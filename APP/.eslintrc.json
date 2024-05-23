@@ -1,0 +1,13 @@
+{
+  "plugins": [
+    "next-on-pages"
+    ],
+  "extends": ["next/core-web-vitals", "plugin:next-on-pages/recommended"],
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
+    "react/jsx-key": "off",
+    "@next/next/no-img-element": "off",
+    "next-on-pages/no-unsupported-configs": "warn"
+  }
+}
