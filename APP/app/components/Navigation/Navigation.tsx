@@ -135,7 +135,9 @@ useEffect(() => {
                 <div className="hidden lg:grid grid-cols-1 lg:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <NavigationItem key={item.name} item={item} closeMenu={close}/>
+                      <div>
+                        <NavigationItem key={item._key} item={item} closeMenu={close}/>
+                      </div>
                     ))}
                   </div>
                 </div>
