@@ -78,7 +78,7 @@ useEffect(() => {
         if(darkMode){ 
           setLogo(navData.logo._ref) 
         } else { 
-          setLogo(navData.logo._ref) 
+          setLogo(navData.logoDark._ref) 
         }
         const navItems = [
           ...(navData.frontpageBoolean
