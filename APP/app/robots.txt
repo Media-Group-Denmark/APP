@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /studio/
-Sitemap: https://xn--pengehjrnet-mgb.dk/sitemap.xml

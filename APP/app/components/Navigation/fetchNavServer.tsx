@@ -8,6 +8,7 @@ export async function fetchNavData() {
     _id,
     frontpageBoolean,
     "logo": logo.asset,
+    "logoDark": logoDark.asset,
     navItems[] {
       _key,
       "name": @->name,

@@ -3,6 +3,7 @@ export interface Article {
      _createdAt: string;
      _updatedAt: string;
      _type: string;
+     _rev: string;
      title: string;
      teaser: string;
      articleSlug: string;
@@ -10,7 +11,7 @@ export interface Article {
      source: string;
      tag: string[];
      tagSlug: string[];
-     category: string;
+     category: string | '';
      categorySlug: string;
      JournalistName: string;
      JournalistPhoto: {};
@@ -19,4 +20,7 @@ export interface Article {
      overview: [];
      views: number;
      disclaimer: boolean;
+     dayInterval: number;
+     startIndex: number;
+     endIndex: number;
 }

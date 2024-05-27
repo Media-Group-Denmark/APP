@@ -1,39 +1,40 @@
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { client, urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
-import { timeSinceText } from "@/app/components/ArticleTools/TimeSinceTag";
 import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
-import SidebarSticky from "@/app/components/ArticleDisplaySystems/StaticSystems/SidebarSticky";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
-export const revalidate = 600; // revalidate at most every 30s
-
-// Updated to accept parameters directly
+import theme from "@/app/lib/theme.json";
+export const revalidate = 600;
+/* -------------------------------------------------------------------------- */
+/*                                  METADATA                                  */
+/* -------------------------------------------------------------------------- */
 export async function generateMetadata({
   params,
 }: {
   params: { journalist: string };
 }): Promise<Metadata> {
-  // Fetch data within the function
   const data: Article[] = await getData({ journalist: params.journalist });
   if (data.length > 0) {
     const article = data[0];
-    //console.log("Article", article.title);
     return {
-      title: `${article.JournalistName} - Artikler og Indsigter`,
+      title: `${article.JournalistName} - Artikler og Indsigter | ${theme.site_name}`,
       description: Array.isArray(article.JournalistDetails)
         ? article.JournalistDetails.join(",")
         : article.JournalistDetails,
-      keywords: `Journalist ${article.JournalistName} - Artikler og Indsigter`,
+      keywords: `Journalist ${article.JournalistName} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
-        title: `${article.JournalistName}`,
+        title: `${article.JournalistName} | ${theme.site_name}`,
         description: `${article.JournalistDetails},`,
-        url: `https://xn--pengehjrnet-mgb.dk/artikler/journalist/${article.articleSlug}`,
+        url: `${theme.site_name}/artikler/journalist/${article.articleSlug}`,
         type: "profile",
-        siteName: "Pengehjørnet",
+        siteName: `${theme.site_name}`,
         locale: "da_DK",
         images: [
           {
@@ -45,7 +46,7 @@ export async function generateMetadata({
                   .fit("fill")
                   .quality(85)
                   .url()
-              : "default_billede_url",
+              : `${theme.logo_public_url}`,
             width: 800,
             height: 600,
             alt: `Foto af ${article.JournalistName}`,
@@ -54,8 +55,8 @@ export async function generateMetadata({
       },
       twitter: {
         card: "summary_large_image",
-        site: "@Pengehjørnet",
-        title: `${article.JournalistName} - Artikler og Indsigter`,
+        site: `${theme.metadata.twitter.site}`,
+        title: `${article.JournalistName} - Artikler og Indsigter | ${theme.site_name}`,
         description: `${article.JournalistDetails}`,
         images: article.JournalistPhoto
           ? urlFor(article.JournalistPhoto)
@@ -65,11 +66,10 @@ export async function generateMetadata({
               .fit("fill")
               .quality(85)
               .url()
-          : "default_billede_url",
+          : `${theme.logo_public_url}`,
       },
-      // Yderligere meta tags for SEO
       robots: "index, follow",
-      publisher: "Pengehjørnet",
+      publisher: `${theme.site_name}`,
     };
   } else {
     console.log("Article data is undefined.");
@@ -79,6 +79,9 @@ export async function generateMetadata({
     };
   }
 }
+/* -------------------------------------------------------------------------- */
+/*                            GET DATA FROM BACKEND                           */
+/* -------------------------------------------------------------------------- */
 export async function getData(params: {
   journalist: string;
 }): Promise<Article[]> {
@@ -110,27 +113,15 @@ export async function getData(params: {
     throw error;
   }
 }
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
 export default async function journalist({
   params,
 }: {
   params: { journalist: string };
 }) {
   const data: Article[] = await getData({ journalist: params.journalist });
-
-  // Define `generateMetadata` function
-  async function generateMetadata() {
-    if (data && data.length > 0) {
-      const journalistName = data[0].JournalistName;
-      return {
-        title: `Artikler af: ${journalistName}`,
-        description: `Find alle artikler skrevet af ${journalistName} på vores hjemmeside.`,
-        // Add other relevant metadata fields (e.g., keywords, image)
-      };
-    }
-    return {}; // Return empty object if no data
-  }
-  const metadata = await generateMetadata();
-
   return (
     <>
       <>
@@ -253,7 +244,12 @@ export default async function journalist({
           </div>
         </div>
 
-        <TrendingArticlesList dayInterval={30} startIndex={0} endIndex={5} journalist={data[0].JournalistSlug} />
+        <TrendingArticlesList
+          dayInterval={30}
+          startIndex={0}
+          endIndex={5}
+          journalist={data[0].JournalistSlug}
+        />
       </section>
     </>
   );

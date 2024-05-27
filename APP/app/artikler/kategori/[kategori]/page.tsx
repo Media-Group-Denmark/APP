@@ -1,19 +1,20 @@
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { client, urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { Metadata } from "next";
-import { timeSinceText } from "@/app/components/ArticleTools/TimeSinceTag";
-import SidebarSticky from "@/app/components/ArticleDisplaySystems/StaticSystems/SidebarSticky";
-/* import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/dataDriven/SubArticlesListLarge"; */
 import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
-export const revalidate = 600; // revalidate at most every 30s
-
-// Updated to accept parameters directly
+import theme from "@/app/lib/theme.json";
+export const revalidate = 600;
+/* -------------------------------------------------------------------------- */
+/*                                  METADATA                                  */
+/* -------------------------------------------------------------------------- */
 export async function generateMetadata({
   params,
 }: {
@@ -25,17 +26,17 @@ export async function generateMetadata({
     const article = data[0];
     //console.log("Article", article.title);
     return {
-      title: `${article.category} - Artikler og Indsigter`,
+      title: `${article.category} - Artikler og Indsigter | ${theme.site_name}`,
       description: Array.isArray(article.teaser)
         ? article.teaser.join(",")
         : article.teaser,
-      keywords: `Kategori ${article.category} - Artikler og Indsigter`,
+      keywords: `Kategori ${article.category} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
-        title: `${article.category}`,
+        title: `${article.category} | ${theme.site_name}`,
         description: `${article.teaser},`,
-        url: `https://xn--pengehjrnet-mgb.dk/artikler/kategori/${article.categorySlug}`,
+        url: `${theme.site_name}/artikler/kategori/${article.categorySlug}`,
         type: "website",
-        siteName: "Pengehjørnet",
+        siteName: `${theme.site_name}`,
         locale: "da_DK",
         images: [
           {
@@ -47,7 +48,7 @@ export async function generateMetadata({
                   .fit("fill")
                   .quality(85)
                   .url()
-              : "default_billede_url",
+              : `${theme.logo_public_url}`,
             width: 800,
             height: 600,
             alt: `Billede for kategori ${article.category}`,
@@ -56,8 +57,8 @@ export async function generateMetadata({
       },
       twitter: {
         card: "summary_large_image",
-        site: "@Pengehjørnet",
-        title: `${article.category} - Artikler og Indsigter`,
+        site: `${theme.metadata.twitter.site}`,
+        title: `${article.category} - Artikler og Indsigter | ${theme.site_name}`,
         description: `${article.teaser}`,
         images: article.image
           ? urlFor(article.image)
@@ -67,11 +68,10 @@ export async function generateMetadata({
               .fit("fill")
               .quality(85)
               .url()
-          : "default_billede_url",
+          : `${theme.logo_public_url}`,
       },
-      // Yderligere meta tags for SEO
       robots: "index, follow",
-      publisher: "Pengehjørnet",
+      publisher: `${theme.site_name}`,
     };
   } else {
     console.log("Article data is undefined.");
@@ -81,6 +81,9 @@ export async function generateMetadata({
     };
   }
 }
+/* -------------------------------------------------------------------------- */
+/*                            GET DATA FROM BACKEND                           */
+/* -------------------------------------------------------------------------- */
 export async function getData(params: {
   kategori: string;
 }): Promise<Article[]> {
@@ -112,7 +115,9 @@ export async function getData(params: {
     throw error;
   }
 }
-
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
 export default async function kategori({
   params,
 }: {
@@ -193,22 +198,38 @@ export default async function kategori({
             <ArticleHero data={data} startIndex={0} endIndex={1} />
 
             {/* Phone */}
-          <div className="inline-block md:hidden">
-            <TrendingArticlesList dayInterval={30} startIndex={0} endIndex={5} category={data[0].categorySlug} />
-            <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
-            <span className="mt-6 block"><ArticleHero data={data} startIndex={3} endIndex={4} /></span>
-            <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
-            <span className="mt-4 block"><ArticleHero data={data} startIndex={6} endIndex={7} /></span>
-          </div>
+            <div className="inline-block md:hidden">
+              <TrendingArticlesList
+                dayInterval={30}
+                startIndex={0}
+                endIndex={5}
+                category={data[0].categorySlug}
+              />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <span className="mt-6 block">
+                <ArticleHero data={data} startIndex={3} endIndex={4} />
+              </span>
+              <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
+              <span className="mt-4 block">
+                <ArticleHero data={data} startIndex={6} endIndex={7} />
+              </span>
+            </div>
 
-          {/* Desktop */}
-          <div className="md:inline-block hidden">
-            <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
-          </div>
+            {/* Desktop */}
+            <div className="md:inline-block hidden">
+              <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+            </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
         </div>
-        <div className="hidden xl:inline-block"><TrendingArticlesList dayInterval={30} startIndex={0} endIndex={5} category={data[0].categorySlug} /></div>
+        <div className="hidden xl:inline-block">
+          <TrendingArticlesList
+            dayInterval={30}
+            startIndex={0}
+            endIndex={5}
+            category={data[0].categorySlug}
+          />
+        </div>
       </section>
     </>
   );

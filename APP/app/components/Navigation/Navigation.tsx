@@ -68,6 +68,7 @@ useEffect(() => {
     root.classList.remove('dark');
     localStorage.setItem("dark mode", "off");
   }
+
 }, [darkMode]);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ useEffect(() => {
     async function loadNavigation() {
       const navData = await fetchNavData();
       if (navData) {
-        if(darkMode){ 
+        if(!darkMode){ 
           setLogo(navData.logo._ref) 
         } else { 
           setLogo(navData.logoDark._ref) 
@@ -95,7 +96,7 @@ useEffect(() => {
     }
 
     loadNavigation();
-  }, [pathname]);
+  }, [pathname, darkMode]);
 
   useEffect(() => {
     const handleScroll = () => {

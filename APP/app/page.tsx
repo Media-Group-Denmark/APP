@@ -1,56 +1,52 @@
-import Image from "next/image";
-import Link from "next/link";
-import { client, urlFor } from "./lib/sanityclient";
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
+import { client } from "./lib/sanityclient";
 import { Article } from "./models/article";
-import { timeSinceText } from "./components/ArticleTools/TimeSinceTag";
 import type { Metadata } from "next";
-import logo from "@/public/logo.png";
-import SidebarSticky from "./components/ArticleDisplaySystems/StaticSystems/SidebarSticky";
-import SubArticlesListLarge from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import SubArticlesListSmall from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import SubArticlesGrid from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
-import SearchFetch from "./components/SearchBar/SearchFetch";
 import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
-export const revalidate = 600; // revalidate at most every 30s
-
+import theme from "@/app/lib/theme.json";
+export const revalidate = 600;
+/* -------------------------------------------------------------------------- */
+/*                                  METADATA                                  */
+/* -------------------------------------------------------------------------- */
 export const metadata: Metadata = {
-  title: "Pengehjørnet | Din Guide til Økonomi, Aktier, Investering og Skat",
-  description:
-    "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
-  keywords:
-    "økonomi, aktier, investering, skat, unge, aktiemarked, kryptovaluta, sparetips",
+  title: theme.metadata.title,
+  description: theme.metadata.description,
+  keywords: theme.metadata.keywords,
   openGraph: {
-    title: "Pengehjørnet | Din Guide til Økonomi, Aktier, Investering og Skat",
-    description:
-      "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
-    url: "https://xn--pengehjrnet-mgb.dk/",
+    title: theme.metadata.openGraph.title,
+    description: theme.metadata.openGraph.description,
+    url: theme.site_url,
     type: "website",
-    siteName: "Pengehjørnet",
-    locale: "da_DK",
+    siteName: theme.site_name,
+    locale: theme.metadata.openGraph.locale,
     images: [
       {
-        url: "default_billede_url",
+        url: theme.logo_url,
         width: 800,
         height: 600,
-        alt: "Pengehjørnet - Din Guide til Økonomi, Aktier, Investering og Skat",
+        alt: theme.metadata.openGraph.title,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@Pengehjørnet",
-    title: "Pengehjørnet | Din Guide til Økonomi, Aktier, Investering og Skat",
-    description:
-      "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
-    images: "default_billede_url",
+    site: theme.metadata.twitter.site,
+    title: theme.metadata.twitter.title,
+    description: theme.metadata.twitter.description,
+    images: theme.logo_url,
   },
-  // Yderligere meta tags for SEO
-  robots: "index, follow",
-  publisher: "Pengehjørnet",
+  robots: theme.metadata.robots,
+  publisher: theme.site_name,
 };
-
+/* -------------------------------------------------------------------------- */
+/*                            GET DATA FROM BACKEND                           */
+/* -------------------------------------------------------------------------- */
 async function getData() {
   const query = `
   *[
@@ -77,37 +73,58 @@ async function getData() {
   //console.log(data);
   return data;
 }
-
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
 export default async function Home() {
   const data: Article[] = await getData();
 
   return (
     <>
-          <TopNewsSlider className="hidden" data={data} dayInterval={14} startIndex={0} endIndex={12}  />
+      <TopNewsSlider
+        data={data}
+        dayInterval={14}
+        startIndex={0}
+        endIndex={12}
+        category=""
+        tag=""
+        journalist=""
+        articles={data}
+      />
       <section className=" grid md:grid-cols-[auto_1fr] mx-auto ">
         <div className="container px-2 md:px-6 py-10 pt-0  max-w-[1000px]">
           <div>
             {/* Both */}
             <ArticleHero data={data} startIndex={0} endIndex={1} />
-            
+
             {/* Phone */}
             <div className="inline-block md:hidden">
-            <TrendingArticlesList dayInterval={14} startIndex={0} endIndex={5} />
-            <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
-            <span className="mt-6 block"><ArticleHero data={data} startIndex={3} endIndex={4} /></span>
-            <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
-            <span className="mt-4 block"><ArticleHero data={data} startIndex={6} endIndex={7} /></span>
+              <TrendingArticlesList
+                dayInterval={14}
+                startIndex={0}
+                endIndex={5}
+              />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <span className="mt-6 block">
+                <ArticleHero data={data} startIndex={3} endIndex={4} />
+              </span>
+              <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
+              <span className="mt-4 block">
+                <ArticleHero data={data} startIndex={6} endIndex={7} />
+              </span>
             </div>
 
             {/* Desktop */}
             <div className="md:inline-block hidden">
-            <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
             </div>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
         </div>
-        <div className="hidden xl:inline-block"><TrendingArticlesList dayInterval={14} startIndex={0} endIndex={5} /></div>
+        <div className="hidden xl:inline-block">
+          <TrendingArticlesList dayInterval={14} startIndex={0} endIndex={5} />
+        </div>
       </section>
     </>
   );

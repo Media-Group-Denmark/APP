@@ -1,8 +1,13 @@
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
 import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import SubArticlesSixGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import Link from "next/link";
-
+/* -------------------------------------------------------------------------- */
+/*                            GET DATA FROM BACKEND                           */
+/* -------------------------------------------------------------------------- */
 export async function getData(queryParam: any, category: string, journalist: string, tag: string) {
     const query = `
       *[_type == "article" && 
@@ -27,8 +32,12 @@ export async function getData(queryParam: any, category: string, journalist: str
           "JournalistSlug": details.journalist->slug.current,
           "JournalistDetails": details.journalist->description
       }`
-    const data = await client.fetch(query, { queryParam: `${queryParam}*`, category: `${category}*`, journalist: `${journalist}*`, tag: `${tag}*`});
-      
+      const data = await client.fetch(query, { 
+        queryParam: `${queryParam}*`, 
+        category: `${category}*`, 
+        journalist: `${journalist}*`, 
+        tag: `${tag}*`
+    });
       console.log(`Query: ${queryParam}`);
     return data;
   }
@@ -63,12 +72,11 @@ export async function getData(queryParam: any, category: string, journalist: str
         "slug": slug.current
       }`;
     const data = await client.fetch(query);
-    /* console.log(data, 'tags'); */
     return data;
   }
-
-
-
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
   export default async function findArtikel({ searchParams}: { searchParams: { q?: string, category?: string, journalist?: string, tag?: string } }) {
 
     const items = await getData(searchParams.q || "", searchParams.category || "", searchParams.journalist || "", searchParams.tag || "");
