@@ -1,25 +1,18 @@
 import React from 'react';
+import FacebookClientBlock from './ClientBlocks/FacebookClientBlock';
 
 interface FacebookTextBlockProps {
-    value: { url: string };
+    value: { posturl: string };
 }
 
 const FacebookTextBlock: React.FC<FacebookTextBlockProps> = ({ value }) => {
-    const embedUrl = value.url.replace("fb.watch", "www.facebook.com/watch");
+    console.log(value.posturl, 'value URL RECEIVED 1st TIME')
+    //const embedUrl = value.url.replace("fb.watch", "www.facebook.com/watch");
 
     return (
-        <div className='w-full grid place-content-center'>
-            <iframe
-                src={embedUrl}
-                width="560"
-                height="315"
-                style={{ border: "none", overflow: "hidden" }}
-                scrolling="no"
-                frameBorder="0"
-                allow="encrypted-media"
-                allowFullScreen={true}
-            ></iframe>
-        </div>
+        <div className='w-full max-w-[90vw] m-auto grid place-content-center'>
+                    <FacebookClientBlock value={value.posturl}/>
+       </div>
     );
 };
 

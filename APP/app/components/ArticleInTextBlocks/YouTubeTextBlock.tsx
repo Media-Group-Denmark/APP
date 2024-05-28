@@ -23,8 +23,9 @@ const YouTubeTextBlock: React.FC<YouTubeTextBlockProps> = ({ value }) => {
 
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
     return (
-        <div className='w-full grid place-content-center'>
+        <div className='w-full m-auto grid place-content-center'>
             <iframe
+            className='max-w-[80vw]'
             width="560"
             height="315"
             src={embedUrl}

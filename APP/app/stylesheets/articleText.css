@@ -42,3 +42,9 @@
 .articleText h6 {
   @apply text-xs lg:text-sm font-medium mb-1; 
 }
+
+@media (max-width: 350px) {
+  .flex-350px {
+    flex-direction: column;
+  }
+}

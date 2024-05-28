@@ -12,7 +12,7 @@ const TikTokTextBlock: React.FC<TikTokTextBlockProps> = ({ value }) => {
         className="tiktok-embed"
         cite={tikTokUrl}
         data-video-id={tikTokUrl.split("/").pop()}
-        style={{ maxWidth: "605px", minWidth: "325px" }}
+        style={{ maxWidth: "605px", minWidth: "280px" }}
       >
         <section></section>
       </blockquote>
