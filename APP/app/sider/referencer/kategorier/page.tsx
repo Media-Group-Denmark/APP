@@ -1,44 +1,53 @@
+/* -------------------------------------------------------------------------- */
+/*                                   IMPORTS                                  */
+/* -------------------------------------------------------------------------- */
 import React from 'react'
 import { Reference } from '@/app/models/reference'
-import { client, urlFor } from '@/app/lib/sanityclient';
+import { client} from '@/app/lib/sanityclient';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import theme from "@/app/lib/theme.json";
 export const revalidate = 80000;
-
+/* -------------------------------------------------------------------------- */
+/*                                  METADATA                                  */
+/* -------------------------------------------------------------------------- */
 export const metadata: Metadata = {
-  title: 'Alle Kategorier | Pengehjørnet',
-  description: 'Udforsk et bredt udvalg af kategorier på Pengehjørnet, fra økonomi og investering til skat og aktiemarkedet. Find dybdegående artikler, der matcher dine interesser.',
-  keywords: 'kategorier, økonomi, investering, skat, aktiemarked, Pengehjørnet',
+  title: `Alle Kategorier | ${theme.site_name}`,
+  description: `Udforsk et bredt udvalg af kategorier på ${theme.site_name}, fra ${theme.metadata.keywords}. Find dybdegående artikler, der matcher dine interesser.`,
+  keywords: `Kategorier ${theme.metadata.keywords} | ${theme.site_name}`,
   openGraph: {
-    title: 'Alle Kategorier | Pengehjørnet',
-    description: 'Udforsk et bredt udvalg af kategorier på Pengehjørnet, fra økonomi og investering til skat og aktiemarkedet. Find dybdegående artikler, der matcher dine interesser.',
-    url: 'https://xn--pengehjrnet-mgb.dk/sider/referencer/kategorier',
+    title: `Alle Kategorier | ${theme.site_name}`,
+    description: `Udforsk et bredt udvalg af kategorier på ${theme.site_name}, fra ${theme.metadata.keywords}. Find dybdegående artikler, der matcher dine interesser.`,
+    url: `${theme.site_name}/sider/referencer/kategorier`,
     type: 'website',
-    siteName: 'Pengehjørnet',
+    siteName: `${theme.site_name}`,
     locale: 'da_DK',
     images: [
       {
-        url: 'https://pengehjørnet.dk/_next/image?url=%2Flogo.png&w=384&q=75',
+        url: `${theme.logo_public_url}`,
         width: 800,
         height: 600,
-        alt: 'Udforsk Kategorier - Pengehjørnet',
+        alt: `Udforsk Kategorier - ${theme.site_name}`,
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@Pengehjørnet',
-    title: 'Alle Kategorier | Pengehjørnet',
-    description: 'Udforsk et bredt udvalg af kategorier på Pengehjørnet, fra økonomi og investering til skat og aktiemarkedet. Find dybdegående artikler, der matcher dine interesser.',
-    images: 'https://pengehjørnet.dk/_next/image?url=%2Flogo.png&w=384&q=75',
+    site: `${theme.metadata.twitter.site}`,
+    title: `Alle Kategorier | ${theme.site_name}`,
+    description: `Udforsk et bredt udvalg af kategorier på ${theme.site_name}, fra ${theme.metadata.keywords}. Find dybdegående artikler, der matcher dine interesser.`,
+    images: `${theme.logo_public_url}`,
   },
-  robots: 'index, follow',
-  publisher: 'Pengehjørnet',
+  robots: theme.metadata.robots,
+  publisher: theme.site_name,
 }
-
-
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
 export default async function kategorier() {
-
+/* -------------------------------------------------------------------------- */
+/*                            GET DATA FROM BACKEND                           */
+/* -------------------------------------------------------------------------- */
 async function getData() {
   const query = `*[_type == "category"] {
     name,
@@ -97,4 +106,3 @@ const data: Reference[] = await getData();
   </div>
   )
 }
-

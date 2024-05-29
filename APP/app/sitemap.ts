@@ -1,52 +1,52 @@
-
 import { MetadataRoute } from 'next'
+import theme from "@/app/lib/theme.json";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://xn--pengehjrnet-mgb.dk',
+      url: theme.site_url,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/referencer/kategorier',
+      url: `${theme.site_url}/sider/referencer/kategorier`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/referencer/tag',
+      url: `${theme.site_url}/sider/referencer/tag`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/referencer/journalister',
+      url: `${theme.site_url}/sider/referencer/journalister`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/cookies',
+      url: `${theme.site_url}/sider/cookies`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/omos',
+      url: `${theme.site_url}/sider/omos`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sider/kontakt',
+      url: `${theme.site_url}/sider/kontakt`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.5,
     },
     {
-      url: 'https://xn--pengehjrnet-mgb.dk/sitemaps/sitemap.xml',
+      url: `${theme.site_url}/sitemaps/sitemap.xml`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,

@@ -3,8 +3,8 @@ import { createClient } from "next-sanity";
 export const client = createClient({
     apiVersion: "2024-01-01",
     dataset: "production",
-    projectId: process.env.SANITY_PROJECT_ID || '123',
-    token: process.env.PAGEVIEW_TOKEN || '123',
+    projectId: process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    token: process.env.PAGEVIEW_TOKEN || process.env.NEXT_PUBLIC_PAGEVIEW_TOKEN,
     useCdn: false
   });
 

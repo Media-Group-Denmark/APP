@@ -7,6 +7,8 @@ import { Disclosure } from "@headlessui/react";
 import Image from "next/image";
 import { MoonIcon, SearchIcon, SunIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { urlFor } from "@/app/lib/sanityclient";
+import theme from "@/app/lib/theme.json";
 
 type NavigationItem = {
   name: string;
@@ -15,15 +17,13 @@ type NavigationItem = {
   _key: string;
 };
 
-
-
 const NavigationItem = ({ item, closeMenu }) => {
-  const router = useRouter(); // Brug useRouter korrekt importeret
+  const router = useRouter(); 
   
   const handleClick = (e: any) => {
-    e.preventDefault(); // Forhindrer standard link adfærd
-    closeMenu(); // Lukker menuen
-    router.push(item.href); // Navigerer manuelt efter at menuen er lukket
+    e.preventDefault(); 
+    closeMenu(); 
+    router.push(item.href); 
   };
 
   return (
@@ -49,7 +49,7 @@ const Navigation = () => {
   const pathname = usePathname();
   const [navigation, setNavigation] = useState<NavigationItem[]>([]);
   const [stickyNav, setStickyNav] = useState(false);
-  const [logo, setLogo] = useState("logo.webp");
+  const [logo, setLogo] = useState("");
 
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== "undefined") {
@@ -64,18 +64,23 @@ useEffect(() => {
   if (darkMode) {
     root.classList.add('dark');
     localStorage.setItem("dark mode", "on");
-    setLogo("logoWhite.webp");
   } else {
     root.classList.remove('dark');
     localStorage.setItem("dark mode", "off");
-    setLogo("logo.webp");
   }
+
 }, [darkMode]);
 
   useEffect(() => {
+
     async function loadNavigation() {
       const navData = await fetchNavData();
       if (navData) {
+        if(!darkMode){ 
+          setLogo(navData.logo._ref) 
+        } else { 
+          setLogo(navData.logoDark._ref) 
+        }
         const navItems = [
           ...(navData.frontpageBoolean
             ? [{ name: "Forside", href: "/", current: pathname === "/" }]
@@ -91,7 +96,7 @@ useEffect(() => {
     }
 
     loadNavigation();
-  }, [pathname]);
+  }, [pathname, darkMode]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -127,15 +132,17 @@ useEffect(() => {
                   className="w-auto h-auto"
                   width={100}
                   height={60}
-                  src={`/${logo}`}
-                  alt="Workflow"
+                  src={logo ? urlFor(logo).url() : theme.logo_url}
+                  alt="Logo"
                 />
               </Link>
                 </div>
                 <div className="hidden lg:grid grid-cols-1 lg:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <NavigationItem key={item.name} item={item} closeMenu={close}/>
+                      <div>
+                        <NavigationItem key={item._key} item={item} closeMenu={close}/>
+                      </div>
                     ))}
                   </div>
                 </div>

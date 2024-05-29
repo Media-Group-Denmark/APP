@@ -1,0 +1,67 @@
+@import './darkModeToggle.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  @apply bg-main_color_light dark:bg-main_color_dark;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  max-width: 100vw;
+  @apply text-main_color_dark dark:text-main_color_light;
+}
+li, a {
+  cursor: pointer;
+}
+/* -------------------------- INDICATING PAGE WIDTH ------------------------- */
+section:not(.articleSection), .pageIndicator, .articleContent {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+/* ----------------------------------- NAV ---------------------------------- */
+@media (min-width: 800px) {
+  .sticky-nav-enabled {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+}
+/* ------------------------ CUSTOM SCROLLBAR STYLING ------------------------ */
+@media(min-width: 800px) {
+  ::-webkit-scrollbar {
+width: 5px;
+height: 5px;
+}
+/* Styler baggrunden på scrollbar track */
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+border-radius: 10px;
+}
+}
+/* Styler det scrollbare håndtag */
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+@apply bg-accent_color_light dark:bg-accent_color_dark bg-opacity-60 ;
+border-radius: 10px;
+}
+/* Styler håndtaget ved hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent_color_dark dark:bg-accent_color_light;
+}
+
+/* ------------------------------ TIMEINDICATOR ----------------------------- */
+.sliderNav .timeSpan {
+  @apply text-accent_color_light dark:text-accent_color_dark;
+}
