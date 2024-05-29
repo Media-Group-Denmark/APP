@@ -20,28 +20,33 @@
   
   /* Adding styles for headings */
 .articleText h1 {
-  @apply text-2xl lg:text-3xl font-bold mb-4 mt-2; 
+  @apply text-3xl lg:text-4xl font-bold mb-4 mt-2; 
 }
 
 .articleText h2 {
-  @apply text-xl lg:text-2xl font-semibold mb-3 mt-2; 
+  @apply text-2xl lg:text-3xl font-semibold mb-3 mt-2; 
 }
 
 .articleText h3 {
-  @apply text-lg lg:text-xl font-medium mb-2 mt-2; 
+  @apply text-xl lg:text-2xl font-medium mb-2 mt-2; 
 }
 
 .articleText h4 {
-  @apply text-base lg:text-lg font-medium mb-2; 
+  @apply text-lg lg:text-xl font-medium mb-2; 
 }
 
 .articleText h5 {
-  @apply text-sm lg:text-base font-medium mb-1; 
+  @apply text-base lg:text-lg font-medium mb-1; 
 }
 
 .articleText h6 {
-  @apply text-xs lg:text-sm font-medium mb-1; 
+  @apply text-sm lg:text-base font-medium mb-1; 
 }
+
+.articleText blockquote {
+  @apply border-l-4 border-accent_color_light dark:border-accent_color_dark p-1 px-2 my-2;
+}
+
 
 @media (max-width: 350px) {
   .flex-350px {

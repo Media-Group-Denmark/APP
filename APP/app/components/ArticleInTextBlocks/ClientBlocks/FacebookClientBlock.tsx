@@ -1,14 +1,18 @@
 'use client';
 import { FacebookEmbed } from 'react-social-media-embed';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
 
 export default function FacebookClientBlock( { value }: { value: string }) {
-    console.log(value, 'value URL RECEIVED 2nd')
+  const [pageLoaded, setPageLoaded] = useState(false)
+  useEffect(() => {
+      setPageLoaded(true)
+  }, [])
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
         {
-            value && (
-                <FacebookEmbed url={value} width={550} />
+            pageLoaded && (
+                  <FacebookEmbed url={value} width={450} />
             )
         }
 </div>

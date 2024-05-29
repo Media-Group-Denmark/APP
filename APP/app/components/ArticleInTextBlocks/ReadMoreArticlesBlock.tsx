@@ -58,10 +58,10 @@ export default async function ReadMoreArticlesBlock({
         {relatedArticles.map((post: any) => (
           <article
             key={post._id}
-            className="relative isolate flex flex-col xs:flex-row gap-8 mb-8"
+            className="relative isolate flex flex-col xs:flex-row gap-2 xs:gap-8 mb-8 bg-second_color_light dark:bg-second_color_dark p-4 rounded-xl"
           >
             <Link href={`/artikel/${post.articleSlug}`}>
-              <div className="relative xs:aspect-[2/1] aspect-square h-32 xs:h-16 w-full xs:w-16 shrink-0">
+              <div className="relative xs:aspect-[2/1] aspect-square h-32 xs:h-24 w-full xs:w-24 shrink-0">
                 <div
                   className="block absolute rounded-2xl inset-0 bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
                   style={{
