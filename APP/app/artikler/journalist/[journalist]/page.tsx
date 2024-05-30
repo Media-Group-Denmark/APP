@@ -239,6 +239,8 @@ export default async function journalist({
                   </>
                 ) : null}
               </>
+              <div id='div-Mobile_Article_1'></div>
+              <div id="div-InText_1"></div>
               <SubArticlesListLarge data={data} startIndex={0} endIndex={10} />
             </div>
           </div>

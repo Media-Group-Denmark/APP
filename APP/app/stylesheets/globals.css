@@ -65,3 +65,10 @@ border-radius: 10px;
 .sliderNav .timeSpan {
   @apply text-accent_color_light dark:text-accent_color_dark;
 }
+
+/* ----------------------------------- ADS ---------------------------------- */
+#div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5 {
+  margin-left: -1.5rem !important;
+  display: grid !important;
+  place-content: center !important;
+}
