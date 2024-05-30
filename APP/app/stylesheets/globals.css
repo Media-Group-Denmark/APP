@@ -72,3 +72,9 @@ border-radius: 10px;
   display: grid !important;
   place-content: center !important;
 }
+#div-InText_1, #div-InText_2 
+{
+  margin-bottom: 30px;
+  display: grid;
+  place-content: center;
+}

@@ -193,7 +193,6 @@ export default async function tag({ params }: { params: { tag: string } }) {
             {/* Both */}
             <ArticleHero data={data} startIndex={0} endIndex={1} />
             <div id='div-Mobile_Article_1'></div>
-            <div id="div-InText_1"></div>
 
             {/* Phone */}
             <div className="inline-block md:hidden">
@@ -217,7 +216,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             {/* Desktop */}
             <div className="md:inline-block hidden">
               <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
-              <div id="div-InText_2"></div>
+              <div id="div-InText_1"></div>
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
