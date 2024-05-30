@@ -196,7 +196,9 @@ export default async function kategori({
           <div>
             {/* Both */}
             <ArticleHero data={data} startIndex={0} endIndex={1} />
-
+            <div id='div-Mobile_Article_1'></div>
+            <div id="div-InText_1"></div>
+            
             {/* Phone */}
             <div className="inline-block md:hidden">
               <TrendingArticlesList
@@ -206,6 +208,7 @@ export default async function kategori({
                 category={data[0].categorySlug}
               />
               <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <div id='div-Mobile_Article_2'></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
@@ -218,6 +221,7 @@ export default async function kategori({
             {/* Desktop */}
             <div className="md:inline-block hidden">
               <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+              <div id="div-InText_2"></div>
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>

@@ -162,7 +162,7 @@ export default async function artikel({
               strategy="afterInteractive"
             />
             <section className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
-              <div className="container px-3 lg:px-6  pt-0 mx-auto articleContent grid md:grid-cols-[auto_1fr] gap-6 ">
+              <div className="container px-3 lg:px-6  pt-0 mx-auto articleContent grid md:grid-cols-[auto_auto] gap-6 ">
                 {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
                 <div className="grid-cols-1">
                   {data.map((article) => (
@@ -244,6 +244,8 @@ export default async function artikel({
                       <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
                         {article.teaser}
                       </h2>
+
+                      <div id='div-Mobile_Article_1'></div>
                       <div id="div-InText_1"></div>
 
                       <div className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
@@ -252,6 +254,8 @@ export default async function artikel({
                           components={components}
                         />
                       </div>
+                      <div id='div-Mobile_Article_2'></div>
+                      <div id="div-InText_2"></div>
                       <SocialMediaShareButtons
                         articleUrl={`https://pengehjørnet.dk/artikel/${article.articleSlug}`}
                       />
