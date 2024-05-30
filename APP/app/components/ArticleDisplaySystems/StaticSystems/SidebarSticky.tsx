@@ -35,7 +35,7 @@ async function SidebarSticky() {
   const data: Article[] = await getData();
   return (
     <div className="hidden md:grid md:grid-cols-1 px-6 md:px-0 gap-8 h-fit md:sticky top-20 xl:gap-6 mb-10 max-w-[300px]">
-      <div id="div-InFeed_1"></div>
+      
       {data.slice(1, 5).map((article) => (
         <div
           key={article._id}

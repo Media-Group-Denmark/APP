@@ -95,7 +95,6 @@ const TrendingArticlesList: React.FC<{
             ))}
         </ul>
       </div>
-      <div id="div-InFeed_1"></div>
     </aside>
   );
 };
