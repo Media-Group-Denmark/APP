@@ -85,7 +85,7 @@ export async function getData(queryParam: any, category: string, journalist: str
     const tag = await getTags();
 
     return (
-      <section className="pb-12">
+      <section className="pb-12" >
         <nav className="flex px-3 md:px-8 max-w-[1280px] m-auto  py-6 pt-6 rounded-lg " aria-label="Breadcrumb">
   <ol className="inline-flex items-center space-x-1 md:space-x-3">
     <li className="inline-flex items-center">

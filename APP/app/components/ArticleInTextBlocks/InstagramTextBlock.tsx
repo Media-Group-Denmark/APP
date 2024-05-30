@@ -13,7 +13,7 @@ const InstagramTextBlock: React.FC<InstagramTextBlockProps> = ({ value }) => {
        <div className='w-full max-w-[90vw] m-auto grid place-content-center'>
         {
             value.url && (
-                <InstagramClientBlock value={value.url} />
+                <InstagramClientBlock value={value.url}/>
             )
         }
        </div>
