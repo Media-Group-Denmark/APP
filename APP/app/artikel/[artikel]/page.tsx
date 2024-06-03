@@ -240,12 +240,12 @@ export default async function artikel({
                             </Link>
                           </React.Fragment>
                         ))}
+                        <div id='div-Mobile_InFeed_1'></div>
                       </div>
                       <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
                         {article.teaser}
                       </h2>
 
-                      <div id='div-Mobile_InFeed_1'></div>
                       <div id="div-InText_1"></div>
 
                       <div className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
