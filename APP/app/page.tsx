@@ -96,7 +96,7 @@ export default async function Home() {
           <div>
             {/* Both */}
             <ArticleHero data={data} startIndex={0} endIndex={1} />
-            <div id='div-Mobile_Article_1'></div>
+            <div id='div-Mobile_InFeed_1'></div>
 
             {/* Phone */}
             <div className="inline-block md:hidden">
@@ -106,7 +106,7 @@ export default async function Home() {
                 endIndex={5}
               />
               <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
-              <div id='div-Mobile_Article_2'></div>
+              <div id='div-Mobile_InFeed_2'></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
