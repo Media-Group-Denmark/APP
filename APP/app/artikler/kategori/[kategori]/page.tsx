@@ -91,7 +91,7 @@ export async function getData(params: {
         *[
           _type == "article" && details.category->slug.current == "${params.kategori}"
         ]
-        | order(_createdAt desc) [0...20]
+        | order(coalesce(publishedAt, _createdAt) desc) [0...20]
           {
           _id,
           _createdAt,

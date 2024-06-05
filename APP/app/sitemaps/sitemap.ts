@@ -7,7 +7,7 @@ export async function getArticleData(): Promise<Article[]> {
               *[
                 _type == "article" 
               ] 
-              | order(_createdAt desc) {
+              | order(coalesce(publishedAt, _createdAt) desc) {
                 _id,
                 title,
                 _createdAt,

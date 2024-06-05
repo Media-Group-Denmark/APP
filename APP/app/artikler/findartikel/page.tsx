@@ -16,7 +16,7 @@ export async function getData(queryParam: any, category: string, journalist: str
       details.journalist->slug.current match $journalist &&
       tag[]->slug.current match $tag
     ] | 
-      order(_createdAt desc) [0...30] {
+      order(coalesce(publishedAt, _createdAt) desc) [0...30] {
         _id,
           _createdAt,
           _type,

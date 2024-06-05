@@ -3,7 +3,7 @@ import { SearchBar } from "./SearchBar";
 
 export async function getData(queryParam) {
     const query = `
-      *[_type == "article" && title match $queryParam] | order(_createdAt desc) [0...5] {
+      *[_type == "article" && title match $queryParam] | order(coalesce(publishedAt, _createdAt) desc) [0...5] {
         _id,
         title,
         body
