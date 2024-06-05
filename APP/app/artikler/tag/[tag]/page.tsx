@@ -88,7 +88,7 @@ export async function getData(params: { tag: string }): Promise<Article[]> {
         *[
           _type == "article" && tag[]->slug.current match "${params.tag}"
         ] 
-        | order(_createdAt desc) [0...20] {
+        | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
           _id,
           _createdAt,
           _type,
