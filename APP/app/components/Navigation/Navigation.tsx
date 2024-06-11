@@ -17,7 +17,7 @@ type NavigationItem = {
   _key: string;
 };
 
-const NavigationItem = ({ item, closeMenu }) => {
+const NavigationItem = ({ item, closeMenu }: {item: any, closeMenu: any} ) => {
   const router = useRouter(); 
   
   const handleClick = (e: any) => {
@@ -146,22 +146,6 @@ useEffect(() => {
                     ))}
                   </div>
                 </div>
-
-               {/*  <div className="flex ml-auto  items-center justify-center p-2 mr-4">
-  <label htmlFor="toggle" className=" cursor-pointer">
-    <div className="relative">
-      <input id="toggle" type="checkbox" className="sr-only" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-   
-      <div className="block bg-gray-600 w-8 h-5 rounded-full"></div>
-      <div className={`dot absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full transition-transform ${darkMode ? 'transform translate-x-4' : ''}`}></div>
-    </div>
-  </label>
-  <div className="text-text_main_color_dark dark:text-text_main_color_light font-medium text-sm mb-1 ml-2">
-    {darkMode ? 'Dark Mode' : 'Light Mode'}
-  </div>
-</div> */}
-
-
 
 <label className="ml-auto mr-4  cursor-pointer">
   <input className='toggle-checkbox' type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
