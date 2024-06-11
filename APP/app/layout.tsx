@@ -4,7 +4,7 @@
 import { Inter } from "next/font/google";
 import "./stylesheets/globals.css";
 import Header from "./components/Navigation/Header";
-import Footer from "./components/Footer";
+import Footer from "./components/Navigation/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
