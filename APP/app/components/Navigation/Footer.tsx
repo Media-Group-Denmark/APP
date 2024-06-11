@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { client } from '../lib/sanityclient';
+import { client } from '../../lib/sanityclient';
 import Link from 'next/link';
-import { FooterData } from '../models/footer';
+import { FooterData } from '../../models/footer';
 
 
 async function getData(): Promise<FooterData[] | undefined> {
@@ -75,7 +75,11 @@ export default async function Footer() {
                     <Link href={`/sider/cookies`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                     {link.name} {link.title}
                   </Link>
-                   ) : null
+                   ) : link.type === 'subPage' ? ( 
+                    <Link href={`/undersider/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                    {link.name} {link.title}
+                  </Link>
+                    ) : null
                 }
                 </>
             ))}
