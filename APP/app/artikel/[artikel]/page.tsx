@@ -104,12 +104,12 @@ export async function getData(params: { artikel: string }): Promise<Article[]> {
                 overview,
                 "image": metaImage.asset,
                 "source": metaImage.asset->description,
-                "category": details.category->name,
-                "categorySlug": details.category->slug.current,
+                "category": category->name,
+                "categorySlug": category->slug.current,
                 "tag": tag[]->name,
                 "tagSlug": tag[]->slug.current,
-                "JournalistName": details.journalist->name,
-                "JournalistSlug": details.journalist->slug.current,
+                "JournalistName": journalist->name,
+                "JournalistSlug": journalist->slug.current,
                 disclaimer,
               }`;
   try {

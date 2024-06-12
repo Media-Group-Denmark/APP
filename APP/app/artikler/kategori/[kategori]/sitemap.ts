@@ -17,7 +17,7 @@ export async function generateSitemaps() {
 
 export default async function sitemap({ id }: { id: string }): Promise<MetadataRoute.Sitemap> {
   const articles: any[] = await client.fetch(`
-    *[_type == "article" && details.category->slug.current == $category][_createdAt desc]{
+    *[_type == "article" && category->slug.current == $category][_createdAt desc]{
       _id,
       _createdAt,
       "slug": slug.current

@@ -89,7 +89,7 @@ export async function getData(params: {
 }): Promise<Article[]> {
   const query = `
         *[
-          _type == "article" && details.category->slug.current == "${params.kategori}"
+          _type == "article" && category->slug.current == "${params.kategori}"
         ]
         | order(coalesce(publishedAt, _createdAt) desc) [0...20]
           {
@@ -100,12 +100,12 @@ export async function getData(params: {
           teaser,
           "articleSlug": slug.current,
           "image": metaImage.asset,
-          "category": details.category->name,
-          "categorySlug": details.category->slug.current,
+          "category": category->name,
+          "categorySlug": category->slug.current,
           "tag": tag[]->name,
-          "JournalistName": details.journalist->name,
-          "JournalistPhoto": details.journalist->image,
-          "JournalistSlug": details.journalist->slug.current
+          "JournalistName": journalist->name,
+          "JournalistPhoto": journalist->image,
+          "JournalistSlug": journalist->slug.current
         }`;
   try {
     const data = await client.fetch<Article[]>(query);

@@ -12,8 +12,8 @@ export async function getData(queryParam: any, category: string, journalist: str
     const query = `
       *[_type == "article" && 
       title match $queryParam &&
-      details.category->slug.current match $category &&
-      details.journalist->slug.current match $journalist &&
+      category->slug.current match $category &&
+      journalist->slug.current match $journalist &&
       tag[]->slug.current match $tag
     ] | 
       order(coalesce(publishedAt, _createdAt) desc) [0...30] {
@@ -24,13 +24,13 @@ export async function getData(queryParam: any, category: string, journalist: str
           teaser,
           "articleSlug": slug.current,
           "image": metaImage.asset,
-          "category": details.category->name,
-          "categorySlug": details.category->slug.current,
+          "category": category->name,
+          "categorySlug": category->slug.current,
           "tag": tag[]->name,
-          "JournalistName": details.journalist->name,
-          "JournalistPhoto": details.journalist->image,
-          "JournalistSlug": details.journalist->slug.current,
-          "JournalistDetails": details.journalist->description
+          "JournalistName": journalist->name,
+          "JournalistPhoto": journalist->image,
+          "JournalistSlug": journalist->slug.current,
+          "JournalistDetails": journalist->description
       }`
       const data = await client.fetch(query, { 
         queryParam: `${queryParam}*`, 
