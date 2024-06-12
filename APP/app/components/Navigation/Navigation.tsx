@@ -9,6 +9,7 @@ import { MoonIcon, SearchIcon, SunIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { urlFor } from "@/app/lib/sanityclient";
 import theme from "@/app/lib/theme.json";
+export const revalidate = 80000;
 
 type NavigationItem = {
   name: string;

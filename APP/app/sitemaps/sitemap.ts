@@ -13,8 +13,8 @@ export async function getArticleData(): Promise<Article[]> {
                 _createdAt,
                 _updatedAt,
                 "articleSlug": slug.current,
-                "category": details.category->name,
-                "categorySlug": details.category->slug.current,
+                "category": category->name,
+                "categorySlug": category->slug.current,
                 "tagSlug": tag[]->slug.current,
               }`;
   const data = await client.fetch(query);

@@ -14,7 +14,7 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
       title,
       "articleSlug": slug.current,
       "image": metaImage.asset,
-      "category": details.category->name,
+      "category": category->name,
     }
   `;
   try {

@@ -33,7 +33,7 @@ async function getData(
         _type == "article"
         ${
           category
-            ? '&& details.category->slug.current == "' +
+            ? '&& category->slug.current == "' +
               encodeURIComponent(category) +
               '"'
             : ""
@@ -45,7 +45,7 @@ async function getData(
         }
         ${
           journalist
-            ? '&& details.journalist->slug.current == "' +
+            ? '&& journalist->slug.current == "' +
               encodeURIComponent(journalist) +
               '"'
             : ""
@@ -64,13 +64,13 @@ async function getData(
       teaser,
       "articleSlug": slug.current,
       "image": metaImage.asset,
-      "category": details.category->name,
-      "categorySlug": details.category->slug.current,
+      "category": category->name,
+      "categorySlug": category->slug.current,
       "tag": tag[]->name,
       "tagSlug": tag[]->slug.current,
-      "JournalistName": details.journalist->name,
-      "JournalistPhoto": details.journalist->image,
-      "JournalistSlug": details.journalist->slug.current,
+      "JournalistName": journalist->name,
+      "JournalistPhoto": journalist->image,
+      "JournalistSlug": journalist->slug.current,
       views
     }`;
   const data = await client.fetch(query);

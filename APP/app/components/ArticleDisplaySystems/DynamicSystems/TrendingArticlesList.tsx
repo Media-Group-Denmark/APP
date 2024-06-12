@@ -23,7 +23,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
         _type == "article"
         ${
           category
-            ? '&& details.category->slug.current == "' +
+            ? '&& category->slug.current == "' +
               encodeURIComponent(category) +
               '"'
             : ""
@@ -31,7 +31,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
         ${tag ? '&& tag[]->slug.current match "' + encodeURIComponent(tag) + '*"' : ""}
         ${
             journalist
-              ? '&& details.journalist->slug.current == "' +
+              ? '&& journalist->slug.current == "' +
                 encodeURIComponent(journalist) +
                 '"'
               : ""
@@ -50,13 +50,13 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
       teaser,
       "articleSlug": slug.current,
       "image": metaImage.asset,
-      "category": details.category->name,
-      "categorySlug": details.category->slug.current,
+      "category": category->name,
+      "categorySlug": category->slug.current,
       "tag": tag[]->name,
       "tagSlug": tag[]->slug.current,
-      "JournalistName": details.journalist->name,
-      "JournalistPhoto": details.journalist->image,
-      "JournalistSlug": details.journalist->slug.current,
+      "JournalistName": journalist->name,
+      "JournalistPhoto": journalist->image,
+      "JournalistSlug": journalist->slug.current,
       views
     }`;
   const data = await client.fetch(query);

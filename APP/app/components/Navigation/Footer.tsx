@@ -3,6 +3,7 @@ import React from 'react';
 import { client } from '../../lib/sanityclient';
 import Link from 'next/link';
 import { FooterData } from '../../models/footer';
+export const revalidate = 80000;
 
 
 async function getData(): Promise<FooterData[] | undefined> {
