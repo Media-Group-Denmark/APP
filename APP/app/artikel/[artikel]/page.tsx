@@ -26,6 +26,8 @@ import YouTubeTextBlock from "@/app/components/ArticleInTextBlocks/YouTubeTextBl
 import ReadMoreArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticlesBlock";
 
 import theme from "@/app/lib/theme.json";
+import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
+import NotFound from "@/app/not-found";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -102,6 +104,7 @@ export async function getData(params: { artikel: string }): Promise<Article[]> {
                 teaser,
                 "articleSlug": slug.current,
                 overview,
+                views,
                 "image": metaImage.asset,
                 "source": metaImage.asset->description,
                 "category": category->name,
@@ -257,7 +260,12 @@ export default async function artikel({
                       <div id='div-Mobile_InFeed_2'></div>
                       <div id="div-InText_2"></div>
                       <SocialMediaShareButtons
-                        articleUrl={`https://pengehjørnet.dk/artikel/${article.articleSlug}`}
+                      views={`${article.views}`}
+                        articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
+                      />
+                      <MobileSocialMediaShareButtons
+                      views={`${article.views}`}
+                        articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
                       />
                       {article.disclaimer && <Disclaimer />}
                       <SubArticlesListSmallOrderRelease />
@@ -269,7 +277,7 @@ export default async function artikel({
             </section>
           </>
         ) : (
-          <h1>Loading...</h1>
+          <NotFound />
         )}
       </div>
       {console.log("isClient:", isClient)}

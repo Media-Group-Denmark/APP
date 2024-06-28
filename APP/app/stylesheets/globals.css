@@ -88,6 +88,14 @@ border-radius: 10px;
 }
 
 @media (max-width: 775px) { 
+  #div-InText_1, #div-InText_2, #div-InText_3, #div-930x180_1
+{
+    min-height: 0px !important;
+}
+#div-InText_1::before, #div-InText_2::before, #div-930x180_1::before {
+  content: none;
+}
+
   #div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5, #div-Mobile_InFeed_1, #div-Mobile_InFeed_2 {
     margin-left: -1.5rem !important;
     display: grid !important;
