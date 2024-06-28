@@ -124,9 +124,9 @@ useEffect(() => {
     >
       {({ open, close }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+          <div className=" mx-auto px-2 sm:px-6 lg:px-8 grid place-content-center">
             <div className="relative flex items-center justify-between h-16">
-              <div className="flex items-center w-[1280px] px-2 lg:px-0">
+              <div className="flex items-center w-[1000px] px-2 lg:px-0">
                 <div className="flex-shrink-0">
                 <Link href="/">
                 <Image

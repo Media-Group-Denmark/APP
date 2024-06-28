@@ -6,7 +6,7 @@ import { urlFor } from '@/app/lib/sanityclient'
 
 const SubArticlesSixGrid: React.FC<{data: Article[]; startIndex: number; endIndex: number}> = ({ data, startIndex, endIndex }) => {
   return (
-    <div className="grid overflow-y-hidden grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+    <div className="grid overflow-y-hidden grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
             {data.slice(startIndex, endIndex).map((article, index) => (
               <div
                 key={article._id}

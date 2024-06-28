@@ -162,7 +162,7 @@ export default async function artikel({
               strategy="afterInteractive"
             />
             <section className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
-              <div className="container px-3 lg:px-6  pt-0 mx-auto articleContent grid md:grid-cols-[auto_auto] gap-6 ">
+              <div className="container px-3 lg:px-6  pt-0 mx-auto articleContent grid gap-6 ">
                 {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
                 <div className="grid-cols-1 max-w-[930px]">
                   {data.map((article) => (
@@ -264,7 +264,7 @@ export default async function artikel({
                     </div>
                   ))}
                 </div>
-                <SidebarSticky />
+                {/* <SidebarSticky /> */}
               </div>
             </section>
           </>

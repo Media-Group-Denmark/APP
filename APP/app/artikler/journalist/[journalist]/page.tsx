@@ -128,7 +128,7 @@ export default async function journalist({
         {data ? (
           <>
             <nav
-              className="flex px-3 md:px-8 max-w-[1280px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
+              className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
               aria-label="Breadcrumb"
             >
               <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -194,14 +194,14 @@ export default async function journalist({
           </>
         ) : null}
       </>
-      <section className=" grid md:grid-cols-[auto_1fr] mx-auto mt-4 ">
+      <section className=" grid mx-auto mt-4 ">
         <div className="container px-6 py-10 pt-0 max-w-[1000px]">
           <div>
             <div className="bg-second_color_light dark:bg-second_color_dark pb-12 rounded-2xl">
               <>
                 {data ? (
                   <>
-                    <div className="grid md:grid-cols-2 gap-4 md:gap-0 max-w-[1280px] m-auto p-6 pb-0  rounded-lg">
+                    <div className="grid md:grid-cols-2 gap-4 md:gap-0 max-w-[1000px] m-auto p-6 pb-0  rounded-lg">
                       <div className="w-full  grid sm:grid-cols-[auto_1fr] sm:place-content-center">
                         <div>
                           <Image
@@ -239,19 +239,14 @@ export default async function journalist({
                   </>
                 ) : null}
               </>
-              <div id='div-Mobile_InFeed_1'></div>
-              <div id="div-InText_1"></div>
+              <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
+              <div className="hidden md:block" id="div-InFeed_1"></div>
               <SubArticlesListLarge data={data} startIndex={0} endIndex={10} />
             </div>
           </div>
         </div>
 
-        <TrendingArticlesList
-          dayInterval={30}
-          startIndex={0}
-          endIndex={5}
-          journalist={data[0].JournalistSlug}
-        />
+        
       </section>
     </>
   );
