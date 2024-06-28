@@ -27,7 +27,7 @@ li, a {
 }
 /* -------------------------- INDICATING PAGE WIDTH ------------------------- */
 section:not(.articleSection), .pageIndicator, .articleContent {
-  max-width: 1280px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 /* ----------------------------------- NAV ---------------------------------- */
@@ -67,14 +67,42 @@ border-radius: 10px;
 }
 
 /* ----------------------------------- ADS ---------------------------------- */
-#div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5 {
-  margin-left: -1.5rem !important;
-  display: grid !important;
-  place-content: center !important;
-}
-#div-InText_1, #div-InText_2, #div-Mobile_InFeed_1, #div-Mobile_InFeed_2
+
+#div-InText_1, #div-InText_2, #div-InText_3, #div-930x180_1
 {
+  background: #fbf8f8 !important;
+    min-height: 250px !important;
+    display: grid !important;
+    place-content: center !important;
+    position: relative;
   margin-bottom: 30px;
   display: grid;
   place-content: center;
+}
+#div-InText_1::before, #div-InText_2::before, #div-930x180_1::before {
+  content: 'Annonce';
+    text-align: center;
+    clear: right;
+    display: block;
+    color: #696969;
+}
+
+@media (max-width: 775px) { 
+  #div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5, #div-Mobile_InFeed_1, #div-Mobile_InFeed_2 {
+    margin-left: -1.5rem !important;
+    display: grid !important;
+    place-content: center !important;
+    background: #fbf8f8 !important;
+      min-height: 250px !important;
+      display: grid !important;
+      place-content: center !important;
+      position: relative;
+  }
+  #div-Mobile_Article_1::before, #div-Mobile_Article_2::before, #div-Mobile_Article_3::before, #div-Mobile_Article_4::before, #div-Mobile_Article_5::before, #div-Mobile_InFeed_1::before, #div-Mobile_InFeed_2::before {
+    content: 'Annonce';
+      text-align: center;
+      clear: right;
+      display: block;
+      color: #696969;
+  }
 }

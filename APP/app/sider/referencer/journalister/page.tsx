@@ -70,7 +70,7 @@ export default async function journalister() {
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
       <>
         <nav
-          className="flex px-3 md:px-8 max-w-[1280px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
+          className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
           aria-label="Breadcrumb"
         >
           <ol className="inline-flex items-center space-x-1 md:space-x-3">

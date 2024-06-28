@@ -91,12 +91,25 @@ export default async function Home() {
         journalist=""
         articles={data}
       />
-      <section className=" grid md:grid-cols-[auto_1fr] mx-auto ">
-        <div className="container px-2 md:px-6 py-10 pt-0  max-w-[1000px]">
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+        <div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
           <div>
             {/* Both */}
-            <ArticleHero data={data} startIndex={0} endIndex={1} />
-            <div id='div-Mobile_InFeed_1'></div>
+            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+              <div className=" lg:w-[700px]">
+                <ArticleHero data={data} startIndex={0} endIndex={1} />
+              </div>
+              <div className="hidden w-[280px] lg:inline-block">
+                <TrendingArticlesList
+                  dayInterval={14}
+                  startIndex={0}
+                  endIndex={5}
+                />
+              </div>
+            </div>
+
+            <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
+            <div className="hidden md:block" id="div-InFeed_1"></div>
 
             {/* Phone */}
             <div className="inline-block md:hidden">
@@ -106,7 +119,7 @@ export default async function Home() {
                 endIndex={5}
               />
               <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
-              <div id='div-Mobile_InFeed_2'></div>
+              <div id="div-Mobile_InFeed_2"></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
@@ -124,9 +137,6 @@ export default async function Home() {
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
-        </div>
-        <div className="hidden xl:inline-block">
-          <TrendingArticlesList dayInterval={14} startIndex={0} endIndex={5} />
         </div>
       </section>
     </>

@@ -70,7 +70,7 @@ const data: Reference[] = await getData();
   return (
     <div className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>     
-<nav className="flex px-3 md:px-8 max-w-[1280px] m-auto  py-6 pt-6 rounded-lg " aria-label="Breadcrumb">
+<nav className="flex px-3 md:px-8 max-w-[1000px] m-auto  py-6 pt-6 rounded-lg " aria-label="Breadcrumb">
   <ol className="inline-flex items-center space-x-1 md:space-x-3">
     <li className="inline-flex items-center">
       <Link href="/" className="text-sm text-fade_color_light dark:text-fade_color_dark hover:text-gray-900 dark:hover:text-gray-400 inline-flex items-center ">

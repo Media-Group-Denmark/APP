@@ -127,7 +127,7 @@ export default async function kategori({
   return (
     <>
       <nav
-        className="flex px-3 md:px-8 max-w-[1280px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
+        className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
         aria-label="Breadcrumb"
       >
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -191,12 +191,25 @@ export default async function kategori({
         </ol>
       </nav>
 
-      <section className=" grid md:grid-cols-[auto_1fr] mx-auto ">
-        <div className="container px-3 md:px-6 py-10 pt-0 max-w-[1000px]">
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+        <div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
           <div>
             {/* Both */}
-            <ArticleHero data={data} startIndex={0} endIndex={1} />
-            <div id='div-Mobile_InFeed_1'></div>
+            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+              <div className=" lg:w-[700px]">
+                <ArticleHero data={data} startIndex={0} endIndex={1} />
+              </div>
+              <div className="hidden w-[280px] lg:inline-block">
+                <TrendingArticlesList
+                  dayInterval={30}
+                  startIndex={0}
+                  endIndex={5}
+                  category={data[0].categorySlug}
+                />
+              </div>
+            </div>
+            <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
+            <div className="hidden md:block" id="div-InFeed_1"></div>
             
             {/* Phone */}
             <div className="inline-block md:hidden">
@@ -224,14 +237,6 @@ export default async function kategori({
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
-        </div>
-        <div className="hidden xl:inline-block">
-          <TrendingArticlesList
-            dayInterval={30}
-            startIndex={0}
-            endIndex={5}
-            category={data[0].categorySlug}
-          />
         </div>
       </section>
     </>

@@ -18,7 +18,7 @@ interface ExtendedArticle extends SanityDocument {
 
 const ArticleHero: React.FC<{data: ExtendedArticle[]; startIndex: number; endIndex: number}> = ({ data, startIndex, endIndex }) =>  {
   return (
-    <div>
+    <div >
             {data.slice(startIndex, endIndex).map((article, index) => (
               <div
                 key={article._id}
@@ -26,7 +26,7 @@ const ArticleHero: React.FC<{data: ExtendedArticle[]; startIndex: number; endInd
               >
                 <Link href={`/artikel/${article.articleSlug}`}>
                   <div
-                    className="block w-full h-[12em] md:h-[28em] rounded-t-lg bg-center bg-cover"
+                    className="block w-full h-[12em] md:h-[20em] rounded-t-lg bg-center bg-cover"
                     style={{
                       backgroundImage: `url(${urlFor(article.image).format("webp")
         .width(900)

@@ -185,7 +185,7 @@ export default async function cookies() {
       {data ? (
         <>
           <nav
-            className="flex px-3 md:px-8 max-w-[1280px] m-auto pt-6 rounded-lg mb-4 "
+            className="flex px-3 md:px-8 max-w-[1000px] m-auto pt-6 rounded-lg mb-4 "
             aria-label="Breadcrumb"
           >
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -227,7 +227,7 @@ export default async function cookies() {
               </li>
             </ol>
           </nav>
-          <div className="max-w-[1280px] m-auto px-8 mb-8">
+          <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />
             </div>
