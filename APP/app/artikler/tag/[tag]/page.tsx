@@ -204,8 +204,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
                 />
               </div>
             </div>
-            <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
-            <div className="hidden md:block" id="div-InFeed_1"></div>
+            <div className=" md:hidden" id="div-Mobile_Square_1"></div>
+            <div className="hidden md:block" id="div-Leaderboard_2"></div>
 
             {/* Phone */}
             <div className="inline-block md:hidden">
@@ -215,11 +215,12 @@ export default async function tag({ params }: { params: { tag: string } }) {
                 endIndex={5}
                 tag={data[0].tagSlug}
               />
+              <div id="div-Mobile_Square_2"></div>
               <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={3} />
-              <div id='div-Mobile_InFeed_2'></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
+              <div id="div-Mobile_Square_3"></div>
               <SubArticlesGrid tag={data[0].tagSlug} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
@@ -229,7 +230,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             {/* Desktop */}
             <div className="md:inline-block hidden">
               <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={7} />
-              <div id="div-InText_1"></div>
+              <div className="hidden md:block" id="div-Leaderboard_3"></div>
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>

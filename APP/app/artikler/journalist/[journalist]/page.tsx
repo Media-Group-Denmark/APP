@@ -239,8 +239,8 @@ export default async function journalist({
                   </>
                 ) : null}
               </>
-              <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
-              <div className="hidden md:block" id="div-InFeed_1"></div>
+              <div className=" md:hidden" id="div-Mobile_Square_1"></div>
+              <div className="hidden md:grid" id="div-Leaderboard_2"></div>
               <SubArticlesListLarge data={data} startIndex={0} endIndex={10} />
             </div>
           </div>

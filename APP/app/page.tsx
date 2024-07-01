@@ -115,8 +115,9 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
-            <div className="hidden md:block" id="div-InText_1"></div>
+            
+            <div className=" md:hidden" id="div-Mobile_Square_1"></div>
+            <div className="hidden md:block" id="div-Leaderboard_2"></div>
 
             {/* Phone */}
             <div className="grid gap-4 md:hidden">
@@ -125,11 +126,12 @@ export default async function Home() {
                 startIndex={0}
                 endIndex={5}
                  />
+              <div id="div-Mobile_Square_2"></div>
               <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
-              <div id="div-Mobile_InFeed_2"></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
+              <div id="div-Mobile_Square_3"></div>
               <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
@@ -140,7 +142,7 @@ export default async function Home() {
             {/* Desktop */}
             <div className="md:inline-block hidden">
               <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
-              <div id="div-InText_1"></div>
+              <div className="hidden md:block" id="div-Leaderboard_3"></div>
               <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
               <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
             </div>

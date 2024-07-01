@@ -243,13 +243,13 @@ export default async function artikel({
                             </Link>
                           </React.Fragment>
                         ))}
-                        <div id='div-Mobile_InFeed_1'></div>
+                        <div className="md:hidden" id='div-Mobile_Square_1'></div>
                       </div>
                       <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
                         {article.teaser}
                       </h2>
 
-                      <div id="div-InText_1"></div>
+                      <div className="hidden md:grid" id="div-Leaderboard_2"></div>
 
                       <div className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
@@ -257,8 +257,8 @@ export default async function artikel({
                           components={components}
                         />
                       </div>
-                      <div id='div-Mobile_InFeed_2'></div>
-                      <div id="div-InText_2"></div>
+                      <div className="md:hidden"  id='div-Mobile_Square_2'></div>
+                      <div className="hidden md:grid" id="div-Leaderboard_3"></div>
                       <SocialMediaShareButtons
                       views={`${article.views}`}
                         articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
