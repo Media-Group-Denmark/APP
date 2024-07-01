@@ -22,7 +22,7 @@ const ArticleHero: React.FC<{data: ExtendedArticle[]; startIndex: number; endInd
             {data.slice(startIndex, endIndex).map((article, index) => (
               <div
                 key={article._id}
-                className="col-span-2 mb-4 lg:mb-8 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
+                className="col-span-2 mb-4 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
               >
                 <Link href={`/artikel/${article.articleSlug}`}>
                   <div
