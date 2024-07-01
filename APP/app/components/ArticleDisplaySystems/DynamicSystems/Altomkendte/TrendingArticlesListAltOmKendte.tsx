@@ -156,11 +156,11 @@ const TrendingArticlesListAltOmKendte: React.FC<{
 
                     {/*  Image Mobile Start */}
                     <Link
-                      className="inline-block md:hidden"
+                      className="block md:hidden"
                       href={`/artikel/${post.articleSlug}`}
                     >
                       <div
-                        className="block w-full h-[5em] w-[5em] rounded-xl bg-gray-300 bg-center bg-cover"
+                        className="block h-[5em] w-[5em] mr-6 rounded-xl bg-gray-300 bg-center bg-cover"
                         style={{
                           backgroundImage: `url(${urlFor(post.image)
                             .format("webp")
