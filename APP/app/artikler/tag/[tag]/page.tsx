@@ -215,12 +215,12 @@ export default async function tag({ params }: { params: { tag: string } }) {
                 endIndex={5}
                 tag={data[0].tagSlug}
               />
-              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={3} />
               <div id='div-Mobile_InFeed_2'></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
-              <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
+              <SubArticlesGrid tag={data[0].tagSlug} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </span>
@@ -228,7 +228,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
             {/* Desktop */}
             <div className="md:inline-block hidden">
-              <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+              <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={7} />
               <div id="div-InText_1"></div>
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />

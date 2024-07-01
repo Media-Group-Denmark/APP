@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { timeSinceText } from '../../ArticleTools/TimeSinceTag'
 import { client, urlFor } from '@/app/lib/sanityclient'
-import theme from '@/app/lib/theme.json'
+
 
 async function getData(category = "", tag = "", journalist = "", dayInterval = 0, endIndex = 0) {
   const today: Date = new Date();
@@ -59,77 +59,73 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
   return data;
 }
 
-const SubArticlesSixGrid: React.FC<{
+const SubArticlesListWide: React.FC<{
   category?: string | undefined;
   tag?: string[] | undefined;
   journalist?: string | undefined;
   dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-}> =  async ({ category, tag, journalist, dayInterval, startIndex, endIndex }) => {
+}> = async ({ category, tag, journalist, dayInterval, startIndex, endIndex }) => {
   const data = await getData(category, tag, journalist, dayInterval);
   return (
     <>
-    <Link href={`${theme.site_url}/artikler/kategori/${category}`} >
-      <h2 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4"><span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
+    <h2 className="lineHeader text-center text-[0.95rem] font-bold mb-4"><span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
       {category ? category : tag ? tag : journalist ? journalist : "Alle Nyheder"}</span></h2>
-    </Link>
-      <div className="grid overflow-y-hidden grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
-      {data
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-8 mt-6 pb-1 rounded-xl">
+          
+          <div className="mx-auto max-w-2xl lg:max-w-4xl">
+            <div >
+            {data
               .slice(startIndex, endIndex)
               .map((post: Article, index: number) => (
-                <div
-                  key={post._id}
-                  className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
-                >
+                <article key={post._id} className="relative isolate flex flex-col gap-8 lg:flex-row mb-10">
                   <Link href={`/artikel/${post.articleSlug}`}>
-                    <div
-                      className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg bg-center bg-cover"
-                      style={{
-                        backgroundImage: `url(${urlFor(post.image).format("webp")
-        .width(400)
-        .height(300)
-        .fit("fill")
-        .quality(85)
-        .url()})`,
-                      }}
-                    ></div>
-                  </Link>
-                  <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4 ">
-                    <div className=" sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
-                      <Link href={`/artikler/kategori/${post.categorySlug}`}>
-                        <button className=" text-accent_color_light dark:text-accent_color_dark  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.85rem] rounded-full ">
-                          {post.category}
-                        </button>
-                      </Link>
-                      <p className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
-                          {timeSinceText({ date: post._createdAt })}
-                        </p>
+                    <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
+                    <div className="block absolute rounded-2xl inset-0  rounded-t-lg bg-center bg-cover" style={{ backgroundImage: `url(${urlFor(post.image).format("webp")
+          .width(200)
+          .height(300)
+          .fit("fill")
+          .quality(85)
+          .url()})` }}>
                     </div>
-                    <Link href={`/artikel/${post.articleSlug}`}>
-                      <span className="grid ">
-                        <h1 className=" text-sm md:text-lg font-semibold py-0 rounded-lg ">{post.title}</h1>
-                      </span>
-                    </Link>
+                    </div>
+                  </Link>
+                  <div>
+                    <div className="flex items-center gap-x-4 text-xs">
+                      <time dateTime={post._createdAt} className="text-gray-500">{timeSinceText({ date: post._createdAt })}</time>
+                      <Link href={`/artikler/kategori/${post.categorySlug}`} className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{post.category}</Link>
+                    </div>
+                    <div className="group relative max-w-xl">
+                      <h3 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200  group-hover:text-gray-600">
+                        <Link href={`/artikel/${post.articleSlug}`}>
+                          <span className="absolute inset-0 " />
+                          {post.title}
+                        </Link>
+                      </h3>
+                      <p className="mt-5 text-sm h-[5em] overflow-hidden leading-6 text-text_second_color_dark dark:text-text_second_color_light">{post.teaser}</p>
+                    </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
+          </div>
+        </div>
     </>
   )
 }
 
-export default SubArticlesSixGrid
+export default SubArticlesListWide
 
 {/* <div className="flex gap-2 mt-4">
   <Link
-    href={`/artikler/journalist/${post.JournalistSlug}`}
+    href={`/artikler/journalist/${article.JournalistSlug}`}
   >
     <p className="text-xs text-gray-500">
-      {post.JournalistName}
+      {article.JournalistName}
     </p>
   </Link>
   <p className="rounded-lg text-xs">
-    {timeSinceText({ date: post._createdAt })}
+    {timeSinceText({ date: article._createdAt })}
   </p>
 </div> */}

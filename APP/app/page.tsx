@@ -10,6 +10,9 @@ import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/Artic
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import theme from "@/app/lib/theme.json";
+import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
+import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
+import SubArticlesListSmallOrderRelease from "./components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -92,47 +95,54 @@ export default async function Home() {
         articles={data}
       />
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-        <div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
+        <div className="container md:px-6 py-10 pt-0 m-auto ">
           <div>
+
             {/* Both */}
             <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
+                <span className="hidden lg:inline-block">
+                  <SubArticlesListWide category={'nyheder'} startIndex={1} endIndex={3} />
+                </span>
               </div>
               <div className="hidden w-[280px] lg:inline-block">
-                <TrendingArticlesList
-                  dayInterval={14}
-                  startIndex={0}
-                  endIndex={5}
-                />
+                <TrendingArticlesListAltOmKendte
+                dayInterval={14}
+                startIndex={0}
+                endIndex={5}
+                 />
               </div>
             </div>
 
             <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
-            <div className="hidden md:block" id="div-InFeed_1"></div>
+            <div className="hidden md:block" id="div-InText_1"></div>
 
             {/* Phone */}
-            <div className="inline-block md:hidden">
-              <TrendingArticlesList
+            <div className="grid gap-4 md:hidden">
+            <TrendingArticlesListAltOmKendte
                 dayInterval={14}
                 startIndex={0}
                 endIndex={5}
-              />
-              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+                 />
+              <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
               <div id="div-Mobile_InFeed_2"></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
-              <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
+              <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </span>
             </div>
 
+
             {/* Desktop */}
             <div className="md:inline-block hidden">
-              <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+              <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
               <div id="div-InText_1"></div>
+              <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
             </div>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />

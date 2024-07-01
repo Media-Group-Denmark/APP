@@ -11,6 +11,9 @@ import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSyste
 import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
+import TopNewsSlider from "@/app/components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
+import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
+import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -190,50 +193,77 @@ export default async function kategori({
           </li>
         </ol>
       </nav>
-
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
           <div>
+
             {/* Both */}
             <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
+                <span className="hidden lg:inline-block">
+                  <SubArticlesListWide category={data[0].categorySlug} startIndex={1} endIndex={3} />
+                </span>
               </div>
               <div className="hidden w-[280px] lg:inline-block">
-                <TrendingArticlesList
-                  dayInterval={30}
-                  startIndex={0}
-                  endIndex={5}
-                  category={data[0].categorySlug}
-                />
+                <TrendingArticlesListAltOmKendte
+                dayInterval={14}
+                startIndex={0}
+                endIndex={5}
+                category={data[0].categorySlug}
+                 />
               </div>
             </div>
+
             <div className=" block md:hidden" id="div-Mobile_InFeed_1"></div>
             <div className="hidden md:block" id="div-InFeed_1"></div>
             
             {/* Phone */}
-            <div className="inline-block md:hidden">
-              <TrendingArticlesList
+            <div className="grid gap-4 md:hidden">
+              <TrendingArticlesListAltOmKendte
                 dayInterval={30}
                 startIndex={0}
                 endIndex={5}
                 category={data[0].categorySlug}
               />
-              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <SubArticlesGrid category={data[0].categorySlug} startIndex={1} endIndex={3} />
               <div id='div-Mobile_InFeed_2'></div>
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
-              <SubArticlesGrid data={data} startIndex={4} endIndex={6} />
+              <SubArticlesGrid category={data[0].categorySlug} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </span>
             </div>
 
+
+            {/* <div className="grid gap-4 md:hidden">
+            <TrendingArticlesListAltOmKendte
+                dayInterval={14}
+                startIndex={0}
+                endIndex={5}
+                 />
+              <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
+              <div id="div-Mobile_InFeed_2"></div>
+              <span className="mt-6 block">
+                <ArticleHero data={data} startIndex={3} endIndex={4} />
+              </span>
+              <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
+              <span className="mt-4 block">
+                <ArticleHero data={data} startIndex={6} endIndex={7} />
+              </span>
+            </div> */}
+
+
+
+
             {/* Desktop */}
             <div className="md:inline-block hidden">
-              <SubArticlesGrid data={data} startIndex={1} endIndex={7} />
+              <SubArticlesGrid category={data[0].categorySlug}  startIndex={3} endIndex={9} />
               <div id="div-InText_1"></div>
+              <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
             </div>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
