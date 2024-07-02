@@ -54,7 +54,7 @@ export default function RootLayout({
         {/* Et tilpasset script, der specifikt håndterer opsætning eller konfiguration af dine reklameenheder 
         baseret på dine egne præferencer og indstillinger.  */}
       <Script
-        src="/lib/ad-script.min.js"
+        src="/lib/ad-script.minTwo.js"
         strategy="afterInteractive"
       />
       </body>

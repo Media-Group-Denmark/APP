@@ -245,8 +245,6 @@ export default async function journalist({
             </div>
           </div>
         </div>
-
-        
       </section>
     </>
   );
