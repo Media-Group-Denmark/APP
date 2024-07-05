@@ -5,6 +5,7 @@ import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import SubArticlesSixGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import Link from "next/link";
+import FindArticle from "@/app/components/ArticleDisplaySystems/StaticSystems/findArticle";
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
@@ -16,7 +17,7 @@ export async function getData(queryParam: any, category: string, journalist: str
       journalist->slug.current match $journalist &&
       tag[]->slug.current match $tag
     ] | 
-      order(coalesce(publishedAt, _createdAt) desc) [0...30] {
+      order(coalesce(publishedAt, _createdAt) desc) [0...50] {
         _id,
           _createdAt,
           _type,
@@ -103,7 +104,7 @@ export async function getData(queryParam: any, category: string, journalist: str
   </ol>
 </nav>
       <SearchBar category={category} journalist={journalist} tag={tag} />
-      <SubArticlesSixGrid data={items} startIndex={0} endIndex={30} />
+      <FindArticle data={items} startIndex={0} endIndex={30} />
     </section>
   );
 }

@@ -24,6 +24,7 @@ import TikTokTextBlock from "@/app/components/ArticleInTextBlocks/TikTokTextBloc
 import InstagramTextBlock from "@/app/components/ArticleInTextBlocks/InstagramTextBlock";
 import YouTubeTextBlock from "@/app/components/ArticleInTextBlocks/YouTubeTextBlock";
 import ReadMoreArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticlesBlock";
+import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreAutomatic/ReadMoreAutomaticArticlesBlock";
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
@@ -152,6 +153,9 @@ export default async function artikel({
       instagram: InstagramTextBlock,
       readMore: (props: any) => (
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
+      ),
+      readMoreAutomatic: (props: any) => (
+        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} />
       ),
     },
   };
