@@ -68,20 +68,20 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
     <div className="my-8">
       <ul className="list-disc list-inside grid gap-2">
         {relatedAutomaticArticles.map((post: any) => (
-          <div className='bg-second_color_light dark:bg-second_color_dark p-2 rounded-xl'>
+          <div className='bg-second_color_light dark:bg-second_color_dark shadow-sm rounded-xl'>
            
             <article
             key={post._id}
-            className="relative isolate flex flex-col xs:flex-row gap-2 xs:gap-8 mb-2 "
+            className="relative isolate flex flex-col sm:flex-row sm:gap-8"
             >
               <Link href={`/artikel/${post.articleSlug}`}>
-                <div className="relative xs:aspect-[2/1] aspect-square h-32 xs:h-24 w-full xs:w-24 shrink-0">
+                <div className="relative sm:aspect-[2/1] aspect-square h-32 sm:h-24 w-full sm:w-24 shrink-0">
                   <div
                     className="block absolute rounded-2xl inset-0 bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
                     style={{
                       backgroundImage: `url(${urlFor(post.image)
                         .format("webp")
-                        .width(100)
+                        .width(300)
                         .height(200)
                         .fit("fill")
                         .quality(85)
@@ -90,17 +90,17 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
                   ></div>
                 </div>
               </Link>
-              <div>
+              <div className='p-2 sm:mt-2 sm:p-0'>
                 <div className="flex items-center gap-x-4">
-                <div className='min-h-12'><ReadMoreAutomaticViews views={post.views} /></div>
+                <div><ReadMoreAutomaticViews views={post.views} /></div>
                 </div>
                 <div className="group relative max-w-xl">
-                  <h3 className="mt-2 !text-[1.1em] font-semibold leading-6 dark:group-hover:text-gray-300  group-hover:text-gray-600">
                     <Link href={`/artikel/${post.articleSlug}`}>
+                  <h4 className=" text-[0.95em] sm:text-[1em] md:text-[1.1em] font-semibold leading-6 mt-2 sm:mr-2 dark:group-hover:text-gray-300  group-hover:text-gray-600">
                       
                       {post.title}
+                  </h4>
                     </Link>
-                  </h3>
                 </div>
               </div>
             </article>

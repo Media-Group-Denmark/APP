@@ -32,13 +32,13 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
 
   return (
     <div className='flex gap-2'>
-      <span className='grid w-fit grid-cols-2 place-content-center items-center '>
+      <span className='grid w-fit grid-cols-[auto_1fr] place-content-center items-center !text-[1em] md:!text-[1.12em] min-w-[2.7em] '>
         {arrow}
-        <CountUp start={previousReaders} end={liveReaders} duration={2.75} style={{ color: color }} />
+        <CountUp start={previousReaders} end={liveReaders} duration={2.75} className='!font-semibold'/>
       </span>
-      <h3 className="!text-xl font-semibold transition-all my-auto">
-        Andre læser lige nu:
-      </h3>
+      <span className="text-sm md:text-lg block font-semibold transition-all my-auto">
+        Læser lige nu:
+      </span>
     </div>
   );
 }

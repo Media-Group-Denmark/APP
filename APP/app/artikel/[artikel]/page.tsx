@@ -23,8 +23,8 @@ import ImageTextBlock from "@/app/components/ArticleInTextBlocks/ImageTextBlock"
 import TikTokTextBlock from "@/app/components/ArticleInTextBlocks/TikTokTextBlock";
 import InstagramTextBlock from "@/app/components/ArticleInTextBlocks/InstagramTextBlock";
 import YouTubeTextBlock from "@/app/components/ArticleInTextBlocks/YouTubeTextBlock";
-import ReadMoreArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticlesBlock";
-import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreAutomatic/ReadMoreAutomaticArticlesBlock";
+import ReadMoreArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
+import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock";
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
