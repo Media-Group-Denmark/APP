@@ -8,6 +8,7 @@ import Footer from "./components/Navigation/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
+import AdBlockDetect from "./components/AdBlockDetect/AdBlockDetect";
 const inter = Inter({ subsets: ["latin"] });
 const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID as string;
 
@@ -29,10 +30,25 @@ export default function RootLayout({
       <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
       <body className={`${inter.className}`}>
+       {/*  <AdBlockDetect /> */}
         <Header />
         <main className="mt-[60px]">{children}</main>
         <GoogleAnalytics gaId={googleAnalyticsId} />
         <Footer />
+
+        <Script
+        id="clarity-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "n4my1o7l85");
+          `,
+        }}
+      />
 
         {/* Google Publisher Tag - Definerer og anmoder om reklamer */}
         <Script
