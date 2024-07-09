@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { timeSinceText } from "../ArticleTools/TimeSinceTag";
+import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import { urlFor, client } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
+import ReadMoreAutomaticViews from "./ReadMoreAutomaticViews";
 
 // Funktion til at hente relaterede artikler
 async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
@@ -12,6 +13,7 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
       _createdAt,
       _type,
       title,
+      views,
       "articleSlug": slug.current,
       "image": metaImage.asset,
       "category": category->name,
@@ -53,21 +55,22 @@ export default async function ReadMoreArticlesBlock({
 
   return (
     <div className="my-8">
-      <h2 className="text-2xl font-semibold">Læs også:</h2>
-      <ul className="list-disc list-inside grid">
-        {relatedArticles.map((post: any) => (
+    <ul className="list-disc list-inside grid gap-2">
+      {relatedArticles.map((post: any) => (
+        <div className='bg-second_color_light dark:bg-second_color_dark shadow-sm rounded-xl'>
+         
           <article
-            key={post._id}
-            className="relative isolate flex flex-col xs:flex-row gap-2 xs:gap-8 mb-8 bg-second_color_light dark:bg-second_color_dark p-4 rounded-xl"
+          key={post._id}
+          className="relative isolate flex flex-col sm:flex-row sm:gap-8"
           >
             <Link href={`/artikel/${post.articleSlug}`}>
-              <div className="relative xs:aspect-[2/1] aspect-square h-32 xs:h-24 w-full xs:w-24 shrink-0">
+              <div className="relative sm:aspect-[2/1] aspect-square h-32 sm:h-24 w-full sm:w-24 shrink-0">
                 <div
                   className="block absolute rounded-2xl inset-0 bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
                   style={{
                     backgroundImage: `url(${urlFor(post.image)
                       .format("webp")
-                      .width(100)
+                      .width(300)
                       .height(200)
                       .fit("fill")
                       .quality(85)
@@ -76,30 +79,23 @@ export default async function ReadMoreArticlesBlock({
                 ></div>
               </div>
             </Link>
-            <div>
-              <div className="flex items-center gap-x-4 text-xs">
-                <time dateTime={post._createdAt} className="text-gray-500">
-                  {timeSinceText({ date: post._createdAt })}
-                </time>
-                <Link
-                  href={`/artikler/kategori/${post.categorySlug}`}
-                  className="relative z-10 w-fit rounded-full bg-gray-50 px-3 py-1.5 font-medium !text-gray-600 hover:bg-gray-100"
-                >
-                  {post.category}
-                </Link>
+            <div className='p-2 sm:mt-2 sm:p-0'>
+              <div className="flex items-center gap-x-4">
+              <div><ReadMoreAutomaticViews views={post.views} /></div>
               </div>
               <div className="group relative max-w-xl">
-                <h3 className="mt-2 text-sm md:text-md font-semibold leading-6 dark:group-hover:text-gray-300  group-hover:text-gray-600">
                   <Link href={`/artikel/${post.articleSlug}`}>
-                    <span className="absolute inset-0" />
+                <h4 className=" text-[0.95em] sm:text-[1em] md:text-[1.1em] font-semibold leading-6 mt-2 sm:mr-2 dark:group-hover:text-gray-300  group-hover:text-gray-600">
+                    
                     {post.title}
+                </h4>
                   </Link>
-                </h3>
               </div>
             </div>
           </article>
-        ))}
-      </ul>
-    </div>
+        </div>
+      ))}
+    </ul>
+  </div>
   );
 }

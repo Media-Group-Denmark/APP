@@ -41,7 +41,7 @@ export default function SocialMediaShareButtons({ articleUrl, views }: { article
                     >
                         <div className="flex items-center bg-[#405a9a] px-2 py-1 ">
                             <FacebookIcon size={44} round />
-                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 2) : (numericViews > 3 ? (numericViews + 9) : numericViews)}</p>
+                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 3) : (numericViews > 3 ? (numericViews + 9) : numericViews)}</p>
                         </div>
                     </FacebookShareButton>
     
@@ -51,7 +51,7 @@ export default function SocialMediaShareButtons({ articleUrl, views }: { article
                     >
                         <div className="flex items-center bg-[#000000] text-white px-2 py-1 ">
                             <TwitterIcon size={44} round />
-                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 3) : (numericViews > 5 ? (numericViews - 4) : numericViews)}</p>
+                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 19) : (numericViews > 10 ? (numericViews - 10) : 0)}</p>
                         </div>
                     </TwitterShareButton>
 
@@ -61,7 +61,7 @@ export default function SocialMediaShareButtons({ articleUrl, views }: { article
                     >
                         <div className="flex items-center bg-[#f54200] text-white px-2 py-1 ">
                             <RedditIcon className=' opacity-90 ' size={44} round />
-                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 3) : (numericViews > 7 ? (numericViews - 7) : numericViews)}</p>
+                            <p className='text-white'>Del: {numericViews > 80 ? Math.round(numericViews / 16) : (numericViews > 13 ? (numericViews - 13) : 0)}</p>
                         </div>
                     </RedditShareButton>
                 </div>
