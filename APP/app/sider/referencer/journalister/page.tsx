@@ -122,39 +122,44 @@ export default async function journalister() {
         </h1>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data.map((journalist) => (
-          <Link href={`/artikler/journalist/${journalist.slug}`}>
-            <div className="w-full bg-second_color_light dark:bg-second_color_dark rounded-lg p-12 flex flex-col justify-center items-center cursor-pointer">
-              <div className="mb-8">
-                <Image
-                  className="object-center object-cover rounded-full h-24 w-24"
-                  alt={journalist.name}
-                  width={200}
-                  height={200}
-                  src={
-                    journalist.image
-                      ? urlFor(journalist.image)
-                          .format("webp")
-                          .width(400)
-                          .height(300)
-                          .fit("fill")
-                          .quality(85)
-                          .url()
-                      : "/img/unisexAvatar.jpeg"
-                  }
-                />
-              </div>
-              <div className="text-center">
-                <p className="text-xl text-text_main_color_dark dark:text-text_main_color_light font-bold mb-2">
-                  {journalist.name}
-                </p>
-                <p className="text-base text-text_main_color_dark dark:text-text_main_color_light font-normal">
-                  Journalist
-                </p>
-              </div>
-            </div>
-          </Link>
-        ))}
+      {data
+  .filter(journalist => journalist._id !== '860d3b16-1c80-4690-b62f-e885fb5fc093')
+  .map((journalist) => (
+    <Link href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
+      <div className="w-full bg-second_color_light dark:bg-second_color_dark rounded-lg p-12 flex flex-col justify-center items-center cursor-pointer">
+        <div className="mb-8">
+          <Image
+            className="object-center object-cover rounded-full h-24 w-24"
+            alt={journalist.name}
+            width={200}
+            height={200}
+            src={
+              journalist.image
+                ? urlFor(journalist.image)
+                    .format("webp")
+                    .width(400)
+                    .height(300)
+                    .fit("fill")
+                    .quality(85)
+                    .url()
+                : "/img/unisexAvatar.jpeg"
+            }
+          />
+        </div>
+        <div className="text-center">
+          <p className="text-xl text-text_main_color_dark dark:text-text_main_color_light font-bold mb-2">
+            {journalist.name}
+          </p>
+          <p className="text-base text-text_main_color_dark dark:text-text_main_color_light font-normal">
+            Journalist
+          </p>
+        </div>
+      </div>
+    </Link>
+  ))
+}
+
+         
       </div>
     </section>
   );
