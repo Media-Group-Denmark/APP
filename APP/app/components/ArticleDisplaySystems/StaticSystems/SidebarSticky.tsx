@@ -15,6 +15,7 @@ async function getData() {
     _type,
     title,
     teaser,
+    publishedAt,
     "articleSlug": slug.current,
     "image": metaImage.asset,
     "category": category->name,
@@ -63,7 +64,7 @@ async function SidebarSticky() {
                 </button>
               </Link>
               <p className="rounded-lg my-auto ml-auto text-xs">
-                {timeSinceText({ date: article._createdAt })}
+                {timeSinceText({ date: article.publishedAt })}
               </p>
             </div>
             <Link href={`/artikel/${article.articleSlug}`}>

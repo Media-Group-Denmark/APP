@@ -38,7 +38,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
           }
         ${
           (dayInterval as number) > 0
-            ? `&& _createdAt >= "${formattedQueryStart}" && _createdAt <= "${formattedToday}"`
+            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
             : ""
         }
       ]

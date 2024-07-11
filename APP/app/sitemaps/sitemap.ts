@@ -12,6 +12,7 @@ export async function getArticleData(): Promise<Article[]> {
                 title,
                 _createdAt,
                 _updatedAt,
+                publishedAt,
                 "articleSlug": slug.current,
                 "category": category->name,
                 "categorySlug": category->slug.current,

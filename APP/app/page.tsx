@@ -58,6 +58,7 @@ async function getData() {
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
     _createdAt,
+    publishedAt,
     _type,
     title,
     teaser,

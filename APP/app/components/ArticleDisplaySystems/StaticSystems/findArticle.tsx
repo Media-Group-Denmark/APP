@@ -33,7 +33,7 @@ const FindArticle: React.FC<{data: Article[]; startIndex: number; endIndex: numb
                       </button>
                     </Link>
                     <p className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
-                        {timeSinceText({ date: article._createdAt })}
+                        {timeSinceText({ date: article.publishedAt })}
                       </p>
                   </div>
                   <Link href={`/artikel/${article.articleSlug}`}>
@@ -59,6 +59,6 @@ export default FindArticle
     </p>
   </Link>
   <p className="rounded-lg text-xs">
-    {timeSinceText({ date: article._createdAt })}
+    {timeSinceText({ date: article.})}
   </p>
 </div> */}

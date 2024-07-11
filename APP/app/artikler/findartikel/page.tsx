@@ -20,6 +20,7 @@ export async function getData(queryParam: any, category: string, journalist: str
       order(coalesce(publishedAt, _createdAt) desc) [0...50] {
         _id,
           _createdAt,
+          publishedAt,
           _type,
           title,
           teaser,

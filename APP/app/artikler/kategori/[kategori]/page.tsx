@@ -98,6 +98,7 @@ export async function getData(params: {
           {
           _id,
           _createdAt,
+          publishedAt,
           _type,
           title,
           teaser,
