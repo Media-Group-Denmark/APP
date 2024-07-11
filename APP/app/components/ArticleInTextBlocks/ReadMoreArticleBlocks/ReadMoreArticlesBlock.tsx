@@ -11,6 +11,7 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
     *[_type == "article" && _id in $articleIds] {
       _id,
       _createdAt,
+      publishedAt,
       _type,
       title,
       views,

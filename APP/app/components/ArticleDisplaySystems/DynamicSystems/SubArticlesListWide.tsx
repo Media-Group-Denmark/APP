@@ -33,7 +33,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
           }
         ${
           (dayInterval as number) > 0
-            ? `&& _createdAt >= "${formattedQueryStart}" && _createdAt <= "${formattedToday}"`
+            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
             : ""
         }
       ]
@@ -43,6 +43,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
       _type,
       title,
       teaser,
+      publishedAt,
       "articleSlug": slug.current,
       "image": metaImage.asset,
       "category": category->name,
@@ -93,7 +94,7 @@ const SubArticlesListWide: React.FC<{
                   </Link>
                   <div>
                     <div className="flex items-center gap-x-4 text-xs">
-                      <time dateTime={post._createdAt} className="text-gray-500">{timeSinceText({ date: post._createdAt })}</time>
+                      <time dateTime={post.publishedAt} className="text-gray-500">{timeSinceText({ date: post.publishedAt })}</time>
                       <Link href={`/artikler/kategori/${post.categorySlug}`} className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{post.category}</Link>
                     </div>
                     <div className="group relative max-w-xl">
@@ -126,6 +127,6 @@ export default SubArticlesListWide
     </p>
   </Link>
   <p className="rounded-lg text-xs">
-    {timeSinceText({ date: article._createdAt })}
+    {timeSinceText({ date: article})}
   </p>
 </div> */}

@@ -92,6 +92,7 @@ export async function getData(params: {
         | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
           _id,
           _createdAt,
+          publishedAt,
           _type,
           title,
           teaser,

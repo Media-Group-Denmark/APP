@@ -103,6 +103,7 @@ export async function getData(params: { artikel: string }): Promise<Article[]> {
                 _type,
                 title,
                 teaser,
+                publishedAt,
                 "articleSlug": slug.current,
                 overview,
                 views,
@@ -195,10 +196,10 @@ export default async function artikel({
                           <div className="flex items-center space-x-2 p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
                             <div>
                               <time
-                                dateTime={article._createdAt}
+                                dateTime={article.publishedAt}
                                 className=" hidden md:block text-xs"
                               >
-                                {timeSinceText({ date: article._createdAt })}
+                                {timeSinceText({ date: article.publishedAt })}
                               </time>
                               <p className="text-fade_color_light lg:mt-2 dark:text-fade_color_dark font-semibold text-xs lg:text-md">
                                 Skrevet af:{" "}
@@ -208,7 +209,7 @@ export default async function artikel({
                               </p>
                               <p className="text-gray-300 font-semibold text-xs">
                                 {new Date(
-                                  article._createdAt
+                                  article.publishedAt
                                 ).toLocaleDateString()}
                               </p>
                             </div>

@@ -2,6 +2,7 @@ export interface Article {
      _id: string;
      _createdAt: string;
      _updatedAt: string;
+     publishedAt: string;
      _type: string;
      _rev: string;
      title: string;

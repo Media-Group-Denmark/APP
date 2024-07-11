@@ -37,8 +37,8 @@ const SubArticlesListSmall: React.FC<{
               </Link>
               <div>
                 <div className="flex flex-col md:flex-row items- start md:items-center gap-y-2 md:gap-y-0 gap-x-4 text-xs">
-                  <time dateTime={post._createdAt} className="text-gray-500 hidden md:inline-block">
-                    {timeSinceText({ date: post._createdAt })}
+                  <time dateTime={post.publishedAt} className="text-gray-500 hidden md:inline-block">
+                    {timeSinceText({ date: post.publishedAt })}
                   </time>
                   <Link
                     href={`/artikler/kategori/${post.categorySlug}`}

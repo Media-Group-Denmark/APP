@@ -14,6 +14,7 @@ interface ExtendedArticle extends SanityDocument {
   JournalistSlug: string;
   JournalistName: string;
   _createdAt: string;
+  publishedAt: string;
 }
 
 const ArticleHero: React.FC<{data: ExtendedArticle[]; startIndex: number; endIndex: number}> = ({ data, startIndex, endIndex }) =>  {
@@ -62,7 +63,7 @@ const ArticleHero: React.FC<{data: ExtendedArticle[]; startIndex: number; endInd
                         </p>
                       </Link>
                       <p className="rounded-lg ">
-                        {timeSinceText({ date: article._createdAt })}
+                        {timeSinceText({ date: article.publishedAt})}
                       </p>
                     </div>
                   </div>

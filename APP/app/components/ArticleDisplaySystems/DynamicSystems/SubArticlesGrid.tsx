@@ -33,7 +33,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
           }
         ${
           (dayInterval as number) > 0
-            ? `&& _createdAt >= "${formattedQueryStart}" && _createdAt <= "${formattedToday}"`
+            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
             : ""
         }
       ]
@@ -43,6 +43,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
       _type,
       title,
       teaser,
+      publishedAt,
       "articleSlug": slug.current,
       "image": metaImage.asset,
       "category": category->name,
@@ -103,7 +104,7 @@ const SubArticlesSixGrid: React.FC<{
                         </button>
                       </Link>
                       <p className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
-                          {timeSinceText({ date: post._createdAt })}
+                          {timeSinceText({ date: post.publishedAt })}
                         </p>
                     </div>
                     <Link href={`/artikel/${post.articleSlug}`}>
@@ -130,6 +131,6 @@ export default SubArticlesSixGrid
     </p>
   </Link>
   <p className="rounded-lg text-xs">
-    {timeSinceText({ date: post._createdAt })}
+    {timeSinceText({ date: post})}
   </p>
 </div> */}

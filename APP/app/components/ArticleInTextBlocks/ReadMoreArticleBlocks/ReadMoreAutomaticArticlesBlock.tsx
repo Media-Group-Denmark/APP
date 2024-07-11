@@ -6,8 +6,9 @@ import { timeSinceText } from '../../ArticleTools/TimeSinceTag';
 import ReadMoreAutomaticViews from './ReadMoreAutomaticViews';
 
 function extractNames(title) {
-  return title.split(' ').filter(word => word[0] === word[0].toUpperCase());
+  return title.split(' ').filter(word => word && word[0] === word[0].toUpperCase());
 }
+
 
 function extractKeywords(title) {
   return title.toLowerCase().split(' ')

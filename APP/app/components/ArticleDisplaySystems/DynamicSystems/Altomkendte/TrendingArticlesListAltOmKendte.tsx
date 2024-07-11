@@ -47,7 +47,7 @@ async function getData(
         }
         ${
           (dayInterval as number) > 0
-            ? `&& _createdAt >= "${formattedQueryStart}" && _createdAt <= "${formattedToday}"`
+            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
             : ""
         }
       ]
@@ -57,6 +57,7 @@ async function getData(
       _type,
       title,
       teaser,
+      publishedAt,
       "articleSlug": slug.current,
       "image": metaImage.asset,
       "category": category->name,
