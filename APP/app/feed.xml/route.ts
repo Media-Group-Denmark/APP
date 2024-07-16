@@ -46,11 +46,11 @@ function getDanishPubDate() {
 /*                            ESCAPE XML CHARACTERS                           */
 /* -------------------------------------------------------------------------- */
 function escapeXML(str) {
-    return str.replace(/&/g, '&#x26;')  // Use hexadecimal for ampersand
-              .replace(/</g, '&#x3C;')   // Use hexadecimal for less than
-              .replace(/>/g, '&gt;')     // Escape greater than
-              .replace(/"/g, '&quot;')  // Escape double quotes
-              .replace(/'/g, '&apos;'); // Escape single quotes
+    return str.replace(/&/g, '&amp;')  // Escape ampersand
+              .replace(/</g, '&lt;')   // Escape less than
+              .replace(/>/g, '&gt;')   // Escape greater than
+              .replace(/"/g, '&quot;')// Escape double quotes
+              .replace(/'/g, '&apos;');// Escape single quotes
 }
 
 /* -------------------------------------------------------------------------- */
@@ -78,7 +78,7 @@ export async function GET() {
     articles.forEach((article) => {
         feed.item({
             title: escapeXML(article.title),
-            description: escapeXML(article.teaser),
+            description: article.teaser,
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
