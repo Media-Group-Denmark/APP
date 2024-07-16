@@ -4,7 +4,38 @@ import { client, urlFor } from '../lib/sanityclient';
 import { PortableText } from "next-sanity";
 import { toHTML } from '@portabletext/to-html';
 
-
+const portableTextToHtml = (portableText) => {
+    const serializers = {
+        types: {
+            block: (props) => {
+                switch (props.node.style) {
+                    case 'h3':
+                        return `<h3>${props.children.join('')}</h3>`;
+                    case 'normal':
+                    default:
+                        return `<p>${props.children.join('')}</p>`;
+                }
+            },
+            imageWithMetadata: (props) => `<img src="${urlFor(props.node.asset).url()}" alt="${props.node.alt || 'Image'}"/>`,
+            youTube: (props) => `<p>Watch on YouTube: <a href="https://youtube.com/watch/${props.node.videoId}">Video Link</a></p>`,
+            tikTok: (props) => `<p>Watch on TikTok: <a href="https://www.tiktok.com/@${props.node.videoId}">Video Link</a></p>`,
+            faceBook: (props) => `<p>See post on Facebook: <a href="https://www.facebook.com/${props.node.postId}">Post Link</a></p>`,
+            instagram: (props) => `<p>See this Instagram post: <a href="https://www.instagram.com/p/${props.node.postId}">Post Link</a></p>`,
+            readMore: (props) => `<p>Read more: <a href="${theme.site_url}/artikel/${props.node.slug}">${props.node.title}</a></p>`,
+            readMoreAutomatic: () => {
+                console.log("Encountered readMoreAutomatic block, returning empty string.");
+                return '';  // Ensure this returns empty string
+            },
+        },
+        // Optionally handle marks like bold, italics, etc.
+        marks: {
+            strong: (props) => `<strong>${props.children.join('')}</strong>`,
+            em: (props) => `<em>${props.children.join('')}</em>`,
+            // Handle other types of marks as needed
+        }
+    };
+    return toHTML(portableText, { serializers });
+};
 
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
@@ -14,7 +45,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...10] {
       _id,
       _createdAt,
       _updatedAt,
@@ -24,6 +55,7 @@ async function getData() {
       teaser,
       "articleSlug": slug.current,
       overview,
+      views,
       "image": metaImage.asset,
       "category": category->name,
       "categorySlug": category->slug.current,
@@ -73,7 +105,7 @@ export async function GET() {
         managingEditor: 'mac@mgdk.dk (Marc Christiansen)',
         webMaster: 'mac@mgdk.dk (Marc Christiansen)',
         copyright: `Copyright ${new Date().getFullYear().toString()}, Marc Christiansen`,
-        language: 'da-DK',
+        language: 'da',
         pubDate: pubDate,
         ttl: 60,
     });
@@ -81,21 +113,22 @@ export async function GET() {
     const articles = await getData();
 
     articles.forEach((article) => {
+        console.log("Original Portable Text: ", article.overview);
+    const articleDescription = portableTextToHtml(article.overview);
+    console.log("Converted HTML: ", articleDescription);
+    const escapedDescription = articleDescription;
+    
         feed.item({
             title: escapeXML(article.title),
-            subTitle: article.teaser,
-            author: article.JournalistName,
-            description: article.teaser,
-            image: { url: urlFor(article.image)
-            .format("webp")
-            .width(400)
-            .height(300)
-            .fit("fill")
-            .quality(85)
-            .url(),
-            width: 800,
-            height: 600,
-            alt: article.title},
+            subTitle: escapeXML(article.teaser),
+            author: escapeXML(article.JournalistName),
+            description: escapedDescription,
+            image: { 
+                url: urlFor(article.image).format("webp").width(400).height(300).fit("fill").quality(85).url(),
+                width: 800,
+                height: 600,
+                alt: escapeXML(article.title)
+            },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
