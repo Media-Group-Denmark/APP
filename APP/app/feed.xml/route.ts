@@ -16,14 +16,13 @@ const portableTextToHtml = (portableText) => {
                         return `<p>${props.children.join('')}</p>`;
                 }
             },
-            imageWithMetadata: (props) => `<img src="${urlFor(props.node.asset).url()}" alt="${props.node.alt || 'Image'}"/>`,
-            youTube: (props) => `<p>Watch on YouTube: <a href="https://youtube.com/watch/${props.node.videoId}">Video Link</a></p>`,
-            tikTok: (props) => `<p>Watch on TikTok: <a href="https://www.tiktok.com/@${props.node.videoId}">Video Link</a></p>`,
-            faceBook: (props) => `<p>See post on Facebook: <a href="https://www.facebook.com/${props.node.postId}">Post Link</a></p>`,
-            instagram: (props) => `<p>See this Instagram post: <a href="https://www.instagram.com/p/${props.node.postId}">Post Link</a></p>`,
-            readMore: (props) => `<p>Read more: <a href="${theme.site_url}/artikel/${props.node.slug}">${props.node.title}</a></p>`,
+            imageWithMetadata: () => ``,
+            youTube: () => ``,
+            tikTok: () => ``,
+            faceBook: () => ``,
+            instagram: () => ``,
+            readMore: () => ``,
             readMoreAutomatic: () => {
-                console.log("Encountered readMoreAutomatic block, returning empty string.");
                 return '';  // Ensure this returns empty string
             },
         },
@@ -113,28 +112,45 @@ export async function GET() {
     const articles = await getData();
 
     articles.forEach((article) => {
-        console.log("Original Portable Text: ", article.overview);
-    const articleDescription = portableTextToHtml(article.overview);
-    console.log("Converted HTML: ", articleDescription);
-    const escapedDescription = articleDescription;
+        const filteredOverview = article.overview.filter(block => 
+            block._type !== 'readMoreAutomatic' &&
+            block._type !== 'readMore' &&
+            block._type !== 'imageWithMetadata' &&
+            block._type !== 'youTube' &&
+            block._type !== 'tikTok' &&
+            block._type !== 'faceBook' &&
+            block._type !== 'instagram'
+        );
+    
+        const imageUrl = urlFor(article.image)
+            .format("webp")
+            .width(800)
+            .height(600)
+            .fit("fill")
+            .quality(85)
+            .url();
+    
+        const articleDescription = portableTextToHtml(filteredOverview);
     
         feed.item({
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
-            description: escapedDescription,
-            image: { 
-                url: urlFor(article.image).format("webp").width(400).height(300).fit("fill").quality(85).url(),
-                width: 800,
-                height: 600,
-                alt: escapeXML(article.title)
+            description: articleDescription,
+            enclosure: {
+                url: imageUrl, // URL til billedet
+                type: "image/webp", // Medietype, afhængigt af format
+                length: 0 // Størrelsen kan sættes til 0 hvis ukendt
             },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
             updated: article._updatedAt,
         });
+        console.log(imageUrl);
     });
+    
+    
 
     const xml = feed.xml({ indent: true });
 
