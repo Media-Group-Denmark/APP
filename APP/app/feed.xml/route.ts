@@ -86,7 +86,16 @@ export async function GET() {
             subTitle: article.teaser,
             author: article.JournalistName,
             description: article.teaser,
-            image: urlFor(article.image),
+            image: { url: urlFor(article.image)
+            .format("webp")
+            .width(400)
+            .height(300)
+            .fit("fill")
+            .quality(85)
+            .url(),
+            width: 800,
+            height: 600,
+            alt: article.title},
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
