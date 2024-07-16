@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.3",
     "@next/third-parties": "^14.2.0",
+    "@portabletext/to-html": "^2.0.13",
     "@sanity/assist": "^3.0.3",
     "@sanity/image-url": "^1.0.2",
     "@sanity/locale-da-dk": "^1.0.1",

@@ -1,6 +1,10 @@
 import RSS from 'rss';
 import theme from '../lib/theme.json';
-import { client } from '../lib/sanityclient';
+import { client, urlFor } from '../lib/sanityclient';
+import { PortableText } from "next-sanity";
+import { toHTML } from '@portabletext/to-html';
+
+
 
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
@@ -13,11 +17,13 @@ async function getData() {
     | order(coalesce(publishedAt, _createdAt) desc) {
       _id,
       _createdAt,
+      _updatedAt,
       publishedAt,
       _type,
       title,
       teaser,
       "articleSlug": slug.current,
+      overview,
       "image": metaImage.asset,
       "category": category->name,
       "categorySlug": category->slug.current,
@@ -25,8 +31,7 @@ async function getData() {
       "tagSlug": tag[]->slug.current,
       "JournalistName": journalist->name,
       "JournalistPhoto": journalist->image,
-      "JournalistSlug": journalist->slug.current,
-      views
+      "JournalistSlug": journalist->slug.current
     }`;
     const data = await client.fetch(query);
     return data;
@@ -78,10 +83,14 @@ export async function GET() {
     articles.forEach((article) => {
         feed.item({
             title: escapeXML(article.title),
+            subTitle: article.teaser,
+            author: article.JournalistName,
             description: article.teaser,
+            image: urlFor(article.image),
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
+            updated: article._updatedAt,
         });
     });
 
