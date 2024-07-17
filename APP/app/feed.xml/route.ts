@@ -149,7 +149,7 @@ export async function GET() {
     
         feed.item(feedItem);
     
-        console.log(feedItem);
+        //console.log(feedItem);
     });
     
     
