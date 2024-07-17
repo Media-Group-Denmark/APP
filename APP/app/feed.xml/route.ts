@@ -22,9 +22,7 @@ const portableTextToHtml = (portableText) => {
             faceBook: () => ``,
             instagram: () => ``,
             readMore: () => ``,
-            readMoreAutomatic: () => {
-                return '';  // Ensure this returns empty string
-            },
+            readMoreAutomatic: () => ``,
         },
         // Optionally handle marks like bold, italics, etc.
         marks: {
