@@ -99,13 +99,14 @@ export async function GET() {
     const feed = new RSS({
         title: theme.site_name,
         description: theme.metadata.description,
-        generator: `RSS til ${theme.site_name}`,
         feed_url: `${theme.site_url}/feed.xml`,
         site_url: theme.site_url,
+        image_url: `${theme.logo_public_url}`,
         managingEditor: 'mac@mgdk.dk (Marc Christiansen)',
         webMaster: 'mac@mgdk.dk (Marc Christiansen)',
         copyright: `Copyright ${new Date().getFullYear().toString()}, Marc Christiansen`,
         language: 'da',
+        categories: [`${theme.metadata.keywords}`],
         pubDate: pubDate,
         ttl: 60,
     });
@@ -128,28 +129,24 @@ export async function GET() {
         const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
         const articleDescription = portableTextToHtml(filteredOverview);
         const articleCategory = article.category ? article.category : 'Ukategoriseret';
-        const articleTags = article.tag ? article.tag.map(tag => escapeXML(tag)) : [];
-        const articleThumbnail = urlFor(article.image).width(150).height(150).url();
     
         feed.item({
             title: escapeXML(article.title),
-            subTitle: escapeXML(article.teaser),
-            author: escapeXML(article.JournalistName),
-            category: escapeXML(articleCategory),
-            tags: articleTags,
-            thumbnail: articleThumbnail,
             description: articleDescription,
-            enclosure: {
-                url: imageUrl,
-                type: `image/${imageExtension}`, 
-                length: `${imageSize}` 
-            },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
+            categories: [articleCategory],
+            author: escapeXML(article.JournalistName),
             date: article.publishedAt,
+            enclosure: {
+            url: imageUrl,
+                file: imageUrl,
+                size: `${imageSize}`,
+                type: `image/${imageExtension}` 
+            },
             updated: article._updatedAt,
         });
-        console.log(imageUrl);
+        //console.log(imageUrl);
     });
     
     
