@@ -4,10 +4,10 @@ import { client, urlFor } from '../lib/sanityclient';
 import { PortableText } from "next-sanity";
 import { toHTML } from '@portabletext/to-html';
 
-const portableTextToHtml = (portableText: any) => {
+const portableTextToHtml = (portableText) => {
     const serializers = {
         types: {
-            block: (props: any) => {
+            block: (props) => {
                 switch (props.node.style) {
                     case 'h3':
                         return `<h3>${props.children.join('')}</h3>`;
@@ -22,12 +22,14 @@ const portableTextToHtml = (portableText: any) => {
             faceBook: () => ``,
             instagram: () => ``,
             readMore: () => ``,
-            readMoreAutomatic: () => ``,
+            readMoreAutomatic: () => {
+                return '';  // Ensure this returns empty string
+            },
         },
         // Optionally handle marks like bold, italics, etc.
         marks: {
-            strong: (props: any) => `<strong>${props.children.join('')}</strong>`,
-            em: (props: any) => `<em>${props.children.join('')}</em>`,
+            strong: (props) => `<strong>${props.children.join('')}</strong>`,
+            em: (props) => `<em>${props.children.join('')}</em>`,
             // Handle other types of marks as needed
         }
     };
@@ -42,7 +44,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...10] {
       _id,
       _createdAt,
       _updatedAt,
@@ -53,7 +55,8 @@ async function getData() {
       "articleSlug": slug.current,
       overview,
       views,
-      "image": metaImage.asset->{url, extension, size, metadata {dimensions}},
+      "image": metaImage.asset,
+      "imageTags": metaImage.asset->{url, extension, size, metadata {dimensions}},
       "category": category->name,
       "categorySlug": category->slug.current,
       "tag": tag[]->name,
@@ -63,7 +66,6 @@ async function getData() {
       "JournalistSlug": journalist->slug.current
     }`;
     const data = await client.fetch(query);
-    console.log(data[0].image.size);
     return data;
 }
 
@@ -110,7 +112,7 @@ export async function GET() {
 
     const articles = await getData();
 
-    articles.forEach((article: any) => {
+    articles.forEach((article) => {
         const filteredOverview = article.overview.filter(block => 
             block._type !== 'readMoreAutomatic' &&
             block._type !== 'readMore' &&
@@ -121,37 +123,39 @@ export async function GET() {
             block._type !== 'instagram'
         );
     
-        const imageUrl = urlFor(article.image.url).url();
+        const imageUrl = urlFor(article.image)
+            .format("webp")
+            .width(800)
+            .height(600)
+            .fit("fill")
+            .quality(85)
+            .url();
+        const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
+        const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
         const articleDescription = portableTextToHtml(filteredOverview);
-        const imageSize = article.image.size ? article.image.size.toString() : '0';
-        const imageExtension = article.image.extension ? article.image.extension : 'jpeg';
+        const articleCategory = article.category ? article.category : 'Ukategoriseret';
+        const articleTags = article.tag ? article.tag.map(tag => escapeXML(tag)) : [];
+        const articleThumbnail = urlFor(article.image).width(150).height(150).url();
     
         feed.item({
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
+            category: escapeXML(articleCategory),
+            tags: articleTags,
+            thumbnail: articleThumbnail,
             description: articleDescription,
-            /* enclosure: {
-                url: imageUrl,
-                type: `image/${imageExtension}`,
-                length: imageSize, 
-            }, */
             enclosure: {
-                url: imageUrl, // URL til billedet
-                type: "image/webp", // Medietype, afhængigt af format
-                length: 0 // Størrelsen kan sættes til 0 hvis ukendt
+                url: imageUrl,
+                type: `image/${imageExtension}`, 
+                length: `${imageSize}` 
             },
-            /* category: article.category ? article.category : null,
-            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
-            thumbnail: urlFor(article.image.url).width(150).height(150).url(), */
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
             updated: article._updatedAt,
         });
-    
-    
-        //console.log(feedItem);
+        console.log(imageUrl);
     });
     
     
