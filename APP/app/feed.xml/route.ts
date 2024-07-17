@@ -137,7 +137,7 @@ export async function GET() {
             enclosure: {
                 url: imageUrl,
                 type: `image/${imageExtension}`,
-                length: imageSize, 
+                length: '0', 
             },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
