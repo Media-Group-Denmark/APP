@@ -126,7 +126,7 @@ export async function GET() {
         const imageSize = article.image.size ? article.image.size.toString() : '0';
         const imageExtension = article.image.extension ? article.image.extension : 'jpeg';
     
-        const feedItem = {
+        feed.Item({
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
@@ -143,9 +143,8 @@ export async function GET() {
             guid: article._id,
             date: article.publishedAt,
             updated: article._updatedAt,
-        };
+        });
     
-        feed.item(feedItem);
     
         //console.log(feedItem);
     });
