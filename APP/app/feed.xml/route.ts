@@ -132,14 +132,14 @@ export async function GET() {
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
-            category: article.category ? article.category : null,
+            /* category: article.category ? article.category : null,
             tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
-            thumbnail: urlFor(article.image.url).width(150).height(150).url(),
+            thumbnail: urlFor(article.image.url).width(150).height(150).url(), */
             description: articleDescription,
             enclosure: {
                 url: imageUrl,
                 type: `image/${imageExtension}`,
-                length: imageSize, // Use integer instead of string
+                length: imageSize, 
             },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
