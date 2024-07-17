@@ -4,10 +4,10 @@ import { client, urlFor } from '../lib/sanityclient';
 import { PortableText } from "next-sanity";
 import { toHTML } from '@portabletext/to-html';
 
-const portableTextToHtml = (portableText) => {
+const portableTextToHtml = (portableText: any) => {
     const serializers = {
         types: {
-            block: (props) => {
+            block: (props: any) => {
                 switch (props.node.style) {
                     case 'h3':
                         return `<h3>${props.children.join('')}</h3>`;
@@ -26,8 +26,8 @@ const portableTextToHtml = (portableText) => {
         },
         // Optionally handle marks like bold, italics, etc.
         marks: {
-            strong: (props) => `<strong>${props.children.join('')}</strong>`,
-            em: (props) => `<em>${props.children.join('')}</em>`,
+            strong: (props: any) => `<strong>${props.children.join('')}</strong>`,
+            em: (props: any) => `<em>${props.children.join('')}</em>`,
             // Handle other types of marks as needed
         }
     };
@@ -110,7 +110,7 @@ export async function GET() {
 
     const articles = await getData();
 
-    articles.forEach((article) => {
+    articles.forEach((article: any) => {
         const filteredOverview = article.overview.filter(block => 
             block._type !== 'readMoreAutomatic' &&
             block._type !== 'readMore' &&
@@ -130,15 +130,20 @@ export async function GET() {
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
-            category: article.category ? article.category : null,
-            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
-            thumbnail: urlFor(article.image.url).width(150).height(150).url(),
             description: articleDescription,
-            enclosure: {
+            /* enclosure: {
                 url: imageUrl,
                 type: `image/${imageExtension}`,
                 length: imageSize, 
+            }, */
+            enclosure: {
+                url: imageUrl, // URL til billedet
+                type: "image/webp", // Medietype, afhængigt af format
+                length: 0 // Størrelsen kan sættes til 0 hvis ukendt
             },
+            category: article.category ? article.category : null,
+            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
+            thumbnail: urlFor(article.image.url).width(150).height(150).url(),
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
