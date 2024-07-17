@@ -44,7 +44,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
+    | order(coalesce(publishedAt, _createdAt) desc) {
       _id,
       _createdAt,
       _updatedAt,
