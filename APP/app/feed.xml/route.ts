@@ -22,7 +22,9 @@ const portableTextToHtml = (portableText) => {
             faceBook: () => ``,
             instagram: () => ``,
             readMore: () => ``,
-            readMoreAutomatic: () => ``,
+            readMoreAutomatic: () => {
+                return '';  // Ensure this returns empty string
+            },
         },
         // Optionally handle marks like bold, italics, etc.
         marks: {
@@ -42,7 +44,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...10] {
       _id,
       _createdAt,
       _updatedAt,
@@ -53,7 +55,7 @@ async function getData() {
       "articleSlug": slug.current,
       overview,
       views,
-      "image": metaImage.asset->{url, extension, size, metadata {dimensions}},
+      "image": metaImage.asset,
       "category": category->name,
       "categorySlug": category->slug.current,
       "tag": tag[]->name,
@@ -63,7 +65,6 @@ async function getData() {
       "JournalistSlug": journalist->slug.current
     }`;
     const data = await client.fetch(query);
-    console.log(data[0].image.size);
     return data;
 }
 
@@ -121,32 +122,32 @@ export async function GET() {
             block._type !== 'instagram'
         );
     
-        const imageUrl = urlFor(article.image.url).url();
-        const articleDescription = portableTextToHtml(filteredOverview);
-        const imageSize = article.image.size ? article.image.size.toString() : '0';
-        const imageExtension = article.image.extension ? article.image.extension : 'jpeg';
+        const imageUrl = urlFor(article.image)
+            .format("webp")
+            .width(800)
+            .height(600)
+            .fit("fill")
+            .quality(85)
+            .url();
     
-        feed.Item({
+        const articleDescription = portableTextToHtml(filteredOverview);
+    
+        feed.item({
             title: escapeXML(article.title),
             subTitle: escapeXML(article.teaser),
             author: escapeXML(article.JournalistName),
-            /* category: article.category ? article.category : null,
-            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
-            thumbnail: urlFor(article.image.url).width(150).height(150).url(), */
             description: articleDescription,
             enclosure: {
-                url: imageUrl,
-                type: `image/${imageExtension}`,
-                length: '0', 
+                url: imageUrl, // URL til billedet
+                type: "image/webp", // Medietype, afhængigt af format
+                length: 0 // Størrelsen kan sættes til 0 hvis ukendt
             },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
             updated: article._updatedAt,
         });
-    
-    
-        //console.log(feedItem);
+        console.log(imageUrl);
     });
     
     
