@@ -1,6 +1,6 @@
 import { client } from '@/app/lib/sanityclient';
 import { MetadataRoute } from 'next';
-const BASE_URL = 'https://xn--pengehjrnet-mgb.dk';
+import theme from '@/app/lib/theme.json';
 
 async function getCategories(): Promise<string[]> {
   const query = `*[_type == "category"][].slug.current`;
@@ -24,13 +24,13 @@ export default async function sitemap({ id }: { id: string }): Promise<MetadataR
     }`, { category: id });
     console.log(articles);
   const siteArticle = articles.map(article => ({
-    url: `${BASE_URL}/artikler/kategori/${id}/${article.slug}`,
+    url: `${theme.site_url}/artikler/kategori/${id}/${article.slug}`,
     lastModified: new Date(article._createdAt),
   }));
   console.log('this never runs')
   return [
     {
-      url: `${BASE_URL}/artikler/kategori/test`,
+      url: `${theme.site_url}/artikler/kategori/test`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,

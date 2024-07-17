@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { client } from '../lib/sanityclient';
+import theme from '../lib/theme.json';
 import { Article } from '../models/article';
 
 export async function getArticleData(): Promise<Article[]> {
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const articles = articleData.map((article) => {
       return {
-        url: `https://xn--pengehjrnet-mgb.dk/artikel/${article.articleSlug}`,
+        url: `${theme.site_url}/artikel/${article.articleSlug}`,
         lastModified: new Date(article._updatedAt),
         priority: 1,
       }
