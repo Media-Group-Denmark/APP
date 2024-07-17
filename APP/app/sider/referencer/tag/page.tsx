@@ -113,7 +113,7 @@ export default async function tag() {
       </>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold leading-8 ">
-          Tags hos Pengehjørnet.dk
+          {`Tags hos ${theme.site_name}`}
         </h2>
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl md:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6">
           <>

@@ -3,6 +3,7 @@ import React from 'react';
 import { client } from '../../lib/sanityclient';
 import Link from 'next/link';
 import { FooterData } from '../../models/footer';
+import theme from '../../lib/theme.json';
 export const revalidate = 80000;
 
 
@@ -106,7 +107,7 @@ export default async function Footer() {
         <div className="flex space-x-6 md:order-2">
         
         </div>
-        <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">&copy; 2024 Pengehjørnet.</p>
+        <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">{`&copy; 2024 ${theme.site_name} .`}</p>
       </div>
     </div>
   </footer>
