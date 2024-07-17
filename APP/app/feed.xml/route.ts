@@ -44,7 +44,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) [0...10] {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
       _id,
       _createdAt,
       _updatedAt,
@@ -123,13 +123,7 @@ export async function GET() {
             block._type !== 'instagram'
         );
     
-        const imageUrl = urlFor(article.image)
-            .format("webp")
-            .width(800)
-            .height(600)
-            .fit("fill")
-            .quality(85)
-            .url();
+        const imageUrl = urlFor(article.image).url();
         const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
         const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
         const articleDescription = portableTextToHtml(filteredOverview);
