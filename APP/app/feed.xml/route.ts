@@ -1,6 +1,40 @@
 import RSS from 'rss';
 import theme from '../lib/theme.json';
-import { client } from '../lib/sanityclient';
+import { client, urlFor } from '../lib/sanityclient';
+import { PortableText } from "next-sanity";
+import { toHTML } from '@portabletext/to-html';
+
+const portableTextToHtml = (portableText) => {
+    const serializers = {
+        types: {
+            block: (props) => {
+                switch (props.node.style) {
+                    case 'h3':
+                        return `<h3>${props.children.join('')}</h3>`;
+                    case 'normal':
+                    default:
+                        return `<p>${props.children.join('')}</p>`;
+                }
+            },
+            imageWithMetadata: () => ``,
+            youTube: () => ``,
+            tikTok: () => ``,
+            faceBook: () => ``,
+            instagram: () => ``,
+            readMore: () => ``,
+            readMoreAutomatic: () => {
+                return '';  // Ensure this returns empty string
+            },
+        },
+        // Optionally handle marks like bold, italics, etc.
+        marks: {
+            strong: (props) => `<strong>${props.children.join('')}</strong>`,
+            em: (props) => `<em>${props.children.join('')}</em>`,
+            // Handle other types of marks as needed
+        }
+    };
+    return toHTML(portableText, { serializers });
+};
 
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
@@ -10,25 +44,28 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
       _id,
       _createdAt,
+      _updatedAt,
       publishedAt,
       _type,
       title,
       teaser,
       "articleSlug": slug.current,
-      "image": metaImage.asset,
+      overview,
+      views,
+      "image": metaImage.asset->{url, extension, size, metadata {dimensions}},
       "category": category->name,
       "categorySlug": category->slug.current,
       "tag": tag[]->name,
       "tagSlug": tag[]->slug.current,
       "JournalistName": journalist->name,
       "JournalistPhoto": journalist->image,
-      "JournalistSlug": journalist->slug.current,
-      views
+      "JournalistSlug": journalist->slug.current
     }`;
     const data = await client.fetch(query);
+    console.log(data[0].image.size);
     return data;
 }
 
@@ -46,11 +83,11 @@ function getDanishPubDate() {
 /*                            ESCAPE XML CHARACTERS                           */
 /* -------------------------------------------------------------------------- */
 function escapeXML(str) {
-    return str.replace(/&/g, '&#x26;')  // Use hexadecimal for ampersand
-              .replace(/</g, '&#x3C;')   // Use hexadecimal for less than
-              .replace(/>/g, '&gt;')     // Escape greater than
-              .replace(/"/g, '&quot;')  // Escape double quotes
-              .replace(/'/g, '&apos;'); // Escape single quotes
+    return str.replace(/&/g, '&amp;')  // Escape ampersand
+              .replace(/</g, '&lt;')   // Escape less than
+              .replace(/>/g, '&gt;')   // Escape greater than
+              .replace(/"/g, '&quot;')// Escape double quotes
+              .replace(/'/g, '&apos;');// Escape single quotes
 }
 
 /* -------------------------------------------------------------------------- */
@@ -68,7 +105,7 @@ export async function GET() {
         managingEditor: 'mac@mgdk.dk (Marc Christiansen)',
         webMaster: 'mac@mgdk.dk (Marc Christiansen)',
         copyright: `Copyright ${new Date().getFullYear().toString()}, Marc Christiansen`,
-        language: 'da-DK',
+        language: 'da',
         pubDate: pubDate,
         ttl: 60,
     });
@@ -76,14 +113,46 @@ export async function GET() {
     const articles = await getData();
 
     articles.forEach((article) => {
-        feed.item({
+        const filteredOverview = article.overview.filter(block => 
+            block._type !== 'readMoreAutomatic' &&
+            block._type !== 'readMore' &&
+            block._type !== 'imageWithMetadata' &&
+            block._type !== 'youTube' &&
+            block._type !== 'tikTok' &&
+            block._type !== 'faceBook' &&
+            block._type !== 'instagram'
+        );
+    
+        const imageUrl = urlFor(article.image.url).url();
+        const articleDescription = portableTextToHtml(filteredOverview);
+        const imageSize = article.image.size ? article.image.size.toString() : '0';
+        const imageExtension = article.image.extension ? article.image.extension : 'jpeg';
+    
+        const feedItem = {
             title: escapeXML(article.title),
-            description: escapeXML(article.teaser),
+            subTitle: escapeXML(article.teaser),
+            author: escapeXML(article.JournalistName),
+            category: article.category ? article.category : null,
+            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
+            thumbnail: urlFor(article.image.url).width(150).height(150).url(),
+            description: articleDescription,
+            enclosure: {
+                url: imageUrl,
+                type: `image/${imageExtension}`,
+                length: imageSize, // Use integer instead of string
+            },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             date: article.publishedAt,
-        });
+            updated: article._updatedAt,
+        };
+    
+        feed.item(feedItem);
+    
+        console.log(feedItem);
     });
+    
+    
 
     const xml = feed.xml({ indent: true });
 
