@@ -56,6 +56,7 @@ async function getData() {
       overview,
       views,
       "image": metaImage.asset,
+      "source": metaImage.asset->description,
       "imageTags": metaImage.asset->{url, extension, size, metadata {dimensions}},
       "category": category->name,
       "categorySlug": category->slug.current,
@@ -109,6 +110,9 @@ export async function GET() {
         categories: [`${theme.metadata.keywords}`],
         pubDate: pubDate,
         ttl: 60,
+        custom_namespaces: {
+            media: 'http://search.yahoo.com/mrss/'
+        }
     });
 
     const articles = await getData();
@@ -144,6 +148,31 @@ export async function GET() {
                 size: `${imageSize}`,
                 type: `image/${imageExtension}` 
             },
+            custom_elements: [
+                {'media:content': {
+                    _attr: {
+                        url: imageUrl,
+                        width: article.imageTags.metadata.dimensions.width,
+                        height: article.imageTags.metadata.dimensions.height,
+                        medium: 'image',
+                        type: `image/${imageExtension}`
+                    },
+                    'media:copyright': `${theme.site_name}`,
+                    'media:title': escapeXML(article.title),
+                    'media:description': {
+                        _attr: { type: 'html' },
+                        _cdata: article.title
+                    },
+                    'media:credit': escapeXML(article.source)
+                }},
+                {'media:thumbnail': {
+                    _attr: {
+                        url: imageUrl,
+                        width: article.imageTags.metadata.dimensions.width,
+                        height: article.imageTags.metadata.dimensions.height
+                    }
+                }}
+            ],
             updated: article._updatedAt,
         });
         //console.log(imageUrl);
@@ -152,6 +181,9 @@ export async function GET() {
     
 
     const xml = feed.xml({ indent: true });
+    const xmlSize = new Blob([xml]).size;
+
+    console.log(`RSS feed size: ${xmlSize} bytes`);
 
     return new Response(xml, {
         headers: {
