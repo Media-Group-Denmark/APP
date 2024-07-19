@@ -189,7 +189,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
       ) : null}
 
 <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-<div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
+<div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           <div>
             {/* Both */}
             <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">

@@ -25,6 +25,9 @@ body {
 li, a {
   cursor: pointer;
 }
+.containerr {
+  padding: 0 10px;
+}
 /* -------------------------- INDICATING PAGE WIDTH ------------------------- */
 section:not(.articleSection), .pageIndicator, .articleContent {
   max-width: 1000px;
@@ -81,10 +84,13 @@ border-radius: 10px;
 }
 #div-InText_1::before, #div-InText_2::before, #div-930x180_1::before, #div-Leaderboard_1::before, #div-Leaderboard_2::before, #div-Leaderboard_3::before {
   content: 'Annonce';
-    text-align: center;
-    clear: right;
-    display: block;
-    color: #696969;
+  font-size: 10px;
+  text-align: center;
+  clear: right;
+  display: block;
+  color: #696969;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 @media (max-width: 775px) { 
@@ -98,20 +104,34 @@ border-radius: 10px;
 
   #div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5, #div-Mobile_Square_1, #div-Mobile_Square_2, #div-Mobile_Square_3 {
    /*  margin-left: -1.5rem !important; */
-    display: grid !important;
-    place-content: center !important;
-    background: #fbf8f8 !important;
-      min-height: 250px !important;
-      display: grid !important;
-      place-content: center !important;
-      position: relative;
+   background: #f5f5f5 !important;
+   min-height: 340px !important;
+   align-items: center;
+   display: grid !important;
+   place-content: start center !important;
+   grid-template-rows: auto 1fr;
+   padding: 5px 0 !important;
+   position: relative;
   }
-  #div-Mobile_Article_1::before, #div-Mobile_Article_2::before, #div-Mobile_Article_3::before, #div-Mobile_Article_4::before, #div-Mobile_Article_5::before, #div-Mobile_Square_1::before, #div-Mobile_Square_2::before, #div-Mobile_Square_3::before {
+  #div-Mobile_Article_1::before, #div-Mobile_Article_2::before, #div-Mobile_Article_3::before, #div-Mobile_Article_4::before, #div-Mobile_Article_5::before {
+    content: 'Artiklen forsætter efter annoncen:';
+    font-size: 10px;
+    text-align: center;
+    clear: right;
+    display: block;
+    color: #696969;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  #div-Mobile_Square_1::before, #div-Mobile_Square_2::before, #div-Mobile_Square_3::before {
     content: 'Annonce';
-      text-align: center;
-      clear: right;
-      display: block;
-      color: #696969;
+    font-size: 10px;
+    text-align: center;
+    clear: right;
+    display: block;
+    color: #696969;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 }
 

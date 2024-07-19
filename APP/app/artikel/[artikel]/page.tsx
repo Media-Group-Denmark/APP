@@ -171,7 +171,7 @@ export default async function artikel({
               strategy="afterInteractive"
             />
             <section className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
-              <div className="container px-3 lg:px-6  pt-0 mx-auto articleContent grid gap-6 ">
+              <div className="containerr px-3 lg:px-6  pt-0 mx-auto articleContent grid gap-6 ">
                 {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
                 <div className="grid-cols-1 max-w-[930px]">
                   {data.map((article) => (
@@ -186,7 +186,7 @@ export default async function artikel({
                           </button>
                         </Link>
                       </div>
-                      <h1 className="text-3xl lg:text-5xl font-bold my-1 px-3 lg:my-2">
+                      <h1 className="text-xl lg:text-5xl font-bold my-1 px-3 lg:my-2">
                         {article.title}
                       </h1>
                       <div className="py-1 lg:py-4">
@@ -201,18 +201,22 @@ export default async function artikel({
                               >
                                 {timeSinceText({ date: article.publishedAt })}
                               </time>
-                              <p className="text-fade_color_light lg:mt-2 dark:text-fade_color_dark font-semibold text-xs lg:text-md">
-                                Skrevet af:{" "}
-                                <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
-                                  {article.JournalistName}
-                                </b>
-                              </p>
-                              <p className="text-gray-300 font-semibold text-xs">
-                                {new Date(
-                                  article.publishedAt
-                                ).toLocaleDateString()}
-                              </p>
+                              
+                             <div className="flex gap-x-2 lg:mt-2 align-middle">
+                                <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
+                                  Skrevet af:{" "}
+                                  <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
+                                    {article.JournalistName}
+                                  </b>
+                                </p>
+                                <p className="text-gray-300 font-semibold text-xs ">
+                                  D. {new Date(
+                                    article.publishedAt
+                                  ).toLocaleDateString()}
+                                </p>
+                             </div>
                             </div>
+                              
                           </div>
                         </Link>
                       </div>
@@ -249,11 +253,11 @@ export default async function artikel({
                             </Link>
                           </React.Fragment>
                         ))}
-                        <div className="md:hidden" id='div-Mobile_Square_1'></div>
                       </div>
                       <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
                         {article.teaser}
                       </h2>
+                        <div className="md:hidden" id='div-Mobile_Article_1'></div>
 
                       <div className="hidden md:grid" id="div-Leaderboard_2"></div>
 
@@ -263,7 +267,6 @@ export default async function artikel({
                           components={components}
                         />
                       </div>
-                      <div className="md:hidden"  id='div-Mobile_Square_2'></div>
                       <div className="hidden md:grid" id="div-Leaderboard_3"></div>
                       <SocialMediaShareButtons
                       views={`${article.views}`}

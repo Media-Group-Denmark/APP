@@ -195,7 +195,7 @@ export default async function kategori({
         </ol>
       </nav>
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-        <div className="container px-2 md:px-6 py-10 pt-0 m-auto ">
+        <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           <div>
 
             {/* Both */}
