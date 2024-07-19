@@ -18,7 +18,7 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
     const intervalDuration = 2500 + Math.random() * 1000; // Giver variation i opdateringsintervallet
     const intervalId = setInterval(() => {
       const randomChange = Math.floor(Math.random() * adjustmentFactor) - Math.floor(adjustmentFactor / 2);
-      const newReaders = Math.max(3, Math.min(67, liveReaders + randomChange));
+      const newReaders = Math.max(3, Math.min(24, liveReaders + randomChange));
       setPreviousReaders(liveReaders);
       setLiveReaders(newReaders);
     }, intervalDuration);
@@ -27,16 +27,16 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
   }, [liveReaders, adjustmentFactor]);
 
   const readerChange = liveReaders - previousReaders;
-  const arrow = readerChange >= 0 ? <ChevronUp color='green' /> : <ChevronDown color='red' />;
+  const arrow = readerChange >= 0 ? <ChevronUp className='scale-[0.9] sm:scale-[1]' color='green' /> : <ChevronDown className='scale-[0.9] sm:scale-[1]' color='red' />;
   const color = readerChange >= 0 ? 'green' : 'red';
 
   return (
     <div className='flex gap-2'>
-      <span className='grid w-fit grid-cols-[auto_1fr] place-content-center items-center !text-[1em] md:!text-[1.12em] min-w-[2.7em] '>
+      <span className='grid w-fit grid-cols-[auto_1fr] place-content-center items-center !text-[15px] md:!text-[1.12em] min-w-[3em] sm:min-w-[2.5em] '>
         {arrow}
         <CountUp start={previousReaders} end={liveReaders} duration={2.75} className='!font-semibold'/>
       </span>
-      <span className="text-sm md:text-lg block font-semibold transition-all my-auto">
+      <span className="text-[0.8em] sm:text-sm md:text-lg block font-bold transition-all my-auto">
         Læser lige nu:
       </span>
     </div>

@@ -34,8 +34,8 @@ async function fetchArticlesByCriteria(title, names, keywords, category) {
   const articles = await client.fetch(query);
 
   // Først forsøger vi at finde artikler baseret på navne
-  const byNames = articles.filter(article => names.some(name => article.title.includes(name)));
-  if (byNames.length >= 2) return byNames.slice(0, 2);
+  /* const byNames = articles.filter(article => names.some(name => article.title.includes(name)));
+  if (byNames.length >= 2) return byNames.slice(0, 2); */
   
   // Dernæst forsøger vi at finde artikler baseret på nøgleord
   const byKeywords = articles.filter(article => {
@@ -66,17 +66,17 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
   const relatedAutomaticArticles = await fetchArticlesByCriteria(articleTitle, names, keywords, articleCategory);
 
   return (
-    <div className="my-8">
-      <ul className="list-disc list-inside grid gap-2">
+    <div className="my-2 sm:my-6">
+      <ul className="list-disc list-inside grid gap-2 !m-0">
         {relatedAutomaticArticles.map((post: any) => (
             <Link href={`/artikel/${post.articleSlug}`}>
           <div className='bg-second_color_light dark:bg-second_color_dark shadow-sm rounded-xl'>
            
             <article
             key={post._id}
-            className="relative isolate flex flex-col sm:flex-row sm:gap-8"
+            className="relative isolate flex sm:flex-row sm:gap-8"
             >
-                <div className="relative sm:aspect-[2/1] aspect-square h-32 sm:h-24 w-full sm:w-24 shrink-0">
+                <div className="relative sm:aspect-[2/1] aspect-square h-[70px] sm:h-24 w-[70px] sm:w-24 shrink-0">
                   <div
                     className="block absolute rounded-2xl inset-0 bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
                     style={{
@@ -90,12 +90,12 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
                     }}
                   ></div>
                 </div>
-              <div className='p-2 sm:mt-2 sm:p-0'>
-                <div className="flex items-center gap-x-4">
+              <div className=' p-1 px-2 sm:p-2 sm:mt-2'>
+                <div className="flex h-[1em] items-center gap-x-4">
                 <div><ReadMoreAutomaticViews views={post.views} /></div>
                 </div>
                 <div className="group relative max-w-xl">
-                  <h4 className=" text-[0.95em] sm:text-[1em] md:text-[1.1em] font-semibold leading-6 mt-2 sm:mr-2 dark:group-hover:text-gray-300  group-hover:text-gray-600">
+                  <h4 className=" !text-[0.8em] sm:!text-[0.95em] font-semibold !leading-5 sm:!leading-6 max-w-[30ch] sm:max-w-[80ch] mt-1 sm:mt-2 sm:mr-2 !mb-0 dark:group-hover:text-gray-300  group-hover:text-gray-600">
                       
                       {post.title}
                   </h4>

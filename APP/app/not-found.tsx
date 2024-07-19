@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <section>
         <div className="flex items-center p-16 ">
-        <div className="container flex flex-col items-center ">
+        <div className="containerr flex flex-col items-center ">
             <div className="flex flex-col gap-6 max-w-md text-center">
                 <h2 className="font-extrabold text-8xl text-gray-600 dark:text-gray-100">
                     <span className="sr-only">Fejl</span>404

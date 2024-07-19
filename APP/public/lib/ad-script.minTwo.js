@@ -283,7 +283,7 @@ Element.prototype.setBefore = function(element) {
       element.parentNode.insertBefore(this, element);
       inserted = true;
   } catch (err) {
-      printError(err, "Failed to setBefore Container: " + (this.id || this.tagName));
+      printError(err, "Failed to setBefore containerr: " + (this.id || this.tagName));
   }
   return inserted;
 };
@@ -295,7 +295,7 @@ Element.prototype.setAfter = function(element) {
       element.parentNode.insertBefore(this, element.nextSibling);
       inserted = true;
   } catch (err) {
-      printError(err, "Failed to setAfter Container: " + (this.id || this.tagName));
+      printError(err, "Failed to setAfter containerr: " + (this.id || this.tagName));
   }
   return inserted;
 };

@@ -97,7 +97,7 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
   );
 
   return (
-    <div className="container relative z-10 mx-auto pb-12 ">
+    <div className="containerr relative z-10 mx-auto pb-12 ">
       <div className="rounded-lg  p-10 shadow-lg bg-main_color_light dark:bg-second_color_dark">
 
         
