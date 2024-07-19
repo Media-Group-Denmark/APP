@@ -1,0 +1,65 @@
+
+ /* Target all container text to reduce redundant code - content provided below in queries */
+ .mvp_ad_widget:has(.desktop_ad):before, #leaderboard_1:before, .mvp_ad_widget:has(.mobile_ad):before, .inArticleBanner:before
+   {
+     content: '';
+     font-size: 10px;
+     text-align: center;
+     clear: right;
+     display: block;
+     color: #696969;
+     letter-spacing: 2px;
+     text-transform: uppercase;
+ } 
+
+/* Ad Layout */
+/* Desktop */
+@media (min-width: 576px) {
+    .mvp_ad_widget:has(.desktop_ad), .inArticleBanner, #leaderboard_1 {
+        background: #f5f5f5 !important;
+      min-height: 300px;
+      align-items: center;
+      display: grid !important;
+      place-content: start center !important;
+      grid-template-rows: auto 1fr;
+      padding: 5px 0 !important;
+      position: relative;
+    }
+    .mvp_ad_widget:has(.desktop_ad):before,
+#leaderboard_1:before {
+        content: 'Annonce';
+    } 
+    
+    .mvp_ad_widget > .mvp-main-box:has(.desktop_ad) {
+        display: grid;
+        place-content: center;
+    }
+}
+/* Mobile */
+@media (max-width: 576px) {
+    .mvp_ad_widget:has(.mobile_ad), .inArticleBanner {
+        background: #f5f5f5 !important;
+        min-height: 390px !important;
+        align-items: center;
+        display: grid !important;
+        place-content: start center !important;
+        grid-template-rows: auto 1fr;
+        padding: 5px 0 !important;
+        position: relative;
+    }
+    .mvp_ad_widget:has(.mobile_ad):before {
+        content: 'Annonce';
+    } 
+    
+    .mvp_ad_widget > .mvp-main-box:has(.mobile_ad) {
+        display: grid;
+        place-content: center;
+    }
+}
+.inArticleBanner:before {
+ content: 'Artiklen forsætter efter annoncen:';
+}
+
+.mvp-ad-label {
+    opacity: 0;
+}

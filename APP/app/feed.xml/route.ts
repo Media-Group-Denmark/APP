@@ -44,7 +44,7 @@ async function getData() {
     *[
       _type == "article"
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
       _id,
       _createdAt,
       _updatedAt,
@@ -55,7 +55,9 @@ async function getData() {
       "articleSlug": slug.current,
       overview,
       views,
-      "image": metaImage.asset->{url, extension, size, metadata {dimensions}},
+      "image": metaImage.asset,
+      "source": metaImage.asset->description,
+      "imageTags": metaImage.asset->{url, extension, size, metadata {dimensions}},
       "category": category->name,
       "categorySlug": category->slug.current,
       "tag": tag[]->name,
@@ -65,7 +67,6 @@ async function getData() {
       "JournalistSlug": journalist->slug.current
     }`;
     const data = await client.fetch(query);
-    console.log(data[0].image.size);
     return data;
 }
 
@@ -99,15 +100,19 @@ export async function GET() {
     const feed = new RSS({
         title: theme.site_name,
         description: theme.metadata.description,
-        generator: `RSS til ${theme.site_name}`,
         feed_url: `${theme.site_url}/feed.xml`,
         site_url: theme.site_url,
+        image_url: `${theme.logo_public_url}`,
         managingEditor: 'mac@mgdk.dk (Marc Christiansen)',
         webMaster: 'mac@mgdk.dk (Marc Christiansen)',
         copyright: `Copyright ${new Date().getFullYear().toString()}, Marc Christiansen`,
         language: 'da',
+        categories: [`${theme.metadata.keywords}`],
         pubDate: pubDate,
         ttl: 60,
+        custom_namespaces: {
+            media: 'http://search.yahoo.com/mrss/'
+        }
     });
 
     const articles = await getData();
@@ -123,38 +128,62 @@ export async function GET() {
             block._type !== 'instagram'
         );
     
-        const imageUrl = urlFor(article.image.url).url();
+        const imageUrl = urlFor(article.image).url();
+        const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
+        const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
         const articleDescription = portableTextToHtml(filteredOverview);
-        const imageSize = article.image.size ? article.image.size.toString() : '0';
-        const imageExtension = article.image.extension ? article.image.extension : 'jpeg';
+        const articleCategory = article.category ? article.category : 'Ukategoriseret';
     
-        const feedItem = {
+        feed.item({
             title: escapeXML(article.title),
-            subTitle: escapeXML(article.teaser),
-            author: escapeXML(article.JournalistName),
-            category: article.category ? article.category : null,
-            tags: article.tag ? article.tag.map(tag => escapeXML(tag)) : [],
-            thumbnail: urlFor(article.image.url).width(150).height(150).url(),
             description: articleDescription,
-            enclosure: {
-                url: imageUrl,
-                type: `image/${imageExtension}`,
-                length: imageSize, // Use integer instead of string
-            },
             url: `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
+            categories: [articleCategory],
+            author: escapeXML(article.JournalistName),
             date: article.publishedAt,
+            enclosure: {
+            url: imageUrl,
+                file: imageUrl,
+                size: `${imageSize}`,
+                type: `image/${imageExtension}` 
+            },
+            custom_elements: [
+                {'media:content': {
+                    _attr: {
+                        url: imageUrl,
+                        width: article.imageTags.metadata.dimensions.width,
+                        height: article.imageTags.metadata.dimensions.height,
+                        medium: 'image',
+                        type: `image/${imageExtension}`
+                    },
+                    'media:copyright': `${theme.site_name}`,
+                    'media:title': escapeXML(article.title),
+                    'media:description': {
+                        _attr: { type: 'html' },
+                        _cdata: article.title
+                    },
+                    'media:credit': escapeXML(article.source)
+                }},
+                {'media:thumbnail': {
+                    _attr: {
+                        url: imageUrl,
+                        width: article.imageTags.metadata.dimensions.width,
+                        height: article.imageTags.metadata.dimensions.height
+                    }
+                }}
+            ],
             updated: article._updatedAt,
-        };
-    
-        feed.item(feedItem);
-    
-        console.log(feedItem);
+        });
+        //console.log(imageUrl);
     });
     
     
 
     const xml = feed.xml({ indent: true });
+    const xmlSize = new Blob([xml]).size;
+
+    console.log(`RSS feed size: ${xmlSize} bytes`);
 
     return new Response(xml, {
         headers: {
