@@ -7,12 +7,10 @@ import type { Metadata } from "next";
 import SubArticlesListSmall from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import SubArticlesGrid from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
-import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import SubArticlesListSmallOrderRelease from "./components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -84,7 +82,7 @@ export default async function Home() {
   const data: Article[] = await getData();
 
   return (
-    <>
+    <section>
       <TopNewsSlider
         data={data}
         dayInterval={14}
@@ -95,12 +93,12 @@ export default async function Home() {
         journalist=""
         articles={data}
       />
-      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+      <div className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="containerr md:px-6 py-10 pt-0 m-auto ">
           <div>
 
             {/* Both */}
-            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+            <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
                 <span className="hidden lg:inline-block">
@@ -114,44 +112,44 @@ export default async function Home() {
                 endIndex={5}
                  />
               </div>
-            </div>
+            </section>
 
             
-            <div className=" md:hidden" id="div-Mobile_Square_1"></div>
-            <div className="hidden md:block" id="div-Leaderboard_2"></div>
+            <aside className=" md:hidden" id="div-Mobile_Square_1"></aside>
+            <aside className="hidden md:block" id="div-Leaderboard_2"></aside>
 
             {/* Phone */}
-            <div className="grid gap-4 md:hidden">
+            <section className="grid gap-4 md:hidden">
             <TrendingArticlesListAltOmKendte
                 dayInterval={14}
                 startIndex={0}
                 endIndex={5}
-                 />
-              <div id="div-Mobile_Square_2"></div>
+              />
+              <aside id="div-Mobile_Square_2"></aside>
               <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
               <span className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </span>
-              <div id="div-Mobile_Square_3"></div>
+              <aside id="div-Mobile_Square_3"></aside>
               <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
               <span className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </span>
-            </div>
+            </section>
 
 
             {/* Desktop */}
-            <div className="md:inline-block hidden">
+            <section className="md:inline-block hidden">
               <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
               <div className="hidden md:block" id="div-Leaderboard_3"></div>
               <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
               <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
-            </div>
+            </section>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

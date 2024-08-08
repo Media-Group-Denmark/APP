@@ -130,7 +130,7 @@ useEffect(() => {
                 <div className="flex-shrink-0">
                 <Link href="/">
                 <Image
-                  className="w-auto h-auto"
+                  className="w-auto h-auto "
                   width={100}
                   height={60}
                   src={logo ? urlFor(logo).url() : theme.logo_url}
@@ -143,6 +143,7 @@ useEffect(() => {
                     {navigation.map((item) => (
                       <div>
                         <NavigationItem key={item._key} item={item} closeMenu={close}/>
+                        <p>{item._key} {item[0]}</p>
                       </div>
                     ))}
                   </div>
