@@ -82,7 +82,7 @@ export default async function Home() {
   const data: Article[] = await getData();
 
   return (
-    <section>
+    <main>
       <TopNewsSlider
         data={data}
         dayInterval={14}
@@ -93,25 +93,24 @@ export default async function Home() {
         journalist=""
         articles={data}
       />
-      <div className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-        <div className="containerr md:px-6 py-10 pt-0 m-auto ">
-          <div>
-
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
+        <div className="containerr md:px-6 py-10 pt-0 m-auto">
+          
             {/* Both */}
             <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
-                <span className="hidden lg:inline-block">
+                <aside className="hidden lg:inline-block">
                   <SubArticlesListWide category={'nyheder'} startIndex={1} endIndex={3} />
-                </span>
+                </aside>
               </div>
-              <div className="hidden w-[280px] lg:inline-block">
+              <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesListAltOmKendte
                 dayInterval={14}
                 startIndex={0}
                 endIndex={5}
                  />
-              </div>
+              </aside>
             </section>
 
             
@@ -127,29 +126,28 @@ export default async function Home() {
               />
               <aside id="div-Mobile_Square_2"></aside>
               <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
-              <span className="mt-6 block">
+              <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
-              </span>
+              </div>
               <aside id="div-Mobile_Square_3"></aside>
               <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
-              <span className="mt-4 block">
+              <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
-              </span>
+              </div>
             </section>
 
 
             {/* Desktop */}
             <section className="md:inline-block hidden">
               <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
-              <div className="hidden md:block" id="div-Leaderboard_3"></div>
+              <aside className="hidden md:block" id="div-Leaderboard_3"></aside>
               <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
               <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
             </section>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

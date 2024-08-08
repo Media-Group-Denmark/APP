@@ -86,11 +86,11 @@ const TrendingArticlesList: React.FC<{
                 key={post._id}
                 className="flex items-center border-b-2  border-b-text_second_color_light dark:border-b-text_second_color_dark pb-2"
               >
-                <span className="font-bold text-text_second_color_dark dark:text-text_second_color_light text-xl min-w-6">{index + 1}</span>
+                <article className="font-bold text-text_second_color_dark dark:text-text_second_color_light text-xl min-w-6">{index + 1}</article>
                 <Link href={`/artikel/${post.articleSlug}`}>
-                  <p className="ml-2 text-main_color_dark dark:text-main_color_light  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
-                    {post.title}
-                  </p>
+                  <header className="ml-2 text-main_color_dark dark:text-main_color_light  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
+                    <h2>{post.title}</h2>
+                  </header>
                 </Link>
               </li>
             ))}

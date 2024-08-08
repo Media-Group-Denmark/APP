@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
-function calculateAdjustmentFactor(views) {
+function calculateAdjustmentFactor(views: any) {
   const base = Math.floor(Number(views) / 6);
   return Math.max(3, Math.min(11, base)); // Sikrer at factor er mellem 3 og 11
 }

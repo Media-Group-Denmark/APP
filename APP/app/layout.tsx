@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
        {/*  <AdBlockDetect /> */}
         <Header />
-        <main className="mt-[60px]">{children}</main>
+        <>{children}</>
         <GoogleAnalytics gaId={googleAnalyticsId} />
         <Footer />
 

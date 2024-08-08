@@ -32,9 +32,9 @@ const FindArticle: React.FC<{data: Article[]; startIndex: number; endIndex: numb
                         {article.category}
                       </button>
                     </Link>
-                    <p className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
+                    <time className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
                         {timeSinceText({ date: article.publishedAt })}
-                      </p>
+                      </time>
                   </div>
                   <Link href={`/artikel/${article.articleSlug}`}>
                     <span className="grid ">

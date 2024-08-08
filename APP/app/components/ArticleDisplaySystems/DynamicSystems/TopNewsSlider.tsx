@@ -109,10 +109,10 @@ const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
   );
   return (
     <aside className="max-w-[1000px] mx-auto px-6 mt-8 md:mt-0">
-      <span className="flex gap-[12px]">
+      <figure className="flex gap-[12px]">
         <h2 className="text-md font-bold">Seneste Nyt</h2>
         <ChevronRight className="font-black my-auto" size={22} />
-      </span>
+      </figure>
       <nav className="sliderNav">
         <ul
           style={{ gridTemplateColumns: "repeat(12, auto)" }}

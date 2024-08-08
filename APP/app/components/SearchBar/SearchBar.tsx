@@ -108,13 +108,6 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
             className="w-full rounded-lg border bg-main_color_light dark:bg-main_color_dark  border-gray-400 p-2"
             placeholder="Søg i arkivet ..."
           />
-          {/* <button
-            type="button"
-            onClick={() => handleSearch("")}
-            className="ml-2 rounded-lg bg-blue-500 p-2 text-white hover:bg-blue-600"
-          >
-            Search
-          </button> */}
         </div>
 
         <div className="grid md:flex gap-4">
@@ -146,13 +139,6 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
                 className="max-h-[300px] z-20 w-full overflow-y-scroll absolute right-0 mt-2 rounded-md shadow-lg 
                 bg-main_color_light dark:bg-main_color_dark text-text_main_color_dark dark:text-text_main_color_dark ring-1 ring-black ring-opacity-5 p-1 space-y-1"
               >
-                {/* <input
-                  id="search-input"
-                  className="block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none"
-                  type="text"
-                  placeholder="Search items"
-                  autoComplete="off"
-                /> */}
                 <p
                   onClick={() => selectCategory("Alle Kategorier", "")}
                   className="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-500 active:bg-blue-100 cursor-pointer rounded-md"
@@ -200,13 +186,6 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
                 className="max-h-[300px] z-20 w-full overflow-y-scroll absolute right-0 mt-2 rounded-md shadow-lg 
                 bg-main_color_light dark:bg-main_color_dark text-text_main_color_dark dark:text-text_main_color_dark ring-1 ring-black ring-opacity-5 p-1 space-y-1"
               >
-                {/* <input
-                  id="search-input"
-                  className="block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none"
-                  type="text"
-                  placeholder="Search items"
-                  autoComplete="off"
-                /> */}
                 <p
                   onClick={() => selectJournalist("Alle Journalister", "")}
                   className="block px-4 py-2  hover:bg-gray-200  dark:hover:bg-gray-500 active:bg-blue-100 cursor-pointer rounded-md"
@@ -253,13 +232,6 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
                 id="dropdown-menu"
                 className="max-h-[300px] z-20 w-full overflow-y-scroll absolute right-0 mt-2 rounded-md shadow-lg bg-main_color_light dark:bg-main_color_dark text-text_main_color_dark dark:text-text_main_color_dark ring-1 ring-black ring-opacity-5 p-1 space-y-1"
               >
-                {/* <input
-                  id="search-input"
-                  className="block w-full px-4 py-2 text-gray-800 border rounded-md  border-gray-300 focus:outline-none"
-                  type="text"
-                  placeholder="Search items"
-                  autoComplete="off"
-                /> */}
                 <p
                   onClick={() => selectTag("Alle tags", "")}
                   className="block px-4 py-2  hover:bg-gray-200  dark:hover:bg-gray-500 active:bg-blue-100 cursor-pointer rounded-md"

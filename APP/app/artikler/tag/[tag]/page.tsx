@@ -119,7 +119,7 @@ export async function getData(params: { tag: string }): Promise<Article[]> {
 export default async function tag({ params }: { params: { tag: string } }) {
   const data: Article[] = await getData({ tag: params.tag });
   return (
-    <>
+    <main>
       {data ? (
         <nav
           className="flex px-3 md:px-8 max-w-[1000px] m-auto  py-6 pt-6 rounded-lg "
@@ -188,56 +188,66 @@ export default async function tag({ params }: { params: { tag: string } }) {
         </nav>
       ) : null}
 
-<section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-<div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
-          <div>
-            {/* Both */}
-            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-              <div className=" lg:w-[700px]">
-                <ArticleHero data={data} startIndex={0} endIndex={1} />
-              </div>
-              <div className="hidden w-[280px] lg:inline-block">
-                <TrendingArticlesList
-                  dayInterval={14}
-                  startIndex={0}
-                  endIndex={5}
-                  tag={data[0].tagSlug}
-                />
-              </div>
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+        <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
+          {/* Both */}
+          <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+            <div className=" lg:w-[700px]">
+              <ArticleHero data={data} startIndex={0} endIndex={1} />
             </div>
-            <div className=" md:hidden" id="div-Mobile_Square_1"></div>
-            <div className="hidden md:block" id="div-Leaderboard_2"></div>
-
-            {/* Phone */}
-            <div className="inline-block md:hidden">
+            <aside className="hidden w-[280px] lg:inline-block">
               <TrendingArticlesList
-                dayInterval={30}
+                dayInterval={60}
                 startIndex={0}
                 endIndex={5}
                 tag={data[0].tagSlug}
               />
-              <div id="div-Mobile_Square_2"></div>
-              <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={3} />
-              <span className="mt-6 block">
-                <ArticleHero data={data} startIndex={3} endIndex={4} />
-              </span>
-              <div id="div-Mobile_Square_3"></div>
-              <SubArticlesGrid tag={data[0].tagSlug} startIndex={4} endIndex={6} />
-              <span className="mt-4 block">
-                <ArticleHero data={data} startIndex={6} endIndex={7} />
-              </span>
-            </div>
+            </aside>
+          </section>
+          <aside className=" md:hidden" id="div-Mobile_Square_1"></aside>
+          <aside className="hidden md:block" id="div-Leaderboard_2"></aside>
 
-            {/* Desktop */}
-            <div className="md:inline-block hidden">
-              <SubArticlesGrid tag={data[0].tagSlug} startIndex={1} endIndex={7} />
-              <div className="hidden md:block" id="div-Leaderboard_3"></div>
+          {/* Phone */}
+          <section className="inline-block md:hidden">
+            <TrendingArticlesList
+              dayInterval={30}
+              startIndex={0}
+              endIndex={5}
+              tag={data[0].tagSlug}
+            />
+            <aside id="div-Mobile_Square_2"></aside>
+            <SubArticlesGrid
+              tag={data[0].tagSlug}
+              startIndex={1}
+              endIndex={3}
+            />
+            <div className="mt-6 block">
+              <ArticleHero data={data} startIndex={3} endIndex={4} />
             </div>
-            <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
-          </div>
+            <aside id="div-Mobile_Square_3"></aside>
+            <SubArticlesGrid
+              tag={data[0].tagSlug}
+              startIndex={4}
+              endIndex={6}
+            />
+            <div className="mt-4 block">
+              <ArticleHero data={data} startIndex={6} endIndex={7} />
+            </div>
+          </section>
+
+          {/* Desktop */}
+          <section className="md:inline-block hidden">
+            <SubArticlesGrid
+              tag={data[0].tagSlug}
+              startIndex={1}
+              endIndex={7}
+            />
+            <aside className="hidden md:block" id="div-Leaderboard_3"></aside>
+          </section>
+          <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
         </div>
       </section>
-    </>
+    </main>
   );
 }
 export const runtime = "edge";
