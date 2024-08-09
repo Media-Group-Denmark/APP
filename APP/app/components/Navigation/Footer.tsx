@@ -48,10 +48,10 @@ export default async function Footer() {
     {footer.footerItems.map((item) => (
       <div key={item._key} className="md:grid md:gap-8">
         <div>
-          <h3 className="text-sm font-semibold leading-6">{item.title}</h3>
+          <h1 className="text-sm font-semibold leading-6">{item.title}</h1>
           <ul className="mt-4 space-y-4 grid text-fade_color_light dark:text-fade_color_dark">
             {item.links.map((link) => (
-              <>
+              <li>
               {
                 link.type === 'category' ? (
                   <Link href={`/artikler/kategori/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
@@ -83,7 +83,7 @@ export default async function Footer() {
                   </Link>
                     ) : null
                 }
-                </>
+                </li>
             ))}
           </ul>
         </div>
@@ -107,7 +107,7 @@ export default async function Footer() {
         <div className="flex space-x-6 md:order-2">
         
         </div>
-        <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">{`&copy; 2024 ${theme.site_name} .`}</p>
+        <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">{`Copyright 2024 ${theme.site_name} .`}</p>
       </div>
     </div>
   </footer>

@@ -8,7 +8,7 @@ export default function TikTokClientBlock( { value }: { value: string }) {
       setPageLoaded(true)
   }, [])
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <aside style={{ display: 'flex', justifyContent: 'center' }}>
         {
             pageLoaded && (
                 <div>
@@ -23,6 +23,6 @@ export default function TikTokClientBlock( { value }: { value: string }) {
               </div>
             )
         }
-</div>
+</aside>
   )
 }

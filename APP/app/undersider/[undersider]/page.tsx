@@ -79,7 +79,7 @@ export default async function page({
   const SampleImageComponent = ({ value, isInline }: any) => {
     const imageAlt = value.alt || " ";
     return (
-      <div>
+      <aside>
         <img
           className="mb-6"
           src={urlFor(value)
@@ -100,7 +100,7 @@ export default async function page({
         <p className="absolute text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
           Foto: {imageAlt}
         </p>
-      </div>
+      </aside>
     );
   };
   /* -------------------------------------------------------------------------- */
@@ -191,7 +191,7 @@ export default async function page({
   };
 
   return (
-    <div>
+    <main>
       {
         data && (
           <>
@@ -246,6 +246,6 @@ export default async function page({
           </>
         )
       }
-    </div>
+    </main>
   )
 }

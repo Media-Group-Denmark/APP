@@ -24,8 +24,8 @@ export default async function ImageTextBlock({
   const imageData = await fetchImageData(value.asset._ref);
 
   return (
-    <div className="w-full max-w-[90vw] grid place-content-center">
-      <div className="w-fit relative">
+    <aside className="w-full max-w-[90vw] grid place-content-center">
+      <figure className="w-fit relative">
           <img
             src={urlFor(imageData)
                 .format("webp")
@@ -39,10 +39,10 @@ export default async function ImageTextBlock({
             className="relative"
             style={{ display: isInline ? "inline-block" : "block" }}
           />
-          <p className="absolute text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+          <figcaption className="absolute text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
             Foto: {imageData.description || value.alt || " "}
-          </p>
-      </div>
-    </div>
+          </figcaption>
+      </figure>
+    </aside>
   );
 }

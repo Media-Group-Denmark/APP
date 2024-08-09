@@ -24,4 +24,5 @@ export interface Article {
      dayInterval: number;
      startIndex: number;
      endIndex: number;
+     reading: number;
 }

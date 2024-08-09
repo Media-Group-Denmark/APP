@@ -35,14 +35,14 @@ async function getData() {
 async function SidebarSticky() {
   const data: Article[] = await getData();
   return (
-    <div className="hidden md:grid md:grid-cols-1 px-6 md:px-0 gap-8 h-fit md:sticky top-20 xl:gap-6 mb-10 max-w-[300px]">
+    <section className="hidden md:grid md:grid-cols-1 px-6 md:px-0 gap-8 h-fit md:sticky top-20 xl:gap-6 mb-10 max-w-[300px]">
       
       {data.slice(1, 5).map((article) => (
         <div
           key={article._id}
           className="w-full bg-second_color_light dark:bg-second_color_dark  rounded-lg relative  "
         >
-          <Link href={`/artikel/${article.articleSlug}`}>
+          <Link aria-label="Læs mere om artiklen" href={`/artikel/${article.articleSlug}`}>
             <div
               className="block w-full h-[10em] bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
               style={{
@@ -77,7 +77,7 @@ async function SidebarSticky() {
           </div>
         </div>
       ))}
-    </div>
+    </section>
   );
 }
 

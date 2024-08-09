@@ -55,46 +55,38 @@ export default async function ReadMoreArticlesBlock({
   if (relatedArticles.length === 0) return null;
 
   return (
-    <div className="my-8">
+    <aside className="my-8">
     <ul className="list-disc list-inside grid gap-2">
       {relatedArticles.map((post: any) => (
           <Link href={`/artikel/${post.articleSlug}`}>
-        <div className='bg-second_color_light dark:bg-second_color_dark shadow-sm rounded-xl'>
-         
-          <article
-          key={post._id}
-          className="relative isolate flex flex-col sm:flex-row sm:gap-8"
-          >
-              <div className="relative sm:aspect-[2/1] aspect-square h-32 sm:h-24 w-full sm:w-24 shrink-0">
-                <div
-                  className="block absolute rounded-2xl inset-0 bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
-                  style={{
-                    backgroundImage: `url(${urlFor(post.image)
-                      .format("webp")
-                      .width(300)
-                      .height(200)
-                      .fit("fill")
-                      .quality(85)
-                      .url()})`,
-                  }}
-                ></div>
-              </div>
+        <article key={post._id} className='bg-second_color_light dark:bg-second_color_dark relative isolate flex flex-col sm:flex-row sm:gap-8 shadow-sm rounded-xl'>
+        <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[70px] sm:h-24 w-[70px] sm:w-24 ">
+              <img
+                src={urlFor(post.image)
+                  .format("webp")
+                  .width(300)
+                  .height(200)
+                  .fit("fill")
+                  .quality(85)
+                  .url()}
+                alt={post.title}
+                className="block rounded-2xl inset-0 bg-gray-300 max-h-44 h-[70px] sm:h-24 rounded-t-lg w-64 lg:w-44 object-cover"
+              />
+            </figure>
             <div className='p-2 sm:mt-2 sm:p-0'>
               <div className="flex items-center gap-x-4">
-              <div><ReadMoreAutomaticViews views={post.views} /></div>
+              <ReadMoreAutomaticViews views={post.views} />
               </div>
-              <div className="group relative max-w-xl">
+              <header className="group relative max-w-xl">
                 <h4 className=" text-[0.95em] sm:text-[1em] md:text-[1.1em] font-semibold leading-6 mt-2 sm:mr-2 dark:group-hover:text-gray-300  group-hover:text-gray-600">
-                    
                     {post.title}
                 </h4>
-              </div>
+              </header>
             </div>
-          </article>
-        </div>
+        </article>
             </Link>
       ))}
     </ul>
-  </div>
+  </aside>
   );
 }

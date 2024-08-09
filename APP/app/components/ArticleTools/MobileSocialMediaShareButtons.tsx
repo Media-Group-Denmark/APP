@@ -23,7 +23,7 @@ export default function SocialMediaShareButtons({ articleUrl, views }: { article
     const [shareMenu, setShareMenu] = useState<boolean>(true);
 
     return (
-        <div className='grid mt-8 w-screen fixed md:hidden z-50 left-0 bottom-0 bg-red-50 shadow-xl'>
+        <aside className='grid mt-8 w-screen fixed md:hidden z-50 left-0 bottom-0 bg-red-50 shadow-xl'>
             {
                 shareMenu ? (
                     <ChevronDown onClick={() => setShareMenu(!shareMenu)} size={30} className='absolute right-0 -top-8 bg-gray-300' />
@@ -66,6 +66,6 @@ export default function SocialMediaShareButtons({ articleUrl, views }: { article
                     </RedditShareButton>
                 </div>
             </div>
-        </div>
+        </aside>
       )
 }

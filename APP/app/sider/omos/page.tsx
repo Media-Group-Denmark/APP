@@ -183,7 +183,7 @@ export default async function omos() {
   const data: Page[] = await getData();
 
   return (
-    <>
+    <main>
       {data ? (
         <>
           <nav
@@ -236,6 +236,6 @@ export default async function omos() {
           </div>
         </>
       ) : null}
-    </>
+    </main>
   );
 }

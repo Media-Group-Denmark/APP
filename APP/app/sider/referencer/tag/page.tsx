@@ -66,7 +66,7 @@ export default async function tag() {
   const data: Reference[] = await getData();
 
   return (
-    <div className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
+    <main className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>
         <nav
           className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
@@ -127,6 +127,6 @@ export default async function tag() {
           </>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

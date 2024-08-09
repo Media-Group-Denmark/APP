@@ -70,54 +70,70 @@ const SubArticlesSixGrid: React.FC<{
 }> =  async ({ category, tag, journalist, dayInterval, startIndex, endIndex }) => {
   const data = await getData(category, tag, journalist, dayInterval);
   return (
-    <>
-    <Link href={`${theme.site_url}/artikler/kategori/${category}`} >
-      <h2 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4"><span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
-      {category ? category : tag ? tag : journalist ? journalist : "Alle Nyheder"}</span></h2>
-    </Link>
-      <div className="grid overflow-y-hidden grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
-      {data
-              .slice(startIndex, endIndex)
-              .map((post: Article, index: number) => (
-                <div
-                  key={post._id}
-                  className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
-                >
-                  <Link href={`/artikel/${post.articleSlug}`}>
-                    <div
-                      className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg bg-center bg-cover"
-                      style={{
-                        backgroundImage: `url(${urlFor(post.image).format("webp")
-        .width(400)
-        .height(300)
-        .fit("fill")
-        .quality(85)
-        .url()})`,
-                      }}
-                    ></div>
+    <section>
+      <Link href={`${theme.site_url}/artikler/kategori/${category}`}>
+        <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
+          <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
+            {category
+              ? category
+              : tag
+              ? tag
+              : journalist
+              ? journalist
+              : "Alle Nyheder"}
+          </span>
+        </h1>
+      </Link>
+      <article className="grid overflow-y-hidden grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+        {data
+          .slice(startIndex, endIndex)
+          .map((post: Article, index: number) => (
+            <div
+              key={post._id}
+              className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
+            >
+              <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
+                <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
+                  <img
+                    src={urlFor(post.image)
+                      .format("webp")
+                      .width(400)
+                      .height(300)
+                      .fit("fill")
+                      .quality(85)
+                      .url()}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
+              </figure>
+              <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
+                <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
+                  <Link href={`/artikler/kategori/${post.categorySlug}`}>
+                  <p className="relative text-sm z-10 w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
+                  {post.category}
+                </p>
                   </Link>
-                  <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4 ">
-                    <div className=" sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
-                      <Link href={`/artikler/kategori/${post.categorySlug}`}>
-                        <button className=" text-accent_color_light dark:text-accent_color_dark  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.85rem] rounded-full ">
-                          {post.category}
-                        </button>
-                      </Link>
-                      <p className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block ">
-                          {timeSinceText({ date: post.publishedAt })}
-                        </p>
-                    </div>
-                    <Link href={`/artikel/${post.articleSlug}`}>
-                      <span className="grid ">
-                        <h1 className=" text-sm md:text-lg font-semibold py-0 rounded-lg ">{post.title}</h1>
-                      </span>
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                  <time
+                    className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"
+                    dateTime={post.publishedAt}
+                  >
+                    {timeSinceText({ date: post.publishedAt })}
+                  </time>
+                </aside>
+                <header>
+                  <Link href={`/artikel/${post.articleSlug}`}>
+                    <h2 className="text-sm md:text-lg font-semibold py-0 rounded-lg">
+                      {post.title}
+                    </h2>
+                  </Link>
+                </header>
+              </div>
             </div>
-    </>
-  )
+          ))}
+      </article>
+    </section>
+  );
 }
 
 export default SubArticlesSixGrid

@@ -10,10 +10,10 @@ export default function InstagramClientBlock( { value }: { value: string }) {
       setPageLoaded(true)
   }, [])
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <aside style={{ display: 'flex', justifyContent: 'center' }}>
       
               <InstagramEmbed url={value} width={328} />
           
-</div>
+</aside>
   )
 }

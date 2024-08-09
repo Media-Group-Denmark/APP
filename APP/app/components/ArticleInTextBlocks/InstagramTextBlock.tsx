@@ -10,13 +10,13 @@ const InstagramTextBlock: React.FC<InstagramTextBlockProps> = ({ value }) => {
     //const embedUrl = value.url.replace("fb.watch", "www.Instagram.com/watch");
 
     return (
-       <div className='w-full max-w-[90vw] m-auto grid place-content-center'>
+       <aside className='w-full max-w-[90vw] m-auto grid place-content-center'>
         {
             value.url && (
                 <InstagramClientBlock value={value.url}/>
             )
         }
-       </div>
+       </aside>
     );
 };
 

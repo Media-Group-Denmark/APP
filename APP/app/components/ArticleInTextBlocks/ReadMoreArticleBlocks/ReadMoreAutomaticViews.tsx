@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import { ChevronUp, ChevronDown } from 'lucide-react';
 
-function calculateAdjustmentFactor(views) {
+function calculateAdjustmentFactor(views: any) {
   const base = Math.floor(Number(views) / 6);
   return Math.max(3, Math.min(11, base)); // Sikrer at factor er mellem 3 og 11
 }
@@ -31,7 +31,7 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
   const color = readerChange >= 0 ? 'green' : 'red';
 
   return (
-    <div className='flex gap-2'>
+    <figure className='flex gap-2'>
       <span className='grid w-fit grid-cols-[auto_1fr] place-content-center items-center !text-[15px] md:!text-[1.12em] min-w-[3em] sm:min-w-[2.5em] '>
         {arrow}
         <CountUp start={previousReaders} end={liveReaders} duration={2.75} className='!font-semibold'/>
@@ -39,6 +39,6 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
       <span className="text-[0.8em] sm:text-sm md:text-lg block font-bold transition-all my-auto">
         Læser lige nu:
       </span>
-    </div>
+    </figure>
   );
 }

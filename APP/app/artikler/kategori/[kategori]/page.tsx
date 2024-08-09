@@ -129,7 +129,7 @@ export default async function kategori({
 }) {
   const data: Article[] = await getData({ kategori: params.kategori });
   return (
-    <>
+    <main>
       <nav
         className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
         aria-label="Breadcrumb"
@@ -194,84 +194,65 @@ export default async function kategori({
           </li>
         </ol>
       </nav>
+
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
-          <div>
 
             {/* Both */}
-            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+            <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
-                <span className="hidden lg:inline-block">
+                <aside className="hidden lg:inline-block">
                   <SubArticlesListWide category={data[0].categorySlug} startIndex={1} endIndex={3} />
-                </span>
+                </aside>
               </div>
-              <div className="hidden w-[280px] lg:inline-block">
+              <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesListAltOmKendte
                 dayInterval={14}
                 startIndex={0}
                 endIndex={5}
                 category={data[0].categorySlug}
                  />
-              </div>
-            </div>
+              </aside>
+            </section>
 
-            <div className=" md:hidden" id="div-Mobile_Square_1"></div>
-            <div className="hidden md:block" id="div-Leaderboard_2"></div>
+            <aside className=" md:hidden" id="div-Mobile_Square_1"></aside>
+            <aside className="hidden md:block" id="div-Leaderboard_2"></aside>
             
             {/* Phone */}
-            <div className="grid gap-4 md:hidden">
+            <section className="grid gap-4 md:hidden">
               <TrendingArticlesListAltOmKendte
                 dayInterval={30}
                 startIndex={0}
                 endIndex={5}
                 category={data[0].categorySlug}
               />
-              <div id="div-Mobile_Square_2"></div>
+              <aside id="div-Mobile_Square_2"></aside>
               <SubArticlesGrid category={data[0].categorySlug} startIndex={1} endIndex={3} />
-              <span className="mt-6 block">
+              <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
-              </span>
-              <div id="div-Mobile_Square_3"></div>
+              </div>
+              <aside id="div-Mobile_Square_3"></aside>
               <SubArticlesGrid category={data[0].categorySlug} startIndex={4} endIndex={6} />
-              <span className="mt-4 block">
+              <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
-              </span>
-            </div>
-
-
-            {/* <div className="grid gap-4 md:hidden">
-            <TrendingArticlesListAltOmKendte
-                dayInterval={14}
-                startIndex={0}
-                endIndex={5}
-                 />
-              <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
-              <div id="div-Mobile_InFeed_2"></div>
-              <span className="mt-6 block">
-                <ArticleHero data={data} startIndex={3} endIndex={4} />
-              </span>
-              <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
-              <span className="mt-4 block">
-                <ArticleHero data={data} startIndex={6} endIndex={7} />
-              </span>
-            </div> */}
+              </div>
+            </section>
 
 
 
 
             {/* Desktop */}
-            <div className="md:inline-block hidden">
+            <section className="md:inline-block hidden">
               <SubArticlesGrid category={data[0].categorySlug}  startIndex={3} endIndex={9} />
-              <div className="hidden md:block" id="div-Leaderboard_3"></div>
+              <aside className="hidden md:block" id="div-Leaderboard_3"></aside>
               <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
               <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
-            </div>
+            </section>
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
-          </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
 export const runtime = "edge";
