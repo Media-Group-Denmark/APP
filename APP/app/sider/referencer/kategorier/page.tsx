@@ -68,7 +68,7 @@ async function getData() {
 const data: Reference[] = await getData();
 
   return (
-    <div className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
+    <main className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>     
 <nav className="flex px-3 md:px-8 max-w-[1000px] m-auto  py-6 pt-6 rounded-lg " aria-label="Breadcrumb">
   <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -103,6 +103,6 @@ const data: Reference[] = await getData();
       </>
       </div>
     </div>
-  </div>
+  </main>
   )
 }

@@ -180,7 +180,7 @@ export default async function privatliv() {
   /* -------------------------------------------------------------------------- */
   const data: Page[] = await getData();
   return (
-    <>
+    <main>
       {data ? (
         <>
           <nav
@@ -233,6 +233,6 @@ export default async function privatliv() {
           </div>
         </>
       ) : null}
-    </>
+    </main>
   );
 }

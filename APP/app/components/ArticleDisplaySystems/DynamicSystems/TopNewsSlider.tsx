@@ -108,9 +108,9 @@ const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
     articles
   );
   return (
-    <aside className="max-w-[1000px] mx-auto px-6 mt-8 md:mt-0">
+    <section className="max-w-[1000px] mx-auto px-6 mt-8 md:mt-0">
       <figure className="flex gap-[12px]">
-        <h2 className="text-md font-bold">Seneste Nyt</h2>
+        <h1 className="text-md font-bold">Seneste Nyt</h1>
         <ChevronRight className="font-black my-auto" size={22} />
       </figure>
       <nav className="sliderNav">
@@ -125,15 +125,15 @@ const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
                 <time dateTime={article.publishedAt} className=" text-xs ">
                   {timeSinceText({ date: article.publishedAt })}
                 </time>
-                <h3 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
+                <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
                   {article.title}
-                </h3>
+                </h2>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
-    </aside>
+    </section>
   );
 };
 

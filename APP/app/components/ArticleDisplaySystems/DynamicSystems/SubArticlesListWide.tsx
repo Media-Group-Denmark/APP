@@ -93,8 +93,8 @@ const SubArticlesListWide: React.FC<{
 }) => {
   const data = await getData(category, tag, journalist, dayInterval);
   return (
-    <>
-      <h2 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
+    <section>
+      <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
         <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
           {category
             ? category
@@ -104,7 +104,7 @@ const SubArticlesListWide: React.FC<{
             ? journalist
             : "Alle Nyheder"}
         </span>
-      </h2>
+      </h1>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-8 mt-6 pb-1 rounded-xl">
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
           {data
@@ -115,7 +115,7 @@ const SubArticlesListWide: React.FC<{
                 className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
               >
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
-                  <Link href={`/artikel/${post.articleSlug}`}>
+                  <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
                     <img
                       src={urlFor(post.image)
                         .format("webp")
@@ -143,15 +143,15 @@ const SubArticlesListWide: React.FC<{
                   </div>
 
                   <header className="group relative max-w-xl">
-                    <h3 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
+                    <h2 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
                       <Link href={`/artikel/${post.articleSlug}`}>
                         <span className="absolute inset-0" />
                         {post.title}
                       </Link>
-                    </h3>
-                    <h4 className="mt-5 text-sm h-[5em] overflow-hidden leading-6 text-text_second_color_dark dark:text-text_second_color_light">
+                    </h2>
+                    <h3 className="mt-5 text-sm h-[5em] overflow-hidden leading-6 text-text_second_color_dark dark:text-text_second_color_light">
                       {post.teaser}
-                    </h4>
+                    </h3>
                   </header>
 
                   {/* <footer className="flex items-center gap-x-4 text-xs mt-4">
@@ -167,7 +167,7 @@ const SubArticlesListWide: React.FC<{
             ))}
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

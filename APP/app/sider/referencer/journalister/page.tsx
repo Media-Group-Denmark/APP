@@ -67,8 +67,8 @@ export default async function journalister() {
   const data: Journalist[] = await getData();
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
-      <>
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
+    
         <nav
           className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
           aria-label="Breadcrumb"
@@ -111,7 +111,6 @@ export default async function journalister() {
             </li>
           </ol>
         </nav>
-      </>
 
       <div className="text-center pb-12">
         <h2 className="text-base font-bold text-accent_color_light dark:text-accent_color_dark">
@@ -161,6 +160,6 @@ export default async function journalister() {
 
          
       </div>
-    </section>
+    </main>
   );
 }

@@ -9,12 +9,12 @@ export default function FacebookClientBlock( { value }: { value: string }) {
       setPageLoaded(true)
   }, [])
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <aside style={{ display: 'flex', justifyContent: 'center' }}>
         {
             pageLoaded && (
                   <FacebookEmbed url={value} width={450} />
             )
         }
-</div>
+</aside>
   )
 }

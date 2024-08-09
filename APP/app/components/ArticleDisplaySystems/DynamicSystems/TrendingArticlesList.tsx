@@ -75,9 +75,9 @@ const TrendingArticlesList: React.FC<{
 }> = async ({ category, tag, journalist, dayInterval, startIndex, endIndex }) => {
   const data = await getData(category, tag, journalist, dayInterval);
   return (
-    <aside id="trending" className="inline-block xl:sticky top-20 p-6 md:p-4 min-w-[300px] w-[95vw] xl:w-full bg-second_color_light dark:bg-second_color_dark rounded-2xl h-fit">
+    <section id="trending" className="inline-block xl:sticky top-20 p-6 md:p-4 min-w-[300px] w-[95vw] xl:w-full bg-second_color_light dark:bg-second_color_dark rounded-2xl h-fit">
       <div>
-        <h2 className="text-sm font-bold mb-4">TOPNYHEDER</h2>
+        <h1 className="text-sm font-bold mb-4">TOPNYHEDER</h1>
         <ul className="space-y-2">
           {data
             .slice(startIndex, endIndex)
@@ -96,7 +96,7 @@ const TrendingArticlesList: React.FC<{
             ))}
         </ul>
       </div>
-    </aside>
+    </section>
   );
 };
 

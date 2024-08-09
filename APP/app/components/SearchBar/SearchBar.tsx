@@ -97,24 +97,22 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
   );
 
   return (
-    <div className="containerr relative z-10 mx-auto pb-12 ">
+    <aside className="containerr relative z-10 mx-auto pb-12 ">
       <div className="rounded-lg  p-10 shadow-lg bg-main_color_light dark:bg-second_color_dark">
-
-        
-        <div className="mb-4 flex items-center">
+       
           <input
             type="text"
             onChange={(e) => handleSearch(e.target.value)}
-            className="w-full rounded-lg border bg-main_color_light dark:bg-main_color_dark  border-gray-400 p-2"
+            className="w-full rounded-lg border bg-main_color_light dark:bg-main_color_dark  border-gray-400 p-2 mb-4 flex items-center"
             placeholder="Søg i arkivet ..."
           />
-        </div>
-
+       
         <div className="grid md:flex gap-4">
+          
           <div
             onClick={() => toggleCategory()}
             className="relative group md:w-[200px]"
-          >
+          > 
             <button
               id="dropdown-button"
               className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium  bg-main_color_light dark:bg-main_color_dark border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
@@ -253,6 +251,6 @@ export function SearchBar({ category, journalist, tag }: { category: any[], jour
         </div>
 
       </div>
-    </div>
+    </aside>
   );
 }

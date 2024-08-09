@@ -7,7 +7,7 @@ interface FacebookTextBlockProps {
 
 const FacebookTextBlock: React.FC<FacebookTextBlockProps> = ({ value }) => {
     return (
-        <div className='w-full max-w-[80vw] m-auto grid place-content-center'>
+        <aside className='w-full max-w-[80vw] m-auto grid place-content-center'>
 
             {
                 value.posturl && (
@@ -17,7 +17,7 @@ const FacebookTextBlock: React.FC<FacebookTextBlockProps> = ({ value }) => {
                 )
             
             }
-       </div>
+       </aside>
     );
 };
 

@@ -130,11 +130,11 @@ useEffect(() => {
                 <div className="flex-shrink-0">
                 <Link href="/">
                 <Image
-                  className="w-auto h-auto "
-                  width={100}
-                  height={60}
                   src={logo ? urlFor(logo).url() : theme.logo_url}
                   alt="Logo"
+                  width={120} 
+                  height={72} 
+                  className="object-contain" 
                 />
               </Link>
                 </div>
@@ -149,8 +149,8 @@ useEffect(() => {
                   </div>
                 </div>
 
-<label className="ml-auto mr-4  cursor-pointer">
-  <input className='toggle-checkbox' type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
+<label htmlFor="darkModeToggle" className="ml-auto mr-4  cursor-pointer">
+  <input className='toggle-checkbox' id="darkModeToggle" type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
   <div className='toggle-slot'>
     <div className='sun-icon-wrapper'>
       <SunIcon color={'#ffbb52'} className="iconify sun-icon" />

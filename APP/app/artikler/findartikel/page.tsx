@@ -88,7 +88,7 @@ export async function getData(queryParam: any, category: string, journalist: str
     const tag = await getTags();
 
     return (
-      <section className="pb-12">
+      <main className="pb-12 lg:w-[980px] m-auto">
         <nav
           className="flex px-3 md:px-8 max-w-[1000px] m-auto  py-6 pt-6 rounded-lg "
           aria-label="Breadcrumb"
@@ -134,7 +134,7 @@ export async function getData(queryParam: any, category: string, journalist: str
         </nav>
         <SearchBar category={category} journalist={journalist} tag={tag} />
         <FindArticle data={items} startIndex={0} endIndex={30} />
-      </section>
+      </main>
     );
 }
 

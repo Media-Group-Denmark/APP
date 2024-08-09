@@ -162,136 +162,136 @@ export default async function artikel({
   };
 
   return (
-    <>
-      <div className="  m-auto ">
+    <main>
+      <section className="m-auto ">
         {data.length > 0 ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
               strategy="afterInteractive"
             />
-            <section className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
-              <div className="containerr px-3 lg:px-6  pt-0 mx-auto articleContent grid gap-6 ">
-                {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
-                <div className="grid-cols-1 max-w-[930px]">
+            <div className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
+              <div className="containerr lg:px-6 grid-cols-1 max-w-[930px]  pt-0 mx-auto articleContent grid gap-6 ">
                   {data.map((article) => (
-                    <div key={article._id} className="w-full rounded-lg">
+                    <article key={article._id} className="w-full rounded-lg">
                       <meta name="article:section" content={article.category} />
-                      <div className="grid px-3 ">
-                        <Link
-                          href={`/artikler/kategori/${article.categorySlug}`}
-                        >
-                          <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-xs lg:text-lg rounded-lg">
-                            {article.category}
-                          </button>
-                        </Link>
-                      </div>
-                      <h1 className="text-xl lg:text-5xl font-bold my-1 px-3 lg:my-2">
-                        {article.title}
-                      </h1>
-                      <div className="py-1 lg:py-4">
-                        <Link
-                          href={`/artikler/journalist/${article.JournalistSlug}`}
-                        >
-                          <div className="flex items-center space-x-2 p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
-                            <div>
-                              <time
-                                dateTime={article.publishedAt}
-                                className=" hidden md:block text-xs"
-                              >
-                                {timeSinceText({ date: article.publishedAt })}
-                              </time>
-                              
-                             <div className="flex gap-x-2 lg:mt-2 align-middle">
-                                <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
-                                  Skrevet af:{" "}
-                                  <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
-                                    {article.JournalistName}
-                                  </b>
-                                </p>
-                                <p className="text-gray-300 font-semibold text-xs ">
-                                  D. {new Date(
-                                    article.publishedAt
-                                  ).toLocaleDateString()}
-                                </p>
-                             </div>
+                      <section>
+                        <div className="grid ">
+                          <Link
+                            href={`/artikler/kategori/${article.categorySlug}`}
+                          >
+                            <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-xs lg:text-lg rounded-lg">
+                              {article.category}
+                            </button>
+                          </Link>
+                        </div>
+                        <header>
+                          <h1 className="text-xl lg:text-5xl font-bold my-1 lg:my-2">
+                            {article.title}
+                          </h1>
+                        </header>
+                        <footer className="py-1 lg:py-4">
+                            <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
+                                <time
+                                  dateTime={article.publishedAt}
+                                  className=" hidden md:block text-xs"
+                                >
+                                  {timeSinceText({ date: article.publishedAt })} 
+                                </time>
+                                
+                               <div className="flex gap-x-2 lg:mt-2 align-middle">
+                               <Link
+                               rel="author"
+                                 href={`/artikler/journalist/${article.JournalistSlug}`}
+                               >
+                                  <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
+                                    Skrevet af:{" "}
+                                    <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
+                                      {article.JournalistName}
+                                    </b>
+                                  </p>
+                                    </Link>
+                                  <time className="text-gray-300 font-semibold text-xs ">
+                                    D. {new Date(
+                                      article.publishedAt
+                                    ).toLocaleDateString()}
+                                  </time>
+                              </div>
                             </div>
-                              
-                          </div>
-                        </Link>
-                      </div>
-                      <div className="relative px-3">
-                        <div
-                          className="block w-full h-[14em] md:h-[25em] bg-gray-300 rounded-t-lg bg-center bg-cover"
-                          style={{
-                            backgroundImage: `url(${urlFor(article.image)
-                              .format("webp")
-                              .width(700)
-                              .height(400)
-                              .fit("fill")
-                              .quality(85)
-                              .url()})`,
-                          }}
-                        ></div>
-                        <p className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50 ">
-                          Foto: {article.source}
-                        </p>
-                      </div>
-                      <div className="my-0 lg:my-2 px-3">
-                        <span className="text-xs lg:text-sm">
-                          Artiklens Tags:{" "}
-                        </span>
-                        {article.tag.map((tag, index) => (
-                          <React.Fragment key={index}>
-                            {index > 0 ? ", " : ""}{" "}
-                            <Link
-                              href={`/artikler/tag/${article.tagSlug[index]}`}
-                            >
-                              <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark rounded-lg">
-                                {tag}
-                              </button>
-                            </Link>
-                          </React.Fragment>
-                        ))}
-                      </div>
-                      <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
-                        {article.teaser}
-                      </h2>
-                        <div className="md:hidden" id='div-Mobile_Article_1'></div>
+                        </footer>
+                        <figure className="relative">
+  <img
+    src={urlFor(article.image)
+      .format("webp")
+      .width(700)
+      .height(400)
+      .fit("fill")
+      .quality(85)
+      .url()}
+    alt={`Billede af ${article.source}`}
+    className="block w-full h-[14em] md:h-[25em] bg-gray-300 rounded-t-lg object-cover"
+  />
+  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+    Foto: {article.source}
+  </figcaption>
+</figure>
 
-                      <div className="hidden md:grid" id="div-Leaderboard_2"></div>
+                        <div className="my-0 lg:my-2 px-3">
+                          <span className="text-xs lg:text-sm">
+                            Artiklens Tags:{" "}
+                          </span>
+                          {article.tag.map((tag, index) => (
+                            <React.Fragment key={index}>
+                              {index > 0 ? ", " : ""}{" "}
+                              <Link
+                                href={`/artikler/tag/${article.tagSlug[index]}`}
+                              >
+                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark rounded-lg">
+                                  {tag}
+                                </button>
+                              </Link>
+                            </React.Fragment>
+                          ))}
+                        </div>
+                        <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
+                          {article.teaser}
+                        </h2>
+                      </section>
+                      
+                      <aside className="md:hidden" id='div-Mobile_Article_1'></aside>
 
-                      <div className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
+                      <aside className="hidden md:grid" id="div-Leaderboard_2"></aside>
+
+                      <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
                           value={article.overview}
                           components={components}
                         />
-                      </div>
-                      <div className="hidden md:grid" id="div-Leaderboard_3"></div>
-                      <SocialMediaShareButtons
-                      views={`${article.views}`}
-                        articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
-                      />
-                      <MobileSocialMediaShareButtons
-                      views={`${article.views}`}
-                        articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
-                      />
+                      </section>
+                      <aside className="hidden md:grid" id="div-Leaderboard_3"></aside>
+                      <section>
+                        <SocialMediaShareButtons
+                        views={`${article.views}`}
+                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
+                        />
+                        <MobileSocialMediaShareButtons
+                        views={`${article.views}`}
+                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
+                        />
+                      </section>
                       {article.disclaimer && <Disclaimer />}
                       <SubArticlesListSmallOrderRelease />
-                    </div>
+                    </article>
                   ))}
-                </div>
-                {/* <SidebarSticky /> */}
               </div>
-            </section>
+            </div>
           </>
         ) : (
           <NotFound />
         )}
-      </div>
-      {console.log("isClient:", isClient)}
+      </section>
       {data.length > 0 && <PageViewTracker articleId={data[0]._id} />}
-    </>
+    </main>
   );
 }
 
