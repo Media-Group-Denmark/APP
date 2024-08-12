@@ -117,6 +117,8 @@ const SubArticlesListWide: React.FC<{
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
                   <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
                     <img
+                      width={200}
+                      height={300}
                       src={urlFor(post.image)
                         .format("webp")
                         .width(200)
