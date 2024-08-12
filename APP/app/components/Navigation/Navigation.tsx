@@ -150,7 +150,7 @@ useEffect(() => {
                 </div>
 
 <label htmlFor="darkModeToggle" className="ml-auto mr-4  cursor-pointer">
-  <input className='toggle-checkbox' id="darkModeToggle" type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
+  <input className='toggle-checkbox' aria-label="darkmodetoggle" id="darkModeToggle" type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
   <div className='toggle-slot'>
     <div className='sun-icon-wrapper'>
       <SunIcon color={'#ffbb52'} className="iconify sun-icon" />
@@ -170,6 +170,7 @@ useEffect(() => {
                     <div>
                       <button
                         type="submit"
+                        aria-label="Søg artikler"
                         className="flex flex-end items-center bg-accent_color_dark dark:bg-bg-accent_color_light bg-opacity-80 justify-center w-12 h-12 rounded-lg"
                       >
                         <svg

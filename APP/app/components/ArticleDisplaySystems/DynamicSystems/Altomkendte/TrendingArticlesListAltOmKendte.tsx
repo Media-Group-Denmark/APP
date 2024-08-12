@@ -118,85 +118,90 @@ const TrendingArticlesListAltOmKendte: React.FC<{
             .map((post: Article, index: number) => (
               <li>
                 <article className="bg-second_color_light dark:bg-second_color_dark rounded-2xl">
-  
-                 {/*  Image Desktop Start */}
-                  <Link
-                    className="hidden md:block"
-                    aria-label="Læs mere om artiklen"
-                    href={`/artikel/${post.articleSlug}`}
-                  >
-                    <div
-                      className="block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 bg-center bg-cover"
-                      style={{
-                        backgroundImage: `url(${urlFor(post.image)
+                  {/*  Image Desktop Start */}
+                  <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-hidden">
+                    <Link
+                      aria-label="Læs mere om artiklen"
+                      href={`/artikel/${post.articleSlug}`}
+                    >
+                      <img
+                        src={urlFor(post.image)
                           .format("webp")
                           .width(400)
                           .height(300)
                           .fit("fill")
                           .quality(85)
-                          .url()})`,
-                      }}
-                    ></div>
-                  </Link>
+                          .url()}
+                        alt={post.title} // Sørg for at inkludere en beskrivende alt-tekst
+                        loading="lazy"
+                        className="w-full h-full object-cover bg-center"
+                      />
+                    </Link>
+                  </figure>
                   {/*  Image Desktop End */}
-  
+
                   <div className="md:pb-2 md:pt-1 md:px-3">
-  
                     {/*  Læsetid Desktop Start */}
-                    <span className="hidden md:inline-block" >
-                    <p className="  text-main_color_dark dark:text-main_color_light ml-[28px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
-                       Læsetid: <span className="text-accent_color_light  dark:text-accent_color_dark">{post.reading} min</span>
+                    <span className="hidden md:inline-block">
+                      <p className="  text-main_color_dark dark:text-main_color_light ml-[28px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
+                        Læsetid:{" "}
+                        <span className="text-accent_color_light  dark:text-accent_color_dark">
+                          {post.reading} min
+                        </span>
                       </p>
                     </span>
                     {/*  Læsetid Desktop End */}
-  
-                    <li key={post._id} className="flex items-center    md:pb-2">
-  
+
+                    <div key={post._id} className="flex items-center    md:pb-2">
                       {/*  Index Desktop Start */}
                       <span className="font-bold text-[#a7a7a7] text-2xl min-w-6 hidden md:inline-block">
                         {index + 1}
                       </span>
                       {/*  Index Desktop End */}
-  
+
                       {/*  Image Mobile Start */}
-                      <Link
-                        className="block md:hidden"
-                        href={`/artikel/${post.articleSlug}`}
-                      >
-                        <div
-                          className="block h-[5em] w-[5em] mr-6 rounded-xl bg-gray-300 bg-center bg-cover"
-                          style={{
-                            backgroundImage: `url(${urlFor(post.image)
+                      <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-hidden">
+                        <Link href={`/artikel/${post.articleSlug}`}>
+                          <img
+                            src={urlFor(post.image)
                               .format("webp")
                               .width(300)
-                              .height(100)
+                              .height(300)
                               .fit("fill")
                               .quality(85)
-                              .url()})`,
-                          }}
-                        ></div>
-                      </Link>
+                              .url()}
+                            loading="lazy"
+                            alt={post.title} // Husk at inkludere en beskrivende alt-tekst
+                            className=" object-cover bg-center"
+                          />
+                        </Link>
+                      </figure>
                       {/*  Image Mobile End */}
-  
+
                       <div>
-    
                         {/*  Læsetid Mobile Start */}
-                        <span className=" inline-block md:hidden" >
-                      <p className="  text-main_color_dark dark:text-main_color_light ml-[8px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
-                       Læsetid: <span className="text-accent_color_light  dark:text-accent_color_dark">{post.reading} min</span>
-                      </p>
-                    </span>
-                      {/*  Læsetid Mobile End */}
-    
-                            {/*  Title Start */}
-                        <Link className="ml-4 md:ml-0" href={`/artikel/${post.articleSlug}`}>
+                        <span className=" inline-block md:hidden">
+                          <p className="  text-main_color_dark dark:text-main_color_light ml-[8px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
+                            Læsetid:{" "}
+                            <span className="text-accent_color_light  dark:text-accent_color_dark">
+                              {post.reading} min
+                            </span>
+                          </p>
+                        </span>
+                        {/*  Læsetid Mobile End */}
+
+                        {/*  Title Start */}
+                        <Link
+                          className="ml-4 md:ml-0"
+                          href={`/artikel/${post.articleSlug}`}
+                        >
                           <h2 className="ml-2 text-main_color_dark dark:text-main_color_light font-semibold  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
                             {post.title}
                           </h2>
                           {/*  Title End */}
                         </Link>
                       </div>
-                    </li>
+                    </div>
                   </div>
                 </article>
               </li>

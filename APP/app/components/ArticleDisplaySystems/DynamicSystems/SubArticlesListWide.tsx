@@ -124,6 +124,7 @@ const SubArticlesListWide: React.FC<{
                         .fit("fill")
                         .quality(85)
                         .url()}
+                        loading='lazy'
                       alt={post.title} // Sørg for at inkludere en beskrivende alt-tekst
                       className="block absolute rounded-2xl inset-0 w-full h-full object-cover"
                     />

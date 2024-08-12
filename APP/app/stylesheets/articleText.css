@@ -10,12 +10,12 @@
     @apply list-decimal list-inside m-4;
 }
 
-.articleText ul li, .articleText ol li {
+.articleText ul li:not(.elementList), .articleText ol li:not(.elementList) {
     @apply ml-2 lg:ml-5 my-2 text-base leading-6;
 }
   
   .articleText a:not(h3 a) {
-    @apply text-accent_color_light dark:text-accent_color_dark;
+    @apply text-accent_color_light dark:text-accent_color_dark font-bold;
   }
   
   /* Adding styles for headings */

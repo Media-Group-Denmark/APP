@@ -55,6 +55,7 @@ export default async function SubArticlesListSmallOrderRelease() {
                   .quality(85)
                   .url()}
                 alt={post.title}
+                loading='lazy'
                 className="block rounded-2xl inset-0 bg-gray-300 max-h-44 rounded-t-lg min-w-44 w-full object-cover"
               />
             </figure>

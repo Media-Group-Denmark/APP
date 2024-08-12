@@ -59,7 +59,7 @@ const ArticleHero: React.FC<{
             <footer className="flex gap-2 mt-2">
               <address>
                 <Link
-                  className="text-sm text-fade_color_light dark:text-fade_color_dark"
+                  className="text-sm py-2 text-fade_color_light dark:text-fade_color_dark"
                   rel="author"
                   href={`/artikler/journalist/${article.JournalistSlug}`}
                 >

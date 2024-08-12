@@ -180,7 +180,7 @@ export default async function artikel({
                           <Link
                             href={`/artikler/kategori/${article.categorySlug}`}
                           >
-                            <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-xs lg:text-lg rounded-lg">
+                            <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
                               {article.category}
                             </button>
                           </Link>
@@ -211,7 +211,7 @@ export default async function artikel({
                                     </b>
                                   </p>
                                     </Link>
-                                  <time className="text-gray-300 font-semibold text-xs ">
+                                  <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
                                     D. {new Date(
                                       article.publishedAt
                                     ).toLocaleDateString()}
@@ -236,24 +236,24 @@ export default async function artikel({
   </figcaption>
 </figure>
 
-                        <div className="my-0 lg:my-2 px-3">
+                        <div className="my-2 px-3">
                           <span className="text-xs lg:text-sm">
                             Artiklens Tags:{" "}
                           </span>
                           {article.tag.map((tag, index) => (
                             <React.Fragment key={index}>
-                              {index > 0 ? ", " : ""}{" "}
+                              {index > 0 ? " " : ""}{" "}
                               <Link
                                 href={`/artikler/tag/${article.tagSlug[index]}`}
                               >
-                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark rounded-lg">
+                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                                   {tag}
                                 </button>
                               </Link>
                             </React.Fragment>
                           ))}
                         </div>
-                        <h2 className="text-md lg:text-3xl font-semibold my-2 mb-4 lg:my-4 px-3">
+                        <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
                           {article.teaser}
                         </h2>
                       </section>
