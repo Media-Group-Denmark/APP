@@ -29,6 +29,7 @@ const SubArticlesListSmall: React.FC<{
                       .quality(85)
                       .url()}
                     alt={post.title}
+                    loading='lazy'
                     className="block rounded-2xl inset-0 bg-gray-300 max-h-44 rounded-t-lg w-64 lg:w-44 object-cover"
                   />
               </Link>

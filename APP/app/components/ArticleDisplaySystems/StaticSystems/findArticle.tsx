@@ -22,6 +22,7 @@ const FindArticle: React.FC<{data: Article[]; startIndex: number; endIndex: numb
               .quality(85)
               .url()}
             alt={article.title}
+            loading='lazy'
             className="w-full h-full object-cover"
           />
                 </Link>

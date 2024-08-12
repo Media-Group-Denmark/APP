@@ -92,7 +92,7 @@ export default async function Footer() {
   </div>
 )}
         <div className="mt-10 xl:mt-0">
-          <h3 className="text-sm font-semibold leading-6 ">Tilmeld dig vores Nyhedsbrev {'(Kommer snart)'} </h3>
+          <h2 className="text-sm font-semibold leading-6 ">Tilmeld dig vores Nyhedsbrev {'(Kommer snart)'} </h2>
           <p className="mt-2 text-sm leading-6 text-fade_color_light dark:text-fade_color_dark ">De seneste nyheder, artikler og ressourcer, sendt til din indbakke ugentligt.</p>
           <form className="mt-6 sm:flex sm:max-w-md">
             <label htmlFor="email-address" className="sr-only">Email address</label>

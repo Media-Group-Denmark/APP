@@ -26,6 +26,7 @@ const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIn
                   .fit("fill")
                   .quality(85)
                   .url()}
+                  loading='lazy'
                 alt={post.title}
                 className="block absolute rounded-2xl inset-0 bg-center bg-cover"
               />
@@ -70,6 +71,7 @@ const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIn
                           .url()
                       : "/img/unisexAvatar.jpeg"
                   }
+                  loading='lazy'
                 />
                 <div className="text-sm leading-6">
                   <p className="font-semibold">

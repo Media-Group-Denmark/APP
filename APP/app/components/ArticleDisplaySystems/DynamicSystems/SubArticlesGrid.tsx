@@ -102,6 +102,7 @@ const SubArticlesSixGrid: React.FC<{
                       .fit("fill")
                       .quality(85)
                       .url()}
+                      loading='lazy'
                     alt={post.title}
                     className="w-full h-full object-cover"
                   />
