@@ -47,7 +47,7 @@ const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIn
               </Link>
             </header>
             <div className="group relative max-w-xl">
-              <h1 className="mt-3 text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
+              <h1 className="mt-3 text-lg font-bold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
                 <Link href={`/artikel/${post.articleSlug}`}>
                   <span className="absolute inset-0" />
                   {post.title}

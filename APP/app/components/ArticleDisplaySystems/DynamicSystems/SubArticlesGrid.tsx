@@ -72,7 +72,7 @@ const SubArticlesSixGrid: React.FC<{
   return (
     <section>
       <Link href={`${theme.site_url}/artikler/kategori/${category}`}>
-        <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
+        <h2 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
           <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
             {category
               ? category
@@ -82,7 +82,7 @@ const SubArticlesSixGrid: React.FC<{
               ? journalist
               : "Alle Nyheder"}
           </span>
-        </h1>
+        </h2>
       </Link>
       <article className="grid overflow-y-hidden grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
         {data
@@ -126,9 +126,9 @@ const SubArticlesSixGrid: React.FC<{
                 </aside>
                 <header>
                   <Link href={`/artikel/${post.articleSlug}`}>
-                    <h2 className="text-sm md:text-lg font-semibold py-0 rounded-lg">
+                    <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
                       {post.title}
-                    </h2>
+                    </h1>
                   </Link>
                 </header>
               </div>

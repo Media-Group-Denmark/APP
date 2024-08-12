@@ -1,16 +1,17 @@
 /* -------------------------------------------------------------------------- */
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
-import { Inter } from "next/font/google";
+import { Inter, Mulish } from "next/font/google";
 import "./stylesheets/globals.css";
 import Header from "./components/Navigation/Header";
 import Footer from "./components/Navigation/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
-import AdBlockDetect from "./components/AdBlockDetect/AdBlockDetect";
-const inter = Inter({ subsets: ["latin"] });
 const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID as string;
+
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
+const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish' });
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
@@ -29,7 +30,7 @@ export default function RootLayout({
       />
       <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
-      <body className={`${inter.className}`}>
+      <body className={`${inter.variable} ${mulish.variable}`}>
        {/*  <AdBlockDetect /> */}
         <Header />
         <>{children}</>
