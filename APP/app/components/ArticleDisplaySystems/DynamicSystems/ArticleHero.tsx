@@ -51,7 +51,7 @@ const ArticleHero: React.FC<{
                 </p>
               </Link>
               <Link href={`/artikel/${article.articleSlug}`}>
-                <h1 className="text-2xl md:text-4xl font-semibold rounded-lg">
+                <h1 className="text-2xl md:text-[2.3em] leading-10 font-extrabold rounded-lg">
                   {article.title}
                 </h1>
               </Link>

@@ -49,7 +49,7 @@ const SubArticlesListSmall: React.FC<{
                   </Link>
                 </aside>
                 <header className="group relative max-w-xl h-[10em] md:h-[12em] overflow-hidden">
-                  <h1 className="mt-2 text-md md:text-md font-semibold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600">
+                  <h1 className="mt-2 text-md md:text-md font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600">
                     <Link href={`/artikel/${post.articleSlug}`}>
                       <span className="absolute inset-0" />
                       {post.title}

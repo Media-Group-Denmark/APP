@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-inter {
+  @apply font-sans;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.font-mulish {
+  @apply font-sans;
+  font-family: var(--font-mulish), sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -16,7 +26,7 @@ body {
   @apply bg-main_color_light dark:bg-main_color_dark;
 }
 main {
-  margin-top: 60px;
+  padding-top: 60px;
 }
 address {
   font-style: normal;
@@ -26,7 +36,7 @@ address {
   padding: 0;
   margin: 0;
   max-width: 100vw;
-  @apply text-main_color_dark dark:text-main_color_light;
+  @apply font-inter text-main_color_dark dark:text-main_color_light;
 }
 li, a {
   cursor: pointer;
@@ -34,11 +44,15 @@ li, a {
 ul, ol, li {
   list-style-type: none;
 }
+h1 {
+  @apply font-mulish font-bold;
+}
+
 .containerr {
   padding: 0 10px;
 }
 /* -------------------------- INDICATING PAGE WIDTH ------------------------- */
-section:not(.articleSection), .pageIndicator, .articleContent {
+section:not(.articleSection), .pageIndicator{
   max-width: 1000px;
   margin: 0 auto;
 }

@@ -162,16 +162,16 @@ export default async function artikel({
   };
 
   return (
-    <main>
-      <section className="m-auto ">
+    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 ">
+      <section className="m-auto">
         {data.length > 0 ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
               strategy="afterInteractive"
             />
-            <div className="bg-main_color_light dark:bg-main_color_dark pt-3 lg:pt-8 articleSection ">
-              <div className="containerr lg:px-6 grid-cols-1 max-w-[930px]  pt-0 mx-auto articleContent grid gap-6 ">
+            <div className="py-3 rounded-lg lg:py-8 articleSection ">
+              <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
                   {data.map((article) => (
                     <article key={article._id} className="w-full rounded-lg">
                       <meta name="article:section" content={article.category} />
@@ -186,7 +186,7 @@ export default async function artikel({
                           </Link>
                         </div>
                         <header>
-                          <h1 className="text-xl lg:text-5xl font-bold my-1 lg:my-2">
+                          <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
                             {article.title}
                           </h1>
                         </header>

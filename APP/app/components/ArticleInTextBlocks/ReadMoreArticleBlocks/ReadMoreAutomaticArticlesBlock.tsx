@@ -71,7 +71,7 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
         {relatedAutomaticArticles.map((post: any) => (
             <li className='elementList'>
               <Link href={`/artikel/${post.articleSlug}`}>
-            <article key={post._id} className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 shadow-sm rounded-xl'>
+            <article key={post._id} className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
             <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[70px] sm:h-24 w-[70px] sm:w-24 ">
                 <img
                 width={300}
