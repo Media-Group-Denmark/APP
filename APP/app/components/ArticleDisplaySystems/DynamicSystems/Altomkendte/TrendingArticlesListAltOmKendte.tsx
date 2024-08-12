@@ -125,6 +125,8 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                       href={`/artikel/${post.articleSlug}`}
                     >
                       <img
+                      width={400}
+                      height={300}
                         src={urlFor(post.image)
                           .format("webp")
                           .width(400)
@@ -163,6 +165,8 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                       <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-hidden">
                         <Link href={`/artikel/${post.articleSlug}`}>
                           <img
+                          width={300}
+                          height={300}
                             src={urlFor(post.image)
                               .format("webp")
                               .width(300)

@@ -95,6 +95,8 @@ const SubArticlesSixGrid: React.FC<{
               <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
                 <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
                   <img
+                  width={400}
+                  height={300}
                     src={urlFor(post.image)
                       .format("webp")
                       .width(400)

@@ -19,6 +19,8 @@ const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIn
           <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
             <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
               <img
+              width={400}
+              height={300}
                 src={urlFor(post.image)
                   .format("webp")
                   .width(400)
@@ -58,6 +60,8 @@ const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIn
             <footer className="mt-6 hidden lg:flex border-t border-gray-900/5 pt-6">
               <div className="relative flex items-center gap-x-4">
                 <img
+                width={400}
+                height={300}
                   className="w-10 h-10 object-cover object-center rounded-full"
                   alt={post.JournalistName}
                   src={

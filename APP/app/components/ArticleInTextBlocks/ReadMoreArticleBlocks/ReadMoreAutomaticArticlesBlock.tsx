@@ -74,6 +74,8 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
             <article key={post._id} className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 shadow-sm rounded-xl'>
             <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[70px] sm:h-24 w-[70px] sm:w-24 ">
                 <img
+                width={300}
+                height={200}
                   src={urlFor(post.image)
                     .format("webp")
                     .width(300)

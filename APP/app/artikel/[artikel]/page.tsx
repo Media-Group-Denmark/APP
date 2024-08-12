@@ -221,6 +221,8 @@ export default async function artikel({
                         </footer>
                         <figure className="relative">
   <img
+  width={700}
+  height={400}
     src={urlFor(article.image)
       .format("webp")
       .width(700)

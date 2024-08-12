@@ -47,6 +47,8 @@ export default async function SubArticlesListSmallOrderRelease() {
           <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
             <figure className="relative   lg:shrink-0">
               <img
+              width={300}
+              height={400}
                 src={urlFor(post.image)
                   .format("webp")
                   .width(300)

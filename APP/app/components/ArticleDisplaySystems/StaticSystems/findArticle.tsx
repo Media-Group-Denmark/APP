@@ -15,6 +15,8 @@ const FindArticle: React.FC<{data: Article[]; startIndex: number; endIndex: numb
                 <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
                 <Link aria-label="Læs mere om artiklen" href={`/artikel/${article.articleSlug}`}>
           <img
+          width={400}
+          height={300}
             src={urlFor(article.image).format("webp")
               .width(400)
               .height(300)
