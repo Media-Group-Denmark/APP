@@ -11,8 +11,10 @@ export const revalidate = 600;
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
 export async function getData(queryParam: any, category: string, journalist: string, tag: string) {
-    const query = `
+  const today = new Date().toISOString();  
+  const query = `
       *[_type == "article" && 
+      publishedAt <= "${today}" &&
       title match $queryParam &&
       category->slug.current match $category &&
       journalist->slug.current match $journalist &&

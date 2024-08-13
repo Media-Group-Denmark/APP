@@ -25,7 +25,7 @@ async function getData(
 
   const query = `
     *[
-        _type == "article"
+        _type == "article" && publishedAt <= "${today.toISOString()}"
         ${
           category
             ? '&& category->slug.current == "' +

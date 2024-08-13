@@ -85,9 +85,10 @@ export async function generateMetadata({
 export async function getData(params: {
   journalist: string;
 }): Promise<Article[]> {
+  const today = new Date().toISOString();
   const query = `
         *[
-          _type == "article" && journalist->slug.current == "${params.journalist}"
+          _type == "article" && publishedAt <= "${today}" && journalist->slug.current == "${params.journalist}"
         ] 
         | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
           _id,

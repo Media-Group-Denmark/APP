@@ -5,9 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function getData() {
+  const today: Date = new Date();
   const query = `
   *[
-    _type == "article"
+    _type == "article" && publishedAt <= "${today.toISOString()}"
   ]
   | order(views desc) {
     _id,

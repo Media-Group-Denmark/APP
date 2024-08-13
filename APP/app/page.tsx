@@ -49,9 +49,10 @@ export const metadata: Metadata = {
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
 async function getData() {
+  const today = new Date().toISOString();
   const query = `
   *[
-    _type == "article"
+    _type == "article" && publishedAt <= "${today}"
   ] 
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
