@@ -4,7 +4,7 @@ import { Article } from '@/app/models/article';
 import Link from 'next/link';
 import React from 'react'
 import AdminSideBar from '../components/sideBar';
-
+export const revalidate = 600;
 
 async function getData() {
     const today: Date = new Date();

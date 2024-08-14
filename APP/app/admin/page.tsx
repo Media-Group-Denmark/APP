@@ -1,6 +1,6 @@
 import React from 'react'
 import AdminSideBar from './components/sideBar'
-
+export const revalidate = 600;
 export default function page() {
   return (
     <main className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
