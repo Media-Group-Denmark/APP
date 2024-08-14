@@ -15,7 +15,7 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
 
   const query = `
     *[
-        _type == "article" && publishedAt <= "${today.toISOString()}"
+        _type == "article" && publishedAt <= "${today.toISOString()}" && previewMode == false
         ${
           category
             ? '&& category->slug.current == "' +
@@ -53,7 +53,8 @@ async function getData(category = "", tag = "", journalist = "", dayInterval = 0
       "JournalistName": journalist->name,
       "JournalistPhoto": journalist->image,
       "JournalistSlug": journalist->slug.current,
-      views
+      views,
+      previewMode
     }`;
   const data = await client.fetch(query);
   console.log(formattedToday, formattedQueryStart, category, tag, journalist, dayInterval);

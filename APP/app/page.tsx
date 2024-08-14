@@ -52,7 +52,7 @@ async function getData() {
   const today = new Date().toISOString();
   const query = `
   *[
-    _type == "article" && publishedAt <= "${today}"
+    _type == "article" && publishedAt <= "${today}" && previewMode == false
   ] 
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
@@ -70,7 +70,8 @@ async function getData() {
     "JournalistName": journalist->name,
     "JournalistPhoto": journalist->image,
     "JournalistSlug": journalist->slug.current,
-    views
+    views,
+    previewMode
   }`;
   const data = await client.fetch(query);
   //console.log(data);

@@ -88,7 +88,7 @@ export async function getData(params: {
   const today = new Date().toISOString();
   const query = `
         *[
-          _type == "article" && publishedAt <= "${today}" && journalist->slug.current == "${params.journalist}"
+          _type == "article" && publishedAt <= "${today}" && previewMode == false && journalist->slug.current == "${params.journalist}"
         ] 
         | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
           _id,
@@ -105,7 +105,8 @@ export async function getData(params: {
           "JournalistName": journalist->name,
           "JournalistPhoto": journalist->image,
           "JournalistSlug": journalist->slug.current,
-          "JournalistDetails": journalist->description
+          "JournalistDetails": journalist->description,
+          previewMode
         }`;
   try {
     const data = await client.fetch<Article[]>(query);

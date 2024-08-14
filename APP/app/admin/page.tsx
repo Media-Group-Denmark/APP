@@ -1,20 +1,13 @@
 import React from 'react'
+import AdminSideBar from './components/sideBar'
 
 export default function page() {
   return (
-    <main className='grid grid-cols-[auto_auto] gap-10 place-content-center '>
-        <p>Hvor mange artikler er udgivet?</p>
-        <p>Grafer / Stats ? </p>
-        <p>Mest populære</p>
+    <main className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
+        <AdminSideBar />
+        
         <section>
-            <button className='p-12 bg-green-200'>
-                Sanity
-            </button>
-        </section>
-        <section>
-            <button className='p-12 bg-green-200'>
-                Scheduled Posts
-            </button>
+            <h1 className='text-6xl'>Klik i navigationsmenuen til venstre for at navigere. Denn side vil blive optimeret med tiden</h1>
         </section>
 
     </main>

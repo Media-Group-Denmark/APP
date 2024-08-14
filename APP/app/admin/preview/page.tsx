@@ -10,7 +10,7 @@ async function getData() {
     const today: Date = new Date();
     const query = `
       *[
-        _type == "article" && publishedAt <= "${today.toISOString()}"
+        _type == "article" && previewMode == "true"
       ]
        | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
         _id,
@@ -69,72 +69,79 @@ export default async function PagePreview() {
         
           <section className='bg-second_color_light dark:bg-second_color_dark p-4 rounded-lg !mt-12'>
         <article className="grid overflow-y-hidden grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
-            {data.map((post: Article) => (
-                <div
-                key={post._id}
-                className="bg-second_color_light drop-shadow-xl dark:bg-second_color_dark rounded-lg relative"
-              >
-              <Link href={`/admin/preview/artikel/${post.articleSlug}`}>
-                    <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
-                      
-                        <img
-                        width={400}
-                        height={300}
-                          src={urlFor(post.image)
-                            .format("webp")
-                            .width(400)
-                            .height(300)
-                            .fit("fill")
-                            .quality(85)
-                            .url()}
-                            loading='lazy'
-                          alt={post.title}
-                          className="w-full h-full object-cover"
-                        />
-                      
-                    </figure>
-                    <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[200px] mx-2 md:mx-4 mb-4">
-                      <aside className="sm:grid align-middle mt-2 h-fit md:my-2">
-                        
-                        
-                        <time
-                          className="rounded-lg sm:my-auto my-1 text-lg"
-                          dateTime={post.publishedAt}
-                        >
-                        <span className='font-extrabold'> Sat til ugivelse klokken : </span>
-                        <span className='font-extrabold'>   
-    {new Intl.DateTimeFormat('da-DK', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    }).format(new Date(post.publishedAt))}
-  </span>
-                        </time>
-                        <aside className='grid grid-cols-[auto_auto] place-content-start gap-x-4 mt-2 '>
-                            <p className="text-sm">
-                            Kategori: {post.category} |
-                          </p>
-                          <p className="text-sm">
-                              Journalist: {post.JournalistName} |
-                          </p>
-                          <p className="text-sm">
-                              Læsetid: {post.reading} minutter |
-                          </p>
-                          <p className="text-sm">
-                              Tag: {post.tag}
-                          </p>
-                        </aside>
-                      </aside>
-                      <header>
-                       
-                          <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
-                            {post.title}
-                          </h1>
-                      </header>
+          {
+            data && data.length > 0 ? ( 
+                  data.map((post: Article) => (
+                    <div
+                    key={post._id}
+                    className="bg-second_color_light drop-shadow-xl dark:bg-second_color_dark rounded-lg relative"
+                  >
+                  <Link href={`/admin/preview/artikel/${post.articleSlug}`}>
+                        <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
+                          
+                            <img
+                            width={400}
+                            height={300}
+                              src={urlFor(post.image)
+                                .format("webp")
+                                .width(400)
+                                .height(300)
+                                .fit("fill")
+                                .quality(85)
+                                .url()}
+                                loading='lazy'
+                              alt={post.title}
+                              className="w-full h-full object-cover"
+                            />
+                          
+                        </figure>
+                        <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[200px] mx-2 md:mx-4 mb-4">
+                          <aside className="sm:grid align-middle mt-2 h-fit md:my-2">
+                            
+                            
+                            <time
+                              className="rounded-lg sm:my-auto my-1 text-lg"
+                              dateTime={post.publishedAt}
+                            >
+                            <span className='font-extrabold'> Sat til ugivelse klokken : </span>
+                            <span className='font-extrabold'>   
+        {new Intl.DateTimeFormat('da-DK', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).format(new Date(post.publishedAt))}
+      </span>
+                            </time>
+                            <aside className='grid grid-cols-[auto_auto] place-content-start gap-x-4 mt-2 '>
+                                <p className="text-sm">
+                                Kategori: {post.category} |
+                              </p>
+                              <p className="text-sm">
+                                  Journalist: {post.JournalistName} |
+                              </p>
+                              <p className="text-sm">
+                                  Læsetid: {post.reading} minutter |
+                              </p>
+                              <p className="text-sm">
+                                  Tag: {post.tag}
+                              </p>
+                            </aside>
+                          </aside>
+                          <header>
+                           
+                              <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
+                                {post.title}
+                              </h1>
+                          </header>
+                        </div>
+      </Link>
                     </div>
-  </Link>
-                </div>
-  ))}
+      ))
+                
+                
+     ) : ( <p className='text-center'>Der er ingen artikler i preview mode</p> )
+          }
+            
         </article>
         </section>
         </section>
