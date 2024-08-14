@@ -57,7 +57,7 @@ export default async function ScheduledPost() {
         return groups;
     }, {});
 
-    console.log(groupArticlesByDate, 'her er en gruppe af artikler');
+    console.log(groupArticlesByDate, 'her er en grup pe af artikler');
   return (
     <main className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
       <AdminSideBar />
