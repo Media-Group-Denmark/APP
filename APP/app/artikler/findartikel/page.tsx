@@ -11,8 +11,11 @@ export const revalidate = 600;
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
 export async function getData(queryParam: any, category: string, journalist: string, tag: string) {
-    const query = `
+  const today = new Date().toISOString();  
+  const query = `
       *[_type == "article" && 
+      publishedAt <= "${today}" &&
+      previewMode == "false" &&
       title match $queryParam &&
       category->slug.current match $category &&
       journalist->slug.current match $journalist &&
@@ -33,7 +36,8 @@ export async function getData(queryParam: any, category: string, journalist: str
           "JournalistName": journalist->name,
           "JournalistPhoto": journalist->image,
           "JournalistSlug": journalist->slug.current,
-          "JournalistDetails": journalist->description
+          "JournalistDetails": journalist->description,
+          previewMode
       }`
       const data = await client.fetch(query, { 
         queryParam: `${queryParam}*`, 

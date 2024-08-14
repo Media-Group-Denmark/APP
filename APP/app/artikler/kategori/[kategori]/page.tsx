@@ -90,9 +90,10 @@ export async function generateMetadata({
 export async function getData(params: {
   kategori: string;
 }): Promise<Article[]> {
+  const today = new Date().toISOString();
   const query = `
         *[
-          _type == "article" && category->slug.current == "${params.kategori}"
+          _type == "article" && previewMode == false && publishedAt <= "${today}" && category->slug.current == "${params.kategori}"
         ]
         | order(coalesce(publishedAt, _createdAt) desc) [0...20]
           {
@@ -109,7 +110,8 @@ export async function getData(params: {
           "tag": tag[]->name,
           "JournalistName": journalist->name,
           "JournalistPhoto": journalist->image,
-          "JournalistSlug": journalist->slug.current
+          "JournalistSlug": journalist->slug.current,
+          previewMode
         }`;
   try {
     const data = await client.fetch<Article[]>(query);

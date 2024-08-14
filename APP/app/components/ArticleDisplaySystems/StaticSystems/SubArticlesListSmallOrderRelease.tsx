@@ -7,9 +7,10 @@ import Link from 'next/link';
 
 
 async function getData() {
+  const today: Date = new Date();
   const query = `
   *[
-    _type == "article"
+    _type == "article" && publishedAt <= "${today.toISOString()}"
   ] 
   | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
