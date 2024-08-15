@@ -52,7 +52,7 @@ export default function RootLayout({
         }}
       />
 
-      <Script async  src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js"/>
+      <Script async src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js" data-cmp-vendor="1100" className="cmplazyload" />
         <LoadAds />
         {/* Google Publisher Tag - Definerer og anmoder om reklamer */}
         <Script
