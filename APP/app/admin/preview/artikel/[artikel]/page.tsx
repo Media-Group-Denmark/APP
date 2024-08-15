@@ -267,7 +267,7 @@ export default async function artikelPreview({
                       
                       <aside className="md:hidden" id='div-Mobile_Article_1'></aside>
 
-                      <aside className="hidden md:grid" id="div-Leaderboard_2"></aside>
+                      <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
 
                       <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
@@ -275,7 +275,7 @@ export default async function artikelPreview({
                           components={components}
                         />
                       </section>
-                      <aside className="hidden md:grid" id="div-Leaderboard_3"></aside>
+                      <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
                       <section>
                         <SocialMediaShareButtons
                         views={`${article.views}`}

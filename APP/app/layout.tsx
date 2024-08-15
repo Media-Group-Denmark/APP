@@ -8,6 +8,7 @@ import Footer from "./components/Navigation/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
+import LoadAds from "./components/Ads/LoadAds";
 const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID as string;
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
@@ -51,6 +52,8 @@ export default function RootLayout({
         }}
       />
 
+      <Script async  src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js"/>
+        <LoadAds />
         {/* Google Publisher Tag - Definerer og anmoder om reklamer */}
         <Script
           async
@@ -70,10 +73,10 @@ export default function RootLayout({
 
         {/* Et tilpasset script, der specifikt håndterer opsætning eller konfiguration af dine reklameenheder 
         baseret på dine egne præferencer og indstillinger.  */}
-      <Script
+      {/* <Script
         src="/lib/ad-script.min.js"
         strategy="afterInteractive"
-      />
+      /> */}
       </body>
     </html>
   );

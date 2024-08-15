@@ -260,9 +260,9 @@ export default async function artikel({
                         </h2>
                       </section>
                       
-                      <aside className="md:hidden" id='div-Mobile_Article_1'></aside>
+                      <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"></aside>
 
-                      <aside className="hidden md:grid" id="div-Leaderboard_2"></aside>
+                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
 
                       <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
@@ -270,7 +270,7 @@ export default async function artikel({
                           components={components}
                         />
                       </section>
-                      <aside className="hidden md:grid" id="div-Leaderboard_3"></aside>
+                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
                       <section>
                         <SocialMediaShareButtons
                         views={`${article.views}`}

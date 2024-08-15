@@ -206,8 +206,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </aside>
           </section>
-          <aside className=" md:hidden" id="div-Mobile_Square_1"></aside>
-          <aside className="hidden md:block" id="div-Leaderboard_2"></aside>
+          <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
+          <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
 
           {/* Phone */}
           <section className="inline-block md:hidden">
@@ -217,7 +217,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               endIndex={5}
               tag={data[0].tagSlug}
             />
-            <aside id="div-Mobile_Square_2"></aside>
+            <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
             <SubArticlesGrid
               tag={data[0].tagSlug}
               startIndex={1}
@@ -226,7 +226,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <div className="mt-6 block">
               <ArticleHero data={data} startIndex={3} endIndex={4} />
             </div>
-            <aside id="div-Mobile_Square_3"></aside>
+            <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
             <SubArticlesGrid
               tag={data[0].tagSlug}
               startIndex={4}
@@ -244,7 +244,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               startIndex={1}
               endIndex={7}
             />
-            <aside className="hidden md:block" id="div-Leaderboard_3"></aside>
+            <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
           </section>
           <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
         </div>

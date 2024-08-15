@@ -94,7 +94,7 @@ border-radius: 10px;
 
 /* ----------------------------------- ADS ---------------------------------- */
 
-#div-InText_1, #div-InText_2, #div-InText_3, #div-930x180_1, #div-Leaderboard_1, #div-Leaderboard_2, #div-Leaderboard_3
+.desktop
 {
   background: #fbf8f8 !important;
     min-height: 250px !important;
@@ -105,7 +105,7 @@ border-radius: 10px;
   display: grid;
   place-content: center;
 }
-#div-InText_1::before, #div-InText_2::before, #div-930x180_1::before, #div-Leaderboard_1::before, #div-Leaderboard_2::before, #div-Leaderboard_3::before {
+.desktop::before {
   content: 'Annonce';
   font-size: 10px;
   text-align: center;
@@ -117,15 +117,15 @@ border-radius: 10px;
 }
 
 @media (max-width: 775px) { 
-  #div-InText_1, #div-InText_2, #div-InText_3, #div-930x180_1, #div-Leaderboard_1, #div-Leaderboard_2, #div-Leaderboard_3
+  .desktop
 {
     min-height: 0px !important;
 }
-#div-InText_1::before, #div-InText_2::before, #div-930x180_1::before, #div-Leaderboard_1::before, #div-Leaderboard_2::before, #div-Leaderboard_3::before  {
+.desktop::before  {
   content: none;
 }
 
-  #div-Mobile_Article_1, #div-Mobile_Article_2, #div-Mobile_Article_3, #div-Mobile_Article_4, #div-Mobile_Article_5, #div-Mobile_Square_1, #div-Mobile_Square_2, #div-Mobile_Square_3 {
+  .mobile {
    /*  margin-left: -1.5rem !important; */
    background: #f5f5f5 !important;
    min-height: 340px !important;
@@ -136,7 +136,7 @@ border-radius: 10px;
    padding: 5px 0 !important;
    position: relative;
   }
-  #div-Mobile_Article_1::before, #div-Mobile_Article_2::before, #div-Mobile_Article_3::before, #div-Mobile_Article_4::before, #div-Mobile_Article_5::before {
+  .mobile::before {
     content: 'Artiklen forsætter efter annoncen:';
     font-size: 10px;
     text-align: center;
@@ -146,7 +146,7 @@ border-radius: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
   }
-  #div-Mobile_Square_1::before, #div-Mobile_Square_2::before, #div-Mobile_Square_3::before {
+  .mobile::before {
     content: 'Annonce';
     font-size: 10px;
     text-align: center;

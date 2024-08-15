@@ -116,8 +116,8 @@ export default async function Home() {
             </section>
 
             
-            <aside className=" md:hidden" id="div-Mobile_Square_1"></aside>
-            <aside className="hidden md:block" id="div-Leaderboard_2"></aside>
+            <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
+            <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
 
             {/* Phone */}
             <section className="grid gap-4 md:hidden">
@@ -126,12 +126,12 @@ export default async function Home() {
                 startIndex={0}
                 endIndex={5}
               />
-              <aside id="div-Mobile_Square_2"></aside>
+              <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
               <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
               <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </div>
-              <aside id="div-Mobile_Square_3"></aside>
+              <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
               <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
               <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
@@ -142,7 +142,7 @@ export default async function Home() {
             {/* Desktop */}
             <section className="md:inline-block hidden">
               <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
-              <aside className="hidden md:block" id="div-Leaderboard_3"></aside>
+              <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
               <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
               <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
             </section>
