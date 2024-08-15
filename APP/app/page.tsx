@@ -117,12 +117,7 @@ export default async function Home() {
 
             
             <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
-            <div className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></div>
-            <div className="hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/leaderboard_2"></div>
-            <div className="hidden md:block" data-ad-unit-id="/49662453/pengehjoernetdk/leaderboard_2"></div>
-            <div className="hidden md:block" data-ad-unit-id="/49662453/Leaderboard_2"></div>
-            <div className="hidden md:block" id="/49662453/PengehjoernetDK/Leaderboard_2"></div>
-            <div className="hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/mobile_square_article_3"></div>
+            <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
             {/* Phone */}
             <section className="grid gap-4 md:hidden">
             <TrendingArticlesListAltOmKendte
