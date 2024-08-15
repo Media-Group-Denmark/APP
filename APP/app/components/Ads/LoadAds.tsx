@@ -1,8 +1,10 @@
 'use client';
 
+import Script from 'next/script';
 import { useEffect } from 'react';
 
 export default function LoadAds() {
+  <Script async src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js" data-cmp-vendor="1100" className="cmplazyload" />
   useEffect(() => {
     // Relevant Digital setup
     let relevantDigital = window.relevantDigital || {};
