@@ -75,7 +75,9 @@ export default function RootLayout({
         src="/lib/ad-script.min.js"
         strategy="afterInteractive"
         /> */}
-        <LoadAds />
+        {/* <LoadAds /> */}
+        <Script src="/lib/relevant.js"
+        strategy="afterInteractive"/>
       </body>
     </html>
   );

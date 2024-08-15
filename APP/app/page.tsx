@@ -117,7 +117,7 @@ export default async function Home() {
 
             
             <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
-            <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
+            <div className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></div>
             {/* Phone */}
             <section className="grid gap-4 md:hidden">
             <TrendingArticlesListAltOmKendte
