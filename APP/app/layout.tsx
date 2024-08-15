@@ -76,6 +76,7 @@ export default function RootLayout({
         strategy="afterInteractive"
         /> */}
         {/* <LoadAds /> */}
+        <Script async src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js" data-cmp-vendor="1100" className="cmplazyload" />
         <Script src="/lib/relevant.js"
         strategy="afterInteractive"/>
       </body>

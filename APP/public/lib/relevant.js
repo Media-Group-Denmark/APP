@@ -1,4 +1,3 @@
-<script async src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js" data-cmp-vendor="1100" className="cmplazyload"></script>
 
 function createSidebanners() {
     const contentElement = document.querySelector("main");
