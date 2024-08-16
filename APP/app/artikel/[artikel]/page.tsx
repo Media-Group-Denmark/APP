@@ -29,7 +29,7 @@ import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
-import LoadAds from "@/app/components/AdScripts/LoadAds";
+
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -294,7 +294,6 @@ export default async function artikel({
         )}
       </section>
       {data.length > 0 && <PageViewTracker articleId={data[0]._id} />}
-      <LoadAds />
     </main>
   );
 }

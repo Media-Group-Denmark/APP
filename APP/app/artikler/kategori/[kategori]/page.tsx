@@ -14,7 +14,7 @@ import theme from "@/app/lib/theme.json";
 import TopNewsSlider from "@/app/components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import LoadAds from "@/app/components/AdScripts/LoadAds";
+
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -255,7 +255,6 @@ export default async function kategori({
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
         </div>
       </section>
-      <LoadAds />
     </main>
   );
 }

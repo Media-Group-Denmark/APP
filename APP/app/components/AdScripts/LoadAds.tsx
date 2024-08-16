@@ -1,35 +1,45 @@
-import Script from "next/script";
-import React from "react";
+'use client';
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-export default function LoadAds() {
-  return (
-    <>
-      {/* Google Publisher Tag - Definerer og anmoder om reklamer */}
-      <Script
-        async
-        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
-      />
 
-      {/* OneTag scriptet bruges til at optimere og forenkle indlæsning af reklamer fra forskellige netværk, 
-        hvilket hjælper med at øge indtægterne fra reklamevisninger. */}
-      <Script
-        async
-        src="//get.s-onetag.com/fe24cb85-40ce-4663-902a-d4273cadd44f/tag.min.js"
-      />
+export default function LoadAds() { 
+  const pathname = usePathname();
 
-      {/* Prebid.js er en open source teknologi, der tillader ad tech firmaer at foretage real-tidsbudgivning 
-        på reklamepladser, før reklamen bliver vist. */}
-      <Script src="/lib/prebid8.46.0-1.js" strategy="afterInteractive" />
+  useEffect(() => {
 
-      {/* Relevant Digital */}
-      <Script
-        async
-        src="https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js"
-        data-cmp-vendor="1100"
-        className="cmplazyload"
-      />
-      <Script src="/lib/relevant.js" strategy="afterInteractive" />
-      { console.log("Ads Refreshed") }
-    </>
-  );
+    const scriptUrls = [
+      "https://securepubads.g.doubleclick.net/tag/js/gpt.js",
+      "https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js",
+      "/lib/relevant.js",
+    ];
+
+    const loadScript = (src: string) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = src
+        script.async = true
+        script.onload = resolve
+        script.onerror = reject
+        document.body.appendChild(script)
+      })
+    }
+
+    loadScript('https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')
+    .then(() => {
+      console.log('Scripts loaded successfully');
+      return Promise.all(
+        scriptUrls
+        .filter((url) => url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')
+        .map((url) => loadScript(url))
+      )
+    })
+    .catch((error) => {
+      console.error('Error loading scripts:', error)
+    })
+
+  }, [pathname])
+
+  return null;
+
 }
