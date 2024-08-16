@@ -160,7 +160,6 @@ border-radius: 10px;
 
 .lineHeader{
   position: relative;
-  z-index: 1;
   -webkit-transform: skewX(-15deg);
     -moz-transform: skewX(-15deg);
     -ms-transform: skewX(-15deg);

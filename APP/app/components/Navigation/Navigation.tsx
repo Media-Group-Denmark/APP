@@ -119,14 +119,14 @@ useEffect(() => {
   return (
     <Disclosure
       as="nav"
-      className={` bg-second_color_light dark:bg-second_color_dark min-h-[60px] z-50 border-t-2 border-slate-50 w-screen 
+      className={` bg-second_color_light dark:bg-second_color_dark min-h-[60px] z-40 border-t-2 border-slate-50 w-screen 
         ${stickyNav ? "fixed top-0" : "block"}`}
     >
       {({ open, close }) => (
         <>
           <div className=" mx-auto px-2 sm:px-6 lg:px-8 grid place-content-center">
             <div className="relative flex items-center justify-between h-16">
-              <div className="flex items-center w-[1000px] px-2 lg:px-0">
+              <div className="flex items-center w-[1000px] px-2 lg:pl-4">
                 <div className="flex-shrink-0">
                 <Link href="/">
                 <Image

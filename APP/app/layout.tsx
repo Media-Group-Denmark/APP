@@ -9,6 +9,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
 import LoadAds from "./components/AdScripts/LoadAds";
+import MailChimpPopUp from "./components/MailChimp/MailChimpPopUp";
 const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID as string;
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
@@ -33,6 +34,7 @@ export default function RootLayout({
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
       <body className={`${inter.variable} ${mulish.variable}`}>
        {/*  <AdBlockDetect /> */}
+        <MailChimpPopUp />
         <Header />
         <>{children}</>
         <GoogleAnalytics gaId={googleAnalyticsId} />

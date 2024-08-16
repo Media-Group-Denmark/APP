@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Navigation/Header.tsx", "app/components/tools/AdRefresher.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Navigation/Header.tsx", "app/components/tools/AdRefresher.jsx", "app/components/MailChimp/MailChimp.js"],
   "exclude": ["node_modules"]
 }

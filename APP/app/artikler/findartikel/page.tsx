@@ -16,7 +16,6 @@ export async function getData(queryParam: any, category: string, journalist: str
   const query = `
       *[_type == "article" && 
       publishedAt <= "${today}" &&
-      previewMode == "false" &&
       title match $queryParam &&
       category->slug.current match $category &&
       journalist->slug.current match $journalist &&

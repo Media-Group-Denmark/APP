@@ -96,7 +96,7 @@ const SubArticlesListWide: React.FC<{
   return (
     <section>
       <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
-        <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
+        <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
           {category
             ? category
             : tag
@@ -140,7 +140,7 @@ const SubArticlesListWide: React.FC<{
                     </time>
                     <Link
                       href={`/artikler/kategori/${post.categorySlug}`}
-                      className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                      className="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                     >
                       {post.category}
                     </Link>

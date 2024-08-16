@@ -46,7 +46,7 @@ const ArticleHero: React.FC<{
           <div className="px-4 pb-4">
             <header className="grid grid-rows-[auto_1fr_auto] min-h-[170px]">
               <Link href={`/artikler/kategori/${article.categorySlug}`}>
-                <p className="relative text-sm z-10 w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
+                <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
                   {article.category}
                 </p>
               </Link>

@@ -109,7 +109,7 @@ const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
     articles
   );
   return (
-    <section className="max-w-[1000px] mx-auto px-6 mt-8 md:mt-0">
+    <section className="max-w-[1000px] mx-auto pt-6 md:pt-4 px-6">
       <figure className="flex gap-[12px]">
         <h1 className="text-md">Seneste Nyt</h1>
         <ChevronRight className="font-black my-auto" size={22} />
