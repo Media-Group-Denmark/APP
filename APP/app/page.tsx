@@ -11,6 +11,7 @@ import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/Top
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
+import LoadAds from "./components/AdScripts/LoadAds";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -150,6 +151,7 @@ export default async function Home() {
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
           </div>
       </section>
+      <LoadAds />
     </main>
   );
 }
