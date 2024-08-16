@@ -71,10 +71,10 @@ const SubArticlesSixGrid: React.FC<{
 }> =  async ({ category, tag, journalist, dayInterval, startIndex, endIndex }) => {
   const data = await getData(category, tag, journalist, dayInterval);
   return (
-    <section>
+    <section className='pb-12'>
       <Link href={`${theme.site_url}/artikler/kategori/${category}`}>
         <h2 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-          <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1 uppercase">
+          <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
             {category
               ? category
               : tag
@@ -114,7 +114,7 @@ const SubArticlesSixGrid: React.FC<{
               <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
                 <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                   <Link href={`/artikler/kategori/${post.categorySlug}`}>
-                  <p className="relative text-sm z-10 w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
+                  <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
                   {post.category}
                 </p>
                   </Link>

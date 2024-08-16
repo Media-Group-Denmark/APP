@@ -253,7 +253,7 @@ export default async function artikelPreview({
                               <Link
                                 href={`/artikler/tag/${article.tagSlug[index]}`}
                               >
-                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative z-10 rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
+                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                                   {tag}
                                 </button>
                               </Link>

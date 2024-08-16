@@ -107,7 +107,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
       <div>
         {/*  Header Start */}
         <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
-          <span className="bg-accent_color_light dark:bg-bg-accent_color_light text-white px-4 py-1">
+          <span className="bg-accent-color-gradient text-white px-4 py-1">
             TOPNYHEDER
           </span>
         </h1>
