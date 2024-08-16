@@ -11,7 +11,7 @@ import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/Dynamic
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import LoadAds from "@/app/components/AdScripts/LoadAds";
+
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -250,7 +250,6 @@ export default async function tag({ params }: { params: { tag: string } }) {
           <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />
         </div>
       </section>
-      <LoadAds />
     </main>
   );
 }

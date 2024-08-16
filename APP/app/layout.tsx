@@ -8,6 +8,7 @@ import Footer from "./components/Navigation/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
+import LoadAds from "./components/AdScripts/LoadAds";
 const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID as string;
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
@@ -50,6 +51,7 @@ export default function RootLayout({
           `,
         }}
       />
+      <LoadAds />
       </body>
     </html>
   );
