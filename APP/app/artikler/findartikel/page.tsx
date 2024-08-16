@@ -6,6 +6,7 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 import SubArticlesSixGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import Link from "next/link";
 import FindArticle from "@/app/components/ArticleDisplaySystems/StaticSystems/findArticle";
+import LoadAds from "@/app/components/AdScripts/LoadAds";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
@@ -138,6 +139,7 @@ export async function getData(queryParam: any, category: string, journalist: str
         </nav>
         <SearchBar category={category} journalist={journalist} tag={tag} />
         <FindArticle data={items} startIndex={0} endIndex={30} />
+        <LoadAds />
       </main>
     );
 }

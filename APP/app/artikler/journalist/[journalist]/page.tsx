@@ -11,6 +11,7 @@ import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
+import LoadAds from "@/app/components/AdScripts/LoadAds";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -239,6 +240,7 @@ export default async function journalist({
           <SubArticlesListLarge data={data} startIndex={0} endIndex={10} />
         </div>
       </section>
+      <LoadAds />
     </main>
   );
 }
