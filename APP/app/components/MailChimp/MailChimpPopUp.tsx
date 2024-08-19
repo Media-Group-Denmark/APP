@@ -21,7 +21,7 @@ export default function MailChimpPopUp() {
     } else {
       const timer = setTimeout(() => {
         setModalIsOpen(true);
-      }, 2000); // Viser pop-up'en efter 40 sekunder
+      }, 20000); // Viser pop-up'en efter 20 sekunder
 
       return () => clearTimeout(timer); // Rydder timeren, hvis komponenten unmountes
     }
