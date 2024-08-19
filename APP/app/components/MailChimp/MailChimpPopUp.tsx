@@ -21,7 +21,7 @@ export default function MailChimpPopUp() {
     } else {
       const timer = setTimeout(() => {
         setModalIsOpen(true);
-      }, 40000); // Viser pop-up'en efter 40 sekunder
+      }, 2000); // Viser pop-up'en efter 40 sekunder
 
       return () => clearTimeout(timer); // Rydder timeren, hvis komponenten unmountes
     }
@@ -43,17 +43,18 @@ export default function MailChimpPopUp() {
       });
       subUser();
       if (res.ok) {
-        toast.success("Du er tilmeldt nyhedsbrevet!");
+        toast.success("Du er tilmeldt nyhedsbrevet!", { toastId: "success1" });
       } else {
-        toast.error("Tilmelding mislykkedes. Prøv venligst igen.");
+        toast.error("Tilmelding mislykkedes. Prøv venligst igen.", { toastId: "error1" });
       }
     } catch (error) {
-      toast.error("Tilmelding mislykkedes. Prøv venligst igen.");
+      toast.error("Tilmelding mislykkedes. Prøv venligst igen.", { toastId: "error2" });
     }
   };
 
   return (
     <aside className="relative">
+      <ToastContainer />
       {subscribed ? null : (
         <Modal
           isOpen={modalIsOpen}
@@ -141,7 +142,6 @@ export default function MailChimpPopUp() {
           </div>
         </Modal>
       )}
-      <ToastContainer />
     </aside>
   );
 }

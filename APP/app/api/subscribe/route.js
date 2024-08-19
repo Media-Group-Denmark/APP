@@ -1,15 +1,18 @@
 import mailchimp from "@mailchimp/mailchimp_marketing";
 
+const apiKey = String(process.env.MAILCHIMP_API || process.env.NEXT_PUBLIC_MAILCHIMP_API);
+const audienceId = String(process.env.MAILCHIMP_AUDIENCE || process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE); 
+console.log(apiKey, audienceId);
+
 mailchimp.setConfig({
-    apiKey: 'e3926bd48e709bb5c9299b375a4510c8-us10',
+    apiKey: apiKey,
     server: 'us10', // Replace with your server region
   })
 
 export async function POST(request) {
   const { email } = await request.json();
-
   try {
-    await mailchimp.lists.addListMember('a2d80d4dd4', {
+    await mailchimp.lists.addListMember(audienceId, {
       email_address: email,
       status: 'subscribed',
     });
