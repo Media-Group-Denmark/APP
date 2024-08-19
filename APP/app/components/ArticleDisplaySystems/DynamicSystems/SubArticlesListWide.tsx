@@ -2,97 +2,22 @@ import { Article } from "@/app/models/article";
 import Link from "next/link";
 import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
-import { client, urlFor } from "@/app/lib/sanityclient";
-
-async function getData(
-  category = "",
-  tag = "",
-  journalist = "",
-  dayInterval = 0,
-  endIndex = 0
-) {
-  const today: Date = new Date();
-  const queryStart = new Date();
-  queryStart.setDate(queryStart.getDate() - (dayInterval || 0));
-
-  const formattedToday = today.toISOString();
-  const formattedQueryStart = queryStart.toISOString();
-
-  const query = `
-    *[
-        _type == "article" && publishedAt <= "${today.toISOString()}" && previewMode == false
-        ${
-          category
-            ? '&& category->slug.current == "' +
-              encodeURIComponent(category) +
-              '"'
-            : ""
-        }
-        ${
-          tag
-            ? '&& tag[]->slug.current match "' + encodeURIComponent(tag) + '*"'
-            : ""
-        }
-        ${
-          journalist
-            ? '&& journalist->slug.current == "' +
-              encodeURIComponent(journalist) +
-              '"'
-            : ""
-        }
-        ${
-          (dayInterval as number) > 0
-            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
-            : ""
-        }
-      ]
-      | order(publishedAt desc) [0...10] {
-      _id,
-      _createdAt,
-      _type,
-      title,
-      teaser,
-      publishedAt,
-      "articleSlug": slug.current,
-      "image": metaImage.asset,
-      "category": category->name,
-      "categorySlug": category->slug.current,
-      "tag": tag[]->name,
-      "tagSlug": tag[]->slug.current,
-      "JournalistName": journalist->name,
-      "JournalistPhoto": journalist->image,
-      "JournalistSlug": journalist->slug.current,
-      views,
-      previewMode
-    }`;
-  const data = await client.fetch(query);
-  console.log(
-    formattedToday,
-    formattedQueryStart,
-    category,
-    tag,
-    journalist,
-    dayInterval
-  );
-  return data;
-}
+import { urlFor } from "@/app/lib/sanityclient";
+import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 
 const SubArticlesListWide: React.FC<{
+  data: Article[];
   category?: string | undefined;
-  tag?: string[] | undefined;
+  tag?: string | string[];
   journalist?: string | undefined;
   dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-}> = async ({
-  category,
-  tag,
-  journalist,
-  dayInterval,
-  startIndex,
-  endIndex,
-}) => {
-  const data = await getData(category, tag, journalist, dayInterval);
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
+
+  const slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
+
+  
   return (
     <section>
       <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
@@ -108,9 +33,7 @@ const SubArticlesListWide: React.FC<{
       </h1>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-8 mt-6 pb-1 rounded-xl">
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
-          {data
-            .slice(startIndex, endIndex)
-            .map((post: Article, index: number) => (
+        {slicedData.map((post: Article) => (
               <article
                 key={post._id}
                 className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
@@ -157,15 +80,6 @@ const SubArticlesListWide: React.FC<{
                       {post.teaser}
                     </h3>
                   </header>
-
-                  {/* <footer className="flex items-center gap-x-4 text-xs mt-4">
-                       <Link
-                         href={`/artikler/journalist/${post.JournalistSlug}`}
-                         className="text-sm text-fade_color_light dark:text-fade_color_dark"
-                       >
-                         {post.JournalistName}
-                       </Link>
-                     </footer> */}
                 </div>
               </article>
             ))}
