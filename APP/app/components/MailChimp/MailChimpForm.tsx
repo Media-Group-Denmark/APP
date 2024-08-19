@@ -7,7 +7,7 @@ export default function MailChimpForm() {
   const [email, setEmail] = useState('');
 
   const handleSubscribe = async (e) => {
-    e.preventDefault(); // Prevent form from submitting traditionally
+    e.preventDefault(); 
     console.log('Subscribing', email);
 
     try {
@@ -20,18 +20,19 @@ export default function MailChimpForm() {
       });
 
       if (res.ok) {
-        toast.success('Du er tilmeldt nyhedsbrevet!');
+        toast.success("Du er tilmeldt nyhedsbrevet!", { toastId: "success2" });
       } else {
-        toast.error('Tilmelding mislykkedes. Prøv venligst igen.');
+        toast.error("Tilmelding mislykkedes. Prøv venligst igen.", { toastId: "error3" });
       }
     } catch (error) {
-      toast.error('Tilmelding mislykkedes. Prøv venligst igen.');
+      toast.error("Tilmelding mislykkedes. Prøv venligst igen.", { toastId: "error4" });
     }
     
   };
 
   return (
     <aside className="mt-10 xl:mt-0">
+      <ToastContainer />
           <h2 className="text-sm font-semibold leading-6 ">Tilmeld dig vores Nyhedsbrev </h2>
           <p className="mt-2 text-sm leading-6 text-fade_color_light dark:text-fade_color_dark ">De seneste nyheder, artikler og ressourcer, sendt til din indbakke ugentligt.</p>
           <form className="mt-6 sm:flex sm:max-w-md">
@@ -41,7 +42,6 @@ export default function MailChimpForm() {
               <button onClick={handleSubscribe} type="submit" className="flex w-full items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tilmeld</button>
             </div>
           </form>
-          <ToastContainer />
         </aside>
   )
 }
