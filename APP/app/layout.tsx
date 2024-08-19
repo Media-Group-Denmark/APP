@@ -34,7 +34,7 @@ export default function RootLayout({
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
       <body className={`${inter.variable} ${mulish.variable}`}>
        {/*  <AdBlockDetect /> */}
-        {/* <MailChimpPopUp /> */}
+        <MailChimpPopUp />
         <Header />
         <>{children}</>
         <GoogleAnalytics gaId={googleAnalyticsId} />
