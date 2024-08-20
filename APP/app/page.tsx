@@ -69,15 +69,14 @@ export default async function Home() {
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
                 <aside className="hidden lg:inline-block">
-                  <SubArticlesListWide data={data} category={'nyheder'} startIndex={1} endIndex={3} />
+                  <SubArticlesListWide data={data} startIndex={1} endIndex={3} />
                 </aside>
               </div>
               <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesListAltOmKendte
                 data={data}
                 dayInterval={14}
-                startIndex={0}
-                endIndex={5}
+                endIndex={100}
                  />
               </aside>
             </section>
@@ -92,10 +91,10 @@ export default async function Home() {
             data={data}
                 dayInterval={14}
                 startIndex={0}
-                endIndex={5}
+                endIndex={100}
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
-              <SubArticlesGrid data={data} category={'nyheder'}  startIndex={1} endIndex={3} />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
               <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </div>
@@ -109,10 +108,10 @@ export default async function Home() {
 
             {/* Desktop */}
             <section className="md:inline-block hidden">
-              <SubArticlesGrid data={data} category={'aktier'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} category={'aktier'} startIndex={0} endIndex={6} />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={1} endIndex={7} />
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
             </section>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />

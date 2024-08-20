@@ -11,7 +11,7 @@ export async function getData() {
   *[
     _type == "article" && publishedAt <= "${formattedToday}" && previewMode == false
   ] 
-  | order(coalesce(publishedAt, _createdAt) desc) [0...150] {
+  | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
     _id,
     _createdAt,
     _type,

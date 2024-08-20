@@ -13,7 +13,7 @@ const TrendingArticlesList: React.FC<{
   dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-  views: number;
+  views?: number;
 }> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
 
   let slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
@@ -35,7 +35,7 @@ const TrendingArticlesList: React.FC<{
                   </header>
                 </Link>
               </li>
-            ))}
+            )).slice(0, 5)}
         </ul>
       </div>
     </section>

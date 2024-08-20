@@ -106,7 +106,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               <TrendingArticlesList
                 dayInterval={60}
                 startIndex={0}
-                endIndex={5}
+                endIndex={100}
                 data={data} tag={params.tag}
               />
             </aside>
@@ -119,7 +119,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <TrendingArticlesList
               dayInterval={30}
               startIndex={0}
-              endIndex={5}
+              endIndex={100}
               data={data} tag={params.tag}
             />
             <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
@@ -146,8 +146,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
           <section className="md:inline-block hidden">
             <SubArticlesGrid
               data={data} tag={'nyheder'}
-              startIndex={1}
-              endIndex={7}
+              startIndex={0}
+              endIndex={6}
             />
             <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
           </section>

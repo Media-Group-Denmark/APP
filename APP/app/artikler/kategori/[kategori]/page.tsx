@@ -118,7 +118,7 @@ export default async function kategori({
                 <TrendingArticlesListAltOmKendte
                 dayInterval={14}
                 startIndex={0}
-                endIndex={5}
+                endIndex={100}
                 data={data} category={params.kategori}
                  />
               </aside>
@@ -132,7 +132,7 @@ export default async function kategori({
               <TrendingArticlesListAltOmKendte
                 dayInterval={30}
                 startIndex={0}
-                endIndex={5}
+                endIndex={100}
                 data={data} category={params.kategori}
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
@@ -154,8 +154,8 @@ export default async function kategori({
             <section className="md:inline-block hidden">
               <SubArticlesGrid data={data} category={params.kategori}  startIndex={3} endIndex={9} />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={1} endIndex={7} />
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
             </section>
             <SubArticlesListSmall data={data} category={params.kategori} startIndex={7} endIndex={21} />
         </div>
