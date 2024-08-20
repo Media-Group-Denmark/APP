@@ -4,14 +4,25 @@ import Image from 'next/image';
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { Article } from '@/app/models/article';
 import Link from 'next/link';
+import { filterAndSliceArticles } from '@/app/lib/FilterArticles';
 
 
-const SubArticlesListLarge: React.FC<{data: Article[]; startIndex: number; endIndex: number}> = ({ data, startIndex, endIndex }) =>  {
+const SubArticlesListLarge: React.FC<{
+  data: Article[];
+  category?: string | undefined;
+  tag?: string | string[];
+  journalist?: string | undefined;
+  dayInterval?: number | undefined;
+  startIndex: number;
+  endIndex: number;
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
+
+  const slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
   return (
     <section className="mx-auto max-w-7xl px-3 lg:px-8 py-2 mt-6 rounded-xl">
   <div className="mx-auto max-w-2xl lg:max-w-4xl">
     <div>
-      {data.slice(startIndex, endIndex).map((post) => (
+    {slicedData.map((post: Article) => (
         <article
           key={post._id}
           className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"

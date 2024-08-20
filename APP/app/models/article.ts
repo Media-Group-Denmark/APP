@@ -19,7 +19,7 @@ export interface Article {
      JournalistSlug: string;
      JournalistDetails: [];
      overview: [];
-     views: number;
+     views: number | 0;
      disclaimer: boolean;
      dayInterval: number;
      startIndex: number;

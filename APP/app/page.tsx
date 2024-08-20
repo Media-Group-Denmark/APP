@@ -11,6 +11,7 @@ import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/Top
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
+import { getData } from "./lib/GetData";
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -45,38 +46,7 @@ export const metadata: Metadata = {
   robots: theme.metadata.robots,
   publisher: theme.site_name,
 };
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-async function getData() {
-  const today = new Date().toISOString();
-  const query = `
-  *[
-    _type == "article" && publishedAt <= "${today}" && previewMode == false
-  ] 
-  | order(coalesce(publishedAt, _createdAt) desc) {
-    _id,
-    _createdAt,
-    publishedAt,
-    _type,
-    title,
-    teaser,
-    "articleSlug": slug.current,
-    "image": metaImage.asset,
-    "category": category->name,
-    "categorySlug": category->slug.current,
-    "tag": tag[]->name,
-    "tagSlug": tag[]->slug.current,
-    "JournalistName": journalist->name,
-    "JournalistPhoto": journalist->image,
-    "JournalistSlug": journalist->slug.current,
-    views,
-    previewMode
-  }`;
-  const data = await client.fetch(query);
-  //console.log(data);
-  return data;
-}
+
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
@@ -87,13 +57,9 @@ export default async function Home() {
     <main>
       <TopNewsSlider
         data={data}
-        dayInterval={14}
+        dayInterval={2}
         startIndex={0}
         endIndex={12}
-        category=""
-        tag=""
-        journalist=""
-        articles={data}
       />
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
         <div className="containerr md:px-6 py-10 pt-0 m-auto">
@@ -103,14 +69,14 @@ export default async function Home() {
               <div className=" lg:w-[700px]">
                 <ArticleHero data={data} startIndex={0} endIndex={1} />
                 <aside className="hidden lg:inline-block">
-                  <SubArticlesListWide category={'nyheder'} startIndex={1} endIndex={3} />
+                  <SubArticlesListWide data={data} startIndex={1} endIndex={3} />
                 </aside>
               </div>
               <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesListAltOmKendte
+                data={data}
                 dayInterval={14}
-                startIndex={0}
-                endIndex={5}
+                endIndex={100}
                  />
               </aside>
             </section>
@@ -121,17 +87,18 @@ export default async function Home() {
             {/* Phone */}
             <section className="grid gap-4 md:hidden">
             <TrendingArticlesListAltOmKendte
+            data={data}
                 dayInterval={14}
                 startIndex={0}
-                endIndex={5}
+                endIndex={100}
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
-              <SubArticlesGrid category={'nyheder'}  startIndex={1} endIndex={3} />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
               <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </div>
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
-              <SubArticlesGrid category={'aktier'} startIndex={4} endIndex={6} />
+              <SubArticlesGrid data={data} category={'aktier'} startIndex={4} endIndex={6} />
               <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </div>
@@ -140,10 +107,10 @@ export default async function Home() {
 
             {/* Desktop */}
             <section className="md:inline-block hidden">
-              <SubArticlesGrid category={'aktier'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} category={'aktier'} startIndex={0} endIndex={6} />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid category={'spare-hacks'} startIndex={1} endIndex={7} />
-              <SubArticlesGrid category={'privatokonomi'} startIndex={1} endIndex={7} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
             </section>
 
             <SubArticlesListSmall data={data} startIndex={7} endIndex={21} />

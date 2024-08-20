@@ -11,6 +11,8 @@ import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/Dynamic
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
+import { getData } from "@/app/lib/GetData";
+import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -81,114 +83,16 @@ export async function generateMetadata({
     };
   }
 }
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-export async function getData(params: { tag: string }): Promise<Article[]> {
-  const today = new Date().toISOString();
-  const query = `
-        *[
-          _type == "article" && previewMode == false && publishedAt <= "${today}" && tag[]->slug.current match "${params.tag}"
-        ] 
-        | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
-          _id,
-          _createdAt,
-          publishedAt,
-          _type,
-          title,
-          teaser,
-          "articleSlug": slug.current,
-          "image": metaImage.asset,
-          "category": category->name,
-          "categorySlug": category->slug.current,
-          "tag": tag[]->name,
-          "tagSlug": tag[]->slug.current,
-          "JournalistName": journalist->name,
-          "JournalistPhoto": journalist->image,
-          "JournalistSlug": journalist->slug.current,
-          previewMode
-        }`;
-  try {
-    const data = await client.fetch<Article[]>(query);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
+
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const data: Article[] = await getData({ tag: params.tag });
+  const data: Article[] = await getData();
   return (
     <main>
       {data ? (
-        <nav
-          className="flex px-3 md:px-8 max-w-[1000px] m-auto  py-6 pt-6 rounded-lg "
-          aria-label="Breadcrumb"
-        >
-          <ol className="inline-flex items-center space-x-1 md:space-x-3">
-            <li className="inline-flex items-center">
-              <Link
-                href="/"
-                className="text-sm text-fade_color_light dark:text-fade_color_dark hover:text-gray-900 dark:hover:text-gray-400 inline-flex items-center "
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-                Forside
-              </Link>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <svg
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <Link
-                  href="/sider/referencer/tag"
-                  className="text-fade_color_light dark:text-fade_color_dark hover:text-gray-900 dark:hover:text-gray-400 ml-1 md:ml-2 text-sm font-medium "
-                >
-                  Tags
-                </Link>
-              </div>
-            </li>
-            <li className=" cursor-default " aria-current="page">
-              <div className="flex items-center">
-                <svg
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-accent_color_light dark:text-accent_color_dark ml-1 md:ml-2 text-sm font-medium capitalize ">
-                  {" "}
-                  {params.tag}{" "}
-                </span>
-              </div>
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb navItem={'Tags'} link={"/sider/referencer/tags"} navItemTwo={params.tag}/>
       ) : null}
 
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
@@ -196,14 +100,14 @@ export default async function tag({ params }: { params: { tag: string } }) {
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
             <div className=" lg:w-[700px]">
-              <ArticleHero data={data} startIndex={0} endIndex={1} />
+              <ArticleHero data={data} tag={params.tag} startIndex={0} endIndex={1} />
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
               <TrendingArticlesList
                 dayInterval={60}
                 startIndex={0}
-                endIndex={5}
-                tag={data[0].tagSlug}
+                endIndex={100}
+                data={data} tag={params.tag}
               />
             </aside>
           </section>
@@ -215,12 +119,12 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <TrendingArticlesList
               dayInterval={30}
               startIndex={0}
-              endIndex={5}
-              tag={data[0].tagSlug}
+              endIndex={100}
+              data={data} tag={params.tag}
             />
             <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
             <SubArticlesGrid
-              tag={data[0].tagSlug}
+              data={data} tag={'nyheder'}
               startIndex={1}
               endIndex={3}
             />
@@ -229,21 +133,21 @@ export default async function tag({ params }: { params: { tag: string } }) {
             </div>
             <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
             <SubArticlesGrid
-              tag={data[0].tagSlug}
+              data={data} tag={params.tag}
               startIndex={4}
               endIndex={6}
             />
             <div className="mt-4 block">
-              <ArticleHero data={data} startIndex={6} endIndex={7} />
+              <ArticleHero data={data} tag={params.tag} startIndex={6} endIndex={7} />
             </div>
           </section>
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
             <SubArticlesGrid
-              tag={data[0].tagSlug}
-              startIndex={1}
-              endIndex={7}
+              data={data} tag={'nyheder'}
+              startIndex={0}
+              endIndex={6}
             />
             <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
           </section>

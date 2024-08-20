@@ -5,7 +5,7 @@ import SubArticlesListSmallOrderRelease from './components/ArticleDisplaySystems
 export default function NotFound() {
   return (
     <aside>
-        <div className="flex items-center p-16 ">
+        <div className="items-center p-16 ">
         <div className="containerr flex flex-col items-center ">
             <div className="flex flex-col gap-6 max-w-md text-center">
                 <h2 className="font-extrabold text-8xl text-gray-600 dark:text-gray-100">

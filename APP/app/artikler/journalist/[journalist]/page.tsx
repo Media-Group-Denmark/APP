@@ -11,6 +11,8 @@ import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
+import { getData } from "@/app/lib/GetData";
+import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -80,43 +82,7 @@ export async function generateMetadata({
     };
   }
 }
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-export async function getData(params: {
-  journalist: string;
-}): Promise<Article[]> {
-  const today = new Date().toISOString();
-  const query = `
-        *[
-          _type == "article" && publishedAt <= "${today}" && previewMode == false && journalist->slug.current == "${params.journalist}"
-        ] 
-        | order(coalesce(publishedAt, _createdAt) desc) [0...20] {
-          _id,
-          _createdAt,
-          publishedAt,
-          _type,
-          title,
-          teaser,
-          "articleSlug": slug.current,
-          "image": metaImage.asset,
-          "category": category->name,
-          "categorySlug": category->slug.current,
-          "tag": tag[]->name,
-          "JournalistName": journalist->name,
-          "JournalistPhoto": journalist->image,
-          "JournalistSlug": journalist->slug.current,
-          "JournalistDetails": journalist->description,
-          previewMode
-        }`;
-  try {
-    const data = await client.fetch<Article[]>(query);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
+
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
@@ -125,74 +91,11 @@ export default async function journalist({
 }: {
   params: { journalist: string };
 }) {
-  const data: Article[] = await getData({ journalist: params.journalist });
+  const data: Article[] = await getData();
   return (
     <main>
       {data ? (
-        <nav
-          className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
-          aria-label="Breadcrumb"
-        >
-          <ol className="inline-flex items-center space-x-1 md:space-x-3">
-            <li className="inline-flex items-center">
-              <Link
-                href="/"
-                className="text-sm text-fade_color_light dark:text-fade_color_dark hover:text-gray-900 dark:hover:text-gray-400 inline-flex items-center "
-              >
-                <svg
-                  className="w-4 h-4 mr-2"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-                Forside
-              </Link>
-            </li>
-            <li>
-              <div className="flex items-center">
-                <svg
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <Link
-                  href="/sider/referencer/journalister"
-                  className="text-fade_color_light dark:text-fade_color_dark hover:text-gray-900 dark:hover:text-gray-400 ml-1 md:ml-2 text-sm font-medium "
-                >
-                  Journalister
-                </Link>
-              </div>
-            </li>
-            <li className=" cursor-default " aria-current="page">
-              <div className="flex items-center">
-                <svg
-                  className="w-6 h-6 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-                <span className="text-accent_color_light dark:text-accent_color_dark ml-1 md:ml-2 text-sm font-medium capitalize ">
-                  {data[0].JournalistName}
-                </span>
-              </div>
-            </li>
-          </ol>
-        </nav>
+        <Breadcrumb navItem={'Journalist'} link={"/sider/referencer/journalister"} navItemTwo={params.journalist}/>
       ) : null}
 
       <section className=" grid mx-auto mt-4 ">
@@ -237,7 +140,7 @@ export default async function journalist({
 
           <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
           <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
-          <SubArticlesListLarge data={data} startIndex={0} endIndex={10} />
+          <SubArticlesListLarge data={data} journalist={params.journalist} startIndex={0} endIndex={10} />
         </div>
       </section>
     </main>

@@ -1,113 +1,34 @@
-/* This can be used on a page like this:
-<TrendingArticlesList 
-dayInterval={7} 
-startIndex={0} 
-endIndex={5} 
-category={data[0].categorySlug or the slug name as string} 
-tag={data[0].tagSlug or the slug name as string} />
-*/
-import { client, urlFor } from "@/app/lib/sanityclient";
+
 import { Article } from "@/app/models/article";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 
-async function getData(
-  category = "",
-  tag = "",
-  journalist = "",
-  dayInterval = 0,
-  startIndex: number,
-  endIndex: number,
-  articles: Article[]
-) {
-  const today: Date = new Date();
-  const queryStart = new Date();
-  queryStart.setDate(queryStart.getDate() - (dayInterval || 0));
-
-  const formattedToday = today.toISOString();
-  const formattedQueryStart = queryStart.toISOString();
-
-  const query = `
-    *[
-        _type == "article" && publishedAt <= "${today.toISOString()}" && previewMode == false
-        ${
-          category
-            ? '&& category->slug.current == "' +
-              encodeURIComponent(category) +
-              '"'
-            : ""
-        }
-        ${
-          tag
-            ? '&& tag[]->slug.current match "' + encodeURIComponent(tag) + '*"'
-            : ""
-        }
-        ${
-          journalist
-            ? '&& journalist->slug.current == "' +
-              encodeURIComponent(journalist) +
-              '"'
-            : ""
-        }
-        ${
-          (dayInterval as number) > 0
-            ? `&& publishedAt >= "${formattedQueryStart}" && publishedAt <= "${formattedToday}"`
-            : ""
-        }
-      ]
-      | order(coalesce(publishedAt, _createdAt) desc) {
-      _id,
-      _createdAt,
-      _type,
-      title,
-      publishedAt,
-      teaser,
-      "articleSlug": slug.current,
-      "image": metaImage.asset,
-      "category": category->name,
-      "categorySlug": category->slug.current,
-      "tag": tag[]->name,
-      "tagSlug": tag[]->slug.current,
-      "JournalistName": journalist->name,
-      "JournalistPhoto": journalist->image,
-      "JournalistSlug": journalist->slug.current,
-      views,
-      previewMode
-    }`;
-  const data = await client.fetch(query);
-  return data;
-}
-
-type TopNewsSliderProps = {
-  category: string;
-  tag: string;
-  journalist: string;
+const TopNewsSlider: React.FC<{
   data: Article[];
-  dayInterval: number;
+  category?: string | undefined;
+  tag?: string | string[];
+  journalist?: string | undefined;
+  dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-  articles: Article[];
-};
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
 
-const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
-  category = '',
-  tag = '',
-  journalist = '',
-  dayInterval,
-  startIndex,
-  endIndex,
-  articles = []
-}) => {
-  const data = await getData(
-    category,
-    tag,
-    journalist,
-    dayInterval,
-    startIndex,
-    endIndex,
-    articles
-  );
+  // Find ud af, hvilken dag vi skal filtrere data fra
+  const today = new Date();
+  today.setDate(today.getDate() - dayInterval as number - 1 || 0);
+  const queryDayIndicator = today.toISOString();
+
+// Filtrér og slice data baseret på kategori, tag, journalist og daginterval
+const slicedData = data
+  .filter(post => {
+    const ifDefinedCategory = category ? post.categorySlug === category : true;
+    const ifDefinedJournalist = journalist ? post.JournalistSlug === journalist : true;
+    const ifDefinedDayInterval = dayInterval ? post.publishedAt >= queryDayIndicator : true;
+    const ifDefinedTag = tag ? post.tagSlug.includes(tag as string) : true;
+    return ifDefinedCategory && ifDefinedJournalist && ifDefinedDayInterval && ifDefinedTag;
+  })
+  .slice(startIndex, endIndex);
   return (
     <section className="max-w-[1000px] mx-auto pt-6 md:pt-4 px-6">
       <figure className="flex gap-[12px]">
@@ -119,15 +40,15 @@ const TopNewsSlider: React.FC<TopNewsSliderProps> = async ({
           style={{ gridTemplateColumns: "repeat(12, auto)" }}
           className="grid grid-cols-[12] overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
         >
-          {data.slice(startIndex, endIndex).map((article: Article) => (
+          {slicedData.map((post: Article)  => (
             <li className="min-w-[240px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
-              <Link href={`/artikel/${article.articleSlug}`}>
-                <time dateTime={article.publishedAt} className=" text-xs ">
-                  {timeSinceText({ date: article.publishedAt })}
+              <Link href={`/artikel/${post.articleSlug}`}>
+                <time dateTime={post.publishedAt} className=" text-xs ">
+                  {timeSinceText({ date: post.publishedAt })}
                 </time>
                 <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
-                  {article.title}
+                  {post.title}
                 </h2>
               </Link>
             </li>
