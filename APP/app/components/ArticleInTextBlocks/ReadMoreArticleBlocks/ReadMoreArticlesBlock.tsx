@@ -55,16 +55,16 @@ export default async function ReadMoreArticlesBlock({
   if (relatedArticles.length === 0) return null;
 
   return (
-    <section className="my-8">
+    <section className="my-2 sm:my-6">
     <ul className="list-disc list-inside grid gap-2 !mx-0">
-      {relatedArticles.map((post: any) => (
-         <li className="elementList">
-            <Link href={`/artikel/${post.articleSlug}`}>
-          <article key={post._id} className='bg-second_color_light dark:bg-second_color_dark relative isolate flex flex-col sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
-          <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[70px] sm:h-24 w-[70px] sm:w-24 ">
+      {relatedArticles.map((post) => (
+        <li className='elementList' key={post._id}>
+          <Link href={`/artikel/${post.articleSlug}`}>
+            <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
+              <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
                 <img
-                width={300}
-                height={200}
+                  width={300}
+                  height={200}
                   src={urlFor(post.image)
                     .format("webp")
                     .width(300)
@@ -73,22 +73,23 @@ export default async function ReadMoreArticlesBlock({
                     .quality(85)
                     .url()}
                   alt={post.title}
-                  className="block rounded-2xl inset-0 bg-gray-300 max-h-44 h-[70px] sm:h-24 rounded-t-lg w-64 lg:w-44 object-cover"
+                  className="block rounded-2xl inset-0 bg-gray-300 max-h-44 h-[100px] sm:h-24 rounded-t-lg w-[85px] lg:w-44 object-cover"
                 />
               </figure>
-              <div className='p-2 sm:mt-2 sm:p-0'>
-                <div className="flex items-center gap-x-4">
-                <ReadMoreAutomaticViews views={post.views} />
-                </div>
+
+              <div className='p-2 sm:mt-2'>
+                <aside className="flex h-[1em] items-center gap-x-4">
+                  <ReadMoreAutomaticViews views={post.views} />
+                </aside>
                 <header className="group relative max-w-xl">
-                  <h1 className=" text-[0.95em] sm:text-[1em] md:text-[1.1em] font-semibold leading-6 mt-2 sm:mr-2 dark:group-hover:text-gray-300  group-hover:text-gray-600">
-                      {post.title}
+                  <h1 className="!text-[0.9em] sm:!text-[1em] !font-normal !leading-5 sm:!leading-6 max-w-[30ch] sm:max-w-[80ch] mt-1 sm:mt-2 sm:mr-2 !mb-0 dark:group-hover:text-gray-300 group-hover:text-gray-600">
+                    {post.title}
                   </h1>
                 </header>
               </div>
-          </article>
-              </Link>
-         </li>
+            </article>
+          </Link>
+        </li>
       ))}
     </ul>
   </section>

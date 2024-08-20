@@ -34,7 +34,7 @@ export default function ReadMoreAutomaticViews({ views }: { views: string }) {
     <figure className='flex gap-2'>
       <span className='grid w-fit grid-cols-[auto_1fr] place-content-center items-center !text-[15px] md:!text-[1.12em] min-w-[3em] sm:min-w-[2.5em] '>
         {arrow}
-        <CountUp start={previousReaders} end={liveReaders} duration={2.75} className='!font-semibold'/>
+        <CountUp start={previousReaders} end={liveReaders} duration={3.75} className='!font-semibold'/>
       </span>
       <span className="text-[0.8em] sm:text-sm md:text-lg block font-bold transition-all my-auto">
         Læser lige nu:
