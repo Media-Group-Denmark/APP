@@ -157,7 +157,7 @@ export default async function artikel({
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
       readMoreAutomatic: (props: any) => (
-        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} />
+        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
       ),
     },
   };

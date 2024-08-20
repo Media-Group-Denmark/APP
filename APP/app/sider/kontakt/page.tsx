@@ -8,6 +8,7 @@ import { PortableText } from "next-sanity";
 import Link from "next/link";
 import React from "react";
 import theme from "@/app/lib/theme.json";
+import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
