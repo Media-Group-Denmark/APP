@@ -5,7 +5,7 @@ export default function AdminSideBar() {
   return (
     <nav
             id="sidebar"
-            className="bg-white relative h-full md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-hidden transition-transform duration-300 ease-in-out"
+            className="bg-white relative h-full md:block shadow-xl px-3 w-30 md:w-60 lg:w-60 overflow-x-clip transition-transform duration-300 ease-in-out"
             x-show="sidenav"
            /*  @click.away="sidenav = false" */
           >

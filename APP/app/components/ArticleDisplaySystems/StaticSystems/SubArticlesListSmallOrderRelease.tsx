@@ -82,7 +82,7 @@ export default async function SubArticlesListSmallOrderRelease() {
                   {post.title}
                 </Link>
               </h1>
-              <h2 className="mt-5 text-sm h-[5em] overflow-hidden leading-6 text-text_second_color_dark dark:text-text_second_color_light">
+              <h2 className="mt-5 text-sm h-[5em] overflow-clip leading-6 text-text_second_color_dark dark:text-text_second_color_light">
                 {post.teaser}
               </h2>
             </header>

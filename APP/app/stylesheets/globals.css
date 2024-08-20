@@ -15,14 +15,14 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 body {
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   min-height: 100svh;
-  overflow-x: hidden;
+  overflow-x: clip;
   @apply bg-main_color_light dark:bg-main_color_dark;
 }
 main {

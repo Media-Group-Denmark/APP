@@ -63,7 +63,7 @@ export default function MailChimpPopUp() {
           overlayClassName="fixed inset-0 bg-black bg-opacity-50" // Tailwind CSS for overlay
         >
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div className="relative isolate overflow-hidden bg-slate-700 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-24">
+            <div className="relative isolate overflow-clip bg-slate-700 px-6 py-24 shadow-2xl sm:rounded-3xl sm:px-24 xl:py-24">
               <h1 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 {" "}
                 Tilmeld dig vores Nyhedsbrev.{" "}

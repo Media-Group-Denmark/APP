@@ -142,6 +142,7 @@ export default async function journalist({
           <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
           <SubArticlesListLarge data={data} journalist={params.journalist} startIndex={0} endIndex={10} />
         </div>
+        
       </section>
     </main>
   );

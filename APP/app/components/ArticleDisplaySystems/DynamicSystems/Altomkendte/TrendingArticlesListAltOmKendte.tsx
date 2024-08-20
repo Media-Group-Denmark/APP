@@ -14,7 +14,8 @@ const TrendingArticlesListAltOmKendte: React.FC<{
   startIndex: number;
   endIndex: number;
   views: number;
-}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex, views }) => {
+  articleAmount?: number;
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex, views, articleAmount}) => {
 
   let slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
   slicedData = slicedData.sort((a, b) => b.views - a.views);
@@ -37,7 +38,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
               <li>
                 <article className="bg-second_color_light dark:bg-second_color_dark rounded-2xl">
                   {/*  Image Desktop Start */}
-                  <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-hidden">
+                  <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-clip">
                     <Link
                       aria-label="Læs mere om artiklen"
                       href={`/artikel/${post.articleSlug}`}
@@ -80,7 +81,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                       {/*  Index Desktop End */}
 
                       {/*  Image Mobile Start */}
-                      <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-hidden">
+                      <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-clip">
                         <Link href={`/artikel/${post.articleSlug}`}>
                           <img
                           width={300}
@@ -127,7 +128,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                   </div>
                 </article>
               </li>
-            )).slice(0, 5)}
+            )).slice(0, articleAmount)}
         </ul>
       </div>
     </section>

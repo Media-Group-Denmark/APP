@@ -72,14 +72,14 @@ export default async function ScheduledPost() {
               Object.keys(groupArticlesByDate).map(date => (
                 <section className='bg-second_color_light dark:bg-second_color_dark p-4 rounded-lg !mt-12'>
                     <h2 className='text-xl py-4 text-center'>Planlagt til <br /> <span className='text-3xl font-extrabold'>{date}</span></h2>
-              <article className="grid overflow-y-hidden grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+              <article className="grid overflow-y-clip grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
                   {groupArticlesByDate[date].map((post: Article) => (
                       <div
                       key={date}
                       className="bg-second_color_light drop-shadow-xl dark:bg-second_color_dark rounded-lg relative"
                     >
                     <Link href={`/admin/preview/artikel/${post.articleSlug}`}>
-                          <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
+                          <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                             
                               <img
                               width={400}
