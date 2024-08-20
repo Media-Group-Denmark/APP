@@ -14,9 +14,24 @@ const ArticleHero: React.FC<{
   dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
-
-  const slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
+}> = async ({
+  data,
+  category,
+  tag,
+  journalist,
+  dayInterval,
+  startIndex,
+  endIndex,
+}) => {
+  const slicedData = filterAndSliceArticles(
+    data,
+    category,
+    tag,
+    journalist,
+    dayInterval,
+    startIndex,
+    endIndex
+  );
   return (
     <>
       {slicedData.map((post: Article) => (
@@ -25,16 +40,20 @@ const ArticleHero: React.FC<{
           className="col-span-2 mb-4 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
         >
           <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-hidden">
-            <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
+            <Link
+              aria-label="Læs mere om artiklen"
+              href={`/artikel/${post.articleSlug}`}
+            >
               <Image
-               src={urlFor(post.image).url()} 
-               alt={post.title}
-               layout="responsive"
-               width={900}
-               height={600}
-               sizes="(max-width: 768px) 100vw, 900px"
-               quality={85}
-             />
+                src={urlFor(post.image).url()}
+                alt={post.title}
+                layout="responsive"
+                width={600}
+                height={400} // Justér højden for at bevare aspect ratio
+                sizes="(max-width: 768px) 600px, 900px"
+                quality={`(max-width: 768px) 50, 85`}
+                priority={true} // Tilføj dette for billeder i det indledende viewport
+              />
             </Link>
           </figure>
 
