@@ -27,7 +27,6 @@ export default function MailChimpForm() {
     } catch (error) {
       toast.error("Tilmelding mislykkedes. Prøv venligst igen.", { toastId: "error4" });
     }
-    
   };
 
   return (

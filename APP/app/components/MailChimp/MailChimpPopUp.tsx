@@ -58,9 +58,7 @@ export default function MailChimpPopUp() {
       {subscribed ? null : (
         <Modal
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Tilmeld dig vores nyhedsbrev"
-          ariaHideApp={false}   
+          contentLabel="Tilmeld dig vores nyhedsbrev" 
           className="fixed inset-0 flex items-center justify-center z-50" // Tailwind CSS for at placere modalen i midten
           overlayClassName="fixed inset-0 bg-black bg-opacity-50" // Tailwind CSS for overlay
         >
