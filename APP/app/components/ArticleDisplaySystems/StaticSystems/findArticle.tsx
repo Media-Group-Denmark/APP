@@ -6,13 +6,13 @@ import { urlFor } from '@/app/lib/sanityclient'
 
 const FindArticle: React.FC<{data: Article[]; startIndex: number; endIndex: number}> = ({ data, startIndex, endIndex }) => {
   return (
-    <section className="grid overflow-y-hidden grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+    <section className="grid overflow-y-clip grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
             {data.slice(startIndex, endIndex).map((article, index) => (
               <article
                 key={article._id}
                 className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
               >
-                <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
+                <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                 <Link aria-label="Læs mere om artiklen" href={`/artikel/${article.articleSlug}`}>
           <img
           width={400}

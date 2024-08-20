@@ -55,7 +55,7 @@ const SubArticlesListSmall: React.FC<{
                     {post.category}
                   </Link>
                 </aside>
-                <header className="group relative max-w-xl h-[10em] md:h-[12em] overflow-hidden">
+                <header className="group relative max-w-xl h-[10em] md:h-[12em] overflow-clip">
                   <h1 className="mt-2 text-md md:text-md font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600">
                     <Link href={`/artikel/${post.articleSlug}`}>
                       <span className="absolute inset-0" />
@@ -68,7 +68,7 @@ const SubArticlesListSmall: React.FC<{
                 </header>
               </div>
             </article>
-          ))}
+          )).slice(0, 14)}
       </div>
     </section>
   );

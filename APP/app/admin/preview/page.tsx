@@ -68,7 +68,7 @@ export default async function PagePreview() {
           </header>
         
           <section className='bg-second_color_light dark:bg-second_color_dark p-4 rounded-lg !mt-12'>
-        <article className="grid overflow-y-hidden grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+        <article className="grid overflow-y-clip grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
           {
             data && data.length > 0 ? ( 
                   data.map((post: Article) => (
@@ -77,7 +77,7 @@ export default async function PagePreview() {
                     className="bg-second_color_light drop-shadow-xl dark:bg-second_color_dark rounded-lg relative"
                   >
                   <Link href={`/admin/preview/artikel/${post.articleSlug}`}>
-                        <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-hidden">
+                        <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                           
                             <img
                             width={400}

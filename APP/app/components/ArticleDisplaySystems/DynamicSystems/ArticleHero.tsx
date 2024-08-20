@@ -39,7 +39,7 @@ const ArticleHero: React.FC<{
           key={post._id}
           className="col-span-2 mb-4 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
         >
-          <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-hidden">
+          <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-clip">
             <Link
               aria-label="Læs mere om artiklen"
               href={`/artikel/${post.articleSlug}`}

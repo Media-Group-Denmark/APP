@@ -14,12 +14,13 @@ const TrendingArticlesList: React.FC<{
   startIndex: number;
   endIndex: number;
   views?: number;
-}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
+  articleAmount?: number;
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex, articleAmount }) => {
 
   let slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
   slicedData = slicedData.sort((a, b) => b.views - a.views);
   return (
-    <section id="trending" className="inline-block xl:sticky top-20 p-6 md:p-4 min-w-[300px] w-[95vw] xl:w-full bg-second_color_light dark:bg-second_color_dark rounded-2xl h-fit">
+    <section id="trending" className="inline-block xl:sticky top-20 p-6 md:p-4 min-w-[300px] w-[95vw] lg:w-full bg-second_color_light dark:bg-second_color_dark rounded-2xl">
       <div>
         <h1 className="text-sm font-bold mb-4">TOPNYHEDER</h1>
         <ul className="space-y-2">
@@ -35,7 +36,7 @@ const TrendingArticlesList: React.FC<{
                   </header>
                 </Link>
               </li>
-            )).slice(0, 5)}
+            )).slice(0, articleAmount)}
         </ul>
       </div>
     </section>

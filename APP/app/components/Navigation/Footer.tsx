@@ -40,7 +40,7 @@ export default async function Footer() {
   const data: FooterData[] | undefined = await getData();
   const footer = data ? data[0] : undefined;
   return (
-  <footer className="bg-second_color_light dark:bg-second_color_dark  shadow" aria-labelledby="footer-heading">
+  <footer className="bg-second_color_light dark:bg-second_color_dark relative z-50  shadow" aria-labelledby="footer-heading">
     <h2 id="footer-heading" className="sr-only">Footer</h2>
     <div className="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
       <div className="xl:grid xl:grid-cols-3 xl:gap-8">
