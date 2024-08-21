@@ -72,7 +72,7 @@ const SubArticlesListWide: React.FC<{
                   <header className="group relative max-w-xl">
                     <h2 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
                       <Link href={`/artikel/${post.articleSlug}`}>
-                        <span className="absolute inset-0" />
+                        <span className="" />
                         {post.title}
                       </Link>
                     </h2>

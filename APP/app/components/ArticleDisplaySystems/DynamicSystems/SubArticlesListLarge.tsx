@@ -60,7 +60,7 @@ const SubArticlesListLarge: React.FC<{
             <div className="group relative max-w-xl">
               <h1 className="mt-3 text-lg font-bold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
                 <Link href={`/artikel/${post.articleSlug}`}>
-                  <span className="absolute inset-0" />
+                  <span className="" />
                   {post.title}
                 </Link>
               </h1>
@@ -91,7 +91,7 @@ const SubArticlesListLarge: React.FC<{
                 <div className="text-sm leading-6">
                   <p className="font-semibold">
                     <Link rel='author' href={`/artikler/journalist/${post.JournalistSlug}`}>
-                      <span className="absolute inset-0" />
+                      <span className="" />
                       {post.JournalistName}
                     </Link>
                   </p>
