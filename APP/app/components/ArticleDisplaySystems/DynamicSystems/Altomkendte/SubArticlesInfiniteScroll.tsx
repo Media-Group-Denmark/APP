@@ -72,7 +72,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                         <header className={`group max-w-xl ${isMainArticle ? 'h-[12em]' : 'h-[7em] lg:h-[12em]'} overflow-clip`}>
                           <h1 className={`mt-2 ${isMainArticle ? 'text-lg md:text-2xl' : 'text-md md:text-md'} font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600`}>
                             <Link href={`/artikel/${post.articleSlug}`}>
-                              <span className="absolute inset-0" />
+                              <span className="" />
                               {post.title}
                             </Link>
                           </h1>
