@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
-import theme from './app/lib/theme.json' assert { type: 'json' };
-import 'dotenv/config';
-import { createClient } from "next-sanity";
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const theme = require('./app/lib/theme.json'); 
+require('dotenv').config(); 
+const { createClient } = require("next-sanity"); 
 
 const client = createClient({
   apiVersion: "2024-01-01",
