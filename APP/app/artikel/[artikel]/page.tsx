@@ -10,7 +10,6 @@ import { Article } from "@/app/models/article";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 
-import SidebarSticky from "@/app/components/ArticleDisplaySystems/StaticSystems/SidebarSticky";
 import SubArticlesListSmallOrderRelease from "@/app/components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 import PageViewTracker from "@/app/components/ArticleTools/PageViewTracker";
 import { timeSinceText } from "@/app/components/ArticleTools/TimeSinceTag";

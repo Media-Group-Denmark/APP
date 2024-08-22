@@ -4,7 +4,7 @@ import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import Image from "next/image";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 const ArticleHero: React.FC<{
   data: Article[];

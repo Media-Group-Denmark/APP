@@ -1,10 +1,9 @@
 import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
-import Image from "next/image";
-import { client, urlFor } from "@/app/lib/sanityclient";
+import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 const SubArticlesListSmall: React.FC<{
   data: Article[];

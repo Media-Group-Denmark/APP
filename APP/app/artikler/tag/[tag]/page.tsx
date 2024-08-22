@@ -2,12 +2,10 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import React from "react";
-import Link from "next/link";
-import { client, urlFor } from "../../../lib/sanityclient";
+import { urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
-import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";

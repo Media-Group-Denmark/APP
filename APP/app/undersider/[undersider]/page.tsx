@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------- */
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { PortableText } from 'next-sanity';
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import React from 'react'
 import theme from '@/app/lib/theme.json';
 import { Metadata } from 'next';

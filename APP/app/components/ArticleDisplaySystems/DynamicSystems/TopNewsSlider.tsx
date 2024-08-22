@@ -2,7 +2,7 @@
 import { Article } from "@/app/models/article";
 import { ChevronRight } from "lucide-react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 const TopNewsSlider: React.FC<{
   data: Article[];

@@ -3,8 +3,6 @@
 /* -------------------------------------------------------------------------- */
 import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-import SubArticlesSixGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
-import Link from "next/link";
 import FindArticle from "@/app/components/ArticleDisplaySystems/StaticSystems/findArticle";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 

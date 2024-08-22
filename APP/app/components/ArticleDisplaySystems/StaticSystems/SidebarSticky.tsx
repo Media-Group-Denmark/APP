@@ -1,8 +1,7 @@
 import { client, urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
-import Image from "next/image";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 async function getData() {
   const today: Date = new Date();

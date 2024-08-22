@@ -1,11 +1,9 @@
 import React from "react";
 import { timeSinceText } from "../../../ArticleTools/TimeSinceTag";
-import Image from "next/image";
 import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
-import TrendingArticlesListAltOmKendte from "./TrendingArticlesListAltOmKendte";
 
 export const SubArticlesInfiniteScroll: React.FC<{
   data: Article[];

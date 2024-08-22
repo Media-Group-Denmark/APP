@@ -5,10 +5,10 @@ import { client, urlFor } from "@/app/lib/sanityclient";
 import React from "react";
 import { Journalist } from "@/app/models/journalist";
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -114,7 +114,7 @@ export default async function journalister() {
           </p>
         </div>
       </div>
-    </Link>
+    </ArticleLink>
   ))
 }
 

@@ -5,7 +5,6 @@ import { client, urlFor } from "@/app/lib/sanityclient";
 import { Page } from "@/app/models/subpage";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
-import Link from "next/link";
 import React from "react";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";

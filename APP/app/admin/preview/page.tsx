@@ -1,4 +1,3 @@
-import { timeSinceText } from '@/app/components/ArticleTools/TimeSinceTag';
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { Article } from '@/app/models/article';
 import { ArticleLink } from '@/app/components/utils/ArticleLink';
