@@ -1,6 +1,6 @@
 import React from 'react'
 import theme from "@/app/lib/theme.json";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 export default function AdminSideBar() {
   return (
     <nav
