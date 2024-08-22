@@ -1,9 +1,8 @@
-import Link from "next/link";
 import React from "react";
-import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import { urlFor, client } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import ReadMoreAutomaticViews from "./ReadMoreAutomaticViews";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 // Funktion til at hente relaterede artikler
 async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
@@ -59,7 +58,7 @@ export default async function ReadMoreArticlesBlock({
     <ul className="list-disc list-inside grid gap-2 !mx-0">
       {relatedArticles.map((post) => (
         <li className='elementList' key={post._id}>
-          <Link href={`/artikel/${post.articleSlug}`}>
+          <ArticleLink href={`/artikel/${post.articleSlug}`}>
             <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
               <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
                 <img
@@ -88,7 +87,7 @@ export default async function ReadMoreArticlesBlock({
                 </header>
               </div>
             </article>
-          </Link>
+          </ArticleLink>
         </li>
       ))}
     </ul>

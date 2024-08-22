@@ -1,9 +1,9 @@
 import { Article } from "@/app/models/article";
-import Link from "next/link";
 import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 const SubArticlesListWide: React.FC<{
   data: Article[];
@@ -39,7 +39,7 @@ const SubArticlesListWide: React.FC<{
                 className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
               >
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
-                  <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
+                  <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
                     <img
                       width={200}
                       height={300}
@@ -54,27 +54,27 @@ const SubArticlesListWide: React.FC<{
                       alt={post.title} // Sørg for at inkludere en beskrivende alt-tekst
                       className="block absolute rounded-2xl inset-0 w-full h-full object-cover"
                     />
-                  </Link>
+                  </ArticleLink>
                 </figure>
                 <div>
                   <div className="flex items-center gap-x-4 text-xs">
                     <time dateTime={post.publishedAt} className="text-gray-500">
                       {timeSinceText({ date: post.publishedAt })}
                     </time>
-                    <Link
+                    <ArticleLink
                       href={`/artikler/kategori/${post.categorySlug}`}
                       className="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                     >
                       {post.category}
-                    </Link>
+                    </ArticleLink>
                   </div>
 
                   <header className="group relative max-w-xl">
                     <h2 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
-                      <Link href={`/artikel/${post.articleSlug}`}>
+                      <ArticleLink href={`/artikel/${post.articleSlug}`}>
                         <span className="" />
                         {post.title}
-                      </Link>
+                      </ArticleLink>
                     </h2>
                     <h3 className="mt-5 text-sm h-[5em] overflow-clip leading-6 text-text_second_color_dark dark:text-text_second_color_light">
                       {post.teaser}

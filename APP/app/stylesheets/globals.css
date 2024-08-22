@@ -23,6 +23,9 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: clip;
+  transition-property: opacity, transform, filter, background;
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
   @apply bg-main_color_light dark:bg-main_color_dark;
 }
 main {
@@ -46,6 +49,18 @@ ul, ol, li {
 }
 h1 {
   @apply font-mulish font-bold;
+}
+.page-transition-light-mode {
+  opacity: 0;
+  background: rgb(255, 255, 255);
+  transform: translateY(40px);
+  filter: blur(12px);
+}
+.page-transition-dark-mode {
+  opacity: 0;
+  background: black;
+  transform: translateY(40px);
+  filter: blur(12px);
 }
 
 .containerr {

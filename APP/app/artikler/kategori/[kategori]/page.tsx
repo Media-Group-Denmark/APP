@@ -2,7 +2,7 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import React from "react";
-import Link from "next/link";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import { client, urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { Metadata } from "next";

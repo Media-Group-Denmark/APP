@@ -5,10 +5,10 @@ import { client, urlFor } from "@/app/lib/sanityclient";
 import React from "react";
 import { Journalist } from "@/app/models/journalist";
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -84,7 +84,7 @@ export default async function journalister() {
       {data
   .filter(journalist => journalist._id !== '860d3b16-1c80-4690-b62f-e885fb5fc093')
   .map((journalist) => (
-    <Link href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
+    <ArticleLink href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
       <div className="w-full bg-second_color_light dark:bg-second_color_dark rounded-lg p-12 flex flex-col justify-center items-center cursor-pointer">
         <div className="mb-8">
           <Image
@@ -114,7 +114,7 @@ export default async function journalister() {
           </p>
         </div>
       </div>
-    </Link>
+    </ArticleLink>
   ))
 }
 

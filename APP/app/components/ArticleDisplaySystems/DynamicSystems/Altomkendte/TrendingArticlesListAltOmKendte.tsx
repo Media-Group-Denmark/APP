@@ -1,8 +1,8 @@
 
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
-import Link from "next/link";
 
 
 const TrendingArticlesListAltOmKendte: React.FC<{
@@ -39,7 +39,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                 <article className="bg-second_color_light dark:bg-second_color_dark rounded-2xl">
                   {/*  Image Desktop Start */}
                   <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-clip">
-                    <Link
+                    <ArticleLink
                       aria-label="Læs mere om artiklen"
                       href={`/artikel/${post.articleSlug}`}
                     >
@@ -57,7 +57,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                         loading="lazy"
                         className="w-full h-full object-cover bg-center"
                       />
-                    </Link>
+                    </ArticleLink>
                   </figure>
                   {/*  Image Desktop End */}
 
@@ -82,7 +82,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
 
                       {/*  Image Mobile Start */}
                       <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-clip">
-                        <Link href={`/artikel/${post.articleSlug}`}>
+                        <ArticleLink href={`/artikel/${post.articleSlug}`}>
                           <img
                           width={300}
                           height={300}
@@ -97,7 +97,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                             alt={post.title} // Husk at inkludere en beskrivende alt-tekst
                             className=" object-cover bg-center"
                           />
-                        </Link>
+                        </ArticleLink>
                       </figure>
                       {/*  Image Mobile End */}
 
@@ -114,7 +114,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                         {/*  Læsetid Mobile End */}
 
                         {/*  Title Start */}
-                        <Link
+                        <ArticleLink
                           className="ml-4 md:ml-0"
                           href={`/artikel/${post.articleSlug}`}
                         >
@@ -122,7 +122,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                             {post.title}
                           </h2>
                           {/*  Title End */}
-                        </Link>
+                        </ArticleLink>
                       </div>
                     </div>
                   </div>

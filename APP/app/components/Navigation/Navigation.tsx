@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { fetchNavData } from "./fetchNavServer";
@@ -9,6 +8,7 @@ import { MoonIcon, SearchIcon, SunIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { urlFor } from "@/app/lib/sanityclient";
 import theme from "@/app/lib/theme.json";
+import { ArticleLink } from "../utils/ArticleLink";
 export const revalidate = 80000;
 
 type NavigationItem = {
@@ -28,7 +28,7 @@ const NavigationItem = ({ item, closeMenu }: {item: any, closeMenu: any} ) => {
   };
 
   return (
-    <Link
+    <ArticleLink
       href={item.href}
       key={item._key}
       onClick={handleClick}
@@ -39,7 +39,7 @@ const NavigationItem = ({ item, closeMenu }: {item: any, closeMenu: any} ) => {
       }`}
     >
       {item.name}
-    </Link>
+    </ArticleLink>
   );
 };
 
@@ -128,7 +128,7 @@ useEffect(() => {
             <div className="relative flex items-center justify-between h-16">
               <div className="flex items-center w-[1000px] px-2 lg:pl-4">
                 <div className="flex-shrink-0">
-                <Link href="/">
+                <ArticleLink href="/">
                 <Image
                   src={logo ? urlFor(logo).url() : theme.logo_url}
                   alt="Logo"
@@ -136,7 +136,7 @@ useEffect(() => {
                   height={72} 
                   className="object-contain" 
                 />
-              </Link>
+              </ArticleLink>
                 </div>
                 <div className="hidden lg:grid grid-cols-1 lg:ml-6">
                   <div className="flex space-x-4">
@@ -166,7 +166,7 @@ useEffect(() => {
 
 
 
-                  <Link className="hidden lg:block" href={"/artikler/findartikel"}>
+                  <ArticleLink className="hidden lg:block" href={"/artikler/findartikel"}>
                     <div>
                       <button
                         type="submit"
@@ -189,7 +189,7 @@ useEffect(() => {
                         </svg>
                       </button>
                     </div>
-                  </Link>
+                  </ArticleLink>
                   
 
                 <div className="flex lg:hidden ">
@@ -234,7 +234,7 @@ useEffect(() => {
           <Disclosure.Panel className="lg:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
-                <Link
+                <ArticleLink
                 key={item._key}
                 href={item.href}
                 onClick={(e) => {
@@ -249,9 +249,9 @@ useEffect(() => {
                   }`}
                 >
                   {item.name}
-                </Link>
+                </ArticleLink>
               ))}
-              <Link className="block flex gap-2 bg-indigo-400 bg-opacity-20 pl-3 pr-4 py-2 text-[1rem]" href={"/artikler/findartikel"}><SearchIcon width={16} />  <p>Søg Artikler</p></Link>
+              <ArticleLink className="block flex gap-2 bg-indigo-400 bg-opacity-20 pl-3 pr-4 py-2 text-[1rem]" href={"/artikler/findartikel"}><SearchIcon width={16} />  <p>Søg Artikler</p></ArticleLink>
             </div>
           </Disclosure.Panel>
         </>

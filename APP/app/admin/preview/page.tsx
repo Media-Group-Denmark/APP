@@ -1,7 +1,6 @@
-import { timeSinceText } from '@/app/components/ArticleTools/TimeSinceTag';
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { Article } from '@/app/models/article';
-import Link from 'next/link';
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import React from 'react'
 import AdminSideBar from '../components/sideBar';
 export const revalidate = 600;
@@ -76,7 +75,7 @@ export default async function PagePreview() {
                     key={post._id}
                     className="bg-second_color_light drop-shadow-xl dark:bg-second_color_dark rounded-lg relative"
                   >
-                  <Link href={`/admin/preview/artikel/${post.articleSlug}`}>
+                  <ArticleLink href={`/admin/preview/artikel/${post.articleSlug}`}>
                         <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                           
                             <img
@@ -134,7 +133,7 @@ export default async function PagePreview() {
                               </h1>
                           </header>
                         </div>
-      </Link>
+      </ArticleLink>
                     </div>
       ))
                 

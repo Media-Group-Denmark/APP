@@ -3,7 +3,6 @@
 /* -------------------------------------------------------------------------- */
 import Script from "next/script";
 import React from "react";
-import Link from "next/link";
 import "@/app/stylesheets/articleText.css";
 
 import { client, urlFor } from "@/app/lib/sanityclient";
@@ -11,7 +10,6 @@ import { Article } from "@/app/models/article";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 
-import SidebarSticky from "@/app/components/ArticleDisplaySystems/StaticSystems/SidebarSticky";
 import SubArticlesListSmallOrderRelease from "@/app/components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 import PageViewTracker from "@/app/components/ArticleTools/PageViewTracker";
 import { timeSinceText } from "@/app/components/ArticleTools/TimeSinceTag";
@@ -29,6 +27,8 @@ import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
+
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -156,14 +156,14 @@ export default async function artikelPreview({
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
       readMoreAutomatic: (props: any) => (
-        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} />
+        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
       ),
     },
   };
 
   return (
-    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 ">
-        <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
+    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+      <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
       <section className="m-auto">
         {data.length > 0 ? (
           <>
@@ -178,13 +178,13 @@ export default async function artikelPreview({
                       <meta name="article:section" content={article.category} />
                       <section>
                         <div className="grid ">
-                          <Link
+                          <ArticleLink
                             href={`/artikler/kategori/${article.categorySlug}`}
                           >
                             <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
                               {article.category}
                             </button>
-                          </Link>
+                          </ArticleLink>
                         </div>
                         <header>
                           <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
@@ -196,16 +196,12 @@ export default async function artikelPreview({
                                 <time
                                   dateTime={article.publishedAt}
                                   className=" hidden md:block text-xs"
-                                > Udgivelse sat til kl.
-                                  {new Intl.DateTimeFormat('da-DK', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  }).format(new Date(article.publishedAt))}
+                                >
+                                  {timeSinceText({ date: article.publishedAt })} 
                                 </time>
                                 
                                <div className="flex gap-x-2 lg:mt-2 align-middle">
-                               <Link
+                               <ArticleLink
                                rel="author"
                                  href={`/artikler/journalist/${article.JournalistSlug}`}
                                >
@@ -215,7 +211,7 @@ export default async function artikelPreview({
                                       {article.JournalistName}
                                     </b>
                                   </p>
-                                    </Link>
+                                    </ArticleLink>
                                   <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
                                     D. {new Date(
                                       article.publishedAt
@@ -250,13 +246,13 @@ export default async function artikelPreview({
                           {article.tag.map((tag, index) => (
                             <React.Fragment key={index}>
                               {index > 0 ? " " : ""}{" "}
-                              <Link
+                              <ArticleLink
                                 href={`/artikler/tag/${article.tagSlug[index]}`}
                               >
                                 <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                                   {tag}
                                 </button>
-                              </Link>
+                              </ArticleLink>
                             </React.Fragment>
                           ))}
                         </div>
@@ -265,9 +261,9 @@ export default async function artikelPreview({
                         </h2>
                       </section>
                       
-                      <aside className="md:hidden" id='div-Mobile_Article_1'></aside>
+                      <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"></aside>
 
-                      <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
+                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
 
                       <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
@@ -275,7 +271,7 @@ export default async function artikelPreview({
                           components={components}
                         />
                       </section>
-                      <aside className="hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
+                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
                       <section>
                         <SocialMediaShareButtons
                         views={`${article.views}`}
