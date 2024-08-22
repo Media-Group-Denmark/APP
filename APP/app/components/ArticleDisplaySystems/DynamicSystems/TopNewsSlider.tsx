@@ -1,8 +1,8 @@
 
 import { Article } from "@/app/models/article";
 import { ChevronRight } from "lucide-react";
-import Link from "next/link";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
+import { ArticleLink } from "../../utils/ArticleLink";
 
 const TopNewsSlider: React.FC<{
   data: Article[];
@@ -43,14 +43,14 @@ const slicedData = data
           {slicedData.map((post: Article)  => (
             <li className="min-w-[240px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
-              <Link href={`/artikel/${post.articleSlug}`}>
+              <ArticleLink href={`/artikel/${post.articleSlug}`}>
                 <time dateTime={post.publishedAt} className=" text-xs ">
                   {timeSinceText({ date: post.publishedAt })}
                 </time>
                 <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
                   {post.title}
                 </h2>
-              </Link>
+              </ArticleLink>
             </li>
           ))}
         </ul>

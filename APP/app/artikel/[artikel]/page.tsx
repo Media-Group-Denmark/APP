@@ -3,7 +3,6 @@
 /* -------------------------------------------------------------------------- */
 import Script from "next/script";
 import React from "react";
-import Link from "next/link";
 import "@/app/stylesheets/articleText.css";
 
 import { client, urlFor } from "@/app/lib/sanityclient";
@@ -29,6 +28,7 @@ import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -178,13 +178,13 @@ export default async function artikel({
                       <meta name="article:section" content={article.category} />
                       <section>
                         <div className="grid ">
-                          <Link
+                          <ArticleLink
                             href={`/artikler/kategori/${article.categorySlug}`}
                           >
                             <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
                               {article.category}
                             </button>
-                          </Link>
+                          </ArticleLink>
                         </div>
                         <header>
                           <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
@@ -201,7 +201,7 @@ export default async function artikel({
                                 </time>
                                 
                                <div className="flex gap-x-2 lg:mt-2 align-middle">
-                               <Link
+                               <ArticleLink
                                rel="author"
                                  href={`/artikler/journalist/${article.JournalistSlug}`}
                                >
@@ -211,7 +211,7 @@ export default async function artikel({
                                       {article.JournalistName}
                                     </b>
                                   </p>
-                                    </Link>
+                                    </ArticleLink>
                                   <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
                                     D. {new Date(
                                       article.publishedAt
@@ -246,13 +246,13 @@ export default async function artikel({
                           {article.tag.map((tag, index) => (
                             <React.Fragment key={index}>
                               {index > 0 ? " " : ""}{" "}
-                              <Link
+                              <ArticleLink
                                 href={`/artikler/tag/${article.tagSlug[index]}`}
                               >
                                 <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                                   {tag}
                                 </button>
-                              </Link>
+                              </ArticleLink>
                             </React.Fragment>
                           ))}
                         </div>

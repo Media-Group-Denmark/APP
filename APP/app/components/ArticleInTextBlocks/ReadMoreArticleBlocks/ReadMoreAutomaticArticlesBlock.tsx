@@ -1,6 +1,6 @@
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { getData } from '@/app/lib/GetData';
-import Link from 'next/link';
+import { ArticleLink } from "../../utils/ArticleLink";
 import React from 'react';
 import ReadMoreAutomaticViews from './ReadMoreAutomaticViews';
 
@@ -80,7 +80,7 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
       <ul className="list-disc list-inside grid gap-2 !mx-0">
         {relatedAutomaticArticles.map((post) => (
           <li className='elementList' key={post._id}>
-            <Link href={`/artikel/${post.articleSlug}`}>
+            <ArticleLink href={`/artikel/${post.articleSlug}`}>
               <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
                   <img
@@ -109,7 +109,7 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
                   </header>
                 </div>
               </article>
-            </Link>
+            </ArticleLink>
           </li>
         ))}
       </ul>

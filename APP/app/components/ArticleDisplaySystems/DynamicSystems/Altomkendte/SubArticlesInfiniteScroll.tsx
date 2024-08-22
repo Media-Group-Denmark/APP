@@ -3,7 +3,7 @@ import { timeSinceText } from "../../../ArticleTools/TimeSinceTag";
 import Image from "next/image";
 import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
-import Link from "next/link";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 import TrendingArticlesListAltOmKendte from "./TrendingArticlesListAltOmKendte";
 
@@ -40,7 +40,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       }`}
                     >
                       <figure className={`relative ${isMainArticle ? 'max-w-none' : 'max-w-[100px] md:max-w-none'}`} >
-                        <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
+                        <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
                           <img
                             width={400}
                             height={400}
@@ -55,26 +55,26 @@ export const SubArticlesInfiniteScroll: React.FC<{
                             loading='lazy'
                             className={`block rounded-2xl inset-0 bg-gray-300 ${isMainArticle ? 'max-h-64 w-[30em]' : 'max-h-44 w-32 lg:w-64'} object-cover`}
                           />
-                        </Link>
+                        </ArticleLink>
                       </figure>
                       <div>
                         <aside className="flex flex-col md:flex-row items-start md:items-center gap-y-2 md:gap-y-0 gap-x-4 text-xs">
                           <time dateTime={post.publishedAt} className="text-gray-500 hidden md:inline-block">
                             {timeSinceText({ date: post.publishedAt })}
                           </time>
-                          <Link
+                          <ArticleLink
                             href={`/artikler/kategori/${post.categorySlug}`}
                             className="w-fit rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                           >
                             {post.category}
-                          </Link>
+                          </ArticleLink>
                         </aside>
                         <header className={`group max-w-xl ${isMainArticle ? 'h-[12em]' : 'h-[7em] lg:h-[12em]'} overflow-clip`}>
                           <h1 className={`mt-2 ${isMainArticle ? 'text-lg md:text-2xl' : 'text-md md:text-md'} font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600`}>
-                            <Link href={`/artikel/${post.articleSlug}`}>
+                            <ArticleLink href={`/artikel/${post.articleSlug}`}>
                               <span className="" />
                               {post.title}
-                            </Link>
+                            </ArticleLink>
                           </h1>
                           <h2 className={`mt-2 ${isMainArticle ? 'text-sm md:text-md' : 'text-xs md:text-sm'} leading-6 text-text_second_color_dark dark:text-text_second_color_light`}>
                             {post.teaser}

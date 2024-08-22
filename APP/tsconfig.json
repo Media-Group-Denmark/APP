@@ -21,6 +21,10 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Navigation/Header.tsx", "app/components/tools/AdRefresher.jsx", "app/components/MailChimp/MailChimp.js"],
+  "ts-node": {
+        // Tell ts-node CLI to install the --loader automatically
+        "esm": true
+    },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Navigation/Header.tsx", "app/components/tools/AdRefresher.jsx", "app/components/MailChimp/MailChimp.js", "warmCache.ts"],
   "exclude": ["node_modules"]
 }

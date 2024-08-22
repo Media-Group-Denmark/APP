@@ -1,6 +1,6 @@
 import React from 'react'
 import theme from "@/app/lib/theme.json";
-import Link from 'next/link';
+import { ArticleLink } from "../../utils/ArticleLink";
 export default function AdminSideBar() {
   return (
     <nav
@@ -16,7 +16,7 @@ export default function AdminSideBar() {
               </h1>
               
               <div id="menu" className="flex flex-col space-y-2">
-                <Link
+                <ArticleLink
                   href="/admin"
                   className="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
                 >
@@ -31,8 +31,8 @@ export default function AdminSideBar() {
                     ></path>
                   </svg>
                   <span className="">Dashboard</span>
-                </Link>
-                <Link
+                </ArticleLink>
+                <ArticleLink
                   href="/admin/scheduled"
                   className="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
                 >
@@ -47,8 +47,8 @@ export default function AdminSideBar() {
                     ></path>
                   </svg>
                   <span className="">Planlagte Artikler</span>
-                </Link>
-                <Link
+                </ArticleLink>
+                <ArticleLink
                   href="/admin/preview"
                   className="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
                 >
@@ -66,7 +66,7 @@ export default function AdminSideBar() {
                     ></path>
                   </svg>
                   <span className="">Preview Artikler</span>
-                </Link>
+                </ArticleLink>
                 {/* <a
                   href=""
                   className="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"

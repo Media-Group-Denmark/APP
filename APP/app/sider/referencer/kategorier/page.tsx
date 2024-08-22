@@ -4,7 +4,7 @@
 import React from 'react'
 import { Reference } from '@/app/models/reference'
 import { client} from '@/app/lib/sanityclient';
-import Link from 'next/link';
+import { ArticleLink } from "../../utils/ArticleLink";
 import type { Metadata } from 'next';
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from '@/app/components/Navigation/Breadcrumb';
@@ -83,7 +83,7 @@ const data: Reference[] = await getData();
       <>
         {
           data.map((kategori) => (
-            <Link key={kategori._id} href={`/artikler/kategori/${kategori.slug}`}><p className="col-span-2 bg-second_color_light dark:bg-second_color_dark dark:hover:bg-slate-600 hover:bg-slate-100  text-center text-lg font-semibold py-2 rounded-md max-h-12 w-full object-contain lg:col-span-1 cursor-pointer">{kategori.name}</p></Link>
+            <ArticleLink key={kategori._id} href={`/artikler/kategori/${kategori.slug}`}><p className="col-span-2 bg-second_color_light dark:bg-second_color_dark dark:hover:bg-slate-600 hover:bg-slate-100  text-center text-lg font-semibold py-2 rounded-md max-h-12 w-full object-contain lg:col-span-1 cursor-pointer">{kategori.name}</p></Link>
           ))
         }
       </>

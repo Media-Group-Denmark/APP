@@ -1,6 +1,6 @@
 import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "./SearchBar";
-import Link from "next/link";
+import { ArticleLink } from "../utils/ArticleLink";
 
 export async function getData(queryParam) {
     const query = `
@@ -27,7 +27,7 @@ export default async function SearchFetch({ searchParams }: { searchParams: { q?
       <ul>
         {items.map((item) => (
           <li key={item._id}>
-            <Link href={`/articles/${item.title}`}>{item.title}</Link>
+            <ArticleLink href={`/articles/${item.title}`}>{item.title}</ArticleLink>
           </li>
         ))}
       </ul>

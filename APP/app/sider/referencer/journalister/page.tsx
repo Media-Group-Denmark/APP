@@ -84,7 +84,7 @@ export default async function journalister() {
       {data
   .filter(journalist => journalist._id !== '860d3b16-1c80-4690-b62f-e885fb5fc093')
   .map((journalist) => (
-    <Link href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
+    <ArticleLink href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
       <div className="w-full bg-second_color_light dark:bg-second_color_dark rounded-lg p-12 flex flex-col justify-center items-center cursor-pointer">
         <div className="mb-8">
           <Image

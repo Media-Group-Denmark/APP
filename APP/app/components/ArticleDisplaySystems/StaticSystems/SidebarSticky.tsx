@@ -2,7 +2,7 @@ import { client, urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import Image from "next/image";
-import Link from "next/link";
+import { ArticleLink } from "../../utils/ArticleLink";
 
 async function getData() {
   const today: Date = new Date();
@@ -44,7 +44,7 @@ async function SidebarSticky() {
           key={article._id}
           className="w-full bg-second_color_light dark:bg-second_color_dark  rounded-lg relative  "
         >
-          <Link aria-label="Læs mere om artiklen" href={`/artikel/${article.articleSlug}`}>
+          <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${article.articleSlug}`}>
             <div
               className="block w-full h-[10em] bg-second_color_light dark:bg-second_color_dark rounded-t-lg bg-center bg-cover"
               style={{
@@ -57,25 +57,25 @@ async function SidebarSticky() {
                   .url()})`,
               }}
             ></div>
-          </Link>
+          </ArticleLink>
           <div className="grid grid-rows-[auto_1fr_auto] h-[150px] mx-4 mb-4 ">
             <div className="grid grid-cols-2 align-middle my-2">
-              <Link href={`/artikler/kategori/${article.categorySlug}`}>
+              <ArticleLink href={`/artikler/kategori/${article.categorySlug}`}>
                 <button className=" text-accent_color_light dark:text-accent_color_dark  mr-auto hover:bg-slate-200 bg-opacity-20 p-1 text-[0.85rem] rounded-full ">
                   {article.category}
                 </button>
-              </Link>
+              </ArticleLink>
               <p className="rounded-lg my-auto ml-auto text-xs">
                 {timeSinceText({ date: article.publishedAt })}
               </p>
             </div>
-            <Link href={`/artikel/${article.articleSlug}`}>
+            <ArticleLink href={`/artikel/${article.articleSlug}`}>
               <span className="grid ">
                 <h1 className=" text-[0.95rem]  rounded-lg ">
                   {article.title}
                 </h1>
               </span>
-            </Link>
+            </ArticleLink>
           </div>
         </div>
       ))}

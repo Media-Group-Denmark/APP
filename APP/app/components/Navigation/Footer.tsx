@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { client } from '../../lib/sanityclient';
-import Link from 'next/link';
+import { ArticleLink } from '../utils/ArticleLink';
 import { FooterData } from '../../models/footer';
 import theme from '../../lib/theme.json';
 import MailChimpForm from '../MailChimp/MailChimpForm';
@@ -55,33 +55,33 @@ export default async function Footer() {
               <li>
               {
                 link.type === 'category' ? (
-                  <Link href={`/artikler/kategori/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                  <ArticleLink href={`/artikler/kategori/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                   {link.name} {link.title}
-                </Link>
+                </ArticleLink>
                 ) : link.type === 'tag' ? (
-                  <Link href={`/artikler/tag/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                  <ArticleLink href={`/artikler/tag/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                   {link.name} {link.title}
-                </Link>
+                </ArticleLink>
                 ) : link.type === 'aboutUs' ? ( 
-                  <Link href={`/sider/omos`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                  <ArticleLink href={`/sider/omos`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                   {link.name} {link.title}
-                </Link>
+                </ArticleLink>
                 ) : link.type === 'contactUs' ? ( 
-                  <Link href={`/sider/kontakt`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                  <ArticleLink href={`/sider/kontakt`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                   {link.name} {link.title}
-                </Link>
+                </ArticleLink>
                  ) : link.type === 'privacyPolicy' ? ( 
-                  <Link href={`/sider/privatliv`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                  <ArticleLink href={`/sider/privatliv`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                   {link.name} {link.title}
-                </Link>
+                </ArticleLink>
                   ) : link.type === 'cookiePolicy' ? ( 
-                    <Link href={`/sider/cookies`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                    <ArticleLink href={`/sider/cookies`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                     {link.name} {link.title}
-                  </Link>
+                  </ArticleLink>
                    ) : link.type === 'subPage' ? ( 
-                    <Link href={`/undersider/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
+                    <ArticleLink href={`/undersider/${link.slug}`}  key={link._key} className="text-sm leading-6  text-fade_color_light hover:text-slate-400 dark:text-fade_color_dark">
                     {link.name} {link.title}
-                  </Link>
+                  </ArticleLink>
                     ) : null
                 }
                 </li>

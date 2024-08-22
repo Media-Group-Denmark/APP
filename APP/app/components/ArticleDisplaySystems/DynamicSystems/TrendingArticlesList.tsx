@@ -1,7 +1,7 @@
 
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 import { Article } from "@/app/models/article";
-import Link from "next/link";
+import { ArticleLink } from "../../utils/ArticleLink";
 
 
 
@@ -30,11 +30,11 @@ const TrendingArticlesList: React.FC<{
                 className="flex items-center border-b-2  border-b-text_second_color_light dark:border-b-text_second_color_dark pb-2"
               >
                 <article className="font-bold text-text_second_color_dark dark:text-text_second_color_light text-xl min-w-6">{index + 1}</article>
-                <Link href={`/artikel/${post.articleSlug}`}>
+                <ArticleLink href={`/artikel/${post.articleSlug}`}>
                   <header className="ml-2 text-main_color_dark dark:text-main_color_light  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
                     <h2>{post.title}</h2>
                   </header>
-                </Link>
+                </ArticleLink>
               </li>
             )).slice(0, articleAmount)}
         </ul>

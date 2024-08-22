@@ -3,8 +3,8 @@ import { timeSinceText } from '../../ArticleTools/TimeSinceTag';
 import Image from 'next/image';
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { Article } from '@/app/models/article';
-import Link from 'next/link';
 import { filterAndSliceArticles } from '@/app/lib/FilterArticles';
+import { ArticleLink } from '../../utils/ArticleLink';
 
 
 const SubArticlesListLarge: React.FC<{
@@ -27,7 +27,7 @@ const SubArticlesListLarge: React.FC<{
           key={post._id}
           className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
         >
-          <Link aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
+          <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.articleSlug}`}>
             <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
               <img
               width={400}
@@ -44,25 +44,25 @@ const SubArticlesListLarge: React.FC<{
                 className="block absolute rounded-2xl inset-0 bg-center bg-cover"
               />
             </figure>
-          </Link>
+          </ArticleLink>
           <div>
             <header className="flex items-center gap-x-4 text-xs">
               <time dateTime={post.publishedAt}>
                 {timeSinceText({ date: post.publishedAt })}
               </time>
-              <Link
+              <ArticleLink
                 href={`/artikler/kategori/${post.categorySlug}`}
                 className="relative rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
               >
                 {post.category}
-              </Link>
+              </ArticleLink>
             </header>
             <div className="group relative max-w-xl">
               <h1 className="mt-3 text-lg font-bold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
-                <Link href={`/artikel/${post.articleSlug}`}>
+                <ArticleLink href={`/artikel/${post.articleSlug}`}>
                   <span className="" />
                   {post.title}
-                </Link>
+                </ArticleLink>
               </h1>
               <h2 className="mt-5 text-sm leading-6 text-text_second_color_dark dark:text-text_second_color_light">
                 {post.teaser}
@@ -90,10 +90,10 @@ const SubArticlesListLarge: React.FC<{
                 />
                 <div className="text-sm leading-6">
                   <p className="font-semibold">
-                    <Link rel='author' href={`/artikler/journalist/${post.JournalistSlug}`}>
+                    <ArticleLink rel='author' href={`/artikler/journalist/${post.JournalistSlug}`}>
                       <span className="" />
                       {post.JournalistName}
-                    </Link>
+                    </ArticleLink>
                   </p>
                   <p className="text-fade_color_light dark:text-fade_color_dark">
                     Journalist

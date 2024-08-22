@@ -178,7 +178,7 @@ export default async function artikelPreview({
                       <meta name="article:section" content={article.category} />
                       <section>
                         <div className="grid ">
-                          <Link
+                          <ArticleLink
                             href={`/artikler/kategori/${article.categorySlug}`}
                           >
                             <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
@@ -205,7 +205,7 @@ export default async function artikelPreview({
                                 </time>
                                 
                                <div className="flex gap-x-2 lg:mt-2 align-middle">
-                               <Link
+                               <ArticleLink
                                rel="author"
                                  href={`/artikler/journalist/${article.JournalistSlug}`}
                                >
@@ -250,7 +250,7 @@ export default async function artikelPreview({
                           {article.tag.map((tag, index) => (
                             <React.Fragment key={index}>
                               {index > 0 ? " " : ""}{" "}
-                              <Link
+                              <ArticleLink
                                 href={`/artikler/tag/${article.tagSlug[index]}`}
                               >
                                 <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
