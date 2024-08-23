@@ -117,4 +117,4 @@ export async function getInitialData() {
       </main>
     );
 }
-
+export const runtime = 'edge';

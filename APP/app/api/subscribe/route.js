@@ -22,3 +22,4 @@ export async function POST(request) {
     return new Response(JSON.stringify({ message: 'Failed to subscribe. Please try again.' }), { status: 500 });
   }
 }
+export const runtime = 'edge';
