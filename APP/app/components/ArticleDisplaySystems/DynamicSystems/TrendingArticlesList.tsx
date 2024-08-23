@@ -1,7 +1,7 @@
 
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 import { Article } from "@/app/models/article";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 
 

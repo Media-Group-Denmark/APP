@@ -42,21 +42,21 @@ export const ArticleLink: React.FC<TransitionLinkProps> = ({
     const body = document.querySelector("body");
     const darkMode = localStorage.getItem("dark mode");
 
-    if (darkMode === "on") {
+    /* if (darkMode === "on") {
       body?.classList.add("page-transition-dark-mode");
     } else {
       body?.classList.add("page-transition-light-mode");
-    }
+    } */
 
-    await sleep(500);
+    await sleep(100);
     router.push(href);
-    await sleep(500);
+    await sleep(100);
 
-    if (darkMode === "on") {
+    /* if (darkMode === "on") {
       body?.classList.remove("page-transition-dark-mode");
     } else {
       body?.classList.remove("page-transition-light-mode");
-    }
+    } */
   };
 
   return (

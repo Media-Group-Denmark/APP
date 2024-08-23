@@ -1,7 +1,6 @@
-import { timeSinceText } from '@/app/components/ArticleTools/TimeSinceTag';
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { Article } from '@/app/models/article';
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import React from 'react'
 import AdminSideBar from '../components/sideBar';
 export const revalidate = 600;
@@ -136,7 +135,7 @@ export default async function ScheduledPost() {
                                 </h1>
                             </header>
                           </div>
-        </Link>
+        </ArticleLink>
                       </div>
         ))}
               </article>

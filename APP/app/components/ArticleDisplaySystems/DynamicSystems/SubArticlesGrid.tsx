@@ -2,7 +2,7 @@ import { Article } from '@/app/models/article'
 import React from 'react'
 import { timeSinceText } from '../../ArticleTools/TimeSinceTag'
 import theme from '@/app/lib/theme.json'
-import { client, urlFor } from '@/app/lib/sanityclient'
+import { urlFor } from '@/app/lib/sanityclient'
 import { filterAndSliceArticles } from '@/app/lib/FilterArticles'
 import { ArticleLink } from '../../utils/ArticleLink'
 

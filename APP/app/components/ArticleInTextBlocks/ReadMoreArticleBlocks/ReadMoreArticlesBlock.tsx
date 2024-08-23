@@ -1,9 +1,8 @@
 import React from "react";
-import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import { urlFor, client } from "@/app/lib/sanityclient";
 import { Article } from "@/app/models/article";
 import ReadMoreAutomaticViews from "./ReadMoreAutomaticViews";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 // Funktion til at hente relaterede artikler
 async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {

@@ -3,7 +3,7 @@ import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
-import { ArticleLink } from "../../utils/ArticleLink";
+import { ArticleLink } from '@/app/components/utils/ArticleLink';
 
 const SubArticlesListWide: React.FC<{
   data: Article[];
