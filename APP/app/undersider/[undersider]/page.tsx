@@ -208,3 +208,4 @@ export default async function page({
     </main>
   )
 }
+export const runtime = 'edge';
