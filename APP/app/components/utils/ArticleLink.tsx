@@ -16,7 +16,7 @@ function sleep(ms: number): Promise<void> {
 
 function darkModeCheck() {
     const darkMode = localStorage.getItem("dark mode");
-    if (darkMode === "on") {
+    if (darkMode === "on") { 
         document.body.classList.add("dark");
     } else {
         document.body.classList.remove("dark");

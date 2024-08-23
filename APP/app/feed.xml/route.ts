@@ -26,7 +26,7 @@ const portableTextToHtml = (portableText) => {
                 return '';  // Ensure this returns empty string
             },
         },
-        // Optionally handle marks like bold, italics, etc.
+        // Optionally handle marks like bold, italics,  etc.
         marks: {
             strong: (props) => `<strong>${props.children.join('')}</strong>`,
             em: (props) => `<em>${props.children.join('')}</em>`,
