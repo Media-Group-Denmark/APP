@@ -1,34 +1,28 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { client } from './app/lib/sanityclient';
+import { getData, republishData } from './app/lib/GetData';
 import theme from './app/lib/theme.json';
+import { Article } from './app/models/article';
 
 export async function middleware(req: NextRequest) {
     const url = req.nextUrl;
     const slug = url.pathname.split('/').pop();
-  
-    const query = `
-    *[
-   _type == "article" && republishArticle == true && newSlug != ''
-    ]  
-   {
-    _id,
-    _type,
-    "articleSlug": slug.current,
-    republishArticle,
-    "newSlug": newSlug.current,
-    }[0]
-    `;
 
+    console.log(`Checking if slug: ${slug} needs to be redirected...`);
 
-    const article = await client.fetch(query, { slug });
-  
+    const data: Article[] = await getData();
+    const article = republishData(data)
+    console.log(article, 'succesfully collected');
+
     if (article?.newSlug) {
-      return NextResponse.redirect(`${theme.site_url}/artikel/${article.newSlug}`, 301);
+        console.log(`Redirecting to new slug: ${article.newSlug}`);
+        return NextResponse.redirect(`${theme.site_url}/artikel/${article.newSlug}`, 301);
+    } else {
+      console.log(`No redirect needed for slug: ${slug}`);
     }
-  
+
     return NextResponse.next();
-  }
-  
-  export const config = {
+}
+
+export const config = {
     matcher: '/artikel/:path*',
-  };
+};

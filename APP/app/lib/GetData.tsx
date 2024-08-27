@@ -46,3 +46,10 @@ export function freshData(articles: Article[]): Article[] {
     article.previewMode === false
   );
 }
+
+export function republishData(articles: Article[]): Article[] {
+  return articles.filter(article => 
+    article.newSlug !== '' && 
+    article.republishArticle == true
+  );
+}
