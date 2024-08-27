@@ -7,9 +7,9 @@ export interface Article {
      _rev: string;
      title: string;
      teaser: string;
-     articleSlug: string;
+     articleSlug: string | '';
      republishArticle: boolean;
-     newSlug: string;
+     newSlug: any;
      image: {};
      source: string;
      tag: string[];

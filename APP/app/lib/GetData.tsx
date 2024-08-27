@@ -47,9 +47,10 @@ export function freshData(articles: Article[]): Article[] {
   );
 }
 
-export function republishData(articles: Article[]): Article[] {
-  return articles.filter(article => 
+export function republishData(articles: Article[], slug: string): Article | undefined {
+  return articles.find(article => 
+    article.articleSlug === slug && 
     article.newSlug !== '' && 
-    article.republishArticle == true
+    article.republishArticle === true
   );
 }
