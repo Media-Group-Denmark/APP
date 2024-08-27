@@ -9,7 +9,7 @@ import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/A
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { getData } from "@/app/lib/GetData";
+import { freshData, getData } from "@/app/lib/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 
@@ -22,7 +22,9 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  const data: Article[] = await getData({ tag: params.tag });
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
   if (data.length > 0) {
     const article = data[0];
 
@@ -87,7 +89,9 @@ export async function generateMetadata({
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const data: Article[] = await getData();
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
   return (
     <main>
       {data ? (
@@ -155,7 +159,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={200} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} endIndex={100} articleAmount={6}  />
+              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
             </section>
         </div>

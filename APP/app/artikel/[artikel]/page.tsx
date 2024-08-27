@@ -28,6 +28,10 @@ import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
+import ArticleInfiniteScroll from "@/app/components/ArticleDisplaySystems/StaticSystems/ArticleInfiniteScroll";
+import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import { getData } from "@/app/lib/GetData";
+import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -38,10 +42,18 @@ export async function generateMetadata({
 }: {
   params: { artikel: string };
 }): Promise<Metadata> {
-  const data: Article[] = await getData({ artikel: params.artikel });
+  const data: Article[] = await getArticle({ artikel: params.artikel });
 
   if (data.length > 0) {
     const article = data[0];
+    let articleSlug = '';
+
+    if(article.republishArticle && article.newSlug.length > 0) { 
+      let articleSlug = article.newSlug;
+    } else {
+      let articleSlug = article.articleSlug;
+    }
+
     return {
       title: article.title,
       description: article.teaser,
@@ -49,7 +61,7 @@ export async function generateMetadata({
       openGraph: {
         title: article.title,
         description: article.teaser,
-        url: `${theme.site_url}/artikel/${article.articleSlug}`,
+        url: `${theme.site_url}/artikel/${articleSlug}`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
@@ -92,10 +104,10 @@ export async function generateMetadata({
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
-export async function getData(params: { artikel: string }): Promise<Article[]> {
+export async function getArticle(params: { artikel: string }): Promise<Article[]> {
   const query = `
               *[
-                _type == "article" && slug.current == "${params.artikel}"
+                _type == "article" && (slug.current == "${params.artikel}" || newSlug.current == "${params.artikel}")
               ] 
               | order(coalesce(publishedAt, _createdAt) desc) {
                 _id,
@@ -105,6 +117,7 @@ export async function getData(params: { artikel: string }): Promise<Article[]> {
                 teaser,
                 publishedAt,
                 "articleSlug": slug.current,
+                "newSlug": newSlug.current,
                 overview,
                 views,
                 "image": metaImage.asset,
@@ -135,8 +148,9 @@ export default async function artikel({
 }: {
   params: { artikel: string };
 }) {
-  const data: Article[] = await getData({ artikel: params.artikel });
-  const mainArticle = data[0];
+  const article: Article[] = await getArticle({ artikel: params.artikel });
+  const data: Article[] = await getData();
+  const mainArticle = article[0];
   
   const isClient = typeof window !== "undefined";
   
@@ -164,7 +178,7 @@ export default async function artikel({
   return (
     <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
-        {data.length > 0 ? (
+        {article.length > 0 ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
@@ -172,7 +186,7 @@ export default async function artikel({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  {data.map((article) => (
+                  {article.map((article) => (
                     <article key={article._id} className="w-full rounded-lg">
                       <meta name="article:section" content={article.category} />
                       <section>
@@ -282,7 +296,6 @@ export default async function artikel({
                         />
                       </section>
                       {article.disclaimer && <Disclaimer />}
-                      <SubArticlesListSmallOrderRelease />
                     </article>
                   ))}
               </div>
@@ -292,7 +305,14 @@ export default async function artikel({
           <NotFound />
         )}
       </section>
-      {data.length > 0 && <PageViewTracker articleId={data[0]._id} />}
+      <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
+              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={80} />
+              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
+              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
+              <TrendingArticlesList data={data} dayInterval={14} endIndex={100} articleAmount={6}  />
+              </div>
+      </section>
+      {article.length > 0 && <PageViewTracker articleId={article[0]._id} />}
     </main>
   );
 }
