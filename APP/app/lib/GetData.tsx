@@ -1,17 +1,16 @@
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
+import { Article } from "../models/article";
 import { client } from "./sanityclient";
 
 export async function getData() {
-  const today = new Date();
-  const formattedToday = today.toISOString();
 
   const query = `
   *[
-    _type == "article" && publishedAt <= "${formattedToday}" && previewMode == false
+    _type == "article" 
   ] 
-  | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
+  | order(coalesce(publishedAt, _createdAt) desc) {
     _id,
     _createdAt,
     _type,
@@ -19,6 +18,8 @@ export async function getData() {
     teaser,
     publishedAt,
     "articleSlug": slug.current,
+    republishArticle,
+    "newSlug": newSlug.current,
     "image": metaImage.asset,
     "category": category->name,
     "categorySlug": category->slug.current,
@@ -36,3 +37,12 @@ export async function getData() {
   return data;
 }
 
+
+export function freshData(articles: Article[]): Article[] {
+  const today = new Date().toISOString();
+  
+  return articles.filter(article => 
+    article.publishedAt <= today && 
+    article.previewMode === false
+  );
+}

@@ -3,15 +3,13 @@
 /* -------------------------------------------------------------------------- */
 import React from "react";
 import Image from "next/image";
-import { ArticleLink } from '@/app/components/utils/ArticleLink';
-import { client, urlFor } from "../../../lib/sanityclient";
+import { urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
-import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { getData } from "@/app/lib/GetData";
+import { freshData, getData } from "@/app/lib/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 
 export const revalidate = 600;
@@ -23,7 +21,9 @@ export async function generateMetadata({
 }: {
   params: { journalist: string };
 }): Promise<Metadata> {
-  const data: Article[] = await getData({ journalist: params.journalist });
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
   if (data.length > 0) {
     const article = data[0];
     return {
@@ -91,7 +91,9 @@ export default async function journalist({
 }: {
   params: { journalist: string };
 }) {
-  const data: Article[] = await getData();
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
   return (
     <main>
       {data ? (

@@ -3,18 +3,16 @@
 /* -------------------------------------------------------------------------- */
 import React from "react";
 import { ArticleLink } from '@/app/components/utils/ArticleLink';
-import { client, urlFor } from "../../../lib/sanityclient";
+import { urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
-import SubArticlesListSmall from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import TopNewsSlider from "@/app/components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getData } from "@/app/lib/GetData";
+import { freshData, getData } from "@/app/lib/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 
@@ -97,8 +95,9 @@ export default async function kategori({
 }: {
   params: { kategori: string };
 }) {
-  const data: Article[] = await getData();
-  console.log('params', params.kategori)
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
   return (
     <main>
 
@@ -118,6 +117,7 @@ export default async function kategori({
               <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesListAltOmKendte
                 dayInterval={14}
+                views={0}
                 startIndex={0}
                 endIndex={100}
                 data={data} category={params.kategori}
@@ -132,6 +132,7 @@ export default async function kategori({
             {/* Phone */}
             <section className="grid gap-4 md:hidden">
               <TrendingArticlesListAltOmKendte
+                views={0}
                 dayInterval={30}
                 startIndex={0}
                 endIndex={100}
@@ -164,7 +165,7 @@ export default async function kategori({
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={200} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} endIndex={100} articleAmount={6}  />
+              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
             </section>
         </div>

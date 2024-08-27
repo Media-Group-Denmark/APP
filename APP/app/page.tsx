@@ -11,7 +11,7 @@ import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/Top
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getData } from "./lib/GetData";
+import { getData, freshData } from "./lib/GetData";
 import { SubArticlesInfiniteScroll } from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 export const revalidate = 600;
@@ -53,8 +53,10 @@ export const metadata: Metadata = {
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function Home() {
-  const data: Article[] = await getData();
-
+  const allData: Article[] = await getData();
+  // Anvend dit filter på dataen
+  const data = freshData(allData);
+  
   return (
     <main>
       <TopNewsSlider
@@ -78,6 +80,8 @@ export default async function Home() {
                 <TrendingArticlesListAltOmKendte
                 data={data}
                 dayInterval={14}
+                views={0}
+                startIndex={0}
                 endIndex={100}
                 articleAmount={5} 
                  />
@@ -93,6 +97,7 @@ export default async function Home() {
             <TrendingArticlesListAltOmKendte
             data={data}
                 dayInterval={14}
+                views={0}
                 startIndex={0}
                 endIndex={100}
                 articleAmount={5} 
@@ -123,7 +128,7 @@ export default async function Home() {
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={200} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} endIndex={100} articleAmount={6}  />
+              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
             </section>
           </div>

@@ -15,6 +15,8 @@ export async function getArticleData(): Promise<Article[]> {
                 _updatedAt,
                 publishedAt,
                 "articleSlug": slug.current,
+                republishArticle,
+                "newSlug": newSlug.current,
                 "category": category->name,
                 "categorySlug": category->slug.current,
                 "tagSlug": tag[]->slug.current,
@@ -30,10 +32,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const articleData: Article[] = await getArticleData();
 
-
+    
     const articles = articleData.map((article) => {
+      let slug = article.articleSlug;
+      if (article.republishArticle && article.newSlug) {
+        slug = article.newSlug;
+      }
       return {
-        url: `${theme.site_url}/artikel/${article.articleSlug}`,
+        url: `${theme.site_url}/artikel/${slug}`,
         lastModified: new Date(article._updatedAt),
         priority: 1,
       }

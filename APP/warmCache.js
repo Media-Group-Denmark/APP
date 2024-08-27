@@ -24,7 +24,7 @@ async function getData() {
     "articles": *[
       _type == "article" && publishedAt <= "${formattedToday}" && previewMode == false
     ] 
-    | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
+    | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
       _id,
       publishedAt,
       "articleSlug": slug.current,

@@ -9,7 +9,7 @@ async function getData() {
     const today: Date = new Date();
     const query = `
       *[
-        _type == "article" && previewMode == "true"
+        _type == "article" && previewMode == true
       ]
        | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
         _id,

@@ -8,6 +8,8 @@ export interface Article {
      title: string;
      teaser: string;
      articleSlug: string;
+     republishArticle: boolean;
+     newSlug: string;
      image: {};
      source: string;
      tag: string[];
@@ -25,4 +27,5 @@ export interface Article {
      startIndex: number;
      endIndex: number;
      reading: number;
+     previewMode: boolean;
 }
