@@ -8,19 +8,21 @@ export async function middleware(req: NextRequest) {
     const slug = url.pathname.split('/').pop();
 
     // Hent alle artikler
-    const data: Article[] = await getData();
+    const { articles: data} = await getData() as { articles: Article[] };
 
     // Filtrer artiklerne for at finde den korrekte omdirigering
     const article = republishData(data, slug);
 
-    if (article) {
+    if (article && article.newSlug) {
         console.log(`Redirecting to new slug: ${article.newSlug}`);
         return NextResponse.redirect(`${theme.site_url}/artikel/${article.newSlug}`, 301);
     } else {
         console.log(`No redirect needed for slug: ${slug}`);
     }
-
-    return NextResponse.next();
+    if (article && article.newSlug === '') {
+        console.log(`Redirecting to new slug: ${article.newSlug}`);
+        return NextResponse.redirect
+    }
 }
 
 export const config = {

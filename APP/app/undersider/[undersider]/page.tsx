@@ -3,11 +3,12 @@
 /* -------------------------------------------------------------------------- */
 import { client, urlFor } from '@/app/lib/sanityclient';
 import { PortableText } from 'next-sanity';
-import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import React from 'react'
 import theme from '@/app/lib/theme.json';
 import { Metadata } from 'next';
 import Breadcrumb from '@/app/components/Navigation/Breadcrumb';
+import { Page } from '@/app/models/subpage';
+import { findSubPage, getData } from '@/app/lib/GetData';
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
@@ -41,28 +42,7 @@ export const metadata: Metadata = {
   robots: theme.metadata.robots,
   publisher: theme.site_name,
 };
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-async function getData({ params 
-}: {
-  params: { undersider: string; };
-}) {
-  const query = `*[_type == "subPage" && slug.current == "${params.undersider}"]
-  {
-    _id,
-    title,
-    _updatedAt,
-    overview
-  }`;
-  try {
-    const data = await client.fetch(query);
-    return data;
-  }
-  catch (error) {
-    console.error(error);
-  }
-}
+
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
@@ -71,9 +51,11 @@ export default async function page({
 }: {
   params: { undersider: string; };
 }) {
-  const data = await getData({ params });
-  const page = data ? data[0] : undefined;
-  console.log(data);
+
+  const { subPage: data } = await getData() as { subPage: Page[] };
+  const page = findSubPage(data, params.undersider) as Page;
+
+  console.log(page);
   /* -------------------------------------------------------------------------- */
   /*                           ARTICLE IMAGE COMPONENT                          */
   /* -------------------------------------------------------------------------- */
@@ -196,7 +178,7 @@ export default async function page({
       {
         data && (
           <>
-          <Breadcrumb navItem={page.titel} link="" navItemTwo=''/>
+          <Breadcrumb navItem={page.title} link="" navItemTwo=''/>
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={page.overview} components={components} />

@@ -21,7 +21,7 @@ export async function generateMetadata({
 }: {
   params: { journalist: string };
 }): Promise<Metadata> {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   if (data.length > 0) {
@@ -91,7 +91,7 @@ export default async function journalist({
 }: {
   params: { journalist: string };
 }) {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   return (

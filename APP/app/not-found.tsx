@@ -7,7 +7,7 @@ import { SubArticlesInfiniteScroll } from "./components/ArticleDisplaySystems/Dy
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 
 export default async function NotFound() {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   return (

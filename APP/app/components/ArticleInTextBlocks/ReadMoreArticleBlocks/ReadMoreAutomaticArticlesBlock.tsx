@@ -3,6 +3,7 @@ import { getData } from '@/app/lib/GetData';
 import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import React from 'react';
 import ReadMoreAutomaticViews from './ReadMoreAutomaticViews';
+import { Article } from '@/app/models/article';
 
 // Global liste over uønskede nøgleord
 const EXCLUDED_WORDS = ["til", "at", "er", "og", "på", "i", "en", "du", "for", "med", "af"];
@@ -64,7 +65,7 @@ function filterArticlesByCriteria(articles, names, category, currentArticleId) {
 
 export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, articleCategory, currentArticleId }) {
   // Hent alle artikler
-  const allArticles = await getData();
+  const { articles: allArticles} = await getData() as { articles: Article[] };
 
   // Ekstraher navne og nøgleord fra den aktuelle artikeltitel
   const names = extractNames(articleTitle);

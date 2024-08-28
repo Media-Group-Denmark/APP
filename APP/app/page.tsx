@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function Home() {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   
