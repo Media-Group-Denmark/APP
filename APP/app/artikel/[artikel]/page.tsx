@@ -30,7 +30,7 @@ import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import ArticleInfiniteScroll from "@/app/components/ArticleDisplaySystems/StaticSystems/ArticleInfiniteScroll";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import { getData } from "@/app/lib/GetData";
+import { findArticle, getData } from "@/app/lib/GetData";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 
 export const revalidate = 600;
@@ -42,26 +42,25 @@ export async function generateMetadata({
 }: {
   params: { artikel: string };
 }): Promise<Metadata> {
-  const data: Article[] = await getArticle({ artikel: params.artikel });
+  const { articles: data } = await getData() as { articles: Article[] };
 
   if (data.length > 0) {
-    const article = data[0];
-    let articleSlug = '';
+    const mainArticle = findArticle(data, params.artikel) as Article;
 
     return {
-      title: article.title,
-      description: article.teaser,
-      keywords: article.tag.join(", "),
+      title: mainArticle.title,
+      description: mainArticle.teaser,
+      keywords: mainArticle.tag.join(", "),
       openGraph: {
-        title: article.facebookTitle || article.title,
-        description: article.facebookDescription || article.teaser,
-        url: `${theme.site_url}/artikel/${article.newSlug || article.articleSlug}`,
+        title: mainArticle.facebookTitle || mainArticle.title,
+        description: mainArticle.facebookDescription || mainArticle.teaser,
+        url: `${theme.site_url}/artikel/${mainArticle.newSlug || mainArticle.articleSlug}`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
         images: [
           {
-            url: urlFor(article.facebookImage || article.image)
+            url: urlFor(mainArticle.facebookImage || mainArticle.image)
               .format("webp")
               .width(400)
               .height(300)
@@ -70,16 +69,16 @@ export async function generateMetadata({
               .url(),
             width: 800,
             height: 600,
-            alt: article.facebookTitle || article.title,
+            alt: mainArticle.facebookTitle || mainArticle.title,
           },
         ],
       },
       twitter: {
         card: "summary_large_image",
         site: theme.metadata.twitter.site,
-        title: article.title,
-        description: article.teaser,
-        images: urlFor(article.image)
+        title: mainArticle.title,
+        description: mainArticle.teaser,
+        images: urlFor(mainArticle.image)
           .format("webp")
           .width(400)
           .height(300)
@@ -95,47 +94,6 @@ export async function generateMetadata({
     };
   }
 }
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-export async function getArticle(params: { artikel: string }): Promise<Article[]> {
-  const query = `
-              *[
-                _type == "article" && (slug.current == "${params.artikel}" || newSlug.current == "${params.artikel}")
-              ] 
-              | order(coalesce(publishedAt, _createdAt) desc) {
-                _id,
-                _createdAt,
-                _type,
-                title,
-                teaser,
-                publishedAt,
-                "articleSlug": slug.current,
-                "newSlug": newSlug.current,
-                overview,
-                views,
-                "image": metaImage.asset,
-                "source": metaImage.asset->description,
-                "category": category->name,
-                "categorySlug": category->slug.current,
-                "tag": tag[]->name,
-                "tagSlug": tag[]->slug.current,
-                "JournalistName": journalist->name,
-                "JournalistSlug": journalist->slug.current,
-                facebookTitle,
-                facebookDescription,
-                "facebookImage": facebookImage.asset,
-                disclaimer,
-              }`;
-  try {
-    const data = await client.fetch<Article[]>(query);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
-
 
 /* -------------------------------------------------------------------------- */
 /*                                 CONTENT                                    */
@@ -145,10 +103,9 @@ export default async function artikel({
 }: {
   params: { artikel: string };
 }) {
-  const article: Article[] = await getArticle({ artikel: params.artikel });
 
   const { articles: data } = await getData() as { articles: Article[] };
-  const mainArticle = article[0];
+  const mainArticle = findArticle(data, params.artikel) as Article;
   
   const isClient = typeof window !== "undefined";
   
@@ -177,7 +134,7 @@ export default async function artikel({
   return (
     <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
-        {article.length > 0 ? (
+        {mainArticle ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
@@ -185,48 +142,48 @@ export default async function artikel({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  {article.map((article) => (
-                    <article key={article._id} className="w-full rounded-lg">
-                      <meta name="article:section" content={article.category} />
+                  
+                    <article key={mainArticle._id} className="w-full rounded-lg">
+                      <meta name="article:section" content={mainArticle.category} />
                       <section>
                         <div className="grid ">
                           <ArticleLink
-                            href={`/artikler/kategori/${article.categorySlug}`}
+                            href={`/artikler/kategori/${mainArticle.categorySlug}`}
                           >
                             <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
-                              {article.category}
+                              {mainArticle.category}
                             </button>
                           </ArticleLink>
                         </div>
                         <header>
                           <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
-                            {article.title}
+                            {mainArticle.title}
                           </h1>
                         </header>
                         <footer className="py-1 lg:py-4">
                             <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
                                 <time
-                                  dateTime={article.publishedAt}
+                                  dateTime={mainArticle.publishedAt}
                                   className=" hidden md:block text-xs"
                                 >
-                                  {timeSinceText({ date: article.publishedAt })} 
+                                  {timeSinceText({ date: mainArticle.publishedAt })} 
                                 </time>
                                 
                                <div className="flex gap-x-2 lg:mt-2 align-middle">
                                <ArticleLink
                                rel="author"
-                                 href={`/artikler/journalist/${article.JournalistSlug}`}
+                                 href={`/artikler/journalist/${mainArticle.JournalistSlug}`}
                                >
                                   <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
                                     Skrevet af:{" "}
                                     <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
-                                      {article.JournalistName}
+                                      {mainArticle.JournalistName}
                                     </b>
                                   </p>
                                     </ArticleLink>
                                   <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
                                     D. {new Date(
-                                      article.publishedAt
+                                      mainArticle.publishedAt
                                     ).toLocaleDateString()}
                                   </time>
                               </div>
@@ -236,18 +193,18 @@ export default async function artikel({
   <img
   width={700}
   height={400}
-    src={urlFor(article.image)
+    src={urlFor(mainArticle.image)
       .format("webp")
       .width(700)
       .height(400)
       .fit("fill")
       .quality(85)
       .url()}
-    alt={`Billede af ${article.source}`}
+    alt={`Billede af ${mainArticle.source}`}
     className="block w-full h-[14em] md:h-[25em] bg-gray-300 rounded-t-lg object-cover"
   />
   <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-    Foto: {article.source}
+    Foto: {mainArticle.source}
   </figcaption>
 </figure>
 
@@ -255,11 +212,11 @@ export default async function artikel({
                           <span className="text-xs lg:text-sm">
                             Artiklens Tags:{" "}
                           </span>
-                          {article.tag.map((tag, index) => (
+                          {mainArticle.tag.map((tag, index) => (
                             <React.Fragment key={index}>
                               {index > 0 ? " " : ""}{" "}
                               <ArticleLink
-                                href={`/artikler/tag/${article.tagSlug[index]}`}
+                                href={`/artikler/tag/${mainArticle.tagSlug[index]}`}
                               >
                                 <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                                   {tag}
@@ -269,7 +226,7 @@ export default async function artikel({
                           ))}
                         </div>
                         <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
-                          {article.teaser}
+                          {mainArticle.teaser}
                         </h2>
                       </section>
                       
@@ -279,35 +236,25 @@ export default async function artikel({
 
                       <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                         <PortableText
-                          value={article.overview}
+                          value={mainArticle.overview}
                           components={components}
                         />
                       </section>
                       <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
                       <section>
                         <SocialMediaShareButtons
-                        views={`${article.views}`}
-                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
+                        views={`${mainArticle.views}`}
+                          articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                         />
                         <MobileSocialMediaShareButtons
-                        views={`${article.views}`}
-                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
+                        views={`${mainArticle.views}`}
+                          articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                         />
                       </section>
-                      {article.disclaimer && <Disclaimer />}
+                      {mainArticle.disclaimer && <Disclaimer />}
                     </article>
-                  ))}
+                  
               </div>
-              <iframe
-        src="https://widget.samlino.dk/car-insurance/index.html"
-        sandbox="allow-popups allow-forms allow-modals allow-scripts allow-top-navigation allow-same-origin"
-        data-headingStyleOptions='{"loaded":"yes","source":"pengehjørnet","medium":"cpc","campaign":"ciweek35_24","widgetSize":430,"widgetheading":"Sample heading","headingTextColor":"#2c3e50","headingon":true,"inputLabelColor":"#312f2e","inputLabelBackgroundColor":"#ffffff","inputfieldBorderColor":"#808080","inputfieldBackgroundColor":"#ffffff","sliderColor":"#77aa43","minMaxValuesColor":"#cccbc8","summarybuttonText":"Se pris","summarybuttonTextColor":"#ffffff","summarybuttonColor":"#f58423","summarybuttonIconColor":"#ffffff","summarybackgroundColor":"#f3f2ee","summarysubheadingColor":"#2c3e50","summarynumberValueColor":"#2c3e50","summaryexplanationColor":"#a39e9c"}'
-        className="widget-example"
-        style={{ width: '430px' }}
-        width="430px"
-        height="200px"
-        id="1708085758758"
-      />
             </div>
           </>
         ) : (
@@ -321,7 +268,7 @@ export default async function artikel({
               <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
       </section>
-      {article.length > 0 && <PageViewTracker articleId={article[0]._id} />}
+      {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
     </main>
   );
 }

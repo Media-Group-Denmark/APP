@@ -3,6 +3,7 @@
 /* -------------------------------------------------------------------------- */
 import { Article } from "../models/article";
 import { Reference } from "../models/reference";
+import { Page } from "../models/subpage";
 import { client } from "./sanityclient";
 
 export async function getData() {
@@ -32,7 +33,13 @@ export async function getData() {
       "JournalistSlug": journalist->slug.current,
       views,
       previewMode,
-      reading
+      reading,
+      overview,
+      "source": metaImage.asset->description,
+      facebookTitle,
+      facebookDescription,
+      "facebookImage": facebookImage.asset,
+      disclaimer
     },
     "categories": *[_type == "category"] {
       _id,
@@ -50,7 +57,15 @@ export async function getData() {
       name,
       "slug": slug.current,
       tagDescription
-    }
+    },
+    "subPage": *[_type == "subPage"]
+    {
+    _id,
+    title,
+    "slug": slug.current,
+    _updatedAt,
+    overview
+  },
   }`;
 
   const data = await client.fetch(query);
@@ -67,6 +82,8 @@ export function freshData(articles: Article[]): Article[] {
     article.previewMode === false
   );
 }
+
+
 
 export function republishData(articles: Article[], slug: string) {
   return articles.find(article => 
@@ -85,3 +102,13 @@ export function findTag(tags: Reference[], tag: string) {
   console.log("Tag", tag, tags);
   return tags.find(({ slug }) => slug === tag);
 }
+
+
+export function findArticle(articles: Article[], article: string) {
+  return articles.find(({ articleSlug, newSlug }) => articleSlug === article || newSlug === article);
+}
+
+export const findSubPage = (subPage: Page[], page: string) => { 
+  return subPage.find(({ slug }) => slug === page);
+}
+
