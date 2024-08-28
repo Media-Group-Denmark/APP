@@ -22,7 +22,7 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   if (data.length > 0) {
@@ -89,7 +89,7 @@ export async function generateMetadata({
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   return (

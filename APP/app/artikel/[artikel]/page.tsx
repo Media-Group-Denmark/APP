@@ -10,7 +10,6 @@ import { Article } from "@/app/models/article";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 
-import SubArticlesListSmallOrderRelease from "@/app/components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 import PageViewTracker from "@/app/components/ArticleTools/PageViewTracker";
 import { timeSinceText } from "@/app/components/ArticleTools/TimeSinceTag";
 import Disclaimer from "@/app/components/ArticleTools/Disclaimer";
@@ -48,26 +47,20 @@ export async function generateMetadata({
     const article = data[0];
     let articleSlug = '';
 
-    if(article.republishArticle && article.newSlug.length > 0) { 
-      let articleSlug = article.newSlug;
-    } else {
-      let articleSlug = article.articleSlug;
-    }
-
     return {
       title: article.title,
       description: article.teaser,
       keywords: article.tag.join(", "),
       openGraph: {
-        title: article.title,
-        description: article.teaser,
-        url: `${theme.site_url}/artikel/${articleSlug}`,
+        title: article.facebookTitle || article.title,
+        description: article.facebookDescription || article.teaser,
+        url: `${theme.site_url}/artikel/${article.newSlug || article.articleSlug}`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
         images: [
           {
-            url: urlFor(article.image)
+            url: urlFor(article.facebookImage || article.image)
               .format("webp")
               .width(400)
               .height(300)
@@ -76,7 +69,7 @@ export async function generateMetadata({
               .url(),
             width: 800,
             height: 600,
-            alt: article.title,
+            alt: article.facebookTitle || article.title,
           },
         ],
       },
@@ -128,6 +121,9 @@ export async function getArticle(params: { artikel: string }): Promise<Article[]
                 "tagSlug": tag[]->slug.current,
                 "JournalistName": journalist->name,
                 "JournalistSlug": journalist->slug.current,
+                facebookTitle,
+                facebookDescription,
+                "facebookImage": facebookImage.asset,
                 disclaimer,
               }`;
   try {
@@ -309,7 +305,7 @@ export default async function artikel({
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={80} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} endIndex={100} articleAmount={6}  />
+              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
       </section>
       {article.length > 0 && <PageViewTracker articleId={article[0]._id} />}

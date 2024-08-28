@@ -12,9 +12,10 @@ import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/Dynamic
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { freshData, getData } from "@/app/lib/GetData";
+import { findCategory, freshData, getData } from "@/app/lib/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import { Reference } from "@/app/models/reference";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -26,20 +27,19 @@ export async function generateMetadata({
   params: { kategori: string };
 }): Promise<Metadata> {
   // Fetch data within the function
-  const data: Article[] = await getData();
-  if (data.length > 0) {
-    const article = data[0];
+  const { articles: allData, categories: category } = await getData() as { articles: Article[], categories: Reference[] };
+  const currentCategory = findCategory(category, params.kategori);
+  if (allData.length > 0) {
+    const article = allData[0];
     //console.log("Article", article.title);
     return {
-      title: `${article.category} - Artikler og Indsigter | ${theme.site_name}`,
-      description: Array.isArray(article.teaser)
-        ? article.teaser.join(",")
-        : article.teaser,
+      title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
+      description: currentCategory.categoryDescription || `Kategori ${article.category} - Artikler og Indsigter, ${theme.site_name}`,
       keywords: `Kategori ${article.category} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
-        title: `${article.category} | ${theme.site_name}`,
-        description: `${article.teaser},`,
-        url: `${theme.site_name}/artikler/kategori/${article.categorySlug}`,
+        title: `${currentCategory.name} | ${theme.site_name}`,
+        description: currentCategory.categoryDescription || article.teaser,
+        url: `${theme.site_name}/artikler/kategori/${currentCategory.slug}`,
         type: "website",
         siteName: `${theme.site_name}`,
         locale: "da_DK",
@@ -95,7 +95,7 @@ export default async function kategori({
 }: {
   params: { kategori: string };
 }) {
-  const allData: Article[] = await getData();
+  const { articles: allData } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
   const data = freshData(allData);
   return (
