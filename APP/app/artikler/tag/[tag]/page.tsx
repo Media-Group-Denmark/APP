@@ -9,9 +9,10 @@ import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/A
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { freshData, getData } from "@/app/lib/GetData";
+import { findTag, freshData, getData } from "@/app/lib/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import { Reference } from "@/app/models/reference";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -22,21 +23,20 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  const { articles: allData } = await getData() as { articles: Article[] };
-  // Anvend dit filter på dataen
+  const { articles: allData, tags: tag } = await getData() as { articles: Article[], tags: Reference[] };
   const data = freshData(allData);
+
+  const currentTag = findTag(tag, params.tag) as Reference;
   if (data.length > 0) {
     const article = data[0];
 
     return {
-      title: `${article.tag} - Artikler og Indsigter | ${theme.site_name}`,
-      description: Array.isArray(article.teaser)
-        ? article.teaser.join(",")
-        : article.teaser,
+      title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
+      description: currentTag.tagDescription,
       keywords: `Tag ${article.tag} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
-        title: `${article.tag} | ${theme.site_name}`,
-        description: `${article.teaser},`,
+        title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
+        description: currentTag.tagDescription,
         url: `${theme.site_name}/artikler/tag/${article.tagSlug}`,
         type: "website",
         siteName: `${theme.site_name}`,
@@ -54,15 +54,15 @@ export async function generateMetadata({
               : `${theme.logo_public_url}`,
             width: 800,
             height: 600,
-            alt: `Billede for tag ${article.tag}`,
+            alt: `Billede for tag ${currentTag.name}`,
           },
         ],
       },
       twitter: {
         card: "summary_large_image",
         site: `${theme.metadata.twitter.site}`,
-        title: `${article.tag} - Artikler og Indsigter | ${theme.site_name}`,
-        description: `${article.teaser}`,
+        title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
+        description: currentTag.tagDescription,
         images: article.image
           ? urlFor(article.image)
               .format("webp")

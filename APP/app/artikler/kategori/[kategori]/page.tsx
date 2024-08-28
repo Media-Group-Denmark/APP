@@ -28,7 +28,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   // Fetch data within the function
   const { articles: allData, categories: category } = await getData() as { articles: Article[], categories: Reference[] };
-  const currentCategory = findCategory(category, params.kategori);
+  const currentCategory = findCategory(category, params.kategori) as Reference;
   if (allData.length > 0) {
     const article = allData[0];
     //console.log("Article", article.title);
@@ -63,8 +63,8 @@ export async function generateMetadata({
       twitter: {
         card: "summary_large_image",
         site: `${theme.metadata.twitter.site}`,
-        title: `${article.category} - Artikler og Indsigter | ${theme.site_name}`,
-        description: `${article.teaser}`,
+        title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
+        description: currentCategory.categoryDescription || article.teaser,
         images: article.image
           ? urlFor(article.image)
               .format("webp")

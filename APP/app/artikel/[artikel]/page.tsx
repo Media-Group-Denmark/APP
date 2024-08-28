@@ -22,6 +22,7 @@ import InstagramTextBlock from "@/app/components/ArticleInTextBlocks/InstagramTe
 import YouTubeTextBlock from "@/app/components/ArticleInTextBlocks/YouTubeTextBlock";
 import ReadMoreArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
 import ReadMoreAutomaticArticlesBlock from "@/app/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock";
+import IframeTextBlock from "@/app/components/ArticleInTextBlocks/IframeTextBlock";
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
@@ -145,7 +146,8 @@ export default async function artikel({
   params: { artikel: string };
 }) {
   const article: Article[] = await getArticle({ artikel: params.artikel });
-  const data: Article[] = await getData();
+
+  const { articles: data } = await getData() as { articles: Article[] };
   const mainArticle = article[0];
   
   const isClient = typeof window !== "undefined";
@@ -162,6 +164,7 @@ export default async function artikel({
       tikTok: TikTokTextBlock,
       faceBook: FacebookTextBlock,
       instagram: InstagramTextBlock,
+      iFrame: IframeTextBlock,
       readMore: (props: any) => (
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
@@ -295,6 +298,16 @@ export default async function artikel({
                     </article>
                   ))}
               </div>
+              <iframe
+        src="https://widget.samlino.dk/car-insurance/index.html"
+        sandbox="allow-popups allow-forms allow-modals allow-scripts allow-top-navigation allow-same-origin"
+        data-headingStyleOptions='{"loaded":"yes","source":"pengehjørnet","medium":"cpc","campaign":"ciweek35_24","widgetSize":430,"widgetheading":"Sample heading","headingTextColor":"#2c3e50","headingon":true,"inputLabelColor":"#312f2e","inputLabelBackgroundColor":"#ffffff","inputfieldBorderColor":"#808080","inputfieldBackgroundColor":"#ffffff","sliderColor":"#77aa43","minMaxValuesColor":"#cccbc8","summarybuttonText":"Se pris","summarybuttonTextColor":"#ffffff","summarybuttonColor":"#f58423","summarybuttonIconColor":"#ffffff","summarybackgroundColor":"#f3f2ee","summarysubheadingColor":"#2c3e50","summarynumberValueColor":"#2c3e50","summaryexplanationColor":"#a39e9c"}'
+        className="widget-example"
+        style={{ width: '430px' }}
+        width="430px"
+        height="200px"
+        id="1708085758758"
+      />
             </div>
           </>
         ) : (

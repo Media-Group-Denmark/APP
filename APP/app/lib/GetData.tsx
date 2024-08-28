@@ -68,7 +68,7 @@ export function freshData(articles: Article[]): Article[] {
   );
 }
 
-export function republishData(articles: Article[], slug: string): Article | undefined {
+export function republishData(articles: Article[], slug: string) {
   return articles.find(article => 
     article.articleSlug === slug ||
     (article.oldSlugs && article.oldSlugs.includes(slug)) && 
@@ -79,4 +79,9 @@ export function republishData(articles: Article[], slug: string): Article | unde
 
 export function findCategory(categories: Reference[], category: string) {
   return categories.find(({ slug }) => slug === category);
+}
+
+export function findTag(tags: Reference[], tag: string) {
+  console.log("Tag", tag, tags);
+  return tags.find(({ slug }) => slug === tag);
 }

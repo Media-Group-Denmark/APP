@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     const slug = url.pathname.split('/').pop();
 
     // Hent alle artikler
-    const data: Article[] = await getData();
+    const { articles: data} = await getData() as { articles: Article[] };
 
     // Filtrer artiklerne for at finde den korrekte omdirigering
     const article = republishData(data, slug);
