@@ -17,6 +17,7 @@ export interface Article {
      categorySlug: string;
      JournalistName: string;
      JournalistSlug: string;
+     JournalistPhoto: string;
      JournalistDetails: [];
      views: number | 0;
      dayInterval: number;
