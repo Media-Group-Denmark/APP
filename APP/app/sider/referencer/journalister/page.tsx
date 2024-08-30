@@ -46,6 +46,8 @@ export const metadata: Metadata = {
   publisher: theme.site_name,
 };
 
+
+export default async function journalister() {
 const { journalists: data } = await getData() as { journalists: Reference[] };
 
   return (

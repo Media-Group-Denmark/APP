@@ -33,6 +33,7 @@ export async function getData(slug: string | undefined) {
         "tagSlug": tag[]->slug.current,
         "JournalistName": journalist->name,
         "JournalistSlug": journalist->slug.current,
+        "JournalistPhoto": journalist->image,
         facebookTitle,
         facebookDescription,
         "facebookImage": facebookImage.asset,
