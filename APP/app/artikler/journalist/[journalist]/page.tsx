@@ -9,7 +9,7 @@ import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import theme from "@/app/lib/theme.json";
-import { freshData, getData } from "@/app/lib/GetData";
+import { getData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 
 export const revalidate = 600;
@@ -21,9 +21,8 @@ export async function generateMetadata({
 }: {
   params: { journalist: string };
 }): Promise<Metadata> {
-  const { articles: allData } = await getData() as { articles: Article[] };
-  // Anvend dit filter på dataen
-  const data = freshData(allData);
+  const { articles: data } = await getData() as { articles: Article[] };
+
   if (data.length > 0) {
     const article = data[0];
     return {
@@ -91,9 +90,8 @@ export default async function journalist({
 }: {
   params: { journalist: string };
 }) {
-  const { articles: allData } = await getData() as { articles: Article[] };
-  // Anvend dit filter på dataen
-  const data = freshData(allData);
+  const { articles: data } = await getData() as { articles: Article[] };
+ 
   return (
     <main>
       {data ? (

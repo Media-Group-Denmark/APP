@@ -1,10 +1,8 @@
 export interface Article {
      _id: string;
      _createdAt: string;
-     _updatedAt: string;
      publishedAt: string;
      _type: string;
-     _rev: string;
      title: string;
      teaser: string;
      articleSlug: string | '';
@@ -15,20 +13,12 @@ export interface Article {
      source: string;
      tag: string[];
      tagSlug: string[];
-     tagDescription: string;
      category: string | '';
      categorySlug: string;
-     categoryDescription: string;
      JournalistName: string;
-     JournalistPhoto: {};
      JournalistSlug: string;
      JournalistDetails: [];
-     facebookTitle: string;
-     facebookDescription: string;
-     facebookImage: {};
-     overview: [];
      views: number | 0;
-     disclaimer: boolean;
      dayInterval: number;
      startIndex: number;
      endIndex: number;

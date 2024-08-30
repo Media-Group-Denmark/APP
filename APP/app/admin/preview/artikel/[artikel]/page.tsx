@@ -29,7 +29,7 @@ import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileS
 import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 
-export const revalidate = 600;
+export const revalidate = 604800; // 1 uge i sekunder
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */

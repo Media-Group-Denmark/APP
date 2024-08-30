@@ -1,7 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { getData, republishData } from './app/lib/GetData';
-import theme from './app/lib/theme.json';
-import { Article } from './app/models/article';
+import { getData } from './app/api/data/GetData';
+import { singleArticle } from './app/models/singleArticle';
 
 export async function middleware(req: NextRequest) {
     const url = req.nextUrl;
@@ -12,19 +11,20 @@ export async function middleware(req: NextRequest) {
         return NextResponse.next();
     }
 
-    const { articles: data } = await getData() as { articles: Article[] };
+  const { singleArticle: data } = await getData(slug) as { singleArticle: singleArticle[]};
+  const article = data[0] as singleArticle;
 
-    const article = republishData(data, slug as string) as Article;
+  //console.log(article, 'data MIDDLE', data[0], 'sent to article page MIDDLE', slug);
 
     if (article && article.newSlug) {
-        console.log(`Redirecting to new slug: ${article.newSlug}`);
+        //console.log(`Redirecting to new slug: ${article.newSlug}`);
 
         const redirectUrl = new URL(`/artikel/${article.newSlug}`, req.url);
         redirectUrl.searchParams.set('redirected', 'true');  // Add query parameter to indicate redirect
 
         return NextResponse.redirect(redirectUrl, 301);
     } else {
-        console.log(`No redirect needed for slug: ${slug}`);
+        //console.log(`No redirect needed for slug: ${slug}`);
     }
 
     return NextResponse.next();

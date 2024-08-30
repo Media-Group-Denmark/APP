@@ -9,7 +9,7 @@ import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/A
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { findTag, freshData, getData } from "@/app/lib/GetData";
+import { findTag, freshData, getData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import { Reference } from "@/app/models/reference";
@@ -89,9 +89,8 @@ export async function generateMetadata({
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const { articles: allData } = await getData() as { articles: Article[] };
-  // Anvend dit filter på dataen
-  const data = freshData(allData);
+  const { articles: data } = await getData() as { articles: Article[] };
+
   return (
     <main>
       {data ? (
