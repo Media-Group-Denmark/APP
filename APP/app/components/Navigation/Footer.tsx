@@ -5,7 +5,6 @@ import { ArticleLink } from '../utils/ArticleLink';
 import { FooterData } from '../../models/footer';
 import theme from '../../lib/theme.json';
 import MailChimpForm from '../MailChimp/MailChimpForm';
-export const revalidate = 80000;
 
 
 async function getData(): Promise<FooterData[] | undefined> {

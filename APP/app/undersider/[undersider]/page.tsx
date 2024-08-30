@@ -8,7 +8,7 @@ import theme from '@/app/lib/theme.json';
 import { Metadata } from 'next';
 import Breadcrumb from '@/app/components/Navigation/Breadcrumb';
 import { Page } from '@/app/models/subpage';
-import { findSubPage, getData } from '@/app/lib/GetData';
+import { findSubPage, getData } from '@/app/api/data/GetData';
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
@@ -52,8 +52,7 @@ export default async function page({
   params: { undersider: string; };
 }) {
 
-  const { subPage: data } = await getData() as { subPage: Page[] };
-  const page = findSubPage(data, params.undersider) as Page;
+  const { subPage: page } = await getData(params.undersider) as { subPage: Page[] };
 
   console.log(page);
   /* -------------------------------------------------------------------------- */

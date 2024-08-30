@@ -1,15 +1,14 @@
 import React from "react";
 import SubArticlesListSmallOrderRelease from "./components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 import { ArticleLink } from "./components/utils/ArticleLink";
-import { freshData, getData } from "./lib/GetData";
+import { getData } from "./api/data/GetData";
 import { Article } from "./models/article";
 import { SubArticlesInfiniteScroll } from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 
 export default async function NotFound() {
-  const { articles: allData } = await getData() as { articles: Article[] };
+  const { articles: data } = await getData() as { articles: Article[] };
   // Anvend dit filter på dataen
-  const data = freshData(allData);
   return (
     <main>
       <div className="items-center p-16 ">
@@ -31,7 +30,7 @@ export default async function NotFound() {
         </div>
       </div>
       <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-        <SubArticlesInfiniteScroll data={data} startIndex={1} endIndex={200} />
+        <SubArticlesInfiniteScroll data={data} startIndex={1} endIndex={150} />
         <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
           <aside
             className="desktop hidden md:block"

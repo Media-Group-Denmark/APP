@@ -12,7 +12,7 @@ import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/Dynamic
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { findCategory, freshData, getData } from "@/app/lib/GetData";
+import { findCategory, freshData, getData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import { Reference } from "@/app/models/reference";
@@ -95,9 +95,8 @@ export default async function kategori({
 }: {
   params: { kategori: string };
 }) {
-  const { articles: allData } = await getData() as { articles: Article[] };
-  // Anvend dit filter på dataen
-  const data = freshData(allData);
+  const { articles: data } = await getData() as { articles: Article[] };
+
   return (
     <main>
 
@@ -162,7 +161,7 @@ export default async function kategori({
               <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
             </section>
             <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={200} />
+              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={150} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
               <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />

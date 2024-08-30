@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "node warmCache.js",
     "start": "next start",
     "publish": "git pull && npm i --force && npm run build && pm2 restart all",
     "lint": "next lint"

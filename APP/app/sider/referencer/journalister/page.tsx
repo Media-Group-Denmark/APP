@@ -9,6 +9,8 @@ import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
+import { Reference } from "@/app/models/reference";
+import { getData } from "@/app/api/data/GetData";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -43,29 +45,8 @@ export const metadata: Metadata = {
   robots: theme.metadata.robots,
   publisher: theme.site_name,
 };
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-export default async function journalister() {
-  async function getData() {
-    const query = `*[ _type == "journalist" ] {
-             _id,
-             name,
-             "slug": slug.current,
-             "image": image.asset
-        }`;
-    try {
-      const data = await client.fetch<Journalist[]>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
-  }
-/* -------------------------------------------------------------------------- */
-/*                                   CONTENT                                  */
-/* -------------------------------------------------------------------------- */
-  const data: Journalist[] = await getData();
+
+const { journalists: data } = await getData() as { journalists: Reference[] };
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">

@@ -8,6 +8,7 @@ import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import type { Metadata } from 'next';
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from '@/app/components/Navigation/Breadcrumb';
+import { getData } from '@/app/api/data/GetData';
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -46,27 +47,8 @@ export const metadata: Metadata = {
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function kategorier() {
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-async function getData() {
-  const query = `*[_type == "category"] {
-    name,
-    _id,
-    "slug": slug.current
-  }`
 
-  try {
-    const data = await client.fetch<Reference[]>(query);
-    return data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    throw error;
-  }
-
-}
-
-const data: Reference[] = await getData();
+  const { categories: data } = await getData() as { categories: Reference[] };
 
   return (
     <main className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">

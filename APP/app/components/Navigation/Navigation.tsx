@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { urlFor } from "@/app/lib/sanityclient";
 import theme from "@/app/lib/theme.json";
 import { ArticleLink } from "../utils/ArticleLink";
-export const revalidate = 80000;
 
 type NavigationItem = {
   name: string;

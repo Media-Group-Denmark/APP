@@ -1,0 +1,31 @@
+export interface singleArticle {
+    _id: string;
+    _createdAt: string;
+    publishedAt: string;
+    _type: string;
+    title: string;
+    teaser: string;
+    articleSlug: string | '';
+    newSlug: any;
+    oldSlugs: string[];
+    republishArticle: boolean;
+    image: {};
+    source: string;
+    tag: string[];
+    tagSlug: string[];
+    category: string | '';
+    categorySlug: string;
+    JournalistName: string;
+    JournalistSlug: string;
+    facebookTitle: string;
+    facebookDescription: string;
+    facebookImage: {};
+    overview: [];
+    views: number | 0;
+    disclaimer: boolean;
+    dayInterval: number;
+    startIndex: number;
+    endIndex: number;
+    reading: number;
+    previewMode: boolean;
+}

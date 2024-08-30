@@ -5,8 +5,7 @@ import Script from "next/script";
 import React from "react";
 import "@/app/stylesheets/articleText.css";
 
-import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/models/article";
+import { urlFor } from "@/app/lib/sanityclient";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 
@@ -27,13 +26,17 @@ import IframeTextBlock from "@/app/components/ArticleInTextBlocks/IframeTextBloc
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
-import { ArticleLink } from "@/app/components/utils/ArticleLink";
-import ArticleInfiniteScroll from "@/app/components/ArticleDisplaySystems/StaticSystems/ArticleInfiniteScroll";
-import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import { findArticle, getData } from "@/app/lib/GetData";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import { getData } from "@/app/api/data/GetData";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
+import { singleArticle } from "@/app/models/singleArticle";
 
-export const revalidate = 600;
+
+async function fetchArticleData(slug: string) {
+  const { singleArticle: data } = await getData(slug) as { singleArticle: singleArticle[] };
+  return data[0] as singleArticle;
+}
+export const revalidate = 1209600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
@@ -42,10 +45,10 @@ export async function generateMetadata({
 }: {
   params: { artikel: string };
 }): Promise<Metadata> {
-  const { articles: data } = await getData() as { articles: Article[] };
 
-  if (data.length > 0) {
-    const mainArticle = findArticle(data, params.artikel) as Article;
+  const mainArticle = await fetchArticleData(params.artikel);
+
+  if (mainArticle) {
 
     return {
       title: mainArticle.title,
@@ -104,9 +107,8 @@ export default async function artikel({
   params: { artikel: string };
 }) {
 
-  const { articles: data } = await getData() as { articles: Article[] };
-  const mainArticle = findArticle(data, params.artikel) as Article;
-  
+  const mainArticle = await fetchArticleData(params.artikel);
+  const data = [mainArticle];
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
@@ -134,7 +136,7 @@ export default async function artikel({
   return (
     <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
-        {mainArticle ? (
+        {data.length > 0 ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
@@ -142,7 +144,7 @@ export default async function artikel({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  
+                  {data.map((mainArticle) =>( 
                     <article key={mainArticle._id} className="w-full rounded-lg">
                       <meta name="article:section" content={mainArticle.category} />
                       <section>
@@ -253,6 +255,8 @@ export default async function artikel({
                       </section>
                       {mainArticle.disclaimer && <Disclaimer />}
                     </article>
+
+                  ))}
                   
               </div>
             </div>
@@ -261,13 +265,13 @@ export default async function artikel({
           <NotFound />
         )}
       </section>
-      <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
+      {/* <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={80} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
               <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
               </div>
-      </section>
+      </section> */}
       {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
     </main>
   );
