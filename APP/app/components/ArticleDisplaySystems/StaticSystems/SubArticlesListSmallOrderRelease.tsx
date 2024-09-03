@@ -45,7 +45,7 @@ export default async function SubArticlesListSmallOrderRelease() {
           key={post._id}
           className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
         >
-          <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug.length > 0 ? post.newSlug : post.articleSlug}`}>
+          <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
             <figure className="relative   lg:shrink-0">
               <img
               width={300}
@@ -77,7 +77,7 @@ export default async function SubArticlesListSmallOrderRelease() {
             </div>
             <header className="group relative max-w-xl">
               <h1 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
-                <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug.length > 0 ? post.newSlug : post.articleSlug}`}>
+                <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
                   <span className="" />
                   {post.title}
                 </ArticleLink>
