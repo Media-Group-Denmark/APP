@@ -6,6 +6,21 @@ import { Reference } from "../../models/reference";
 import { Page } from "../../models/subpage";
 import { client } from "../../lib/sanityclient";
 
+
+
+export async function getMiddlewareData() { 
+  const query = `*[_type == "article" && defined(newSlug)] {
+    _id,
+    republishArticle,
+    "articleSlug": slug.current,
+    "oldSlug": oldSlugs[],
+    "newSlug": newSlug.current
+  }`;
+
+  const data = await client.fetch(query);
+  return data;
+}
+
 export async function getData(slug: string | undefined) {
   const today = new Date().toISOString();
   const query = `
@@ -115,7 +130,6 @@ export async function getData(slug: string | undefined) {
   const data = await client.fetch(query);
   return data;
 }
-
 
 
 
