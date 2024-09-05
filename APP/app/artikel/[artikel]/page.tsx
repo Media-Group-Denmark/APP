@@ -26,15 +26,14 @@ import IframeTextBlock from "@/app/components/ArticleInTextBlocks/IframeTextBloc
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from "@/app/not-found";
-import { ArticleLink } from "@/app/components/utils/ArticleLink";import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import { getData } from "@/app/api/data/GetData";
-import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
+import { ArticleLink } from "@/app/components/utils/ArticleLink";
+import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/models/singleArticle";
 
 
 async function fetchArticleData(slug: string) {
-  const { singleArticle: data } = await getData(slug) as { singleArticle: singleArticle[] };
-  return data[0] as singleArticle;
+  const data: singleArticle  = await getArticleSingleData(slug);
+  return data;
 }
 export const revalidate = 1209600;
 /* -------------------------------------------------------------------------- */
@@ -108,7 +107,6 @@ export default async function artikel({
 }) {
 
   const mainArticle = await fetchArticleData(params.artikel);
-  const data = [mainArticle];
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
@@ -136,7 +134,7 @@ export default async function artikel({
   return (
     <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
-        {data.length > 0 ? (
+        {mainArticle ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
@@ -144,7 +142,7 @@ export default async function artikel({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  {data.map((mainArticle) =>( 
+                  
                     <article key={mainArticle._id} className="w-full rounded-lg">
                       <meta name="article:section" content={mainArticle.category} />
                       <section>
@@ -256,7 +254,7 @@ export default async function artikel({
                       {mainArticle.disclaimer && <Disclaimer />}
                     </article>
 
-                  ))}
+                  
                   
               </div>
             </div>

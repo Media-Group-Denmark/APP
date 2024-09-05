@@ -48,9 +48,9 @@ export const ArticleLink: React.FC<TransitionLinkProps> = ({
       body?.classList.add("page-transition-light-mode");
     } */
 
-    await sleep(100);
+    await sleep(0);
     router.push(href);
-    await sleep(100);
+    await sleep(0);
 
     /* if (darkMode === "on") {
       body?.classList.remove("page-transition-dark-mode");
