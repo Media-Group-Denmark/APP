@@ -21,15 +21,11 @@ export async function getMiddlewareData() {
   return data;
 }
 
-export async function getData(slug: string | undefined) {
-  const today = new Date().toISOString();
-  const query = `
-  {
-    "singleArticle": *[_type == "article" && 
-      (slug.current == "${slug}" || 
+export async function getArticleSingleData(slug: string | undefined) {
+  const query = `*[_type == "article" && (slug.current == "${slug}" || 
       newSlug.current == "${slug}" || 
       "${slug}" in oldSlugs)] | 
-      order(coalesce(publishedAt, _createdAt) desc) {
+      order(coalesce(publishedAt, _createdAt) desc)[0] {
         _id,
         _createdAt,
         publishedAt,
@@ -57,7 +53,15 @@ export async function getData(slug: string | undefined) {
         disclaimer,
         reading,
         previewMode,
-      },
+      }`;
+  const data = await client.fetch(query);
+  return data;
+}
+
+export async function getData(slug: string | undefined) {
+  const today = new Date().toISOString();
+  const query = `
+  {
     "articles": *[_type == "article" && publishedAt <= "${today}" && 
     previewMode == false ] | order(coalesce(publishedAt, _createdAt) desc) [0...150] {
       _id,
