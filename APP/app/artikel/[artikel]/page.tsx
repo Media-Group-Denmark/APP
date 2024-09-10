@@ -29,6 +29,7 @@ import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/models/singleArticle";
+import LoadStrossle from "@/app/components/AdScripts/LoadStrossle";
 
 
 async function fetchArticleData(slug: string) {
@@ -135,26 +136,12 @@ export default async function artikel({
 
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
-      
       <section className="m-auto">
         {mainArticle ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
               strategy="afterInteractive"
-            />
-              <Script id="strossle-init" strategy="lazyOnload">
-              {`
-                window.strossle = window.strossle || function() {
-                  (strossle.q = strossle.q || []).push(arguments);
-                };
-                strossle('afa93f9a-daf1-43d0-aa8a-d47abbbdb710', '.strossle-widget');
-              `}
-            </Script>
-            <Script 
-              src="https://assets.strossle.com/strossle-widget-sdk/1/strossle-widget-sdk.js" 
-              strategy="lazyOnload" 
-              async 
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
@@ -206,6 +193,13 @@ export default async function artikel({
                             </div>
                         </footer>
                         <figure className="relative">
+                          
+      <Script
+        src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+        data-wid="auto"
+        type="text/javascript"
+        strategy="lazyOnload"
+      />
   <img
   width={700}
   height={400}
@@ -269,12 +263,12 @@ export default async function artikel({
                       </section>
                       {mainArticle.disclaimer && <Disclaimer />}
                     </article>
-                    <div className="strossle-widget"></div>
 
                   
                   
               </div>
             </div>
+            <LoadStrossle />
           </>
         ) : (
           <NotFound />
