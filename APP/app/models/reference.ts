@@ -4,5 +4,7 @@ _id: string;
 slug?: string;
 categoryDescription: string;
 tagDescription: string;
+description: [];
+photo: string;
 image: {};
 }

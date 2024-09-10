@@ -42,15 +42,15 @@ export const ArticleLink: React.FC<TransitionLinkProps> = ({
     const body = document.querySelector("body");
     const darkMode = localStorage.getItem("dark mode");
 
-    /* if (darkMode === "on") {
+ /*    if (darkMode === "on") {
       body?.classList.add("page-transition-dark-mode");
     } else {
       body?.classList.add("page-transition-light-mode");
     } */
 
-    await sleep(0);
+    /* await sleep(0); */
     router.push(href);
-    await sleep(0);
+    /* await sleep(1000); */
 
     /* if (darkMode === "on") {
       body?.classList.remove("page-transition-dark-mode");

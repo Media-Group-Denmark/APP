@@ -58,7 +58,7 @@ export default async function PagePreview() {
 
     console.log(groupArticlesByDate, 'her er en gruppe af artikler');
   return (
-    <main className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
+    <section className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
       <AdminSideBar />
         <section className='mt-12'>
           <header className='grid place-content-center text-center'>
@@ -145,6 +145,6 @@ export default async function PagePreview() {
         </section>
         </section>
        
-    </main>
+    </section>
   )
 }

@@ -29,6 +29,8 @@ import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/models/singleArticle";
+import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 
 
 async function fetchArticleData(slug: string) {
@@ -132,7 +134,7 @@ export default async function artikel({
   };
 
   return (
-    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
         {mainArticle ? (
           <>
@@ -271,7 +273,7 @@ export default async function artikel({
               </div>
       </section> */}
       {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
-    </main>
+    </section>
   );
 }
 

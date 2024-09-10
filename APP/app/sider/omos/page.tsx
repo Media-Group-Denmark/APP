@@ -183,7 +183,7 @@ export default async function omos() {
   const data: Page[] = await getData();
 
   return (
-    <main>
+    <section>
       {data ? (
         <>
           <Breadcrumb navItem={'Om Os'} link="" navItemTwo="" />
@@ -194,6 +194,6 @@ export default async function omos() {
           </div>
         </>
       ) : null}
-    </main>
+    </section>
   );
 }

@@ -58,7 +58,7 @@ export default async function ScheduledPost() {
 
     console.log(groupArticlesByDate, 'her er en gruppe af artikler');
   return (
-    <main className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
+    <section className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
       <AdminSideBar />
         <section className='mt-6'>
           <header className='grid place-content-center text-center'>
@@ -146,6 +146,6 @@ export default async function ScheduledPost() {
 
 
         </section>
-    </main>
+    </section>
   )
 }

@@ -2,8 +2,6 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import React from "react";
-import { ArticleLink } from '@/app/components/utils/ArticleLink';
-import { urlFor } from "../../../lib/sanityclient";
 import { Article } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
@@ -12,10 +10,9 @@ import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/Dynamic
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { findCategory, freshData, getData } from "@/app/api/data/GetData";
+import { getCategoryData, getFreshArticleData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import { Reference } from "@/app/models/reference";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -27,36 +24,28 @@ export async function generateMetadata({
   params: { kategori: string };
 }): Promise<Metadata> {
   // Fetch data within the function
-  const { articles: allData, categories: category } = await getData() as { articles: Article[], categories: Reference[] };
-  const currentCategory = findCategory(category, params.kategori) as Reference;
-  if (allData.length > 0) {
-    const article = allData[0];
+  
+  const currentCategory = await getCategoryData(params.kategori);
+
+  if (currentCategory) {
     //console.log("Article", article.title);
     return {
       title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
-      description: currentCategory.categoryDescription || `Kategori ${article.category} - Artikler og Indsigter, ${theme.site_name}`,
-      keywords: `Kategori ${article.category} - Artikler og Indsigter, ${theme.site_name}`,
+      description: currentCategory.categoryDescription || `Kategori ${currentCategory.name} - Artikler og Indsigter, ${theme.site_name}`,
+      keywords: `Kategori ${currentCategory.name} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
         title: `${currentCategory.name} | ${theme.site_name}`,
-        description: currentCategory.categoryDescription || article.teaser,
+        description: currentCategory.categoryDescription || theme.metadata.description,
         url: `${theme.site_name}/artikler/kategori/${currentCategory.slug}`,
         type: "website",
         siteName: `${theme.site_name}`,
         locale: "da_DK",
         images: [
           {
-            url: article.image
-              ? urlFor(article.image)
-                  .format("webp")
-                  .width(400)
-                  .height(300)
-                  .fit("fill")
-                  .quality(85)
-                  .url()
-              : `${theme.logo_public_url}`,
+            url: `${theme.logo_public_url}`,
             width: 800,
             height: 600,
-            alt: `Billede for kategori ${article.category}`,
+            alt: `Billede for kategori ${currentCategory.name}`,
           },
         ],
       },
@@ -64,16 +53,8 @@ export async function generateMetadata({
         card: "summary_large_image",
         site: `${theme.metadata.twitter.site}`,
         title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
-        description: currentCategory.categoryDescription || article.teaser,
-        images: article.image
-          ? urlFor(article.image)
-              .format("webp")
-              .width(400)
-              .height(300)
-              .fit("fill")
-              .quality(85)
-              .url()
-          : `${theme.logo_public_url}`,
+        description: currentCategory.categoryDescription || theme.metadata.description,
+        images: `${theme.logo_public_url}`,
       },
       robots: "index, follow",
       publisher: `${theme.site_name}`,
@@ -94,11 +75,12 @@ export default async function kategori({
   params,
 }: {
   params: { kategori: string };
+
 }) {
-  const { articles: data } = await getData() as { articles: Article[] };
+  const data: Article[] = await getFreshArticleData();
 
   return (
-    <main>
+    <section>
 
       <Breadcrumb navItem={'Kategorier'} link={"/sider/referencer/kategorier"} navItemTwo={params.kategori}/>
 
@@ -135,6 +117,7 @@ export default async function kategori({
                 dayInterval={30}
                 startIndex={0}
                 endIndex={100}
+                articleAmount={6}
                 data={data} category={params.kategori}
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
@@ -156,12 +139,12 @@ export default async function kategori({
             <section className="md:inline-block hidden">
               <SubArticlesGrid data={data} category={params.kategori}  startIndex={3} endIndex={9} />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={20} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={20} articleAmount={6}  />
             </section>
             <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={150} />
+              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={100} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
               <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
@@ -169,7 +152,7 @@ export default async function kategori({
             </section>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
 export const runtime = "edge";

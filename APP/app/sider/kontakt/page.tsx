@@ -180,7 +180,7 @@ export default async function kontaktos() {
   /* -------------------------------------------------------------------------- */
   const data: Page[] = await getData();
   return (
-    <main>
+    <section>
       {data ? (
         <>
           <Breadcrumb navItem={'Kontakt Os'} link="" navItemTwo="" />
@@ -191,6 +191,6 @@ export default async function kontaktos() {
           </div>
         </>
       ) : null}
-    </main>
+    </section>
   );
 }
