@@ -45,7 +45,7 @@ export default async function RootLayout({
        {/*  <AdBlockDetect /> */}
         <MailChimpPopUp />
         <Header />
-        <main>
+        <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 
 
         <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">

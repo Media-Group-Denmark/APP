@@ -72,14 +72,13 @@ export async function generateMetadata({
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
   const data: Article[] = await getFreshArticleData();
-
   return (
     <section>
       {data ? (
         <Breadcrumb navItem={'Tags'} link={"/sider/referencer/tag"} navItemTwo={params.tag}/>
       ) : null}
 
-      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto "> 
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
