@@ -139,16 +139,9 @@ export default async function kategori({
             <section className="md:inline-block hidden">
               <SubArticlesGrid data={data} category={params.kategori}  startIndex={3} endIndex={9} />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={20} articleAmount={6}  />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={100} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={20} articleAmount={6}  />
-            </section>
-            <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={100} />
-              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
-              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
-              </div>
+              <SubArticlesGrid data={data} category={'privatkonomi'} startIndex={0} endIndex={100} articleAmount={6}  />
             </section>
         </div>
       </section>

@@ -100,12 +100,12 @@ export default async function Home() {
                 articleAmount={5} 
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
-              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} articleAmount={2} />
               <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </div>
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
-              <SubArticlesGrid data={data} category={'aktier'} startIndex={4} endIndex={6} />
+              <SubArticlesGrid data={data} category={'nyheder'} startIndex={4} endIndex={6} articleAmount={2} />
               <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </div>
@@ -114,11 +114,11 @@ export default async function Home() {
 
             {/* Desktop */}
             <section className="md:inline-block hidden">
-              <SubArticlesGrid data={data} category={'aktier'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'nyheder'} startIndex={0} endIndex={100} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={100} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatkonomi'} startIndex={0} endIndex={100} articleAmount={6}  />
             </section>
 
             
