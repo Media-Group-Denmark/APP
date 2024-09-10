@@ -106,6 +106,8 @@ export default async function artikel({
   params: { artikel: string };
 }) {
 
+
+  
   const mainArticle = await fetchArticleData(params.artikel);
   const isClient = typeof window !== "undefined";
   
@@ -132,7 +134,8 @@ export default async function artikel({
   };
 
   return (
-    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+      
       <section className="m-auto">
         {mainArticle ? (
           <>
@@ -140,9 +143,22 @@ export default async function artikel({
               src="https://www.tiktok.com/embed.js"
               strategy="afterInteractive"
             />
+              <Script id="strossle-init" strategy="lazyOnload">
+              {`
+                window.strossle = window.strossle || function() {
+                  (strossle.q = strossle.q || []).push(arguments);
+                };
+                strossle('afa93f9a-daf1-43d0-aa8a-d47abbbdb710', '.strossle-widget');
+              `}
+            </Script>
+            <Script 
+              src="https://assets.strossle.com/strossle-widget-sdk/1/strossle-widget-sdk.js" 
+              strategy="lazyOnload" 
+              async 
+            />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  
+              
                     <article key={mainArticle._id} className="w-full rounded-lg">
                       <meta name="article:section" content={mainArticle.category} />
                       <section>
@@ -253,6 +269,7 @@ export default async function artikel({
                       </section>
                       {mainArticle.disclaimer && <Disclaimer />}
                     </article>
+                    <div className="strossle-widget"></div>
 
                   
                   
@@ -263,15 +280,8 @@ export default async function artikel({
           <NotFound />
         )}
       </section>
-      {/* <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={80} />
-              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
-              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
-              </div>
-      </section> */}
       {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
-    </main>
+    </section>
   );
 }
 

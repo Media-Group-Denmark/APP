@@ -3,12 +3,11 @@
 /* -------------------------------------------------------------------------- */
 import React from 'react'
 import { Reference } from '@/app/models/reference'
-import { client} from '@/app/lib/sanityclient';
 import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import type { Metadata } from 'next';
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from '@/app/components/Navigation/Breadcrumb';
-import { getData } from '@/app/api/data/GetData';
+import { getAllCategoriesData } from '@/app/api/data/GetData';
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -48,10 +47,11 @@ export const metadata: Metadata = {
 /* -------------------------------------------------------------------------- */
 export default async function kategorier() {
 
-  const { categories: data } = await getData() as { categories: Reference[] };
+  
+  const data: Reference[] = await getAllCategoriesData();
 
   return (
-    <main className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
+    <section className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>     
       <Breadcrumb navItem={'Kategorier'} link="" navItemTwo="" />
           </>
@@ -64,13 +64,13 @@ export default async function kategorier() {
       >
       <>
         {
-          data.map((kategori) => (
+          data.map((kategori: Reference) => (
             <ArticleLink key={kategori._id} href={`/artikler/kategori/${kategori.slug}`}><p className="col-span-2 bg-second_color_light dark:bg-second_color_dark dark:hover:bg-slate-600 hover:bg-slate-100  text-center text-lg font-semibold py-2 rounded-md max-h-12 w-full object-contain lg:col-span-1 cursor-pointer">{kategori.name}</p></ArticleLink>
           ))
         }
       </>
       </div>
     </div>
-  </main>
+  </section>
   )
 }

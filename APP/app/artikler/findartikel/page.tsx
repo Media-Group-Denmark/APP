@@ -30,11 +30,11 @@ export const revalidate = 6000;
     });
 
     return (
-      <main className="pb-12 lg:w-[980px] m-auto">
+      <section className="pb-12 lg:w-[980px] m-auto">
         <Breadcrumb navItem={'Arkivet'} link="/artikler/findartikel" navItemTwo="" /> 
         <SearchBar category={categories} journalist={journalists} tag={tags} />
         <FindArticle data={filteredItems} startIndex={0} endIndex={100} />
-      </main>
+      </section>
     );
 }
 export const runtime = 'edge';

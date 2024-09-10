@@ -15,9 +15,10 @@ const SubArticlesSixGrid: React.FC<{
   dayInterval?: number | undefined;
   startIndex: number;
   endIndex: number;
-}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex }) => {
+  articleAmount?: number;
+}> =  async ({ data, category, tag, journalist, dayInterval, startIndex, endIndex, articleAmount }) => {
 
-  const slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
+  const slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex, articleAmount);
   return (
     <section className='pb-12'>
       <ArticleLink href={`${theme.site_url}/artikler/kategori/${category}`}>
@@ -80,7 +81,7 @@ const SubArticlesSixGrid: React.FC<{
                 </header>
               </div>
             </div>
-          ))}
+          )).slice(0, articleAmount)}
       </article>
     </section>
   );
