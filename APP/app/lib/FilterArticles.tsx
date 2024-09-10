@@ -13,6 +13,7 @@ export function filterAndSliceArticles(
   if (!data || data.length === 0) {
     return [];
   }
+  
 
   // Find ud af, hvilken dag vi skal filtrere data fra
   const today = new Date();
@@ -25,7 +26,7 @@ export function filterAndSliceArticles(
       const ifDefinedCategory = category ? post.categorySlug === category : true;
       const ifDefinedJournalist = journalist ? post.JournalistSlug === journalist : true;
       const ifDefinedDayInterval = dayInterval ? post.publishedAt >= queryDayIndicator : true;
-      const ifDefinedTag = tag ? post.tagSlug.includes(tag as string) : true;
+      const ifDefinedTag = tag ? Array.isArray(post.tagSlug) && post.tagSlug.some((slug) => slug === tag) : true;
       return ifDefinedCategory && ifDefinedJournalist && ifDefinedDayInterval && ifDefinedTag;
     })
     .slice(startIndex, endIndex);
