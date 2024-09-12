@@ -3,12 +3,11 @@
 /* -------------------------------------------------------------------------- */
 import React from "react";
 import { Reference } from "@/app/models/reference";
-import { client } from "@/app/lib/sanityclient";
 import { ArticleLink } from '@/app/components/utils/ArticleLink';
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
-import { getData } from "@/app/api/data/GetData";
+import { getAllTagsData } from "@/app/api/data/GetData";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -48,12 +47,10 @@ export const metadata: Metadata = {
 /* -------------------------------------------------------------------------- */
 export default async function tag() {
 
-
-  const { tags: data } = await getData() as { tags: Reference[] };
-
+  const data: Reference[] = await getAllTagsData();
 
   return (
-    <main className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
+    <section className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>
       <Breadcrumb navItem={'Tags'} link="" navItemTwo="" />
       </>
@@ -63,7 +60,7 @@ export default async function tag() {
         </h2>
         <div className="mx-auto mt-10 grid max-w-lg grid-cols-2 items-center gap-x-8 gap-y-10 sm:max-w-xl md:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-6">
           <>
-            {data.map((tag) => (
+            {data.map((tag: Reference) => (
               <ArticleLink href={`/artikler/tag/${tag.slug}`}>
                 <p className="col-span-2 bg-second_color_light dark:bg-second_color_dark dark:hover:bg-slate-600 hover:bg-slate-100  text-center text-lg font-semibold py-2 rounded-md max-h-12 w-full object-contain lg:col-span-1 cursor-pointer">
                   {tag.name}
@@ -73,6 +70,6 @@ export default async function tag() {
           </>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

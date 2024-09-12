@@ -10,7 +10,7 @@ import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { Reference } from "@/app/models/reference";
-import { getData } from "@/app/api/data/GetData";
+import { getAllJournalistsData, getData } from "@/app/api/data/GetData";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -48,10 +48,10 @@ export const metadata: Metadata = {
 
 
 export default async function journalister() {
-const { journalists: data } = await getData() as { journalists: Reference[] };
+  const data: Reference[] = await getAllJournalistsData();
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
     
     <Breadcrumb navItem={'Journalister'} link="" navItemTwo="" />
 
@@ -66,7 +66,7 @@ const { journalists: data } = await getData() as { journalists: Reference[] };
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {data
   .filter(journalist => journalist._id !== '860d3b16-1c80-4690-b62f-e885fb5fc093')
-  .map((journalist) => (
+  .map((journalist: Reference) => (
     <ArticleLink href={`/artikler/journalist/${journalist.slug}`} key={journalist._id}>
       <div className="w-full bg-second_color_light dark:bg-second_color_dark rounded-lg p-12 flex flex-col justify-center items-center cursor-pointer">
         <div className="mb-8">
@@ -103,6 +103,6 @@ const { journalists: data } = await getData() as { journalists: Reference[] };
 
          
       </div>
-    </main>
+    </section>
   );
 }

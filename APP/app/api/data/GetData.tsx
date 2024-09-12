@@ -5,10 +5,11 @@ import { Article } from "../../models/article";
 import { Reference } from "../../models/reference";
 import { Page } from "../../models/subpage";
 import { client } from "../../lib/sanityclient";
+import { singleArticle } from "@/app/models/singleArticle";
 
+const today = new Date().toISOString();
 
-
-export async function getMiddlewareData() { 
+export async function getMiddlewareData() {
   const query = `*[_type == "article" && defined(newSlug)] {
     _id,
     republishArticle,
@@ -54,8 +55,151 @@ export async function getArticleSingleData(slug: string | undefined) {
         reading,
         previewMode,
       }`;
+  try {
+    const data = await client.fetch<singleArticle[]>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
+
+export async function getFreshArticleData(
+  categoryDefined: string | undefined = undefined,
+  tagDefined: string | undefined = undefined,
+  journalistDefined: string | undefined = undefined
+) {
+  let filters = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false]`;
+
+  if (categoryDefined) {
+    filters += ` && category->slug.current == "${categoryDefined}"`;
+  }
+
+  if (tagDefined) {
+    filters += ` && "${tagDefined}" in tag[]->slug.current`;
+  }
+
+  if (journalistDefined) {
+    filters += ` && journalist->slug.current == "${journalistDefined}"`;
+  }
+
+  const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
+    _id,
+    publishedAt,
+    _type,
+    title,
+    teaser,
+    republishArticle,
+    "articleSlug": slug.current,
+    "newSlug": newSlug.current,
+    "oldSlugs": oldSlugs[], 
+    "image": metaImage.asset,
+    "category": category->name,
+    "categorySlug": category->slug.current,
+    "tag": tag[]->name,
+    "tagSlug": tag[]->slug.current,
+    "JournalistName": journalist->name,
+    "JournalistSlug": journalist->slug.current,
+    views,
+    previewMode,
+    reading,
+  }`;
+
+  try {
+    const data = await client.fetch<Article[]>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
+
+export async function getCategoryData(slug: string | undefined) {
+  const query = `*[_type == "category" && slug.current == "${slug}"][0] {
+      _id,
+      name,
+      "slug": slug.current,
+      categoryDescription
+    }`;
+    try {
+      const data = await client.fetch<Reference>(query);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+}
+export async function getAllCategoriesData() {
+  const query = `*[_type == "category"] {
+      _id,
+      name,
+      "slug": slug.current,
+    }`;
+    try {
+      const data = await client.fetch<Reference>(query);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+}
+
+export async function getTagData(slug: string | undefined) { 
+  const query = `*[_type == "tag" && slug.current == "${slug}"][0] {
+      _id,
+      name,
+      "slug": slug.current,
+      tagDescription
+    }`;
+    try {
+      const data = await client.fetch<Reference>(query);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+}
+export async function getAllTagsData() {
+  const query = `*[_type == "tag"] {
+      _id,
+      name,
+      "slug": slug.current,
+    }`;
+    try {
+      const data = await client.fetch<Reference>(query);
+      console.log("Data", data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
+}
+
+export async function getJournalistData(slug: string | undefined) {
+  const query = `*[_type == "journalist" && slug.current == "${slug}"][0] {
+      _id,
+      name,
+      description,
+      "image": image.asset,
+      "slug": slug.current
+    }`;
   const data = await client.fetch(query);
   return data;
+}
+
+export async function getAllJournalistsData() {
+  const query = `*[_type == "journalist"] {
+      _id,
+      name,
+      "slug": slug.current
+    }`;
+    try {
+      const data = await client.fetch<Reference>(query);
+      return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      throw error;
+    }
 }
 
 export async function getData(slug: string | undefined) {
@@ -138,14 +282,14 @@ export async function getData(slug: string | undefined) {
 
 
 
-
-
 export function republishData(articles: Article[], slug: string) {
-  return articles.find(article => 
-    article.articleSlug === slug ||
-    (article.oldSlugs && article.oldSlugs.includes(slug)) && 
-    article.newSlug !== '' && 
-    article.republishArticle === true
+  return articles.find(
+    (article) =>
+      article.articleSlug === slug ||
+      (article.oldSlugs &&
+        article.oldSlugs.includes(slug) &&
+        article.newSlug !== "" &&
+        article.republishArticle === true)
   );
 }
 
@@ -158,8 +302,6 @@ export function findTag(tags: Reference[], tag: string) {
   return tags.find(({ slug }) => slug === tag);
 }
 
-
-export const findSubPage = (subPage: Page[], page: string) => { 
+export const findSubPage = (subPage: Page[], page: string) => {
   return subPage.find(({ slug }) => slug === page);
-}
-
+};

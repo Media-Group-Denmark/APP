@@ -9,10 +9,20 @@ import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import theme from "@/app/lib/theme.json";
-import { getData } from "@/app/api/data/GetData";
+import { getData, getFreshArticleData, getJournalistData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
+import { Reference } from "@/app/models/reference";
 
-export const revalidate = 600;
+export const revalidate = 10000;
+
+async function fetchData(slug: string | undefined = undefined) {
+  const data: Article[] = await getFreshArticleData();
+  const currentJournalist: Reference = await getJournalistData(slug);
+  return {
+    data,
+    currentJournalist,
+  };
+}
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
@@ -21,27 +31,27 @@ export async function generateMetadata({
 }: {
   params: { journalist: string };
 }): Promise<Metadata> {
-  const { articles: data } = await getData() as { articles: Article[] };
 
-  if (data.length > 0) {
-    const article = data[0];
+  const { currentJournalist } = await fetchData(params.journalist); 
+
+  if (currentJournalist) {
     return {
-      title: `${article.JournalistName} - Artikler og Indsigter | ${theme.site_name}`,
-      description: Array.isArray(article.JournalistDetails)
-        ? article.JournalistDetails.join(",")
-        : article.JournalistDetails,
-      keywords: `Journalist ${article.JournalistName} - Artikler og Indsigter, ${theme.site_name}`,
+      title: `${currentJournalist.name} - Artikler og Indsigter | ${theme.site_name}`,
+      description: Array.isArray(currentJournalist.description)
+        ? currentJournalist.description.join(",")
+        : currentJournalist.description,
+      keywords: `Journalist ${currentJournalist.name} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
-        title: `${article.JournalistName} | ${theme.site_name}`,
-        description: `${article.JournalistDetails},`,
-        url: `${theme.site_name}/artikler/journalist/${article.articleSlug}`,
+        title: `${currentJournalist.name} | ${theme.site_name}`,
+        description: `${currentJournalist.description},`,
+        url: `${theme.site_name}/artikler/journalist/${currentJournalist.slug}`,
         type: "profile",
         siteName: `${theme.site_name}`,
         locale: "da_DK",
         images: [
           {
-            url: article.JournalistPhoto
-              ? urlFor(article.JournalistPhoto)
+            url: currentJournalist.image
+              ? urlFor(currentJournalist.image)
                   .format("webp")
                   .width(400)
                   .height(300)
@@ -51,17 +61,17 @@ export async function generateMetadata({
               : `${theme.logo_public_url}`,
             width: 800,
             height: 600,
-            alt: `Foto af ${article.JournalistName}`,
+            alt: `Foto af ${currentJournalist.name}`,
           },
         ],
       },
       twitter: {
         card: "summary_large_image",
         site: `${theme.metadata.twitter.site}`,
-        title: `${article.JournalistName} - Artikler og Indsigter | ${theme.site_name}`,
-        description: `${article.JournalistDetails}`,
-        images: article.JournalistPhoto
-          ? urlFor(article.JournalistPhoto)
+        title: `${currentJournalist.name} - Artikler og Indsigter | ${theme.site_name}`,
+        description: `${currentJournalist.description}`,
+        images: currentJournalist.image
+          ? urlFor(currentJournalist.image)
               .format("webp")
               .width(400)
               .height(300)
@@ -90,11 +100,13 @@ export default async function journalist({
 }: {
   params: { journalist: string };
 }) {
-  const { articles: data } = await getData() as { articles: Article[] };
- 
+
+  const { data, currentJournalist } = await fetchData(params.journalist); 
+  console.log('journa', currentJournalist,  currentJournalist.name)
+
   return (
-    <main>
-      {data ? (
+    <section>
+      {data  ? (
         <Breadcrumb navItem={'Journalist'} link={"/sider/referencer/journalister"} navItemTwo={params.journalist}/>
       ) : null}
 
@@ -106,12 +118,12 @@ export default async function journalist({
                 <figure>
                   <Image
                     className="object-center object-cover rounded-full h-24 w-24"
-                    alt={data[0].JournalistName}
+                    alt={currentJournalist.name}
                     width={200}
                     height={200}
                     src={
-                      data[0].JournalistPhoto
-                        ? urlFor(data[0].JournalistPhoto)
+                      currentJournalist.image
+                        ? urlFor(currentJournalist.image)
                             .format("webp")
                             .width(400)
                             .height(300)
@@ -124,7 +136,7 @@ export default async function journalist({
                 </figure>
                 <header className="my-auto sm:ml-4">
                   <h1 className="text-xl  font-bold mb-2">
-                    {data[0].JournalistName}
+                    {currentJournalist.name}
                   </h1>
                   <h2 className="text-base text-fade_color_light dark:text-fade_color_dark font-normal">
                     Journalist
@@ -133,7 +145,7 @@ export default async function journalist({
               </div>
 
               <h3 className="my-auto">
-                <PortableText value={data[0].JournalistDetails} />
+                <PortableText value={currentJournalist.description} />
               </h3>
             </address>
           ) : null}
@@ -144,7 +156,7 @@ export default async function journalist({
         </div>
         
       </section>
-    </main>
+    </section>
   );
 }
 export const runtime = "edge";

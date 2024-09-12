@@ -9,10 +9,10 @@ import ArticleHero from "@/app/components/ArticleDisplaySystems/DynamicSystems/A
 import SubArticlesGrid from "@/app/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { findTag, freshData, getData } from "@/app/api/data/GetData";
+import { getFreshArticleData, getTagData } from "@/app/api/data/GetData";
 import Breadcrumb from "@/app/components/Navigation/Breadcrumb";
 import { SubArticlesInfiniteScroll } from "@/app/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import { Reference } from "@/app/models/reference";
+
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -23,35 +23,25 @@ export async function generateMetadata({
 }: {
   params: { tag: string };
 }): Promise<Metadata> {
-  const { articles: allData, tags: tag } = await getData() as { articles: Article[], tags: Reference[] };
-  const data = freshData(allData);
+  
+  const currentTag = await getTagData(params.tag);
 
-  const currentTag = findTag(tag, params.tag) as Reference;
-  if (data.length > 0) {
-    const article = data[0];
+  if (currentTag) {
 
     return {
       title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
       description: currentTag.tagDescription,
-      keywords: `Tag ${article.tag} - Artikler og Indsigter, ${theme.site_name}`,
+      keywords: `Tag ${currentTag.name} - Artikler og Indsigter, ${theme.site_name}`,
       openGraph: {
         title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
         description: currentTag.tagDescription,
-        url: `${theme.site_name}/artikler/tag/${article.tagSlug}`,
+        url: `${theme.site_name}/artikler/tag/${currentTag.slug}`,
         type: "website",
         siteName: `${theme.site_name}`,
         locale: "da_DK",
         images: [
           {
-            url: article.image
-              ? urlFor(article.image)
-                  .format("webp")
-                  .width(400)
-                  .height(300)
-                  .fit("fill")
-                  .quality(85)
-                  .url()
-              : `${theme.logo_public_url}`,
+            url: `${theme.logo_public_url}`,
             width: 800,
             height: 600,
             alt: `Billede for tag ${currentTag.name}`,
@@ -63,15 +53,7 @@ export async function generateMetadata({
         site: `${theme.metadata.twitter.site}`,
         title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
         description: currentTag.tagDescription,
-        images: article.image
-          ? urlFor(article.image)
-              .format("webp")
-              .width(400)
-              .height(300)
-              .fit("fill")
-              .quality(85)
-              .url()
-          : `${theme.logo_public_url}`,
+        images: `${theme.logo_public_url}`,
       },
       robots: "index, follow",
       publisher: `${theme.site_name}`,
@@ -89,15 +71,14 @@ export async function generateMetadata({
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const { articles: data } = await getData() as { articles: Article[] };
-
+  const data: Article[] = await getFreshArticleData();
   return (
-    <main>
+    <section>
       {data ? (
-        <Breadcrumb navItem={'Tags'} link={"/sider/referencer/tags"} navItemTwo={params.tag}/>
+        <Breadcrumb navItem={'Tags'} link={"/sider/referencer/tag"} navItemTwo={params.tag}/>
       ) : null}
 
-      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto "> 
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
@@ -154,16 +135,9 @@ export default async function tag({ params }: { params: { tag: string } }) {
             />
             <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
           </section>
-          <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={200} />
-              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
-              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
-              </div>
-            </section>
         </div>
       </section>
-    </main>
+    </section>
   );
 }
 export const runtime = "edge";

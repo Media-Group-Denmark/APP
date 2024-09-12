@@ -173,7 +173,7 @@ export default async function page({
   };
 
   return (
-    <main>
+    <section>
       {
         data && (
           <>
@@ -186,7 +186,7 @@ export default async function page({
           </>
         )
       }
-    </main>
+    </section>
   )
 }
 export const runtime = 'edge';

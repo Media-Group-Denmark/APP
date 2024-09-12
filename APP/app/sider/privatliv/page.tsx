@@ -180,7 +180,7 @@ export default async function privatliv() {
   /* -------------------------------------------------------------------------- */
   const data: Page[] = await getData();
   return (
-    <main>
+    <section>
       {data ? (
         <>
           <Breadcrumb navItem={'Privatliv'} link="" navItemTwo="" />
@@ -191,6 +191,6 @@ export default async function privatliv() {
           </div>
         </>
       ) : null}
-    </main>
+    </section>
   );
 }

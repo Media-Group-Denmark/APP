@@ -162,7 +162,7 @@ export default async function artikelPreview({
   };
 
   return (
-    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
       <section className="m-auto">
         {data.length > 0 ? (
@@ -294,7 +294,7 @@ export default async function artikelPreview({
         )}
       </section>
       {data.length > 0 && <PageViewTracker articleId={data[0]._id} />}
-    </main>
+    </section>
   );
 }
 

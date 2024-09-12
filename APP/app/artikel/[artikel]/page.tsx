@@ -29,6 +29,7 @@ import NotFound from "@/app/not-found";
 import { ArticleLink } from "@/app/components/utils/ArticleLink";
 import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/models/singleArticle";
+import LoadStrossle from "@/app/components/AdScripts/LoadStrossle";
 
 
 async function fetchArticleData(slug: string) {
@@ -106,6 +107,8 @@ export default async function artikel({
   params: { artikel: string };
 }) {
 
+
+  
   const mainArticle = await fetchArticleData(params.artikel);
   const isClient = typeof window !== "undefined";
   
@@ -132,7 +135,7 @@ export default async function artikel({
   };
 
   return (
-    <main className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
         {mainArticle ? (
           <>
@@ -142,7 +145,7 @@ export default async function artikel({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  
+              
                     <article key={mainArticle._id} className="w-full rounded-lg">
                       <meta name="article:section" content={mainArticle.category} />
                       <section>
@@ -190,6 +193,13 @@ export default async function artikel({
                             </div>
                         </footer>
                         <figure className="relative">
+                          
+      <Script
+        src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+        data-wid="auto"
+        type="text/javascript"
+        strategy="lazyOnload"
+      />
   <img
   width={700}
   height={400}
@@ -258,20 +268,14 @@ export default async function artikel({
                   
               </div>
             </div>
+            <LoadStrossle />
           </>
         ) : (
           <NotFound />
         )}
       </section>
-      {/* <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={80} />
-              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
-              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
-              </div>
-      </section> */}
       {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
-    </main>
+    </section>
   );
 }
 

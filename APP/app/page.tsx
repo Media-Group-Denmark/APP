@@ -4,14 +4,13 @@
 import { client } from "./lib/sanityclient";
 import { Article } from "./models/article";
 import type { Metadata } from "next";
-import SubArticlesListSmall from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import SubArticlesGrid from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getData, freshData } from "./api/data/GetData";
+import { getFreshArticleData } from "./api/data/GetData";
 import { SubArticlesInfiniteScroll } from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 export const revalidate = 600;
@@ -53,11 +52,10 @@ export const metadata: Metadata = {
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function Home() {
-  const { articles: data } = await getData() as { articles: Article[] };
-  
+  const data: Article[] = await getFreshArticleData();
   
   return (
-    <main>
+    <section>
       <TopNewsSlider
         data={data}
         dayInterval={2}
@@ -101,12 +99,12 @@ export default async function Home() {
                 articleAmount={5} 
               />
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
-              <SubArticlesGrid data={data} startIndex={1} endIndex={3} />
+              <SubArticlesGrid data={data} startIndex={1} endIndex={3} articleAmount={2} />
               <div className="mt-6 block">
                 <ArticleHero data={data} startIndex={3} endIndex={4} />
               </div>
               <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
-              <SubArticlesGrid data={data} category={'aktier'} startIndex={4} endIndex={6} />
+              <SubArticlesGrid data={data} category={'nyheder'} startIndex={4} endIndex={6} articleAmount={2} />
               <div className="mt-4 block">
                 <ArticleHero data={data} startIndex={6} endIndex={7} />
               </div>
@@ -115,22 +113,16 @@ export default async function Home() {
 
             {/* Desktop */}
             <section className="md:inline-block hidden">
-              <SubArticlesGrid data={data} category={'aktier'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'nyheder'} startIndex={0} endIndex={100} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'spare-hacks'} startIndex={0} endIndex={100} articleAmount={6}  />
               <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-              <SubArticlesGrid data={data} category={'privatokonomi'} startIndex={0} endIndex={6} />
+              <SubArticlesGrid data={data} category={'privatkonomi'} startIndex={0} endIndex={100} articleAmount={6}  />
             </section>
 
-            <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
-              <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={150} />
-              <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
-              <aside className='desktop hidden md:block' data-ad-unit-id="/49662453/PengehjoernetDK/Square_2"></aside>
-              <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={100} articleAmount={6}  />
-              </div>
-            </section>
+            
           </div>
       </section>
-    </main>
+    </section>
   );
 }

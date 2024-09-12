@@ -39,24 +39,24 @@ export const ArticleLink: React.FC<TransitionLinkProps> = ({
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const body = document.querySelector("body");
+    const body = document.querySelector(".loadingScreen");
     const darkMode = localStorage.getItem("dark mode");
 
-    /* if (darkMode === "on") {
+    if (darkMode === "on") {
       body?.classList.add("page-transition-dark-mode");
     } else {
       body?.classList.add("page-transition-light-mode");
-    } */
+    }
 
-    await sleep(0);
+    await sleep(100);
     router.push(href);
-    await sleep(0);
+    /* await sleep(1000); */
 
-    /* if (darkMode === "on") {
+    if (darkMode === "on") {
       body?.classList.remove("page-transition-dark-mode");
     } else {
       body?.classList.remove("page-transition-light-mode");
-    } */
+    }
   };
 
   return (
