@@ -9,8 +9,10 @@ import { singleArticle } from "@/app/models/singleArticle";
 
 const today = new Date().toISOString();
 
-export async function getMiddlewareData() {
-  const query = `*[_type == "article" && defined(newSlug)] {
+export async function getMiddlewareData(slug: string | undefined) {
+  console.log("Slug Received", slug);
+  const query = `*[_type == "article" && (newSlug.current == "${slug}" || 
+      "${slug}" in oldSlugs)][0] {
     _id,
     republishArticle,
     "articleSlug": slug.current,
@@ -18,8 +20,13 @@ export async function getMiddlewareData() {
     "newSlug": newSlug.current
   }`;
 
-  const data = await client.fetch(query);
-  return data;
+  try {
+    const data = await client.fetch<singleArticle[]>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function getArticleSingleData(slug: string | undefined) {
