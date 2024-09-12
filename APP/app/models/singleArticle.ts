@@ -6,7 +6,7 @@ export interface singleArticle {
     title: string;
     teaser: string;
     articleSlug: string | '';
-    newSlug: any;
+    newSlug: string | '';
     oldSlugs: string[];
     republishArticle: boolean;
     image: {};
