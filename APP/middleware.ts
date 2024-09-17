@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { getMiddlewareData } from './app/api/data/GetData';
-import { singleArticle } from './app/models/singleArticle';
+import { singleArticle } from './app/(home)/models/singleArticle';
 import theme from './app/lib/theme.json';
 
 export async function middleware(req: NextRequest) {

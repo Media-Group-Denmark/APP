@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Navigation/Header.tsx", "app/components/tools/AdRefresher.jsx", "app/components/MailChimp/MailChimp.js", "warmCache.js", "app/lib/GetRepublishedArticles.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(home)/components/Navigation/Header.tsx", "app/(home)/components/tools/AdRefresher.jsx", "app/(home)/components/MailChimp/MailChimp.js", "warmCache.js", "app/lib/GetRepublishedArticles.js"],
   "exclude": ["node_modules"]
 }

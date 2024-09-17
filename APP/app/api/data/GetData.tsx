@@ -1,11 +1,11 @@
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
-import { Article } from "../../models/article";
-import { Reference } from "../../models/reference";
-import { Page } from "../../models/subpage";
+import { Article } from "../../(home)/models/article";
+import { Reference } from "../../(home)/models/reference";
+import { Page } from "../../(home)/models/subpage";
 import { client } from "../../lib/sanityclient";
-import { singleArticle } from "@/app/models/singleArticle";
+import { singleArticle } from "@/app/(home)/models/singleArticle";
 
 const today = new Date().toISOString();
 
@@ -312,3 +312,36 @@ export function findTag(tags: Reference[], tag: string) {
 export const findSubPage = (subPage: Page[], page: string) => {
   return subPage.find(({ slug }) => slug === page);
 };
+
+export async function getChartArticleData() {
+
+  const query = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) [0...1000] {
+    _id,
+    publishedAt,
+    _type,
+    title,
+    teaser,
+    republishArticle,
+    "articleSlug": slug.current,
+    "newSlug": newSlug.current,
+    "oldSlugs": oldSlugs[], 
+    "image": metaImage.asset,
+    "category": category->name,
+    "categorySlug": category->slug.current,
+    "tag": tag[]->name,
+    "tagSlug": tag[]->slug.current,
+    "JournalistName": journalist->name,
+    "JournalistSlug": journalist->slug.current,
+    views,
+    previewMode,
+    reading,
+  }`;
+
+  try {
+    const data = await client.fetch<Article[]>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
