@@ -39,7 +39,7 @@ const SubArticlesListWide: React.FC<{
                 className="relative isolate flex flex-col gap-8 lg:flex-row mb-10"
               >
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
-                  <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
+                  <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
                     <img
                       width={200}
                       height={300}
@@ -71,7 +71,7 @@ const SubArticlesListWide: React.FC<{
 
                   <header className="group relative max-w-xl">
                     <h2 className="mt-3 text-text_main_color_dark dark:text-text_main_color_light text-lg font-semibold leading-6 dark:group-hover:text-gray-200 group-hover:text-gray-600">
-                      <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
+                      <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
                         <span className="" />
                         {post.title}
                       </ArticleLink>

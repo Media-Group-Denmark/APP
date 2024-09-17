@@ -42,7 +42,7 @@ const ArticleHero: React.FC<{
           <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-clip">
             <ArticleLink
               aria-label="Læs mere om artiklen"
-              href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}
+              href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
             >
               <Image
                 src={urlFor(post.image).url()}
@@ -64,7 +64,7 @@ const ArticleHero: React.FC<{
                   {post.category}
                 </p>
               </ArticleLink>
-              <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
+              <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
                 <h1 className="text-2xl md:text-[2.3em] leading-10 font-extrabold rounded-lg">
                   {post.title}
                 </h1>
