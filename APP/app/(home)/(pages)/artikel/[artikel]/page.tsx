@@ -103,14 +103,13 @@ export async function generateMetadata({
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
 export default async function artikel({
-  params, searchParams
+  params
 }: {
   params: { artikel: string };
-  searchParams: { p: string };
 }) {
 
   
-  const mainArticle = await fetchArticleData(params.artikel, searchParams.p);
+  const mainArticle = await fetchArticleData(params.artikel);
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
