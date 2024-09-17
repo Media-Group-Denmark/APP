@@ -111,7 +111,7 @@ export default async function artikel({
 }) {
 
   
-  const mainArticle = await fetchArticleData(params.artikel, searchParams.p);
+  const mainArticle = await fetchArticleData(params.artikel);
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
