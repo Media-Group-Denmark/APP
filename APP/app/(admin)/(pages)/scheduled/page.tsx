@@ -18,21 +18,11 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
-import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs";
-import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import React from "react";
 import Link from "next/link";
@@ -68,7 +58,6 @@ async function getData() {
         reading
       }`;
   const data = await client.fetch(query);
-  console.log(data, "dataaaaaaaaaaaaaaaaaaaaaaaaaaaa");
   return data;
 }
 

@@ -54,7 +54,6 @@ export default async function page({
 
   const { subPage: page } = await getData(params.undersider) as { subPage: Page[] };
 
-  console.log(page);
   /* -------------------------------------------------------------------------- */
   /*                           ARTICLE IMAGE COMPONENT                          */
   /* -------------------------------------------------------------------------- */

@@ -93,7 +93,6 @@ export async function generateMetadata({
       },
     };
   } else {
-    console.log("Article data is undefined.");
     return {
       title: "Default Title",
     };
@@ -110,7 +109,6 @@ export default async function artikel({
   searchParams: { p: string };
 }) {
 
-console.log('params: ', params, 'searc', searchParams, 'pub', searchParams.p);
   
   const mainArticle = await fetchArticleData(params.artikel, searchParams.p);
   const isClient = typeof window !== "undefined";

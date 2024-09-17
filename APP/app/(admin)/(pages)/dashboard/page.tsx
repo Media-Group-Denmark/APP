@@ -1,5 +1,4 @@
 import React from 'react'
-import AdminSideBar from '../../components/sideBar'
 import { BarChartPublished } from './components/BarChartPublished';
 import { getChartArticleData } from '@/app/api/data/GetData';
 import { Article } from '@/app/(home)/models/article';

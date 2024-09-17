@@ -84,7 +84,6 @@ export async function generateMetadata({
       publisher: `${theme.site_name}`,
     };
   } else {
-    console.log("Article data is undefined.");
     return {
       title: "Default Title",
       robots: "noindex, nofollow", // Added robots meta tag
@@ -102,7 +101,6 @@ export default async function journalist({
 }) {
 
   const { data, currentJournalist } = await fetchData(params.journalist); 
-  console.log('journa', currentJournalist,  currentJournalist.name)
 
   return (
     <section>

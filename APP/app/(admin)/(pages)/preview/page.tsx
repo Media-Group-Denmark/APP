@@ -55,10 +55,8 @@ export default async function PagePreview() {
         return groups;
     }, {});
 
-    console.log(groupArticlesByDate, 'her er en gruppe af artikler');
   return (
     <section className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
-      <AdminSideBar />
         <section className='mt-12'>
           <header className='grid place-content-center text-center'>
               <h1 className='text-4xl'>Artikler i Preview Mode</h1>

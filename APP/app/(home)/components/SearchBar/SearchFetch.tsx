@@ -11,15 +11,12 @@ export async function getData(queryParam) {
       }`
     const data = await client.fetch(query, { queryParam: `${queryParam}*` });
       
-      console.log(`Query: ${queryParam}`);
+     
     return data;
   }
 
 export default async function SearchFetch({ searchParams }: { searchParams: { q?: string } }) {
     const items = await getData(searchParams.q || "");
-    console.log('Props received by SearchFetch:', { searchParams });
-    console.log(items, "items");
-    console.log(searchParams.q, "searchParams");
 
   return (
     <div>

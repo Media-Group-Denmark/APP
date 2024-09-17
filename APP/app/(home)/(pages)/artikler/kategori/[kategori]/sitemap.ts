@@ -5,13 +5,11 @@ import theme from '@/app/lib/theme.json';
 async function getCategories(): Promise<string[]> {
   const query = `*[_type == "category"][].slug.current`;
   const categories = await client.fetch(query);
-  console.log('this runs')
   return categories;
 }
 
 export async function generateSitemaps() {
   const categories = await getCategories();
-  console.log('this runs')
   return categories.map((category, index) => ({ id: category }));
 }
 
@@ -22,12 +20,10 @@ export default async function sitemap({ id }: { id: string }): Promise<MetadataR
       _createdAt,
       "slug": slug.current
     }`, { category: id });
-    console.log(articles);
   const siteArticle = articles.map(article => ({
     url: `${theme.site_url}/artikler/kategori/${id}/${article.slug}`,
     lastModified: new Date(article._createdAt),
   }));
-  console.log('this never runs')
   return [
     {
       url: `${theme.site_url}/artikler/kategori/test`,

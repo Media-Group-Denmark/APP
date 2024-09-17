@@ -7,7 +7,6 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl;
     const slug: string | undefined = url.pathname.split('/').pop();
     const fullPath: string = url.pathname;
-    console.log('fullPath: ', fullPath);
 
     if (url.searchParams.has('redirected')) {
         return NextResponse.next();
@@ -17,8 +16,7 @@ export async function middleware(req: NextRequest) {
     // Fetch the relevant articles
     const data = await getMiddlewareData(slug) as singleArticle[];
     
-    console.log('articleRedirect: ', data);
-    //console.log(`Data: ${JSON.stringify(data)}`);
+    
 
     if (data) {
         // Redirect to the new slug

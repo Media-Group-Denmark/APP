@@ -70,8 +70,7 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
   // Ekstraher navne og nøgleord fra den aktuelle artikeltitel
   const names = extractNames(articleTitle);
 
-  //console.log('Extracted names:', names); // Debugging
-  //console.log('All Articles:', allArticles); // Debugging
+  
 
   // Filtrér de hentede artikler baseret på navne, kategori og ekskluder den aktuelle artikel
   const relatedAutomaticArticles = filterArticlesByCriteria(allArticles, names, articleCategory, currentArticleId);
