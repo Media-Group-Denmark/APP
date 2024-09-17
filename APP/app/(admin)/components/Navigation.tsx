@@ -1,13 +1,10 @@
 'use client'
-import { LineChart, Package, ShoppingCart, Users } from 'lucide-react'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { usePathname, useSearchParams } from 'next/navigation'
 
-export default function Navigation() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+export default function Navigation({searchParams, pathname}) {
+ 
 
   const navItems = [
      {

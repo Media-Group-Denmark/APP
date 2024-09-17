@@ -28,8 +28,7 @@ export default function MailChimpPopUp() {
   }, []);
 
   const handleSubscribe = async (e) => {
-    e.preventDefault(); // Prevent form from submitting traditionally
-    console.log("Subscribing", email);
+    e.preventDefault(); 
     
     setTimeout(() => { closeModal(); }, 1000);
 

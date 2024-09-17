@@ -11,7 +11,6 @@ interface Props {
   const PageViewTracker: React.FC<Props> = ({ articleId }) => {
     useEffect(() => {
       const uniqueId = `${articleId}-${Date.now()}`;
-      console.log('Page view tracked:', uniqueId);
       PageViews(articleId);
     }, [articleId]);
   

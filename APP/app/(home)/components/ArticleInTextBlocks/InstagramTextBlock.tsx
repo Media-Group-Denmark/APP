@@ -6,7 +6,6 @@ interface InstagramTextBlockProps {
 }
 
 const InstagramTextBlock: React.FC<InstagramTextBlockProps> = ({ value }) => {
-    console.log(value.url, 'value.url', 'InstagramTextBlock');
     //const embedUrl = value.url.replace("fb.watch", "www.Instagram.com/watch");
 
     return (

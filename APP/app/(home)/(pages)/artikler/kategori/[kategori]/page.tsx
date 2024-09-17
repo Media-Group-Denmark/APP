@@ -28,7 +28,6 @@ export async function generateMetadata({
   const currentCategory = await getCategoryData(params.kategori);
 
   if (currentCategory) {
-    //console.log("Article", article.title);
     return {
       title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
       description: currentCategory.categoryDescription || `Kategori ${currentCategory.name} - Artikler og Indsigter, ${theme.site_name}`,
@@ -60,7 +59,6 @@ export async function generateMetadata({
       publisher: `${theme.site_name}`,
     };
   } else {
-    console.log("Article data is undefined.");
     return {
       title: "Default Title",
       robots: "noindex, nofollow", // Added robots meta tag

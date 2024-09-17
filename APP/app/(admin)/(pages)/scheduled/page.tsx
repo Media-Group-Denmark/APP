@@ -23,7 +23,6 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs";
-import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import React from "react";
 import Link from "next/link";

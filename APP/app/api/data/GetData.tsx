@@ -10,7 +10,6 @@ import { singleArticle } from "@/app/(home)/models/singleArticle";
 const today = new Date().toISOString();
 
 export async function getMiddlewareData(slug: string | undefined) {
-  console.log("Slug Received", slug);
   const query = `*[_type == "article" && (newSlug.current == "${slug}" || 
       "${slug}" in oldSlugs)][0] {
     _id,
@@ -187,7 +186,6 @@ export async function getAllTagsData() {
     }`;
     try {
       const data = await client.fetch<Reference>(query);
-      console.log("Data", data);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -319,7 +317,6 @@ export function findCategory(categories: Reference[], category: string) {
 }
 
 export function findTag(tags: Reference[], tag: string) {
-  console.log("Tag", tag, tags);
   return tags.find(({ slug }) => slug === tag);
 }
 

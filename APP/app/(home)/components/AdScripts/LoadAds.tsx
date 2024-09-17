@@ -26,7 +26,6 @@ export default function LoadAds() {
 
     loadScript('https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')
     .then(() => {
-      console.log('Scripts loaded successfully');
       return Promise.all(
         scriptUrls
         .filter((url) => url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')

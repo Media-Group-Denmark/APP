@@ -59,7 +59,6 @@ export async function generateMetadata({
       publisher: `${theme.site_name}`,
     };
   } else {
-    console.log("Article data is undefined.");
     return {
       title: "Default Title",
       robots: "noindex, nofollow",

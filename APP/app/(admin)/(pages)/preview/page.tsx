@@ -55,7 +55,6 @@ export default async function PagePreview() {
         return groups;
     }, {});
 
-    console.log(groupArticlesByDate, 'her er en gruppe af artikler');
   return (
     <section className='grid grid-cols-[auto_1fr] place-content-start pt-6'>
       

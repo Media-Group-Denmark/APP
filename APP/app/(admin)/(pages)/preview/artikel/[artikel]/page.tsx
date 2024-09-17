@@ -5,12 +5,11 @@ import Script from "next/script";
 import React from "react";
 import "@/app/stylesheets/articleText.css";
 
-import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/models/article";
+import { urlFor } from "@/app/lib/sanityclient";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
+import Image from "next/image";
 
-import SubArticlesListSmallOrderRelease from "@/app/(home)/components/ArticleDisplaySystems/StaticSystems/SubArticlesListSmallOrderRelease";
 import PageViewTracker from "@/app/(home)/components/ArticleTools/PageViewTracker";
 import { timeSinceText } from "@/app/(home)/components/ArticleTools/TimeSinceTag";
 import Disclaimer from "@/app/(home)/components/ArticleTools/Disclaimer";
@@ -23,39 +22,51 @@ import InstagramTextBlock from "@/app/(home)/components/ArticleInTextBlocks/Inst
 import YouTubeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/YouTubeTextBlock";
 import ReadMoreArticlesBlock from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
 import ReadMoreAutomaticArticlesBlock from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock";
+import IframeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/IframeTextBlock";
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
 import NotFound from '@/app/[...not-found]/page';
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
+import { getArticleSingleData} from "@/app/api/data/GetData";
+import { singleArticle } from "@/app/(home)/models/singleArticle";
+import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 
-export const revalidate = 604800; // 1 uge i sekunder
+
+async function fetchArticleData(slug: string, p: string) {
+  const data: singleArticle  = await getArticleSingleData(slug, p);
+  return data;
+}
+export const revalidate = 1209600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
 export async function generateMetadata({
-  params,
+  params, searchParams
 }: {
   params: { artikel: string };
+  searchParams: { p: string };
 }): Promise<Metadata> {
-  const data: Article[] = await getData({ artikel: params.artikel });
 
-  if (data.length > 0) {
-    const article = data[0];
+  const mainArticle = await fetchArticleData(params.artikel);
+
+
+  if (mainArticle) {
+
     return {
-      title: article.title,
-      description: article.teaser,
-      keywords: article.tag.join(", "),
+      title: mainArticle.title,
+      description: mainArticle.teaser,
+      keywords: mainArticle.tag.join(", "),
       openGraph: {
-        title: article.title,
-        description: article.teaser,
-        url: `${theme.site_url}/artikel/${article.articleSlug}`,
+        title: mainArticle.facebookTitle || mainArticle.title,
+        description: mainArticle.facebookDescription || mainArticle.teaser,
+        url: `${theme.site_url}/artikel/${mainArticle.newSlug || mainArticle.articleSlug}`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
         images: [
           {
-            url: urlFor(article.image)
+            url: urlFor(mainArticle.facebookImage || mainArticle.image)
               .format("webp")
               .width(400)
               .height(300)
@@ -64,16 +75,16 @@ export async function generateMetadata({
               .url(),
             width: 800,
             height: 600,
-            alt: article.title,
+            alt: mainArticle.facebookTitle || mainArticle.title,
           },
         ],
       },
       twitter: {
         card: "summary_large_image",
         site: theme.metadata.twitter.site,
-        title: article.title,
-        description: article.teaser,
-        images: urlFor(article.image)
+        title: mainArticle.title,
+        description: mainArticle.teaser,
+        images: urlFor(mainArticle.image)
           .format("webp")
           .width(400)
           .height(300)
@@ -83,61 +94,24 @@ export async function generateMetadata({
       },
     };
   } else {
-    console.log("Article data is undefined.");
     return {
       title: "Default Title",
     };
   }
 }
-/* -------------------------------------------------------------------------- */
-/*                            GET DATA FROM BACKEND                           */
-/* -------------------------------------------------------------------------- */
-export async function getData(params: { artikel: string }): Promise<Article[]> {
-  const query = `
-              *[
-                _type == "article" && slug.current == "${params.artikel}"
-              ] 
-              | order(coalesce(publishedAt, _createdAt) desc) {
-                _id,
-                _createdAt,
-                _type,
-                title,
-                teaser,
-                publishedAt,
-                "articleSlug": slug.current,
-                overview,
-                views,
-                "image": metaImage.asset,
-                "source": metaImage.asset->description,
-                "category": category->name,
-                "categorySlug": category->slug.current,
-                "tag": tag[]->name,
-                "tagSlug": tag[]->slug.current,
-                "JournalistName": journalist->name,
-                "JournalistSlug": journalist->slug.current,
-                disclaimer,
-              }`;
-  try {
-    const data = await client.fetch<Article[]>(query);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-}
-
 
 /* -------------------------------------------------------------------------- */
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
-export default async function artikelPreview({
-  params,
+export default async function artikel({
+  params, searchParams
 }: {
   params: { artikel: string };
+  searchParams: { p: string };
 }) {
-  const data: Article[] = await getData({ artikel: params.artikel });
-  const mainArticle = data[0];
+
   
+  const mainArticle = await fetchArticleData(params.artikel, searchParams.p);
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
@@ -152,6 +126,7 @@ export default async function artikelPreview({
       tikTok: TikTokTextBlock,
       faceBook: FacebookTextBlock,
       instagram: InstagramTextBlock,
+      iFrame: IframeTextBlock,
       readMore: (props: any) => (
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
@@ -163,9 +138,9 @@ export default async function artikelPreview({
 
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
-      <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
       <section className="m-auto">
-        {data.length > 0 ? (
+      <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
+        {mainArticle ? (
           <>
             <Script
               src="https://www.tiktok.com/embed.js"
@@ -173,129 +148,148 @@ export default async function artikelPreview({
             />
             <div className="py-3 rounded-lg lg:py-8 articleSection ">
               <div className="containerr lg:px-6 grid-cols-1 pt-0 mx-auto articleContent grid gap-6 ">
-                  {data.map((article) => (
-                    <article key={article._id} className="w-full rounded-lg">
-                      <meta name="article:section" content={article.category} />
-                      <section>
-                        <div className="grid ">
+                <article key={mainArticle._id} className="w-full rounded-lg">
+                  <meta name="article:section" content={mainArticle.category} />
+                  <section>
+                    <div className="grid ">
+                      <ArticleLink
+                        href={`/artikler/kategori/${mainArticle.categorySlug}`}
+                      >
+                        <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
+                          {mainArticle.category}
+                        </button>
+                      </ArticleLink>
+                    </div>
+                    <header>
+                      <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
+                        {mainArticle.title}
+                      </h1>
+                    </header>
+                    <footer className="py-1 lg:py-4">
+                      <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
+                        <time
+                          dateTime={mainArticle.publishedAt}
+                          className=" hidden md:block text-xs"
+                        >
+                          {timeSinceText({ date: mainArticle.publishedAt })}
+                        </time>
+
+                        <div className="flex gap-x-2 lg:mt-2 align-middle">
                           <ArticleLink
-                            href={`/artikler/kategori/${article.categorySlug}`}
+                            rel="author"
+                            href={`/artikler/journalist/${mainArticle.JournalistSlug}`}
                           >
-                            <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
-                              {article.category}
+                            <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
+                              Skrevet af:{" "}
+                              <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
+                                {mainArticle.JournalistName}
+                              </b>
+                            </p>
+                          </ArticleLink>
+                          <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
+                            D.{" "}
+                            {new Date(
+                              mainArticle.publishedAt
+                            ).toLocaleDateString()}
+                          </time>
+                        </div>
+                      </div>
+                    </footer>
+                    {/* <Script
+        src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+        data-wid="auto"
+        type="text/javascript"
+        strategy="lazyOnload"
+      /> */}
+
+                    <figure className="relative h-[14em] md:h-[25em] overflow-clip">
+                      <Image
+                        src={urlFor(mainArticle.image)
+                          .format("webp")
+                          .width(700)
+                          .height(400)
+                          .quality(100)
+                          .url()}
+                        alt={`Billede af ${mainArticle.source}`}
+                        className="block w-full  bg-gray-300 rounded-t-lg object-cover"
+                        loading="eager"
+                        layout="fill"
+                        priority={true}
+                        sizes="(max-width: 800px) 100vw, 700px"
+                      />
+                      <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+                        Foto: {mainArticle.source}
+                      </figcaption>
+                    </figure>
+
+                    <div className="my-2 px-3">
+                      <span className="text-xs lg:text-sm">
+                        Artiklens Tags:{" "}
+                      </span>
+                      {mainArticle.tag.map((tag, index) => (
+                        <React.Fragment key={index}>
+                          {index > 0 ? " " : ""}{" "}
+                          <ArticleLink
+                            href={`/artikler/tag/${mainArticle.tagSlug[index]}`}
+                          >
+                            <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
+                              {tag}
                             </button>
                           </ArticleLink>
-                        </div>
-                        <header>
-                          <h1 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
-                            {article.title}
-                          </h1>
-                        </header>
-                        <footer className="py-1 lg:py-4">
-                            <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
-                                <time
-                                  dateTime={article.publishedAt}
-                                  className=" hidden md:block text-xs"
-                                >
-                                  {timeSinceText({ date: article.publishedAt })} 
-                                </time>
-                                
-                               <div className="flex gap-x-2 lg:mt-2 align-middle">
-                               <ArticleLink
-                               rel="author"
-                                 href={`/artikler/journalist/${article.JournalistSlug}`}
-                               >
-                                  <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
-                                    Skrevet af:{" "}
-                                    <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
-                                      {article.JournalistName}
-                                    </b>
-                                  </p>
-                                    </ArticleLink>
-                                  <time className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs ">
-                                    D. {new Date(
-                                      article.publishedAt
-                                    ).toLocaleDateString()}
-                                  </time>
-                              </div>
-                            </div>
-                        </footer>
-                        <figure className="relative">
-  <img
-  width={700}
-  height={400}
-    src={urlFor(article.image)
-      .format("webp")
-      .width(700)
-      .height(400)
-      .fit("fill")
-      .quality(85)
-      .url()}
-    alt={`Billede af ${article.source}`}
-    className="block w-full h-[14em] md:h-[25em] bg-gray-300 rounded-t-lg object-cover"
-  />
-  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-    Foto: {article.source}
-  </figcaption>
-</figure>
+                        </React.Fragment>
+                      ))}
+                    </div>
+                    <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
+                      {mainArticle.teaser}
+                    </h2>
+                  </section>
 
-                        <div className="my-2 px-3">
-                          <span className="text-xs lg:text-sm">
-                            Artiklens Tags:{" "}
-                          </span>
-                          {article.tag.map((tag, index) => (
-                            <React.Fragment key={index}>
-                              {index > 0 ? " " : ""}{" "}
-                              <ArticleLink
-                                href={`/artikler/tag/${article.tagSlug[index]}`}
-                              >
-                                <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
-                                  {tag}
-                                </button>
-                              </ArticleLink>
-                            </React.Fragment>
-                          ))}
-                        </div>
-                        <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
-                          {article.teaser}
-                        </h2>
-                      </section>
-                      
-                      <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"></aside>
+                  <aside
+                    className="mobile md:hidden"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"
+                  ></aside>
 
-                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
+                  <aside
+                    className="desktop hidden md:grid"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"
+                  ></aside>
 
-                      <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
-                        <PortableText
-                          value={article.overview}
-                          components={components}
-                        />
-                      </section>
-                      <aside className="desktop hidden md:grid" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
-                      <section>
-                        <SocialMediaShareButtons
-                        views={`${article.views}`}
-                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
-                        />
-                        <MobileSocialMediaShareButtons
-                        views={`${article.views}`}
-                          articleUrl={`${theme.site_url}/artikel/${article.articleSlug}`}
-                        />
-                      </section>
-                      {article.disclaimer && <Disclaimer />}
-                      <SubArticlesListSmallOrderRelease />
-                    </article>
-                  ))}
+                  <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
+                    <PortableText
+                      value={mainArticle.overview}
+                      components={components}
+                    />
+                  </section>
+                  <aside
+                    className="desktop hidden md:grid"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"
+                  ></aside>
+                  <section>
+                    <SocialMediaShareButtons
+                      views={`${mainArticle.views}`}
+                      articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
+                    />
+                    <MobileSocialMediaShareButtons
+                      views={`${mainArticle.views}`}
+                      articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
+                    />
+                  </section>
+                  {mainArticle.disclaimer && <Disclaimer />}
+                </article>
               </div>
             </div>
+            <LoadStrossle />
           </>
-        ) : (
-          <NotFound />
-        )}
+        ) : null}
       </section>
-      {data.length > 0 && <PageViewTracker articleId={data[0]._id} />}
+      {mainArticle && <PageViewTracker articleId={mainArticle._id} />}
     </section>
   );
 }
 
 export const runtime = "edge";
+
+
+
+
+
