@@ -18,15 +18,6 @@ import {
   TableRow,
 } from "../../components/ui/table";
 import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
-import {
   Tabs,
   TabsContent,
   TabsList,
@@ -68,7 +59,6 @@ async function getData() {
         reading
       }`;
   const data = await client.fetch(query);
-  console.log(data, "dataaaaaaaaaaaaaaaaaaaaaaaaaaaa");
   return data;
 }
 

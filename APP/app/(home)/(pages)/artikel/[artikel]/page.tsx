@@ -47,7 +47,7 @@ export async function generateMetadata({
   searchParams: { p: string };
 }): Promise<Metadata> {
 
-  const mainArticle = await fetchArticleData(params.artikel);
+  const mainArticle = await fetchArticleData(params.artikel, searchParams.p);
 
 
   if (mainArticle) {

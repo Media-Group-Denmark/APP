@@ -26,7 +26,7 @@ import ReadMoreAutomaticArticlesBlock from "@/app/(home)/components/ArticleInTex
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
-import NotFound from "@/app/(home)/not-found";
+import NotFound from '@/app/[...not-found]/page';
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
 export const revalidate = 604800; // 1 uge i sekunder
