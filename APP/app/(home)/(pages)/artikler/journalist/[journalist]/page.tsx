@@ -3,7 +3,7 @@
 /* -------------------------------------------------------------------------- */
 import React from "react";
 import Image from "next/image";
-import { urlFor } from "../../../lib/sanityclient";
+import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "../../../../models/article";
 import { PortableText } from "next-sanity";
 import type { Metadata } from "next";

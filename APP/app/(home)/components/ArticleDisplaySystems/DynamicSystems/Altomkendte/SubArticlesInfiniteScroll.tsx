@@ -38,7 +38,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       }`}
                     >
                       <figure className={`relative ${isMainArticle ? 'max-w-none' : 'max-w-[100px] md:max-w-none'}`} >
-                        <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                        <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                           <img
                             width={400}
                             height={400}
@@ -69,7 +69,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                         </aside>
                         <header className={`group max-w-xl ${isMainArticle ? 'h-[12em]' : 'h-[7em] lg:h-[12em]'} overflow-clip`}>
                           <h1 className={`mt-2 ${isMainArticle ? 'text-lg md:text-2xl' : 'text-md md:text-md'} font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600`}>
-                            <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                            <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                               <span className="" />
                               {post.title}
                             </ArticleLink>

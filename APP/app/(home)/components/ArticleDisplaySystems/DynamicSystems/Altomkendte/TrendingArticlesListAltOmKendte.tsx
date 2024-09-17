@@ -41,7 +41,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                   <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-clip">
                     <ArticleLink
                       aria-label="Læs mere om artiklen"
-                      href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
+                      href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}
                     >
                       <img
                       width={400}
@@ -82,7 +82,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
 
                       {/*  Image Mobile Start */}
                       <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-clip">
-                        <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                        <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                           <img
                           width={300}
                           height={300}
@@ -116,7 +116,7 @@ const TrendingArticlesListAltOmKendte: React.FC<{
                         {/*  Title Start */}
                         <ArticleLink
                           className="ml-4 md:ml-0"
-                          href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
+                          href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}
                         >
                           <h2 className="ml-2 text-main_color_dark dark:text-main_color_light font-semibold  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
                             {post.title}

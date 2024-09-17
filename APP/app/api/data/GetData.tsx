@@ -29,11 +29,23 @@ export async function getMiddlewareData(slug: string | undefined) {
   }
 }
 
-export async function getArticleSingleData(slug: string | undefined) {
-  const query = `*[_type == "article" && (slug.current == "${slug}" || 
+export async function getArticleSingleData(slug: string | undefined, dato: string | undefined) {
+  let query = `*[_type == "article"`;
+
+  // Tilføj dato-filter først, hvis defineret
+  if (dato) {
+    const formattedDate = new Date(dato).toISOString().split('T')[0]; 
+    query += ` && publishedAt >= "${formattedDate}"`;
+  }
+  
+  // Tilføj slug-filtrering
+  query += ` && (slug.current == "${slug}" || 
       newSlug.current == "${slug}" || 
-      "${slug}" in oldSlugs)] | 
-      order(coalesce(publishedAt, _createdAt) desc)[0] {
+      "${slug}" in oldSlugs)]`;
+
+
+  // Tilføj ordren og resten af data, når filtrene er opsat
+  query += ` | order(coalesce(publishedAt, _createdAt) desc)[0] {
         _id,
         _createdAt,
         publishedAt,
@@ -62,6 +74,7 @@ export async function getArticleSingleData(slug: string | undefined) {
         reading,
         previewMode,
       }`;
+
   try {
     const data = await client.fetch<singleArticle[]>(query);
     return data;
@@ -235,7 +248,8 @@ export async function getData(slug: string | undefined) {
       previewMode,
       reading,
     },
-     "allArticles": *[_type == "article"] | order(coalesce(publishedAt, _createdAt) desc) {
+     "allArticles": *[_type == "article" && publishedAt <= "${today}" && 
+    previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) {
       _id,
       publishedAt,
       _type,

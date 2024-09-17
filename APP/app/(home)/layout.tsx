@@ -18,8 +18,8 @@ import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/
 import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
 import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
-const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish' });
+const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap', });
+const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish', display: 'swap', });
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */

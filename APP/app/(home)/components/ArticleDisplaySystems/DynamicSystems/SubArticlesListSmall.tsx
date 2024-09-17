@@ -25,7 +25,7 @@ const SubArticlesListSmall: React.FC<{
               className="relative isolate flex flex-col gap-4 md:gap-8 lg:flex-row mb-10 border-b-slate-100 dark:border-b-slate-600 border-b-[1px] pb-2"
             >
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0">
-              <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+              <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                   <img
                     width={400}
                     height={400}
@@ -56,7 +56,7 @@ const SubArticlesListSmall: React.FC<{
                 </aside>
                 <header className="group relative max-w-xl h-[10em] md:h-[12em] overflow-clip">
                   <h1 className="mt-2 text-md md:text-md font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600">
-                    <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                    <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                       <span className="" />
                       {post.title}
                     </ArticleLink>

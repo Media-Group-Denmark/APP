@@ -81,7 +81,7 @@ export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, art
       <ul className="list-disc list-inside grid gap-2 !mx-0">
         {relatedAutomaticArticles.map((post) => (
           <li className='elementList' key={post._id}>
-            <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+            <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
               <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
                 <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
                   <img

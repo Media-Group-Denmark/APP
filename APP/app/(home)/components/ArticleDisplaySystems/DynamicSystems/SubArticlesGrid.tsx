@@ -41,7 +41,7 @@ const SubArticlesSixGrid: React.FC<{
               className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
             >
               <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
-                <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                <ArticleLink aria-label="Læs mere om artiklen" href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                   <img
                   width={400}
                   height={300}
@@ -73,7 +73,7 @@ const SubArticlesSixGrid: React.FC<{
                   </time>
                 </aside>
                 <header>
-                  <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                  <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}?p=${new Date(post.publishedAt).toLocaleDateString()}`}>
                     <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
                       {post.title}
                     </h1>
