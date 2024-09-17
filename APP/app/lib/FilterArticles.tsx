@@ -1,4 +1,4 @@
-import { Article } from "../models/article";
+import { Article } from "../(home)/models/article";
 
 export function filterAndSliceArticles(
   data: Article[] = [],

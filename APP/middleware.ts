@@ -1,42 +1,36 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { getMiddlewareData } from './app/api/data/GetData';
-import { singleArticle } from './app/models/singleArticle';
+import { singleArticle } from './app/(home)/models/singleArticle';
+import theme from './app/lib/theme.json';
 
 export async function middleware(req: NextRequest) {
     const url = req.nextUrl;
     const slug: string | undefined = url.pathname.split('/').pop();
+    const fullPath: string = url.pathname;
+    console.log('fullPath: ', fullPath);
 
-    // Check for the 'redirected' query parameter to prevent redirect loop
     if (url.searchParams.has('redirected')) {
         return NextResponse.next();
     }
 
-    console.log(`Checking for redirect for slug: ${slug}`);
 
     // Fetch the relevant articles
-    const data = await getMiddlewareData() as singleArticle[];
+    const data = await getMiddlewareData(slug) as singleArticle[];
+    
+    console.log('articleRedirect: ', data);
+    //console.log(`Data: ${JSON.stringify(data)}`);
 
-    console.log(`Data: ${JSON.stringify(data)}`);
-
-    // Find the article by newSlug, articleSlug, or oldSlugs
-    const article = 
-    data.find(({ articleSlug }) => articleSlug === slug) ||
-    data.find(({ newSlug }) => newSlug === slug) ||
-    data.find(({ oldSlugs }) => oldSlugs && oldSlugs.includes(slug));
-
-    if (article && article.newSlug) {
+    if (data) {
         // Redirect to the new slug
-        const redirectUrl = new URL(`/artikel/${article.newSlug}`, req.url);
-        redirectUrl.searchParams.set('redirected', 'true');  // Add query parameter to prevent loop
+        const redirectUrl = new URL(`${theme.site_url}/artikel/${data.newSlug}`, req.url);
+        redirectUrl.searchParams.set('redirected', 'true');
         return NextResponse.redirect(redirectUrl, 301);
-    } else {
-        console.log(`No redirect needed for slug: ${slug}`);
-        NextResponse.next();
-    }
-
-    return NextResponse.next();
+    } 
+    const redirectUrl = new URL(`${theme.site_url}${fullPath}`, req.url);
+    redirectUrl.searchParams.set('redirected', 'true');  
+    return NextResponse.redirect(redirectUrl, 301);
 }
 
 export const config = {
-    matcher: '/artikel/:path*',
+    matcher: '/:path*',
 };
