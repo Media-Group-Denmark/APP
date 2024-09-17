@@ -41,10 +41,9 @@ export const revalidate = 1209600;
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
 export async function generateMetadata({
-  params, searchParams
+  params
 }: {
   params: { artikel: string };
-  searchParams: { p: string };
 }): Promise<Metadata> {
 
   const mainArticle = await fetchArticleData(params.artikel);

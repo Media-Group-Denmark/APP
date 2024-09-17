@@ -104,10 +104,9 @@ export async function generateMetadata({
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
 export default async function artikel({
-  params, searchParams
+  params
 }: {
   params: { artikel: string };
-  searchParams: { p: string };
 }) {
 
   
