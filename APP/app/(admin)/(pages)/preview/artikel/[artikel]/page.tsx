@@ -26,6 +26,7 @@ import IframeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/IframeT
 
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
+import NotFound from '@/app/[...not-found]/page';
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/(home)/models/singleArticle";
