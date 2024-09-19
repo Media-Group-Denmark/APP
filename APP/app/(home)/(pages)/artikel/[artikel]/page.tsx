@@ -32,11 +32,11 @@ import { singleArticle } from "@/app/(home)/models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 
 
-async function fetchArticleData(slug: string, p: string) {
-  const data: singleArticle  = await getArticleSingleData(slug, p);
+async function fetchArticleData(slug: string) {
+  const data: singleArticle  = await getArticleSingleData(slug);
   return data;
 }
-export const revalidate = 1209600;
+export const revalidate = 6000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
@@ -242,12 +242,12 @@ export default async function artikel({
 
                   <aside
                     className="mobile md:hidden"
-                    data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/mobile_square_article_1"
                   ></aside>
 
                   <aside
                     className="desktop hidden md:grid"
-                    data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/square_article_1"
                   ></aside>
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
@@ -256,10 +256,6 @@ export default async function artikel({
                       components={components}
                     />
                   </section>
-                  <aside
-                    className="desktop hidden md:grid"
-                    data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"
-                  ></aside>
                   <section>
                     <SocialMediaShareButtons
                       views={`${mainArticle.views}`}

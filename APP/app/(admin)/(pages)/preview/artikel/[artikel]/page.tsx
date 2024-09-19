@@ -244,7 +244,7 @@ export default async function artikel({
 
                   <aside
                     className="mobile md:hidden"
-                    data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Article_1"
+                    data-ad-unit-id="/49662453/PengehjoernetDK/mobile_square_article_1"
                   ></aside>
 
                   <aside
