@@ -11,7 +11,6 @@ export const client = createClient({
 export async function PageViews(articleId: string) {
   try {
     await client.patch(articleId).inc({ views: 1 }).commit();
-    console.log('Article views incremented');
   } catch (error) {
     console.error('Error incrementing article views :', error);
     console.error('Article ID:', articleId);

@@ -1,16 +1,15 @@
 /* -------------------------------------------------------------------------- */
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
-import { Article } from "../../models/article";
-import { Reference } from "../../models/reference";
-import { Page } from "../../models/subpage";
+import { Article } from "../../(home)/models/article";
+import { Reference } from "../../(home)/models/reference";
+import { Page } from "../../(home)/models/subpage";
 import { client } from "../../lib/sanityclient";
-import { singleArticle } from "@/app/models/singleArticle";
+import { singleArticle } from "@/app/(home)/models/singleArticle";
 
 const today = new Date().toISOString();
 
 export async function getMiddlewareData(slug: string | undefined) {
-  console.log("Slug Received", slug);
   const query = `*[_type == "article" && (newSlug.current == "${slug}" || 
       "${slug}" in oldSlugs)][0] {
     _id,
@@ -29,11 +28,23 @@ export async function getMiddlewareData(slug: string | undefined) {
   }
 }
 
-export async function getArticleSingleData(slug: string | undefined) {
-  const query = `*[_type == "article" && (slug.current == "${slug}" || 
+export async function getArticleSingleData(slug: string | undefined, dato: string | undefined) {
+  let query = `*[_type == "article"`;
+
+  // Tilføj dato-filter først, hvis defineret
+  if (dato) {
+    const formattedDate = new Date(dato).toISOString().split('T')[0]; 
+    query += ` && publishedAt >= "${formattedDate}"`;
+  }
+  
+  // Tilføj slug-filtrering
+  query += ` && (slug.current == "${slug}" || 
       newSlug.current == "${slug}" || 
-      "${slug}" in oldSlugs)] | 
-      order(coalesce(publishedAt, _createdAt) desc)[0] {
+      "${slug}" in oldSlugs)]`;
+
+
+  // Tilføj ordren og resten af data, når filtrene er opsat
+  query += ` | order(coalesce(publishedAt, _createdAt) desc)[0] {
         _id,
         _createdAt,
         publishedAt,
@@ -62,6 +73,7 @@ export async function getArticleSingleData(slug: string | undefined) {
         reading,
         previewMode,
       }`;
+
   try {
     const data = await client.fetch<singleArticle[]>(query);
     return data;
@@ -174,7 +186,6 @@ export async function getAllTagsData() {
     }`;
     try {
       const data = await client.fetch<Reference>(query);
-      console.log("Data", data);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -235,7 +246,8 @@ export async function getData(slug: string | undefined) {
       previewMode,
       reading,
     },
-     "allArticles": *[_type == "article"] | order(coalesce(publishedAt, _createdAt) desc) {
+     "allArticles": *[_type == "article" && publishedAt <= "${today}" && 
+    previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) {
       _id,
       publishedAt,
       _type,
@@ -305,10 +317,42 @@ export function findCategory(categories: Reference[], category: string) {
 }
 
 export function findTag(tags: Reference[], tag: string) {
-  console.log("Tag", tag, tags);
   return tags.find(({ slug }) => slug === tag);
 }
 
 export const findSubPage = (subPage: Page[], page: string) => {
   return subPage.find(({ slug }) => slug === page);
 };
+
+export async function getChartArticleData() {
+
+  const query = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) [0...1000] {
+    _id,
+    publishedAt,
+    _type,
+    title,
+    teaser,
+    republishArticle,
+    "articleSlug": slug.current,
+    "newSlug": newSlug.current,
+    "oldSlugs": oldSlugs[], 
+    "image": metaImage.asset,
+    "category": category->name,
+    "categorySlug": category->slug.current,
+    "tag": tag[]->name,
+    "tagSlug": tag[]->slug.current,
+    "JournalistName": journalist->name,
+    "JournalistSlug": journalist->slug.current,
+    views,
+    previewMode,
+    reading,
+  }`;
+
+  try {
+    const data = await client.fetch<Article[]>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+}
