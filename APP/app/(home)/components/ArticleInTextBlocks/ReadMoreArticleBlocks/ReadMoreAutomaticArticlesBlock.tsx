@@ -1,5 +1,5 @@
 import { urlFor } from '@/app/lib/sanityclient';
-import { getData } from '@/app/api/data/GetData';
+import { getData, getFreshArticleData } from '@/app/api/data/GetData';
 import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
 import React from 'react';
 import ReadMoreAutomaticViews from './ReadMoreAutomaticViews';
@@ -8,23 +8,13 @@ import { Article } from '@/app/(home)/models/article';
 // Global liste over uønskede nøgleord
 const EXCLUDED_WORDS = ["til", "at", "er", "og", "på", "i", "en", "du", "for", "med", "af"];
 
-/**
- * Ekstraherer navne fra titlen. Navne defineres som ord, der starter med stort bogstav,
- * og som ikke er inkluderet i nøgleordene.
- * @param {string} title - Artikeltitel.
- * @returns {string[]} - Liste af navne med stort bogstav.
- */
+
 function extractNames(title) {
   return title
     .split(' ')
     .filter(word => word && word[0] === word[0].toUpperCase() && !EXCLUDED_WORDS.includes(word.toLowerCase()));
 }
 
-/**
- * Ekstraherer nøgleord fra titlen, som ikke er små almindelige ord.
- * @param {string} title - Artikeltitel.
- * @returns {string[]} - Liste af relevante nøgleord i små bogstaver.
- */
 function extractKeywords(title) {
   return title
     .toLowerCase()
@@ -33,15 +23,7 @@ function extractKeywords(title) {
     .filter(word => word.length > 1 && !EXCLUDED_WORDS.includes(word));
 }
 
-/**
- * Filtrerer artikler baseret på navne og kategori, og prioriterer de artikler
- * med højest antal views.
- * @param {Object[]} articles - Liste af artikler.
- * @param {string[]} names - Navne ekstraheret fra den aktuelle artikeltitel.
- * @param {string} category - Kategori af den aktuelle artikel.
- * @param {string} currentArticleId - ID på den aktuelle artikel for at ekskludere den.
- * @returns {Object[]} - Liste af de to bedst matchende artikler.
- */
+
 function filterArticlesByCriteria(articles, names, category, currentArticleId) {
   // Ekskluder den aktuelle artikel baseret på _id
   const filteredArticles = articles.filter(article => article._id !== currentArticleId);
@@ -63,9 +45,11 @@ function filterArticlesByCriteria(articles, names, category, currentArticleId) {
   return byNames.concat(byCategory).slice(0, 2);
 }
 
+// Find main artikel
+
 export default async function ReadMoreAutomaticArticlesBlock({ articleTitle, articleCategory, currentArticleId }) {
   // Hent alle artikler
-  const { articles: allArticles} = await getData() as { articles: Article[] };
+  const allArticles: Article[] = await getFreshArticleData();
 
   // Ekstraher navne og nøgleord fra den aktuelle artikeltitel
   const names = extractNames(articleTitle);

@@ -21,7 +21,6 @@ import TikTokTextBlock from "@/app/(home)/components/ArticleInTextBlocks/TikTokT
 import InstagramTextBlock from "@/app/(home)/components/ArticleInTextBlocks/InstagramTextBlock";
 import YouTubeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/YouTubeTextBlock";
 import ReadMoreArticlesBlock from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
-import ReadMoreAutomaticArticlesBlock from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock";
 import IframeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/IframeTextBlock";
 
 import theme from "@/app/lib/theme.json";
@@ -30,6 +29,8 @@ import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { getArticleSingleData} from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/(home)/models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
+import dynamic from "next/dynamic";
+import ReadMoreArticlesSkeleton from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
 
 
 async function fetchArticleData(slug: string) {
@@ -98,6 +99,19 @@ export async function generateMetadata({
   }
 }
 
+const DynamicReadMore = dynamic(() => 
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(import('@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock'));
+    }, 5000); // 3 sekunders forsinkelse
+  }), 
+  {
+    loading: () => <ReadMoreArticlesSkeleton />,
+  }
+);
+
+
+
 /* -------------------------------------------------------------------------- */
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
@@ -109,6 +123,7 @@ export default async function artikel({
 
   
   const mainArticle = await fetchArticleData(params.artikel);
+  
   const isClient = typeof window !== "undefined";
   
   await generateMetadata({ params });
@@ -128,11 +143,12 @@ export default async function artikel({
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
       readMoreAutomatic: (props: any) => (
-        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
+        <DynamicReadMore articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
       ),
     },
   };
-
+  
+  {/* <ReadMoreAutomaticArticlesBlock articleTitle={cookies().get('name')} articleCategory={cookies().get('category')} currentArticleId={cookies().get('articleId')} /> */}
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">

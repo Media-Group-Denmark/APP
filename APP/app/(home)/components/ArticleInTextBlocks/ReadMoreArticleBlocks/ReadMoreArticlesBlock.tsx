@@ -14,7 +14,7 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
       title,
       views,
       "articleSlug": slug.current,
-    }
+    }[0]
   `;
   try {
     if (!articleIds || articleIds.length === 0) {
