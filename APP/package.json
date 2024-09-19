@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "publish": "git pull && npm i --force && npm run build && pm2 restart all",
+    "merge": "git merge --no-commit --no-ff main",
+    "publish": "npm i --force && npm run build && pm2 restart all",
     "lint": "next lint"
   },
   "dependencies": {
