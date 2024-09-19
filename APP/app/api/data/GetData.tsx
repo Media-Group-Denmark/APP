@@ -28,14 +28,8 @@ export async function getMiddlewareData(slug: string | undefined) {
   }
 }
 
-export async function getArticleSingleData(slug: string | undefined, dato: string | undefined) {
+export async function getArticleSingleData(slug: string | undefined) {
   let query = `*[_type == "article"`;
-
-  // Tilføj dato-filter først, hvis defineret
-  if (dato) {
-    const formattedDate = new Date(dato).toISOString().split('T')[0]; 
-    query += ` && publishedAt >= "${formattedDate}"`;
-  }
   
   // Tilføj slug-filtrering
   query += ` && (slug.current == "${slug}" || 
@@ -102,7 +96,7 @@ export async function getFreshArticleData(
     filters += ` && journalist->slug.current == "${journalistDefined}"`;
   }
 
-  const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
+  const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...100] {
     _id,
     publishedAt,
     _type,

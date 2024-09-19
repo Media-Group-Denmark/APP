@@ -94,8 +94,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </aside>
           </section>
-          <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_1"></aside>
-          <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"></aside>
+          <aside className="mobile md:hidden" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_1`}></aside>
+          <aside className="desktop hidden md:block" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_2`}></aside>
 
           {/* Phone */}
           <section className="inline-block md:hidden">
@@ -105,7 +105,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               endIndex={100}
               data={data} tag={params.tag}
             />
-            <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_2"></aside>
+            <aside className="mobile md:hidden" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_2`}></aside>
             <SubArticlesGrid
               data={data} tag={'nyheder'}
               startIndex={1}
@@ -114,7 +114,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <div className="mt-6 block">
               <ArticleHero data={data} startIndex={3} endIndex={4} />
             </div>
-            <aside className="mobile md:hidden" data-ad-unit-id="/49662453/PengehjoernetDK/Mobile_Square_3"></aside>
+            <aside className="mobile md:hidden" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_3`}></aside>
             <SubArticlesGrid
               data={data} tag={params.tag}
               startIndex={4}
@@ -132,7 +132,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               startIndex={0}
               endIndex={6}
             />
-            <aside className="desktop hidden md:block" data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_3"></aside>
+            <aside className="desktop hidden md:block" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_3`}></aside>
           </section>
         </div>
       </section>

@@ -9,14 +9,11 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
   const query = `
     *[_type == "article" && _id in $articleIds] {
       _id,
-      _createdAt,
       publishedAt,
       _type,
       title,
       views,
       "articleSlug": slug.current,
-      "image": metaImage.asset,
-      "category": category->name,
     }
   `;
   try {
@@ -62,12 +59,12 @@ export default async function ReadMoreArticlesBlock({
             <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
               <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
                 <img
-                  width={300}
-                  height={200}
+                  width={200}
+                  height={100}
                   src={urlFor(post.image)
                     .format("webp")
-                    .width(300)
-                    .height(200)
+                    .width(200)
+                    .height(100)
                     .fit("fill")
                     .quality(85)
                     .url()}

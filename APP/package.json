@@ -8,6 +8,7 @@
     "start": "next start",
     "merge": "git merge --no-commit --no-ff main",
     "publish": "npm i --force && npm run build && pm2 restart all",
+    "debug": "node --inspect npx next dev",
     "lint": "next lint"
   },
   "dependencies": {
