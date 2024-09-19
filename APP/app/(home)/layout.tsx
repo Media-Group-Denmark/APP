@@ -14,12 +14,34 @@ import { SubArticlesInfiniteScroll } from "./components/ArticleDisplaySystems/Dy
 import TrendingArticlesList from "./components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import { Article } from "./models/article";
 import { getFreshArticleData } from "../api/data/GetData";
-import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
-import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap', });
 const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish', display: 'swap', });
+
+
+
+const InfiniteScroll = ({ data } : {data : Article[]}) => {
+  return (
+    <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl bg-second_color_light dark:bg-second_color_dark">
+      <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={30} />
+      <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
+        <aside className="desktop hidden md:block" data-ad-unit-id={`/49662453/${theme.site_ad_name}/Square_2`}></aside>
+        <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={30} articleAmount={6} />
+      </div>
+    </section>
+  );
+};
+
+// Dynamisk komponent
+const DynamicArticles = dynamic(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(InfiniteScroll), 5000); 
+  });
+}, {
+  loading: () => null, 
+});
+
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
@@ -47,13 +69,15 @@ export default async function RootLayout({
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 
 
-        <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
+        {/* <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl  bg-second_color_light dark:bg-second_color_dark ">
               <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={30} />
               <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
               <aside className='desktop hidden md:block' data-ad-unit-id={`/49662453/${theme.site_ad_name}/Square_2`}></aside>
               <TrendingArticlesList data={data} dayInterval={14} startIndex={0} endIndex={30} articleAmount={6}  />
               </div>
-        </section>
+        </section> */}
+
+        <DynamicArticles data={data} />
         
         </main>
         <GoogleAnalyticsScripts />
