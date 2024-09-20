@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     const slug: string | undefined = url.pathname.split('/').pop();
     const fullPath: string = url.pathname;
 
-    if (url.searchParams.has('redirected')) {
+    if (url.searchParams.has('d')) {
         return NextResponse.next();
     }
 
@@ -21,11 +21,11 @@ export async function middleware(req: NextRequest) {
     if (data) {
         // Redirect to the new slug
         const redirectUrl = new URL(`${theme.site_url}/artikel/${data.newSlug}`, req.url);
-        redirectUrl.searchParams.set('redirected', 'true');
+        redirectUrl.searchParams.set('d', 'true');
         return NextResponse.redirect(redirectUrl, 301);
     } 
     const redirectUrl = new URL(`${theme.site_url}${fullPath}`, req.url);
-    redirectUrl.searchParams.set('redirected', 'true');  
+    redirectUrl.searchParams.set('d', 'true');  
     return NextResponse.redirect(redirectUrl, 301);
 }
 

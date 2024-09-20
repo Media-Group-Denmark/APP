@@ -206,14 +206,13 @@ export default async function artikel({
                           </time>
                         </div>
                       </div>
-                    </footer>
-                    {/* <Script
-        src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-        data-wid="auto"
-        type="text/javascript"
-        strategy="lazyOnload"
-      /> */}
-
+                          </footer>
+                          <Script
+              src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+              data-wid="auto"
+              type="text/javascript"
+              strategy="lazyOnload"
+            />
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
