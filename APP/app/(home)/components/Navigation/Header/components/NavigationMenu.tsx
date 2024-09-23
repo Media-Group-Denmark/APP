@@ -12,7 +12,7 @@ import { ArticleLink } from "../../../utils/ArticleLink";
 import { urlFor } from "@/app/lib/sanityclient";
 import Image from "next/image";
 import theme from "@/app/lib/theme.json";
-import DarkModeToggle from "./DarkModeToggle";
+import DarkModeToggle from "./DarkModeToggle/DarkModeToggle";
 import SearchButton from "./SearchBar";
 import { getNavItems } from "../api/getNavItems";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -98,9 +98,9 @@ export default function NewNav() {
               <li>
                 <Link
                   key={link._key}
-                  href={`/artikler/kategori/${link.slug}`}
+                  href={`/kategori/${link.slug}`}
                   className={`transition-colors hover:text-foreground ${
-                    pathname === `/artikler/kategori/${link.slug}`
+                    pathname === `/kategori/${link.slug}`
                       ? "text-foreground"
                       : "text-muted-foreground"
                   }`}
@@ -133,9 +133,9 @@ export default function NewNav() {
                     return (
                       <Link
                         key={link._key}
-                        href={`/artikler/kategori/${link.slug}`}
+                        href={`/kategori/${link.slug}`}
                         className={`transition-colors hover:text-foreground ${
-                          pathname === `/artikler/kategori/${link.slug}`
+                          pathname === `/kategori/${link.slug}`
                             ? "text-foreground"
                             : "text-muted-foreground"
                         }`}

@@ -1,12 +1,17 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { getMiddlewareData } from './app/api/data/GetData';
-import { singleArticle } from './app/(home)/models/singleArticle';
+import { getMiddlewareData } from './api/getMiddlewareData';
+import { singleArticle } from './app/(home)/(pages)/artikel/models/singleArticle';
 import theme from './app/lib/theme.json';
 
 export async function middleware(req: NextRequest) {
     const url = req.nextUrl;
     const slug: string | undefined = url.pathname.split('/').pop();
     const fullPath: string = url.pathname;
+
+    const today = new Date();
+    const formattedDate = ('0' + (today.getMonth() + 1)).slice(-2) + '/' +
+                      ('0' + today.getDate()).slice(-2) + '/' +
+                      today.getFullYear().toString().slice(-2);
 
     if (url.searchParams.has('d')) {
         return NextResponse.next();
@@ -21,11 +26,11 @@ export async function middleware(req: NextRequest) {
     if (data) {
         // Redirect to the new slug
         const redirectUrl = new URL(`${theme.site_url}/artikel/${data.newSlug}`, req.url);
-        redirectUrl.searchParams.set('d', 'true');
+        redirectUrl.searchParams.set('d', `${formattedDate}`);
         return NextResponse.redirect(redirectUrl, 301);
     } 
     const redirectUrl = new URL(`${theme.site_url}${fullPath}`, req.url);
-    redirectUrl.searchParams.set('d', 'true');  
+    redirectUrl.searchParams.set('d', `${formattedDate}`);  
     return NextResponse.redirect(redirectUrl, 301);
 }
 

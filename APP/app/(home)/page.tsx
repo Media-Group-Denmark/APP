@@ -1,15 +1,15 @@
 /* -------------------------------------------------------------------------- */
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
-import { Article } from "./models/article";
+import { Article } from "./(pages)/(article-collections)/models/article";
 import type { Metadata } from "next";
-import SubArticlesGrid from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
-import ArticleHero from "./components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
-import TopNewsSlider from "./components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
+import SubArticlesGrid from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
+import ArticleHero from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
+import TopNewsSlider from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TopNewsSlider";
 import theme from "@/app/lib/theme.json";
-import TrendingArticlesListAltOmKendte from "./components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
-import SubArticlesListWide from "./components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getFreshArticleData } from "../api/data/GetData";
+import TrendingArticlesListAltOmKendte from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
+import SubArticlesListWide from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
+import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
 import { frontpageMeta } from "./meta/frontpageMeta";
 export const revalidate = 600;
 

@@ -28,7 +28,7 @@ import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { getArticleSingleData } from "@/app/api/data/GetData";
-import { singleArticle } from "@/app/(home)/models/singleArticle";
+import { singleArticle } from "@/app/(home)/(pages)/artikel/models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 
 async function fetchArticleData(slug: string, p: string) {
@@ -180,7 +180,7 @@ export default async function artikel({
                         <div className="flex gap-x-2 lg:mt-2 align-middle">
                           <ArticleLink
                             rel="author"
-                            href={`/artikler/journalist/${mainArticle.JournalistSlug}`}
+                            href={`/journalist/${mainArticle.JournalistSlug}`}
                           >
                             <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
                               Skrevet af:{" "}

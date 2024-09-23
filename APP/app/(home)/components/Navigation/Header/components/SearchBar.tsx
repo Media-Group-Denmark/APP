@@ -3,7 +3,7 @@ import { ArticleLink } from "../../../utils/ArticleLink";
 
 export default function SearchButton() {
   return (
-    <ArticleLink className="hidden lg:block" href={"/artikler/findartikel"}>
+    <ArticleLink className="hidden lg:block" href={"/findartikel"}>
       <div>
         <button
           type="submit"

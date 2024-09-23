@@ -10,19 +10,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${theme.site_url}/referencer/kategorier`,
+      url: `${theme.site_url}/kategorier`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/referencer/tag`,
+      url: `${theme.site_url}/tag`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/referencer/journalister`,
+      url: `${theme.site_url}/journalister`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.5,

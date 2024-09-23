@@ -1,5 +1,5 @@
 import { client, urlFor } from '@/app/lib/sanityclient';
-import { Article } from '@/app/(home)/models/article';
+import { Article } from 'import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";';
 import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
 import React from 'react'
 export const revalidate = 600;

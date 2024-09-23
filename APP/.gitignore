@@ -15,6 +15,7 @@
 
 # production
 /build
+theme.json
 
 # misc
 .DS_Store
