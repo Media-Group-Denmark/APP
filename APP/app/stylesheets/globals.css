@@ -16,6 +16,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  @apply bg-main_color_light dark:bg-main_color_dark;
 }
 body {
   display: grid;
@@ -23,6 +24,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: clip;
+  @apply bg-main_color_light dark:bg-main_color_dark;
 }
 main {
   padding-top: 60px;

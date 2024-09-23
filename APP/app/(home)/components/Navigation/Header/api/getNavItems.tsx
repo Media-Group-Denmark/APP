@@ -3,7 +3,7 @@
 import { client } from "@/app/lib/sanityclient";
 
 
-export async function fetchNavData() {
+export async function getNavItems() {
   const query = `*[_type == "navigation"] {
     _id,
     frontpageBoolean,
