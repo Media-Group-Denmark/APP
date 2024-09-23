@@ -1,5 +1,5 @@
 import React from "react";
-import { timeSinceText } from "../../../ArticleTools/TimeSinceTag";
+import { timeSinceText } from "../../../../(home-pages)/(article-collections)/artikel/components/ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/(home)/models/article";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";

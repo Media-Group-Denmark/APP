@@ -1,6 +1,6 @@
 import { client, urlFor } from "@/app/lib/sanityclient";
 import { Article } from "@/app/(home)/models/article";
-import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
+import { timeSinceText } from "@/app/(home)/(home-pages)/(article-collections)/artikel/components/ArticleTools/TimeSinceTag";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
 async function getData() {

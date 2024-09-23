@@ -4,7 +4,7 @@ import { getData } from "@/app/lib/GetData";
 import { Article } from "@/app/(home)/models/article";
 import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleLink } from "../../utils/ArticleLink";
-import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
+import { timeSinceText } from "@/app/(home)/(home-pages)/(article-collections)/artikel/components/ArticleTools/TimeSinceTag";
 import { PortableText } from "next-sanity";
 import { SquareChevronRight } from "lucide-react";
 

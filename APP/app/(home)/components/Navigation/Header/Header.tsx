@@ -2,9 +2,6 @@ import theme from "@/app/lib/theme.json";
 import NewNav from "./components/NavigationMenu";
 
 export default function Header() {
- 
-  
-
   return (
     <header className=" duration-500 h-fit md:h-[300px] shadow fixed md:relative z-40 w-screen ">
       <div
@@ -14,6 +11,4 @@ export default function Header() {
       <NewNav />
     </header>
   );
-};
-
-
+}

@@ -1,6 +1,6 @@
 import { Article } from "@/app/(home)/models/article";
 import React from "react";
-import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
+import { timeSinceText } from "@/app/(home)/(home-pages)/(article-collections)/artikel/components/ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
