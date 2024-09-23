@@ -1,4 +1,4 @@
-export interface FooterData {
+export interface FooterItem {
     footerTitle: string;
     _id: string;
     footerItems: {

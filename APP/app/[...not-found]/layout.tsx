@@ -8,11 +8,11 @@ import theme from "@/app/lib/theme.json";
 import { getFreshArticleData } from "../api/data/GetData";
 import { Article } from "../(home)/models/article";
 import MailChimpPopUp from "../(home)/components/MailChimp/MailChimpPopUp";
-import Header from "../(home)/components/Navigation/Header";
+import Header from "../(home)/components/Navigation/Header/Header";
 import { SubArticlesInfiniteScroll } from "../(home)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesList from "../(home)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import GoogleAnalyticsScripts from "../(home)/components/AdScripts/GoogleAnalyticsScripts";
-import Footer from "../(home)/components/Navigation/Footer";
+import Footer from "../(home)/components/Navigation/Footer/Footer";
 import LoadAds from "../(home)/components/AdScripts/LoadAds";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });

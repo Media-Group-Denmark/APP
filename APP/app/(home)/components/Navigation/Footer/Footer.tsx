@@ -1,42 +1,17 @@
 
 import React from 'react';
-import { client } from '../../../lib/sanityclient';
-import { ArticleLink } from '../utils/ArticleLink';
-import { FooterData } from '../../models/footer';
-import theme from '../../../lib/theme.json';
-import MailChimpForm from '../MailChimp/MailChimpForm';
+import { ArticleLink } from '../../utils/ArticleLink';
+import { FooterItem } from './models/footer';
+import theme from '../../../../lib/theme.json';
+import MailChimpForm from './components/MailChimpForm';
+import { getFooterItems } from './api/getFooterItems';
 
 
-async function getData(): Promise<FooterData[] | undefined> {
-  
-const query = `*[_type == "footer"] {
-  footerTitle,
-  _id,
-  footerItems[] {
-    title,
-    _key,
-    links[] {
-      _key,
-      "name": @->name,
-      "title": @->title,
-      "type": @->_type,
-        "slug": @->slug.current
-      }
-    }
-  } `;
-  try {
-    const data = await client.fetch(query);
-    return data;
-  }
-  catch (error) {
-    console.error(error);
-  }
-  return undefined; 
-}
+
 
 
 export default async function Footer() { 
-  const data: FooterData[] | undefined = await getData();
+  const data: FooterItem[] | undefined = await getFooterItems();
   const footer = data ? data[0] : undefined;
   return (
   <footer className="bg-second_color_light dark:bg-second_color_dark relative z-50  shadow" aria-labelledby="footer-heading">

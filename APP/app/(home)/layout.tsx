@@ -3,8 +3,8 @@
 /* -------------------------------------------------------------------------- */
 import { Inter, Mulish } from "next/font/google";
 import "@/app/stylesheets/globals.css";
-import Header from "./components/Navigation/Header";
-import Footer from "./components/Navigation/Footer";
+import Header from "./components/Navigation/Header/Header";
+import Footer from "./components/Navigation/Footer/Footer";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
 import LoadAds from "./components/AdScripts/LoadAds";
