@@ -2,7 +2,7 @@
 /*                            GET DATA FROM BACKEND                           */
 /* -------------------------------------------------------------------------- */
 import { Article } from "../../(home)/models/article";
-import { Reference } from "../../(home)/models/reference";
+import { Reference } from "../../(home)/(home-pages)/(information)/models/reference";
 import { Page } from "../../(home)/models/subpage";
 import { client } from "../../lib/sanityclient";
 import { singleArticle } from "@/app/(home)/models/singleArticle";
@@ -30,12 +30,11 @@ export async function getMiddlewareData(slug: string | undefined) {
 
 export async function getArticleSingleData(slug: string | undefined) {
   let query = `*[_type == "article"`;
-  
+
   // Tilføj slug-filtrering
   query += ` && (slug.current == "${slug}" || 
       newSlug.current == "${slug}" || 
       "${slug}" in oldSlugs)]`;
-
 
   // Tilføj ordren og resten af data, når filtrene er opsat
   query += ` | order(coalesce(publishedAt, _createdAt) desc)[0] {
@@ -134,13 +133,13 @@ export async function getCategoryData(slug: string | undefined) {
       "slug": slug.current,
       categoryDescription
     }`;
-    try {
-      const data = await client.fetch<Reference>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+  try {
+    const data = await client.fetch<Reference>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 export async function getAllCategoriesData() {
   const query = `*[_type == "category"] {
@@ -148,29 +147,29 @@ export async function getAllCategoriesData() {
       name,
       "slug": slug.current,
     }`;
-    try {
-      const data = await client.fetch<Reference>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+  try {
+    const data = await client.fetch<Reference>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 
-export async function getTagData(slug: string | undefined) { 
+export async function getTagData(slug: string | undefined) {
   const query = `*[_type == "tag" && slug.current == "${slug}"][0] {
       _id,
       name,
       "slug": slug.current,
       tagDescription
     }`;
-    try {
-      const data = await client.fetch<Reference>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+  try {
+    const data = await client.fetch<Reference>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 export async function getAllTagsData() {
   const query = `*[_type == "tag"] {
@@ -178,13 +177,13 @@ export async function getAllTagsData() {
       name,
       "slug": slug.current,
     }`;
-    try {
-      const data = await client.fetch<Reference>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+  try {
+    const data = await client.fetch<Reference>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function getJournalistData(slug: string | undefined) {
@@ -205,13 +204,13 @@ export async function getAllJournalistsData() {
       name,
       "slug": slug.current
     }`;
-    try {
-      const data = await client.fetch<Reference>(query);
-      return data;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      throw error;
-    }
+  try {
+    const data = await client.fetch<Reference>(query);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
 }
 
 export async function getData(slug: string | undefined) {
@@ -292,9 +291,6 @@ export async function getData(slug: string | undefined) {
   return data;
 }
 
-
-
-
 export function republishData(articles: Article[], slug: string) {
   return articles.find(
     (article) =>
@@ -319,7 +315,6 @@ export const findSubPage = (subPage: Page[], page: string) => {
 };
 
 export async function getChartArticleData() {
-
   const query = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) [0...1000] {
     _id,
     publishedAt,

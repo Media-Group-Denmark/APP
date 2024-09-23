@@ -25,7 +25,7 @@ export default async function ArticleInfiniteScroll() {
                 <header>
                   <aside className="flex flex-col md:flex-row items-start md:items-center gap-y-2 md:gap-y-0 gap-x-4 text-xs">
                     <ArticleLink
-                      href={`/artikler/kategori/${article.categorySlug}`}
+                      href={`/kategori/${article.categorySlug}`}
                       className="relative w-fit rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                     >
                       {article.category}

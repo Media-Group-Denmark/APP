@@ -27,13 +27,12 @@ import IframeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/IframeT
 import theme from "@/app/lib/theme.json";
 import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
-import { getArticleSingleData} from "@/app/api/data/GetData";
+import { getArticleSingleData } from "@/app/api/data/GetData";
 import { singleArticle } from "@/app/(home)/models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 
-
 async function fetchArticleData(slug: string, p: string) {
-  const data: singleArticle  = await getArticleSingleData(slug, p);
+  const data: singleArticle = await getArticleSingleData(slug, p);
   return data;
 }
 export const revalidate = 1209600;
@@ -41,17 +40,15 @@ export const revalidate = 1209600;
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
 export async function generateMetadata({
-  params, searchParams
+  params,
+  searchParams,
 }: {
   params: { artikel: string };
   searchParams: { p: string };
 }): Promise<Metadata> {
-
   const mainArticle = await fetchArticleData(params.artikel);
 
-
   if (mainArticle) {
-
     return {
       title: mainArticle.title,
       description: mainArticle.teaser,
@@ -59,7 +56,9 @@ export async function generateMetadata({
       openGraph: {
         title: mainArticle.facebookTitle || mainArticle.title,
         description: mainArticle.facebookDescription || mainArticle.teaser,
-        url: `${theme.site_url}/artikel/${mainArticle.newSlug || mainArticle.articleSlug}`,
+        url: `${theme.site_url}/artikel/${
+          mainArticle.newSlug || mainArticle.articleSlug
+        }`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
@@ -103,17 +102,15 @@ export async function generateMetadata({
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
 export default async function artikel({
-  params
+  params,
 }: {
   params: { artikel: string };
 }) {
-
-  
   const mainArticle = await fetchArticleData(params.artikel);
   const isClient = typeof window !== "undefined";
-  
+
   await generateMetadata({ params });
-  
+
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
   /* -------------------------------------------------------------------------- */
@@ -129,7 +126,11 @@ export default async function artikel({
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
       readMoreAutomatic: (props: any) => (
-        <ReadMoreAutomaticArticlesBlock articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
+        <ReadMoreAutomaticArticlesBlock
+          articleTitle={mainArticle.title}
+          articleCategory={mainArticle.category}
+          currentArticleId={mainArticle._id}
+        />
       ),
     },
   };
@@ -137,7 +138,11 @@ export default async function artikel({
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
-      <p className="bg-red-200 font-mulish text-center py-8 text-3xl">Denne artikel er i <span className="font-extrabold">Preview mode</span> og er ikke udgivet endnu</p>
+        <p className="bg-red-200 font-mulish text-center py-8 text-3xl">
+          Denne artikel er i{" "}
+          <span className="font-extrabold">Preview mode</span> og er ikke
+          udgivet endnu
+        </p>
         {mainArticle ? (
           <>
             <Script
@@ -151,7 +156,7 @@ export default async function artikel({
                   <section>
                     <div className="grid ">
                       <ArticleLink
-                        href={`/artikler/kategori/${mainArticle.categorySlug}`}
+                        href={`/kategori/${mainArticle.categorySlug}`}
                       >
                         <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
                           {mainArticle.category}
@@ -228,7 +233,7 @@ export default async function artikel({
                         <React.Fragment key={index}>
                           {index > 0 ? " " : ""}{" "}
                           <ArticleLink
-                            href={`/artikler/tag/${mainArticle.tagSlug[index]}`}
+                            href={`/tag/${mainArticle.tagSlug[index]}`}
                           >
                             <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                               {tag}
@@ -286,8 +291,3 @@ export default async function artikel({
 }
 
 export const runtime = "edge";
-
-
-
-
-

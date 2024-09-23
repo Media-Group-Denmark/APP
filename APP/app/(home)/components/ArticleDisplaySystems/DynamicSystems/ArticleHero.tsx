@@ -4,7 +4,7 @@ import React from "react";
 import { timeSinceText } from "../../ArticleTools/TimeSinceTag";
 import Image from "next/image";
 import { filterAndSliceArticles } from "@/app/lib/FilterArticles";
-import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
+import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
 const ArticleHero: React.FC<{
   data: Article[];
@@ -42,7 +42,11 @@ const ArticleHero: React.FC<{
           <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-clip">
             <ArticleLink
               aria-label="Læs mere om artiklen"
-              href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
+              href={`/artikel/${
+                post.republishArticle && post.newSlug
+                  ? post.newSlug
+                  : post.articleSlug
+              }`}
             >
               <Image
                 src={urlFor(post.image).url()}
@@ -59,12 +63,18 @@ const ArticleHero: React.FC<{
 
           <div className="px-4 pb-4">
             <header className="grid grid-rows-[auto_1fr_auto] min-h-[170px]">
-              <ArticleLink href={`/artikler/kategori/${post.categorySlug}`}>
+              <ArticleLink href={`/kategori/${post.categorySlug}`}>
                 <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
                   {post.category}
                 </p>
               </ArticleLink>
-              <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+              <ArticleLink
+                href={`/artikel/${
+                  post.republishArticle && post.newSlug
+                    ? post.newSlug
+                    : post.articleSlug
+                }`}
+              >
                 <h1 className="text-2xl md:text-[2.3em] leading-10 font-extrabold rounded-lg">
                   {post.title}
                 </h1>

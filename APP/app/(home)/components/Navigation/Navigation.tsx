@@ -17,13 +17,13 @@ type NavigationItem = {
   _key: string;
 };
 
-const NavigationItem = ({ item, closeMenu }: {item: any, closeMenu: any} ) => {
-  const router = useRouter(); 
-  
+const NavigationItem = ({ item, closeMenu }: { item: any; closeMenu: any }) => {
+  const router = useRouter();
+
   const handleClick = (e: any) => {
-    e.preventDefault(); 
-    closeMenu(); 
-    router.push(item.href); 
+    e.preventDefault();
+    closeMenu();
+    router.push(item.href);
   };
 
   return (
@@ -42,8 +42,6 @@ const NavigationItem = ({ item, closeMenu }: {item: any, closeMenu: any} ) => {
   );
 };
 
-
-
 const Navigation = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -58,28 +56,25 @@ const Navigation = () => {
     return false;
   });
 
-
-useEffect(() => {
-  const root = document.documentElement;
-  if (darkMode) {
-    root.classList.add('dark');
-    localStorage.setItem("dark mode", "on");
-  } else {
-    root.classList.remove('dark');
-    localStorage.setItem("dark mode", "off");
-  }
-
-}, [darkMode]);
+  useEffect(() => {
+    const root = document.documentElement;
+    if (darkMode) {
+      root.classList.add("dark");
+      localStorage.setItem("dark mode", "on");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("dark mode", "off");
+    }
+  }, [darkMode]);
 
   useEffect(() => {
-
     async function loadNavigation() {
       const navData = await fetchNavData();
       if (navData) {
-        if(!darkMode){ 
-          setLogo(navData.logo._ref) 
-        } else { 
-          setLogo(navData.logoDark._ref) 
+        if (!darkMode) {
+          setLogo(navData.logo._ref);
+        } else {
+          setLogo(navData.logoDark._ref);
         }
         const navItems = [
           ...(navData.frontpageBoolean
@@ -87,8 +82,8 @@ useEffect(() => {
             : []),
           ...navData.navItems.map((item: { name: any; slug: any }) => ({
             name: item.name,
-            href: `/artikler/kategori/${item.slug}`,
-            current: pathname === `/artikler/kategori/${item.slug}`,
+            href: `/kategori/${item.slug}`,
+            current: pathname === `/kategori/${item.slug}`,
           })),
         ];
         setNavigation(navItems);
@@ -127,69 +122,93 @@ useEffect(() => {
             <div className="relative flex items-center justify-between h-16">
               <div className="flex items-center w-[1000px] px-2 lg:pl-4">
                 <div className="flex-shrink-0">
-                <ArticleLink href="/">
-                <Image
-                  src={logo ? urlFor(logo).url() : theme.logo_url}
-                  alt="Logo"
-                  width={120} 
-                  height={72} 
-                  className="object-contain" 
-                />
-              </ArticleLink>
+                  <ArticleLink href="/">
+                    <Image
+                      src={logo ? urlFor(logo).url() : theme.logo_url}
+                      alt="Logo"
+                      width={120}
+                      height={72}
+                      className="object-contain"
+                    />
+                  </ArticleLink>
                 </div>
                 <div className="hidden lg:grid grid-cols-1 lg:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <div>
-                        <NavigationItem key={item._key} item={item} closeMenu={close}/>
-                        <p>{item._key} {item[0]}</p>
+                        <NavigationItem
+                          key={item._key}
+                          item={item}
+                          closeMenu={close}
+                        />
+                        <p>
+                          {item._key} {item[0]}
+                        </p>
                       </div>
                     ))}
                   </div>
                 </div>
 
-<label htmlFor="darkModeToggle" className="ml-auto mr-4  cursor-pointer">
-  <input className='toggle-checkbox' aria-label="darkmodetoggle" id="darkModeToggle" type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)}></input>
-  <div className='toggle-slot'>
-    <div className='sun-icon-wrapper'>
-      <SunIcon color={'#ffbb52'} className="iconify sun-icon" />
-      <div className="iconify sun-icon" data-icon="feather-sun" data-inline="false"></div>
-    </div>
-    <div className='toggle-button'></div>
-    <div className='moon-icon-wrapper'>
-      <MoonIcon className="iconify moon-icon" />
-      <div className="iconify moon-icon" data-icon="feather-moon" data-inline="false"></div>
-    </div>
-  </div>
-</label>
-
-
-
-                  <ArticleLink className="hidden lg:block" href={"/artikler/findartikel"}>
-                    <div>
-                      <button
-                        type="submit"
-                        aria-label="Søg artikler"
-                        className="flex flex-end items-center bg-accent_color_dark dark:bg-bg-accent_color_light bg-opacity-80 justify-center w-12 h-12 rounded-lg"
-                      >
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                          ></path>
-                        </svg>
-                      </button>
+                <label
+                  htmlFor="darkModeToggle"
+                  className="ml-auto mr-4  cursor-pointer"
+                >
+                  <input
+                    className="toggle-checkbox"
+                    aria-label="darkmodetoggle"
+                    id="darkModeToggle"
+                    type="checkbox"
+                    checked={darkMode}
+                    onChange={() => setDarkMode(!darkMode)}
+                  ></input>
+                  <div className="toggle-slot">
+                    <div className="sun-icon-wrapper">
+                      <SunIcon color={"#ffbb52"} className="iconify sun-icon" />
+                      <div
+                        className="iconify sun-icon"
+                        data-icon="feather-sun"
+                        data-inline="false"
+                      ></div>
                     </div>
-                  </ArticleLink>
-                  
+                    <div className="toggle-button"></div>
+                    <div className="moon-icon-wrapper">
+                      <MoonIcon className="iconify moon-icon" />
+                      <div
+                        className="iconify moon-icon"
+                        data-icon="feather-moon"
+                        data-inline="false"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+
+                <ArticleLink
+                  className="hidden lg:block"
+                  href={"/artikler/findartikel"}
+                >
+                  <div>
+                    <button
+                      type="submit"
+                      aria-label="Søg artikler"
+                      className="flex flex-end items-center bg-accent_color_dark dark:bg-bg-accent_color_light bg-opacity-80 justify-center w-12 h-12 rounded-lg"
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </ArticleLink>
 
                 <div className="flex lg:hidden ">
                   <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -234,13 +253,13 @@ useEffect(() => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <ArticleLink
-                key={item._key}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault(); // Stopper standard link opførsel
-                  close(); // Lukker menuen
-                  router.push(item.href); // Navigerer manuelt
-                }}
+                  key={item._key}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault(); // Stopper standard link opførsel
+                    close(); // Lukker menuen
+                    router.push(item.href); // Navigerer manuelt
+                  }}
                   className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
                     item.current
                       ? "bg-indigo-50 border-indigo-500 text-accent_color_light dark:text-accent_color_dark"
@@ -250,7 +269,12 @@ useEffect(() => {
                   {item.name}
                 </ArticleLink>
               ))}
-              <ArticleLink className="block flex gap-2 bg-indigo-400 bg-opacity-20 pl-3 pr-4 py-2 text-[1rem]" href={"/artikler/findartikel"}><SearchIcon width={16} />  <p>Søg Artikler</p></ArticleLink>
+              <ArticleLink
+                className="block flex gap-2 bg-indigo-400 bg-opacity-20 pl-3 pr-4 py-2 text-[1rem]"
+                href={"/artikler/findartikel"}
+              >
+                <SearchIcon width={16} /> <p>Søg Artikler</p>
+              </ArticleLink>
             </div>
           </Disclosure.Panel>
         </>

@@ -127,7 +127,7 @@ export default async function ScheduledPost() {
                             </TableCell>
                             <TableCell>
                               <Link
-                                href={`${theme.site_url}/artikler/kategori/${post.categorySlug}`}
+                                href={`${theme.site_url}/kategori/${post.categorySlug}`}
                               >
                                 <Badge variant="secondary">
                                   {post.category}
@@ -146,7 +146,7 @@ export default async function ScheduledPost() {
                             <TableCell className="m-auto w-[60vw] max-w-[30ch]">
                               {post.tag.map((tag, index) => (
                                 <Link
-                                  href={`${theme.site_url}/artikler/tag/${post.tagSlug[index]}`}
+                                  href={`${theme.site_url}/tag/${post.tagSlug[index]}`}
                                 >
                                   <Badge className="m-1" variant="secondary">
                                     {tag}
