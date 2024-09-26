@@ -31,88 +31,50 @@ import { singleArticle } from "../models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 import dynamic from "next/dynamic";
 import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
+import { generateArticleMetadata } from "../meta/generateArticleMetadata";
 
 async function fetchArticleData(slug: string) {
-  const data: singleArticle = await getArticleSingleData(slug);
-  return data;
+  const articleData: singleArticle = await getArticleSingleData(slug);
+  return articleData;
 }
+
 export const revalidate = 6000;
+
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
-export async function generateMetadata({
-  params,
-}: {
-  params: { artikel: string };
-}): Promise<Metadata> {
-  const mainArticle = await fetchArticleData(params.artikel);
-
-  if (mainArticle) {
-    return {
-      title: mainArticle.title,
-      description: mainArticle.teaser,
-      alternates: {
-        canonical: `${theme.site_url}/artikel/${
-          mainArticle.articleSlug
-        }`,
-      },  
-      keywords: mainArticle.tag.join(", "),
-      openGraph: {
-        title: mainArticle.facebookTitle || mainArticle.title,
-        description: mainArticle.facebookDescription || mainArticle.teaser,
-        url: `${theme.site_url}/artikel/${
-          mainArticle.newSlug || mainArticle.articleSlug
-        }`,
-        type: "article",
-        siteName: theme.site_name,
-        locale: "da_DK",
-        images: [
-          {
-            url: urlFor(mainArticle.facebookImage || mainArticle.image)
-              .format("webp")
-              .width(400)
-              .height(300)
-              .fit("fill")
-              .quality(85)
-              .url(),
-            width: 800,
-            height: 600,
-            alt: mainArticle.facebookTitle || mainArticle.title,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        site: theme.metadata.twitter.site,
-        title: mainArticle.title,
-        description: mainArticle.teaser,
-        images: urlFor(mainArticle.image)
-          .format("webp")
-          .width(400)
-          .height(300)
-          .fit("fill")
-          .quality(85)
-          .url(),
-      },
-    };
-  } else {
-    return {
-      title: "Default Title",
-    };
-  }
+export async function generateMetadata({ params }: { params: { artikel: string } }) {
+  const article = await fetchArticleData(params.artikel);
+  const metadata: Metadata = await generateArticleMetadata(article);
+  return metadata;
 }
+
+const DynamicScriptLoader = dynamic(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(() => (
+          <Script
+            src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+            data-wid="auto"
+            type="text/javascript"
+          />
+        ));
+      }, 5000); // 5 sekunders forsinkelse
+    }).then((mod) => mod as React.ComponentType),
+  {
+    ssr: false, // Sørger for, at det kun loader på client side
+  }
+);
+
 
 const DynamicReadMore = dynamic(
   () =>
     new Promise((resolve) => {
       setTimeout(() => {
-        resolve(
-          import(
-            "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"
-          )
-        );
+        resolve(import("../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"));
       }, 5000); // 3 sekunders forsinkelse
-    }),
+    }).then((mod) => mod.default),
   {
     loading: () => <ReadMoreArticlesSkeleton />,
   }
@@ -130,7 +92,6 @@ export default async function artikel({
 
   const isClient = typeof window !== "undefined";
 
-  await generateMetadata({ params });
 
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
@@ -223,6 +184,7 @@ export default async function artikel({
                       type="text/javascript"
                       strategy="lazyOnload"
                     />
+                    <DynamicScriptLoader />
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)

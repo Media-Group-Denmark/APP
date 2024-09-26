@@ -4,6 +4,9 @@ import theme from "@/app/lib/theme.json";
 export const privacyPageMeta: Metadata = {
   title: `Privatlivspolitik | ${theme.site_name}`,
   description: `Opdag, hvordan ${theme.site_name} beskytter og håndterer dine personlige oplysninger. Læs vores forpligtelse til privatlivets fred.`,
+  alternates: {
+    canonical: `${theme.site_name}/privatliv`,
+  },
   keywords: `privatlivspolitik, personlige oplysninger, databeskyttelse, ${theme.site_name}`,
   openGraph: {
     title: `Privatlivspolitik | ${theme.site_name}`,

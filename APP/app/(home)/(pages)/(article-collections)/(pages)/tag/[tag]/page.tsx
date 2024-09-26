@@ -11,63 +11,35 @@ import theme from "@/app/lib/theme.json";
 import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
 import { getTagData } from "../api/getTagData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
-import { SubArticlesInfiniteScroll } from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
+import { generateTagMetadata } from "../meta/generateTagMetaData";
+
 
 export const revalidate = 600;
-/* -------------------------------------------------------------------------- */
-/*                                  METADATA                                  */
-/* -------------------------------------------------------------------------- */
-export async function generateMetadata({
-  params,
-}: {
-  params: { tag: string };
-}): Promise<Metadata> {
-  const currentTag = await getTagData(params.tag);
 
-  if (currentTag) {
-    return {
-      title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
-      description: currentTag.tagDescription,
-      keywords: `Tag ${currentTag.name} - Artikler og Indsigter, ${theme.site_name}`,
-      openGraph: {
-        title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
-        description: currentTag.tagDescription,
-        url: `${theme.site_name}/tag/${currentTag.slug}`,
-        type: "website",
-        siteName: `${theme.site_name}`,
-        locale: "da_DK",
-        images: [
-          {
-            url: `${theme.logo_public_url}`,
-            width: 800,
-            height: 600,
-            alt: `Billede for tag ${currentTag.name}`,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        site: `${theme.metadata.twitter.site}`,
-        title: `${currentTag.name} - Artikler og Indsigter | ${theme.site_name}`,
-        description: currentTag.tagDescription,
-        images: `${theme.logo_public_url}`,
-      },
-      robots: "index, follow",
-      publisher: `${theme.site_name}`,
-    };
-  } else {
-    return {
-      title: "Default Title",
-      robots: "noindex, nofollow",
-    };
-  }
+async function fetchData(slug: string | undefined = undefined) {
+  const data: Article[] = await getFreshArticleData();
+  const currentTag: Reference = await getTagData(slug);
+  
+  return {
+    data,
+    currentTag,
+  };
+}
+
+export async function generateMetadata({ params }: { params: { tag: string } }) {
+  const { currentTag } = await fetchData(params.tag);
+  const metadata: Metadata = await generateTagMetadata(currentTag);
+  return metadata;
 }
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function tag({ params }: { params: { tag: string } }) {
-  const data: Article[] = await getFreshArticleData();
+
+  const { data } = await fetchData(params.tag);
+
   return (
     <section>
       {data ? (

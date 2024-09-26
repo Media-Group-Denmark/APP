@@ -8,40 +8,11 @@ import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { getAllTagsData } from "./api/getAllTagsData";
+import { tagPageMeta } from "./meta/tagPageMeta";
 export const revalidate = 80000;
-/* -------------------------------------------------------------------------- */
-/*                                  METADATA                                  */
-/* -------------------------------------------------------------------------- */
-export const metadata: Metadata = {
-  title: `Alle Tags | ${theme.site_name}`,
-  description: `Opdag indhold skræddersyet til dine interesser. Udforsk ${theme.site_name}s tags for ${theme.metadata.keywords}, og meget mere.`,
-  keywords: `${theme.metadata.keywords} ${theme.site_name}`,
-  openGraph: {
-    title: `Alle Tags | ${theme.site_name}`,
-    description: `Opdag indhold skræddersyet til dine interesser. Udforsk ${theme.site_name}s tags for ${theme.metadata.keywords}, og meget mere.`,
-    url: `${theme.site_url}/tag`,
-    type: "website",
-    siteName: theme.site_name,
-    locale: "da_DK",
-    images: [
-      {
-        url: `${theme.logo_public_url}`,
-        width: 800,
-        height: 600,
-        alt: `Udforsk Tags - ${theme.site_name}`,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: `${theme.metadata.twitter.site}`,
-    title: `Alle Tags | ${theme.site_name}`,
-    description: `Opdag indhold skræddersyet til dine interesser. Udforsk ${theme.site_name}s tags for ${theme.metadata.keywords}, og meget mere.`,
-    images: `${theme.logo_public_url}`,
-  },
-  robots: theme.metadata.robots,
-  publisher: theme.site_name,
-};
+
+export const metadata: Metadata = tagPageMeta;
+
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
