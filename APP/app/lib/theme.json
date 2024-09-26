@@ -1,38 +1,38 @@
 {
-    "site_name": "Pengehjørnet",
-    "site_url": "https://pengehjoernet.dk",
+    "site_name": "Dagsavisen",
+    "site_url": "https://dagsavisen.dk",
     "site_language": "da",
-    "site_ad_name": "PengehjoernetDK",
-    "logo_url": "/img/pengehjoernet.webp",
-    "logo_public_url": "https://pengehjoernet.dk/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fikbzpczn%2Fproduction%2Fc0c95b2cd5fc03cd89bfd7a48e9821b5c90c795e-473x124.webp&w=128&q=75",
+    "site_ad_name": "DagsavisenDK",
+    "logo_url": "/img/logo.png",
+    "logo_public_url": "https://dagsavisen.dk/path/to/logo.png",
     "metadata": {
-        "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-        "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
-        "keywords": "økonomi, aktier, investering, skat, unge, aktiemarked, kryptovaluta, sparetips",
+        "title": "Dagsavisen | Seneste nyheder fra ind- og udland",
+        "description": "Dagsavisen leverer daglige nyheder om politik, kultur, samfund, sport og meget mere fra både Danmark og resten af verden.",
+        "keywords": "nyheder, politik, kultur, samfund, sport, Danmark, verden, Dagsavisen",
         "openGraph": {
-            "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-            "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
+            "title": "Dagsavisen | Seneste nyheder fra ind- og udland",
+            "description": "Dagsavisen leverer daglige nyheder om politik, kultur, samfund, sport og meget mere fra både Danmark og resten af verden.",
             "locale": "da_DK",
             "images": [
                 {
                     "width": 800,
                     "height": 600,
-                    "alt": "Pengehjørnet - Din guide til økonomi, aktier, investering og skat"
+                    "alt": "Dagsavisen - Seneste nyheder fra ind- og udland"
                 }
             ]
         },
         "twitter": {
             "card": "summary_large_image",
-            "site": "@Pengehjørnet",
-            "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-            "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark."
+            "site": "@Dagsavisen",
+            "title": "Dagsavisen | Seneste nyheder fra ind- og udland",
+            "description": "Dagsavisen leverer daglige nyheder om politik, kultur, samfund, sport og meget mere fra både Danmark og resten af verden."
         },
         "robots": "index, follow",
-        "publisher": "Pengehjørnet"
+        "publisher": "Dagsavisen"
     },
     "subPage": {
         "referenceJournalist": {
-            "keywords": "journalister, økonomieksperter, Pengehjørnet team, finansielle analytikere"
+            "keywords": "journalister, redaktører, Dagsavisen team, korrespondenter"
         }
     }
 }

@@ -7,7 +7,7 @@ const Breadcrumb: React.FC<{ navItem: string, link: string, navItemTwo: string |
         className="flex px-3 md:px-8 max-w-[1000px] m-auto text-fade_color_light dark:text-fade_color_dark py-6 pt-6 rounded-lg "
         aria-label="Breadcrumb"
       >
-        <ol className="inline-flex items-center space-x-1 md:space-x-3">
+        {/* <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
             <ArticleLink
               href="/"
@@ -69,7 +69,7 @@ const Breadcrumb: React.FC<{ navItem: string, link: string, navItemTwo: string |
           </li>
         )}
 
-        </ol>
+        </ol> */}
       </nav>
   )
 }

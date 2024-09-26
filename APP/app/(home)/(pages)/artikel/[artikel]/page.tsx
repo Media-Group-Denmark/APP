@@ -28,7 +28,6 @@ import MobileSocialMediaShareButtons from "../components/ArticleTools/MobileSoci
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { getArticleSingleData } from "../api/getArticleSingle";
 import { singleArticle } from "../models/singleArticle";
-import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 import dynamic from "next/dynamic";
 import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
 import { generateArticleMetadata } from "../meta/generateArticleMetadata";
@@ -49,23 +48,7 @@ export async function generateMetadata({ params }: { params: { artikel: string }
   return metadata;
 }
 
-const DynamicScriptLoader = dynamic(
-  () =>
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(() => (
-          <Script
-            src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-            data-wid="auto"
-            type="text/javascript"
-          />
-        ));
-      }, 5000); // 5 sekunders forsinkelse
-    }).then((mod) => mod as React.ComponentType),
-  {
-    ssr: false, // Sørger for, at det kun loader på client side
-  }
-);
+
 
 
 const DynamicReadMore = dynamic(
@@ -178,13 +161,6 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-                    <Script
-                      src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-                      data-wid="auto"
-                      type="text/javascript"
-                      strategy="lazyOnload"
-                    />
-                    <DynamicScriptLoader />
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
@@ -229,12 +205,12 @@ export default async function artikel({
 
                   <aside
                     className="mobile md:hidden"
-                    data-ad-unit-id={`/49662453/${theme.site_ad_name}/mobile_square_article_1`}
+                    data-ad-unit-id-id={`/49662233/${theme.site_ad_name}/mobile_square_article_1`}
                   ></aside>
 
                   <aside
                     className="desktop hidden md:grid"
-                    data-ad-unit-id={`/49662453/${theme.site_ad_name}/square_article_1`}
+                    data-ad-unit-id-id={`/49662233/${theme.site_ad_name}/square_article_1`}
                   ></aside>
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
@@ -243,7 +219,7 @@ export default async function artikel({
                       components={components}
                     />
                   </section>
-                  <section>
+                 {/*  <section>
                     <SocialMediaShareButtons
                       views={`${mainArticle.views}`}
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
@@ -253,11 +229,10 @@ export default async function artikel({
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                     />
                   </section>
-                  {mainArticle.disclaimer && <Disclaimer />}
+                  {mainArticle.disclaimer && <Disclaimer />} */}
                 </article>
               </div>
             </div>
-            <LoadStrossle />
           </>
         ) : null}
       </section>

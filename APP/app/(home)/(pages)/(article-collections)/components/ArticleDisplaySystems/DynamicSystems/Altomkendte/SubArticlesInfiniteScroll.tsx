@@ -33,128 +33,82 @@ export const SubArticlesInfiniteScroll: React.FC<{
   );
 
   return (
-    <section className="mx-auto rounded-xl  md:max-w-7xl px-3 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-2 md:mt-6 pb-1">
-      <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-        <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-          Alle Nyheder
-        </span>
-      </h1>
+    <section className="mx-auto md:max-w-7xl px-3 lg:px-8 pt-2 md:mt-6 pb-1">
+  {/* Header Start */}
+ 
+  {/* Header End */}
 
-      <div className="mx-auto py-4 grid gap-4">
-        {slicedData.map((post: Article, index: number) => {
-          // Bestem om det er den første artikel i en sektion
-          const isMainArticle = index % 4 === 0;
-          return (
-            <>
-              <article
-                key={post._id}
-                className={` grid gap-4 md:gap-8 mb-10 border-b-slate-100 dark:border-b-slate-600 border-b-[1px] pb-2 ${
-                  isMainArticle ? "grid-cols-[auto]" : "grid-cols-[auto_auto]"
-                }`}
-              >
-                <figure
-                  className={`relative ${
-                    isMainArticle ? "max-w-none" : "max-w-[100px] md:max-w-none"
+  <div className="mx-auto py-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+    {slicedData.map((post: Article, index: number) => {
+      // Bestem om det er den første artikel i en sektion
+      const isMainArticle = index % 5 === 0;
+      return (
+        <article
+          key={post._id}
+          className={`flex justify-center items-center mb-10 ${
+            isMainArticle ? 'md:col-span-2' : 'md:col-span-1'
+          }`}
+        >
+          <ArticleLink
+            href={`/artikel/${
+              post.republishArticle && post.newSlug
+                ? post.newSlug
+                : post.articleSlug
+            }`}
+            aria-label={`Læs mere om ${post.title}`}
+            className="block w-full"
+          >
+            <div className="relative flex flex-col mt-6 text-gray-700 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl overflow-hidden transform transition-transform hover:-translate-y-1">
+              <div className="relative overflow-hidden">
+                <img
+                  src={urlFor(post.image)
+                    .format('webp')
+                    .width(isMainArticle ? 600 : 400)
+                    .height(isMainArticle ? 400 : 300)
+                    .fit('fill')
+                    .quality(85)
+                    .url()}
+                  alt={post.title}
+                  className={`w-full ${
+                    isMainArticle ? 'h-64' : 'h-40'
+                  } object-cover`}
+                  loading="lazy"
+                />
+                {/* Kategori Badge */}
+                <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+                  {post.category}
+                </div>
+              </div>
+              <div className="p-6">
+                <h2
+                  className={`mb-2 font-sans ${
+                    isMainArticle ? 'text-2xl' : 'text-lg'
+                  } font-semibold leading-snug tracking-normal text-main_color_dark dark:text-main_color_light`}
+                >
+                  {post.title}
+                </h2>
+                {/* Tidsstempel */}
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-300 mb-2">
+                  <time dateTime={post.publishedAt}>
+                    {timeSinceText({ date: post.publishedAt })}
+                  </time>
+                </div>
+                {/* Teaser */}
+                <p
+                  className={`text-gray-600 dark:text-gray-300 text-sm ${
+                    isMainArticle ? 'line-clamp-3' : 'line-clamp-2'
                   }`}
                 >
-                  <ArticleLink
-                    aria-label="Læs mere om artiklen"
-                    href={`/artikel/${
-                      post.republishArticle && post.newSlug
-                        ? post.newSlug
-                        : post.articleSlug
-                    }`}
-                  >
-                    <img
-                      width={400}
-                      height={400}
-                      src={urlFor(post.image)
-                        .format("webp")
-                        .width(400)
-                        .height(400)
-                        .fit("fill")
-                        .quality(85)
-                        .url()}
-                      alt={post.title}
-                      loading="lazy"
-                      className={`block rounded-2xl inset-0 bg-gray-300 ${
-                        isMainArticle
-                          ? "max-h-64 w-[30em]"
-                          : "max-h-44 w-32 lg:w-64"
-                      } object-cover`}
-                    />
-                  </ArticleLink>
-                </figure>
-                <div>
-                  <aside className="flex flex-col md:flex-row items-start md:items-center gap-y-2 md:gap-y-0 gap-x-4 text-xs">
-                    <time
-                      dateTime={post.publishedAt}
-                      className="text-gray-500 hidden md:inline-block"
-                    >
-                      {timeSinceText({ date: post.publishedAt })}
-                    </time>
-                    <ArticleLink
-                      href={`/kategori/${post.categorySlug}`}
-                      className="w-fit rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                    >
-                      {post.category}
-                    </ArticleLink>
-                  </aside>
-                  <header
-                    className={`group max-w-xl ${
-                      isMainArticle ? "h-[12em]" : "h-[7em] lg:h-[12em]"
-                    } overflow-clip`}
-                  >
-                    <h1
-                      className={`mt-2 ${
-                        isMainArticle
-                          ? "text-lg md:text-2xl"
-                          : "text-md md:text-md"
-                      } font-bold leading-6 dark:group-hover:text-gray-300 group-hover:text-gray-600`}
-                    >
-                      <ArticleLink
-                        href={`/artikel/${
-                          post.republishArticle && post.newSlug
-                            ? post.newSlug
-                            : post.articleSlug
-                        }`}
-                      >
-                        <span className="" />
-                        {post.title}
-                      </ArticleLink>
-                    </h1>
-                    <h2
-                      className={`mt-2 ${
-                        isMainArticle
-                          ? "text-sm md:text-md"
-                          : "text-xs md:text-sm"
-                      } leading-6 text-text_second_color_dark dark:text-text_second_color_light`}
-                    >
-                      {post.teaser}
-                    </h2>
-                  </header>
-                  <aside
-                    className={
-                      isMainArticle ? "desktop hidden md:block" : "hidden"
-                    }
-                    data-ad-unit-id={
-                      isMainArticle ? "/49662453/PengehjoernetDK/Square_1" : ""
-                    }
-                  ></aside>
-                  <aside
-                    className={isMainArticle ? "mobile md:hidden" : "hidden"}
-                    data-ad-unit-id={
-                      isMainArticle
-                        ? "/49662453/PengehjoernetDK/Mobile_Square_3"
-                        : ""
-                    }
-                  ></aside>
-                </div>
-              </article>
-            </>
-          );
-        })}
-      </div>
-    </section>
+                  {post.teaser}
+                </p>
+              </div>
+            </div>
+          </ArticleLink>
+        </article>
+      );
+    })}
+  </div>
+</section>
+
   );
 };

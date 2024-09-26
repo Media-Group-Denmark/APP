@@ -10,19 +10,21 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			main_color_light: '#fafafa',
-  			second_color_light: '#ffffff',
-  			text_main_color_light: '#f8fafc',
-  			text_second_color_light: '#e2e8f0',
-  			fade_color_light: '#09060a',
-  			accent_color_light: '#007F6C',
-  			accent_color_gradient_light: '#007F6C, #00C090',
-  			main_color_dark: '#10172b',
-  			second_color_dark: '#20293c',
-  			text_main_color_dark: '#10172b',
-  			fade_color_dark: '#c3c9d7',
-  			accent_color_dark: '#00C090',
-  			color_accent: '#007F6C',
+			main_color_light: '#fafafa',
+second_color_light: '#ffffff',
+text_main_color_light: '#f8fafc',
+text_second_color_light: '#e2e8f0',
+fade_color_light: '#09060a',
+accent_color_light: '#9dc18f',  // Lysere grøn tone (#9dc18f)
+accent_color_gradient_light: '#9dc18f, #7fa973',  // Gradient med grønne nuancer tæt på #9dc18f
+main_color_dark: '#10172b',
+second_color_dark: '#20293c',
+text_main_color_dark: '#10172b',
+fade_color_dark: '#c3c9d7',
+accent_color_dark: '#7fa973',  // Mørkere variant af grøn
+color_accent: '#9dc18f',  // Primær accentfarve (#9dc18f)
+
+			
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -65,8 +67,8 @@ const config: Config = {
   			}
   		},
   		backgroundImage: {
-  			'accent-color-gradient': 'linear-gradient(90deg, #007F6C, #00AC82)'
-  		},
+			'accent-color-gradient': 'linear-gradient(90deg, #9dc18f, #7fa973)'  // Opdateret gradient til lysegrønne nuancer
+		  },
   		screens: {
   			xs: '350px'
   		},

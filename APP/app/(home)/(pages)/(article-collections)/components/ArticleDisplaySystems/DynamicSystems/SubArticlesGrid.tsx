@@ -37,84 +37,76 @@ const SubArticlesSixGrid: React.FC<{
   );
   return (
     <section className="pb-12">
-      <ArticleLink href={`${theme.site_url}/kategori/${category}`}>
-        <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-          <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-            {category
-              ? category
-              : tag
-              ? tag
-              : journalist
-              ? journalist
-              : "Alle Nyheder"}
-          </span>
-        </h1>
-      </ArticleLink>
-      <article className="grid overflow-y-clip grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
-        {slicedData
-          .map((post: Article) => (
-            <div
-              key={post._id}
-              className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
-            >
-              <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
-                <ArticleLink
-                  aria-label="Læs mere om artiklen"
-                  href={`/artikel/${
-                    post.republishArticle && post.newSlug
-                      ? post.newSlug
-                      : post.articleSlug
-                  }`}
-                >
-                  <img
-                    width={400}
-                    height={300}
-                    src={urlFor(post.image)
-                      .format("webp")
-                      .width(400)
-                      .height(300)
-                      .fit("fill")
-                      .quality(85)
-                      .url()}
-                    loading="lazy"
-                    alt={post.title}
-                    className="w-full h-full object-cover"
-                  />
-                </ArticleLink>
-              </figure>
-              <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
-                <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
-                  <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                    <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
-                      {post.category}
-                    </p>
-                  </ArticleLink>
-                  <time
-                    className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"
-                    dateTime={post.publishedAt}
-                  >
-                    {timeSinceText({ date: post.publishedAt })}
-                  </time>
-                </aside>
-                <header>
-                  <ArticleLink
-                    href={`/artikel/${
-                      post.republishArticle && post.newSlug
-                        ? post.newSlug
-                        : post.articleSlug
-                    }`}
-                  >
-                    <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
-                      {post.title}
-                    </h1>
-                  </ArticleLink>
-                </header>
+ {/*  <ArticleLink href={`${theme.site_url}/kategori/${category}`}>
+  <div className="relative text-center mb-8">
+    <h1 className="inline-block text-lg md:text-2xl font-extrabold text-main_color_dark dark:text-main_color_light uppercase tracking-wide">
+      {category
+        ? category
+        : tag
+        ? tag
+        : journalist
+        ? journalist
+        : "Alle Nyheder"}
+    </h1>
+    <div className="absolute left-1/2 transform -translate-x-1/2 bottom-0 w-24 h-1 bg-gradient-to-r from-accent_color_dark to-accent_color_light rounded-full"></div>
+  </div>
+</ArticleLink> */}
+
+<article className="grid grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+  {slicedData
+    .slice(0, articleAmount)
+    .map((post: Article) => (
+      <div
+        key={post._id}
+        className="flex justify-center items-center"
+      >
+        <ArticleLink
+          href={`/artikel/${
+            post.republishArticle && post.newSlug
+              ? post.newSlug
+              : post.articleSlug
+          }`}
+          aria-label={`Læs mere om ${post.title}`}
+          className="mb-4"
+        >
+          <div className="relative flex flex-col mt-6 text-gray-700 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl w-72">
+            <div className="relative h-40 mx-4 -mt-6 overflow-hidden shadow-lg rounded-xl">
+              <img
+                src={urlFor(post.image)
+                  .format("webp")
+                  .width(400)
+                  .height(300)
+                  .fit("fill")
+                  .quality(85)
+                  .url()}
+                alt={post.title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+              {/* Kategori Badge */}
+              <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+                {post.category}
               </div>
             </div>
-          ))
-          .slice(0, articleAmount)}
-      </article>
-    </section>
+            <div className="p-6">
+              <h2 className="block mb-2 font-sans text-lg font-semibold leading-snug tracking-normal text-main_color_dark dark:text-main_color_light">
+                {post.title}
+              </h2>
+              {/* Tidsstempel */}
+              <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                <time dateTime={post.publishedAt}>
+                  {timeSinceText({ date: post.publishedAt })}
+                </time>
+              </div>
+            </div>
+          </div>
+        </ArticleLink>
+      </div>
+    ))}
+</article>
+
+</section>
+
   );
 };
 

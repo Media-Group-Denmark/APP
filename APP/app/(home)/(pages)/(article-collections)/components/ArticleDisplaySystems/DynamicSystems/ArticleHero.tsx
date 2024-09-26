@@ -34,71 +34,117 @@ const ArticleHero: React.FC<{
   );
   return (
     <>
-      {slicedData.map((post: Article) => (
-        <article
-          key={post._id}
-          className="col-span-2 mb-4 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
-        >
-          <figure className="block w-full h-[12em] md:h-[20em] rounded-t-lg overflow-clip">
-            <ArticleLink
-              aria-label="Læs mere om artiklen"
-              href={`/artikel/${
-                post.republishArticle && post.newSlug
-                  ? post.newSlug
-                  : post.articleSlug
-              }`}
-            >
-              <Image
-                src={urlFor(post.image).url()}
+    {slicedData.map((post: Article) => (
+      <article
+      key={post._id}
+      className="flex justify-center items-center col-span-2 my-6"
+    >
+      <ArticleLink
+        href={`/artikel/${
+          post.republishArticle && post.newSlug
+            ? post.newSlug
+            : post.articleSlug
+        }`}
+        aria-label={`Læs mere om ${post.title}`}
+        className="mb-4"
+      >
+        <div className="max-w-[720px] mx-auto">
+          <div className="relative flex flex-col text-gray-700 bg-white dark:bg-gray-800 shadow-md bg-clip-border rounded-xl w-full">
+            <div className="relative h-[20em] mx-4 -mt-6 overflow-hidden shadow-lg rounded-xl">
+              <img
+                src={urlFor(post.image)
+                  .format("webp")
+                  .width(600)
+                  .height(400)
+                  .fit("fill")
+                  .quality(85)
+                  .url()}
                 alt={post.title}
-                layout="responsive"
-                width={600}
-                height={400} // Justér højden for at bevare aspect ratio
-                sizes="(max-width: 768px) 600px, 900px"
-                quality={`(max-width: 768px) 50, 85`}
-                priority={true} // Tilføj dette for billeder i det indledende viewport
+                className="w-full h-full object-cover"
+                loading="lazy"
               />
-            </ArticleLink>
-          </figure>
-
-          <div className="px-4 pb-4">
-            <header className="grid grid-rows-[auto_1fr_auto] min-h-[170px]">
-              <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
-                  {post.category}
-                </p>
-              </ArticleLink>
-              <ArticleLink
-                href={`/artikel/${
-                  post.republishArticle && post.newSlug
-                    ? post.newSlug
-                    : post.articleSlug
-                }`}
-              >
-                <h1 className="text-2xl md:text-[2.3em] leading-10 font-extrabold rounded-lg">
-                  {post.title}
-                </h1>
-              </ArticleLink>
-            </header>
-            <footer className="flex gap-2 mt-2">
-              <address>
+              {/* Kategori Badge */}
+              <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+                {post.category}
+              </div>
+            </div>
+            <div className="p-6">
+              <h1 className="block mb-4 font-sans text-2xl md:text-3xl font-extrabold leading-snug tracking-normal text-main_color_dark dark:text-main_color_light">
+                {post.title}
+              </h1>
+              <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                 <ArticleLink
-                  className="text-sm py-2 text-fade_color_light dark:text-fade_color_dark"
-                  rel="author"
                   href={`/journalist/${post.JournalistSlug}`}
+                  rel="author"
+                  className="flex items-center"
                 >
-                  {post.JournalistName}
+                  <span className="mr-2">Af</span>
+                  <span className="font-medium">{post.JournalistName}</span>
                 </ArticleLink>
-              </address>
-              <time className="rounded-lg">
-                {timeSinceText({ date: post.publishedAt })}
-              </time>
-            </footer>
+                <span className="mx-2">•</span>
+                <time>{timeSinceText({ date: post.publishedAt })}</time>
+              </div>
+            </div>
           </div>
-        </article>
-      ))}
-    </>
+        </div>
+      </ArticleLink>
+    </article>
+    
+    ))}
+  </>
+  
   );
 };
 
 export default ArticleHero;
+
+
+{/* <article
+        key={post._id}
+        className="col-span-2 my-6 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg transform transition-transform hover:-translate-y-1"
+      >
+        <ArticleLink
+          href={`/artikel/${
+            post.republishArticle && post.newSlug
+              ? post.newSlug
+              : post.articleSlug
+          }`}
+          aria-label={`Læs mere om ${post.title}`}
+          className="block"
+        >
+          <figure className="relative">
+            <img
+              src={urlFor(post.image)
+                .format("webp")
+                .width(600)
+                .height(400)
+                .fit("fill")
+                .quality(85)
+                .url()}
+              alt={post.title}
+              className="w-full max-h-[20em] object-cover"
+              loading="lazy"
+            />
+            <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-3 py-1 rounded-full">
+              {post.category}
+            </div>
+          </figure>
+          <div className="p-6">
+            <h1 className="text-2xl md:text-[2em] leading-snug font-extrabold text-main_color_dark dark:text-main_color_light mb-4">
+              {post.title}
+            </h1>
+            <div className="flex items-center text-sm text-gray-600 dark:text-gray-300">
+              <ArticleLink
+                href={`/journalist/${post.JournalistSlug}`}
+                rel="author"
+                className="flex items-center"
+              >
+                <span className="mr-2">Af</span>
+                <span className="font-medium">{post.JournalistName}</span>
+              </ArticleLink>
+              <span className="mx-2">•</span>
+              <time>{timeSinceText({ date: post.publishedAt })}</time>
+            </div>
+          </div>
+        </ArticleLink>
+      </article> */}

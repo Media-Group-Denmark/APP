@@ -69,19 +69,16 @@ export default function NewNav() {
       <nav className={`${stickyNav ? "fixed top-0" : "flex"} h-16 content-center bg-second_color_light dark:bg-second_color_dark w-screen items-center justify-center`} >
        <ul className={`hidden w-[1000px] bg-second_color_light dark:bg-second_color_dark m-auto  flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 px-2 lg:pl-4 `}>
           <li className="flex-shrink-0">
-            {
-              navData ? (
+            
                 <ArticleLink href="/">
                 <Image
-                  src={logo ? urlFor(logo).url() :  theme.logo_url}
+                  src={ theme.logo_url}
                   alt="Logo"
-                  width={110}
-                  height={62}
+                  width={150}
+                  height={102}
                   className="object-contain"
                 />
               </ArticleLink>
-              ) : null
-            }
           </li>
           {navData?.frontpageBoolean ? (
             <li>
@@ -110,8 +107,8 @@ export default function NewNav() {
               </li>
             );
           })}
-          <DarkModeToggle onClick={toggle} />
-          <SearchButton />
+          {/* <DarkModeToggle onClick={toggle} />
+          <SearchButton /> */}
        </ul>
       </nav>
       <Sheet>

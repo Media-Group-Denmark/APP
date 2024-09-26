@@ -20,119 +20,71 @@ const TrendingArticlesListAltOmKendte: React.FC<{
   let slicedData = filterAndSliceArticles(data, category, tag, journalist, dayInterval, startIndex, endIndex);
   slicedData = slicedData.sort((a, b) => b.views - a.views);
   return (
-    <section
-      id="trending"
-      className=" md:px-2 min-w-[280px] xl:w-full  rounded-2xl h-fit grid place-content-center"
-    >
-      <div>
-        {/*  Header Start */}
-        <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
-          <span className="bg-accent-color-gradient text-white px-4 py-1">
-            TOPNYHEDER
-          </span>
-        </h1>
-        {/*  Header End */}
+   <section
+  id="trending"
+  className="md:px-2 min-w-[280px] xl:w-full rounded-2xl h-fit hidden md:inline-block"
+>
+  <div>
+  
+    {/* Header End */}
 
-        <ul className="space-y-4">
-        {slicedData.map((post: Article, index: number) => (
-              <li>
-                <article className="bg-second_color_light dark:bg-second_color_dark rounded-2xl">
-                  {/*  Image Desktop Start */}
-                  <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-clip">
-                    <ArticleLink
-                      aria-label="Læs mere om artiklen"
-                      href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
-                    >
-                      <img
-                      width={400}
-                      height={300}
-                        src={urlFor(post.image)
-                          .format("webp")
-                          .width(400)
-                          .height(300)
-                          .fit("fill")
-                          .quality(85)
-                          .url()}
-                        alt={post.title} // Sørg for at inkludere en beskrivende alt-tekst
-                        loading="lazy"
-                        className="w-full h-full object-cover bg-center"
-                      />
-                    </ArticleLink>
-                  </figure>
-                  {/*  Image Desktop End */}
-
-                  <div className="md:pb-2 md:pt-1 md:px-3">
-                    {/*  Læsetid Desktop Start */}
-                    <span className="hidden md:inline-block">
-                      <p className="  text-main_color_dark dark:text-main_color_light ml-[28px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
-                        Læsetid:{" "}
-                        <span className="text-accent_color_light  dark:text-accent_color_dark">
-                          {post.reading} min
-                        </span>
-                      </p>
-                    </span>
-                    {/*  Læsetid Desktop End */}
-
-                    <div key={post._id} className="flex items-center    md:pb-2">
-                      {/*  Index Desktop Start */}
-                      <span className="font-bold text-[#a7a7a7] text-2xl min-w-6 hidden md:inline-block">
-                        {index + 1}
-                      </span>
-                      {/*  Index Desktop End */}
-
-                      {/*  Image Mobile Start */}
-                      <figure className="block md:hidden max-w-20 mr-6 rounded-xl overflow-clip">
-                        <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
-                          <img
-                          width={300}
-                          height={300}
-                            src={urlFor(post.image)
-                              .format("webp")
-                              .width(300)
-                              .height(300)
-                              .fit("fill")
-                              .quality(85)
-                              .url()}
-                            loading="lazy"
-                            alt={post.title} // Husk at inkludere en beskrivende alt-tekst
-                            className=" object-cover bg-center"
-                          />
-                        </ArticleLink>
-                      </figure>
-                      {/*  Image Mobile End */}
-
-                      <div>
-                        {/*  Læsetid Mobile Start */}
-                        <span className=" inline-block md:hidden">
-                          <p className="  text-main_color_dark dark:text-main_color_light ml-[8px]  mr-auto dark:hover:hover:bg-slate-700 hover:bg-slate-200 bg-opacity-20 py-1 md:p-1 text-[0.75rem] rounded-full ">
-                            Læsetid:{" "}
-                            <span className="text-accent_color_light  dark:text-accent_color_dark">
-                              {post.reading} min
-                            </span>
-                          </p>
-                        </span>
-                        {/*  Læsetid Mobile End */}
-
-                        {/*  Title Start */}
-                        <ArticleLink
-                          className="ml-4 md:ml-0"
-                          href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
-                        >
-                          <h2 className="ml-2 text-main_color_dark dark:text-main_color_light font-semibold  hover:text-accent_color_light dark:hover:text-accent_color_dark transition-colors text-sm ">
-                            {post.title}
-                          </h2>
-                          {/*  Title End */}
-                        </ArticleLink>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            )).slice(0, articleAmount)}
-        </ul>
+    <ul className="space-y-6">
+      {slicedData
+        .slice(0, articleAmount)
+        .map((post: Article, index: number) => (
+          <div className="flex justify-center items-center">
+              <ArticleLink
+              href={`/artikel/${
+                post.republishArticle && post.newSlug
+                  ? post.newSlug
+                  : post.articleSlug
+              }`}
+              aria-label={`Læs mere om ${post.title}`} className="mb-4">
+      <div className="max-w-[720px] mx-auto">
+  
+          <div className="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
+              <div
+                  className="relative h-40 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
+                  <img
+            src={urlFor(post.image)
+              .format("webp")
+              .width(400)
+              .height(300)
+              .fit("fill")
+              .quality(85)
+              .url()}
+            alt={post.title}
+            className="w-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+        {index + 1}
       </div>
-    </section>
-  );
+      <div className="absolute bottom-2 left-2 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded-full">
+        {post.reading} min læsning
+      </div>
+              </div>
+              <div className="p-6">
+                  <h2 className="block mb-2 font-sans text-lg antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                  {post.title}
+                  </h2>
+                 {/*  <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                      The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio"
+                      where you can enjoy the main night life in Barcelona.
+                  </p> */}
+              </div>
+          </div>
+      </div>
+          </ArticleLink>
+  </div>
+        ))}
+    </ul>
+  </div>
+</section>
+
+
+);
 };
 
 export default TrendingArticlesListAltOmKendte;
+
