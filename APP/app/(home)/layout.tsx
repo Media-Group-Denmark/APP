@@ -35,7 +35,7 @@ const InfiniteScroll = ({ data } : {data : Article[]}) => {
 };
 
 // Dynamisk komponent
-const DynamicArticles = dynamic(() => {
+const DynamicArticles = dynamic<React.ComponentType<{ data: Article[] }>>(() => {
   return new Promise((resolve) => {
     setTimeout(() => resolve(InfiniteScroll), 5000); 
   });
