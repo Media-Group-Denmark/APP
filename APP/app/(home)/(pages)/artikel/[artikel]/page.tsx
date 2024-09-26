@@ -45,10 +45,27 @@ export const revalidate = 6000;
 /* -------------------------------------------------------------------------- */
 export async function generateMetadata({ params }: { params: { artikel: string } }) {
   const article = await fetchArticleData(params.artikel);
-  console.log(article, 'til meta');
   const metadata: Metadata = await generateArticleMetadata(article);
   return metadata;
 }
+
+const DynamicScriptLoader = dynamic(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(() => (
+          <Script
+            src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+            data-wid="auto"
+            type="text/javascript"
+          />
+        ));
+      }, 5000); // 5 sekunders forsinkelse
+    }).then((mod) => mod as React.ComponentType),
+  {
+    ssr: false, // Sørger for, at det kun loader på client side
+  }
+);
 
 
 const DynamicReadMore = dynamic(
@@ -167,6 +184,7 @@ export default async function artikel({
                       type="text/javascript"
                       strategy="lazyOnload"
                     />
+                    <DynamicScriptLoader />
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
