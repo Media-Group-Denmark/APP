@@ -13,61 +13,27 @@ import SubArticlesListWide from "@/app/(home)/(pages)/(article-collections)/comp
 import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
 import { getCategoryData } from "../api/getCategoryData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import { generateCategoryMetadata } from "../meta/generateCategoryMetadata";
+import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
-export async function generateMetadata({
-  params,
-}: {
-  params: { kategori: string };
-}): Promise<Metadata> {
-  // Fetch data within the function
+async function fetchData(slug: string | undefined = undefined) {
+  const data: Article[] = await getFreshArticleData();
+  const currentCategory: Reference = await getCategoryData(slug);
+  
+  return {
+    data,
+    currentCategory,
+  };
+}
 
-  const currentCategory = await getCategoryData(params.kategori);
-
-  if (currentCategory) {
-    return {
-      title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
-      description:
-        currentCategory.categoryDescription ||
-        `Kategori ${currentCategory.name} - Artikler og Indsigter, ${theme.site_name}`,
-      keywords: `Kategori ${currentCategory.name} - Artikler og Indsigter, ${theme.site_name}`,
-      openGraph: {
-        title: `${currentCategory.name} | ${theme.site_name}`,
-        description:
-          currentCategory.categoryDescription || theme.metadata.description,
-        url: `${theme.site_name}/kategori/${currentCategory.slug}`,
-        type: "website",
-        siteName: `${theme.site_name}`,
-        locale: "da_DK",
-        images: [
-          {
-            url: `${theme.logo_public_url}`,
-            width: 800,
-            height: 600,
-            alt: `Billede for kategori ${currentCategory.name}`,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        site: `${theme.metadata.twitter.site}`,
-        title: `${currentCategory.name} - Artikler og Indsigter | ${theme.site_name}`,
-        description:
-          currentCategory.categoryDescription || theme.metadata.description,
-        images: `${theme.logo_public_url}`,
-      },
-      robots: "index, follow",
-      publisher: `${theme.site_name}`,
-    };
-  } else {
-    return {
-      title: "Default Title",
-      robots: "noindex, nofollow", // Added robots meta tag
-    };
-  }
+export async function generateMetadata({ params }: { params: { kategori: string } }) {
+  const { currentCategory } = await fetchData(params.kategori);
+  const metadata: Metadata = await generateCategoryMetadata(currentCategory);
+  return metadata  ;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -78,7 +44,7 @@ export default async function kategori({
 }: {
   params: { kategori: string };
 }) {
-  const data: Article[] = await getFreshArticleData();
+  const { data } = await fetchData(params.kategori);
 
   return (
     <section>

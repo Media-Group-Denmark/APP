@@ -4,6 +4,9 @@ import theme from "@/app/lib/theme.json";
 export const aboutUsPageMate: Metadata = {
   title: `Om Os | ${theme.site_name}`,
   description: `${theme.metadata.description}`,
+  alternates: {
+    canonical: `${theme.site_name}/tags`,
+  },
   keywords: `om os, ${theme.site_name}, ${theme.metadata.keywords}`,
   openGraph: {
     title: `Om Os | ${theme.site_name}`,

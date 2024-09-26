@@ -4,6 +4,9 @@ import theme from "@/app/lib/theme.json";
 export const contactUsPageMeta: Metadata = {
   title: `Kontakt Os | ${theme.site_name}`,
   description: `Har du spørgsmål eller feedback? Kontakt ${theme.site_name} team direkte for support, information, eller mediehenvendelser.`,
+  alternates: {
+    canonical: `${theme.site_name}/kontakt`,
+  },
   keywords: `kontakt, support, feedback, ${theme.site_name}, mediehenvendelser`,
   openGraph: {
     title: `Kontakt Os | ${theme.site_name}`,

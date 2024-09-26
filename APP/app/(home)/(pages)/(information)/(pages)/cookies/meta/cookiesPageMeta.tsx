@@ -4,6 +4,9 @@ import theme from "@/app/lib/theme.json";
 export const cookiesPageMeta: Metadata = {
   title: `Cookiepolitik | ${theme.site_name}`,
   description: `Læs om hvordan ${theme.site_name} anvender cookies for at forbedre din oplevelse på vores website, og hvilke data vi indsamler.`,
+  alternates: {
+    canonical: `${theme.site_name}/cookies`,
+  },
   keywords: `cookiepolitik, cookies, persondata, privatlivspolitik, ${theme.site_name}`,
   openGraph: {
     title: `Cookiepolitik | ${theme.site_name}`,
