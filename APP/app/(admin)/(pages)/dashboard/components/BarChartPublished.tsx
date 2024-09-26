@@ -15,8 +15,8 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/app/(admin)/components/ui/chart"
-import { Article } from "@/app/(home)/models/article"
+} from "@/app/(admin)/components/ui/chart";
+import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
 
 export const description = "An interactive bar chart"
 

@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 import theme from "@/app/lib/theme.json";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -6,50 +6,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: theme.site_url,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${theme.site_url}/sider/referencer/kategorier`,
+      url: `${theme.site_url}/kategorier`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/sider/referencer/tag`,
+      url: `${theme.site_url}/tag`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/sider/referencer/journalister`,
+      url: `${theme.site_url}/journalister`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/sider/cookies`,
+      url: `${theme.site_url}/cookies`,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/sider/omos`,
+      url: `${theme.site_url}/omos`,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/sider/kontakt`,
+      url: `${theme.site_url}/kontakt`,
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 0.5,
     },
     {
       url: `${theme.site_url}/sitemaps/sitemap.xml`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: "daily",
       priority: 1,
     },
-  ]
+  ];
 }

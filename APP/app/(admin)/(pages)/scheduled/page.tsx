@@ -1,5 +1,5 @@
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/models/article";
+import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import {
   Card,
@@ -127,7 +127,7 @@ export default async function ScheduledPost() {
                             </TableCell>
                             <TableCell>
                               <Link
-                                href={`${theme.site_url}/artikler/kategori/${post.categorySlug}`}
+                                href={`${theme.site_url}/kategori/${post.categorySlug}`}
                               >
                                 <Badge variant="secondary">
                                   {post.category}
@@ -136,7 +136,7 @@ export default async function ScheduledPost() {
                             </TableCell>
                             <TableCell>
                               <Link
-                                href={`${theme.site_url}/artikler/journalist/${post.JournalistSlug}`}
+                                href={`${theme.site_url}/journalist/${post.JournalistSlug}`}
                               >
                                 <Badge variant="secondary">
                                   {post.JournalistName}
@@ -146,7 +146,7 @@ export default async function ScheduledPost() {
                             <TableCell className="m-auto w-[60vw] max-w-[30ch]">
                               {post.tag.map((tag, index) => (
                                 <Link
-                                  href={`${theme.site_url}/artikler/tag/${post.tagSlug[index]}`}
+                                  href={`${theme.site_url}/tag/${post.tagSlug[index]}`}
                                 >
                                   <Badge className="m-1" variant="secondary">
                                     {tag}

@@ -1,3 +1,48 @@
 {
-    "material-icon-theme.activeIconPack": "react"
+  "material-icon-theme.activeIconPack": "react",
+  "material-icon-theme.folders.associations": {
+    "(admin)": "secure",
+    "(pages)": "views",
+    "sitemaps": "docs",
+    "(home)": "home",
+    "[...not-found]": "error",
+
+  },
+  "material-icon-theme.folders.customClones": [
+    {
+      "name": "pages-files",
+      "base": "src",
+      "color": "light-green-500",
+      "lightColor": "light-green-700",
+      "folderNames": [
+        "cookies",
+        "kontakt",
+        "omos",
+        "privatliv",
+        "kategori",
+        "kategorier",
+        "kategori/[kategori]",
+        "tag",
+        "tags",
+        "tag/[tag]",
+        "journalist",
+        "journalister",
+        "journalist/[journalist]",
+        "findartikel",
+        "artikel", 
+        "artikel/[artikel]",
+      ]
+    },
+    {
+      "name": "custom-folders",
+      "base": "context",
+      "color": "green-700",
+      "lightColor": "green-700",
+      "folderNames": [
+        "(article-collections)", "(information)", "(referencer)",
+      ]
+    },
+  ],
+
+  "folder-color.pathColors": []
 }

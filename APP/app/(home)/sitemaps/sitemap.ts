@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { client } from '../../lib/sanityclient';
 import theme from '../../lib/theme.json';
-import { Article } from '../models/article';
+import { Article } from '../(pages)/(article-collections)/models/article';
 
 export async function getArticleData(): Promise<Article[]> {
   const query = `

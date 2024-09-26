@@ -1,12 +1,14 @@
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
-const theme = require('./app/lib/theme.json'); 
-require('dotenv').config(); 
-const { createClient } = require("next-sanity"); 
+const fetch = (...args) =>
+  import("node-fetch").then(({ default: fetch }) => fetch(...args));
+const theme = require("./app/lib/theme.json");
+require("dotenv").config();
+const { createClient } = require("next-sanity");
 
 const client = createClient({
   apiVersion: "2024-01-01",
   dataset: "production",
-  projectId: process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  projectId:
+    process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   useCdn: false,
   perspective: "published",
   stega: {
@@ -40,9 +42,9 @@ async function getData() {
 
   try {
     const data = await client.fetch(query);
-    return data;  
+    return data;
   } catch (error) {
-    console.error('Error fetching combined data:', error);
+    console.error("Error fetching combined data:", error);
     return null;
   }
 }
@@ -51,22 +53,21 @@ async function warmCache() {
   const baseUrl = theme.site_url;
   const data = await getData();
 
-   // Map articles to paths
-   const articlePaths = data.articles.map((post) => `/artikel/${post.articleSlug}`);
+  // Map articles to paths
+  const articlePaths = data.articles.map(
+    (post) => `/artikel/${post.articleSlug}`
+  );
 
-   // Map navigation slugs to paths
-   const categoryPaths = data.navigation && data.navigation.navItems
-    ? data.navigation.navItems.map((item) => `/artikler/kategori/${item.slug}`)
-    : [];
+  // Map navigation slugs to paths
+  const categoryPaths =
+    data.navigation && data.navigation.navItems
+      ? data.navigation.navItems.map((item) => `/kategori/${item.slug}`)
+      : [];
 
-  const paths = [
-    '/',
-    ...categoryPaths, 
-    ...articlePaths,   
-  ];
+  const paths = ["/", ...categoryPaths, ...articlePaths];
 
-  console.log('paths', paths);
-  console.log('baseUrl', baseUrl);
+  console.log("paths", paths);
+  console.log("baseUrl", baseUrl);
 
   // Fetch all URLs in parallel
   const fetchPromises = paths.map(async (path) => {

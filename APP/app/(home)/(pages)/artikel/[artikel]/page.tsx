@@ -3,38 +3,37 @@
 /* -------------------------------------------------------------------------- */
 import Script from "next/script";
 import React from "react";
-import "@/app/stylesheets/articleText.css";
+import "../stylesheets/articleText.css";
 
 import { urlFor } from "@/app/lib/sanityclient";
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 
-import PageViewTracker from "@/app/(home)/components/ArticleTools/PageViewTracker";
-import { timeSinceText } from "@/app/(home)/components/ArticleTools/TimeSinceTag";
-import Disclaimer from "@/app/(home)/components/ArticleTools/Disclaimer";
-import SocialMediaShareButtons from "@/app/(home)/components/ArticleTools/SocialMediaShareButtons";
+import PageViewTracker from "../components/ArticleTools/PageViewTracker";
+import { timeSinceText } from "../components/ArticleTools/TimeSinceTag";
+import Disclaimer from "../components/ArticleTools/Disclaimer";
+import SocialMediaShareButtons from "../components/ArticleTools/SocialMediaShareButtons";
 
-import FacebookTextBlock from "@/app/(home)/components/ArticleInTextBlocks/FacebookTextBlock";
-import ImageTextBlock from "@/app/(home)/components/ArticleInTextBlocks/ImageTextBlock";
-import TikTokTextBlock from "@/app/(home)/components/ArticleInTextBlocks/TikTokTextBlock";
-import InstagramTextBlock from "@/app/(home)/components/ArticleInTextBlocks/InstagramTextBlock";
-import YouTubeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/YouTubeTextBlock";
-import ReadMoreArticlesBlock from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
-import IframeTextBlock from "@/app/(home)/components/ArticleInTextBlocks/IframeTextBlock";
+import FacebookTextBlock from "../components/ArticleInTextBlocks/FacebookTextBlock";
+import ImageTextBlock from "../components/ArticleInTextBlocks/ImageTextBlock";
+import TikTokTextBlock from "../components/ArticleInTextBlocks/TikTokTextBlock";
+import InstagramTextBlock from "../components/ArticleInTextBlocks/InstagramTextBlock";
+import YouTubeTextBlock from "../components/ArticleInTextBlocks/YouTubeTextBlock";
+import ReadMoreArticlesBlock from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesBlock";
+import IframeTextBlock from "../components/ArticleInTextBlocks/IframeTextBlock";
 
 import theme from "@/app/lib/theme.json";
-import MobileSocialMediaShareButtons from "@/app/(home)/components/ArticleTools/MobileSocialMediaShareButtons";
+import MobileSocialMediaShareButtons from "../components/ArticleTools/MobileSocialMediaShareButtons";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
-import { getArticleSingleData} from "@/app/api/data/GetData";
-import { singleArticle } from "@/app/(home)/models/singleArticle";
+import { getArticleSingleData } from "../api/getArticleSingle";
+import { singleArticle } from "../models/singleArticle";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 import dynamic from "next/dynamic";
-import ReadMoreArticlesSkeleton from "@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
-
+import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
 
 async function fetchArticleData(slug: string) {
-  const data: singleArticle  = await getArticleSingleData(slug);
+  const data: singleArticle = await getArticleSingleData(slug);
   return data;
 }
 export const revalidate = 6000;
@@ -42,16 +41,13 @@ export const revalidate = 6000;
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
 export async function generateMetadata({
-  params
+  params,
 }: {
   params: { artikel: string };
 }): Promise<Metadata> {
-
   const mainArticle = await fetchArticleData(params.artikel);
 
-
   if (mainArticle) {
-
     return {
       title: mainArticle.title,
       description: mainArticle.teaser,
@@ -59,7 +55,9 @@ export async function generateMetadata({
       openGraph: {
         title: mainArticle.facebookTitle || mainArticle.title,
         description: mainArticle.facebookDescription || mainArticle.teaser,
-        url: `${theme.site_url}/artikel/${mainArticle.newSlug || mainArticle.articleSlug}`,
+        url: `${theme.site_url}/artikel/${
+          mainArticle.newSlug || mainArticle.articleSlug
+        }`,
         type: "article",
         siteName: theme.site_name,
         locale: "da_DK",
@@ -99,35 +97,36 @@ export async function generateMetadata({
   }
 }
 
-const DynamicReadMore = dynamic(() => 
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(import('@/app/(home)/components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock'));
-    }, 5000); // 3 sekunders forsinkelse
-  }), 
+const DynamicReadMore = dynamic(
+  () =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          import(
+            "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"
+          )
+        );
+      }, 5000); // 3 sekunders forsinkelse
+    }),
   {
     loading: () => <ReadMoreArticlesSkeleton />,
   }
 );
 
-
-
 /* -------------------------------------------------------------------------- */
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
 export default async function artikel({
-  params
+  params,
 }: {
   params: { artikel: string };
 }) {
-
-  
   const mainArticle = await fetchArticleData(params.artikel);
-  
+
   const isClient = typeof window !== "undefined";
-  
+
   await generateMetadata({ params });
-  
+
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
   /* -------------------------------------------------------------------------- */
@@ -143,12 +142,18 @@ export default async function artikel({
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
       readMoreAutomatic: (props: any) => (
-        <DynamicReadMore articleTitle={mainArticle.title} articleCategory={mainArticle.category} currentArticleId={mainArticle._id} />
+        <DynamicReadMore
+          articleTitle={mainArticle.title}
+          articleCategory={mainArticle.category}
+          currentArticleId={mainArticle._id}
+        />
       ),
     },
   };
-  
-  {/* <ReadMoreAutomaticArticlesBlock articleTitle={cookies().get('name')} articleCategory={cookies().get('category')} currentArticleId={cookies().get('articleId')} /> */}
+
+  {
+    /* <ReadMoreAutomaticArticlesBlock articleTitle={cookies().get('name')} articleCategory={cookies().get('category')} currentArticleId={cookies().get('articleId')} /> */
+  }
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
       <section className="m-auto">
@@ -165,7 +170,7 @@ export default async function artikel({
                   <section>
                     <div className="grid ">
                       <ArticleLink
-                        href={`/artikler/kategori/${mainArticle.categorySlug}`}
+                        href={`/kategori/${mainArticle.categorySlug}`}
                       >
                         <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
                           {mainArticle.category}
@@ -189,7 +194,7 @@ export default async function artikel({
                         <div className="flex gap-x-2 lg:mt-2 align-middle">
                           <ArticleLink
                             rel="author"
-                            href={`/artikler/journalist/${mainArticle.JournalistSlug}`}
+                            href={`/journalist/${mainArticle.JournalistSlug}`}
                           >
                             <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
                               Skrevet af:{" "}
@@ -206,13 +211,13 @@ export default async function artikel({
                           </time>
                         </div>
                       </div>
-                          </footer>
-                          <Script
-              src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-              data-wid="auto"
-              type="text/javascript"
-              strategy="lazyOnload"
-            />
+                    </footer>
+                    <Script
+                      src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+                      data-wid="auto"
+                      type="text/javascript"
+                      strategy="lazyOnload"
+                    />
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
@@ -241,7 +246,7 @@ export default async function artikel({
                         <React.Fragment key={index}>
                           {index > 0 ? " " : ""}{" "}
                           <ArticleLink
-                            href={`/artikler/tag/${mainArticle.tagSlug[index]}`}
+                            href={`/tag/${mainArticle.tagSlug[index]}`}
                           >
                             <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
                               {tag}
@@ -256,7 +261,8 @@ export default async function artikel({
                   </section>
 
                   <aside
-                    className="mobile md:hidden" data-ad-unit-id={`/49662453/${theme.site_ad_name}/mobile_square_article_1`}
+                    className="mobile md:hidden"
+                    data-ad-unit-id={`/49662453/${theme.site_ad_name}/mobile_square_article_1`}
                   ></aside>
 
                   <aside
