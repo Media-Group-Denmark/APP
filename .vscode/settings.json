@@ -44,5 +44,37 @@
     },
   ],
 
-  "folder-color.pathColors": []
+  "folder-color.pathColors": [],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "APP/.eslintrc.json": true,
+    "APP/.gitignore": true,
+    "APP/components.json": true,
+    "APP/next-env.d.ts": true,
+    "APP/next.config.mjs": true,
+    "APP/package-lock.json": true,
+    "APP/package.json": true,
+    "APP/tsconfig.json": true,
+    "loadingscreen": true,
+    "APP/postcss.config.js": true,
+    "APP/tailwind.config.ts": true
+  },
+  "hide-files.files": [
+    "APP/.eslintrc.json",
+    "APP/.gitignore",
+    "APP/components.json",
+    "APP/next-env.d.ts",
+    "APP/next.config.mjs",
+    "APP/package-lock.json",
+    "APP/package.json",
+    "APP/tsconfig.json",
+    "loadingscreen",
+    "APP/postcss.config.js",
+    "APP/tailwind.config.ts"
+  ]
 }

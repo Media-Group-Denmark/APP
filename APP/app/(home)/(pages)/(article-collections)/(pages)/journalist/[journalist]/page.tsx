@@ -13,82 +13,24 @@ import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/
 import { getJournalistData } from "../api/getJournalistData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
+import { generateJournalistMetadata } from "../meta/generateJournalistMetaData";
 
 export const revalidate = 10000;
 
 async function fetchData(slug: string | undefined = undefined) {
   const data: Article[] = await getFreshArticleData();
   const currentJournalist: Reference = await getJournalistData(slug);
+  
   return {
     data,
     currentJournalist,
   };
 }
-/* -------------------------------------------------------------------------- */
-/*                                  METADATA                                  */
-/* -------------------------------------------------------------------------- */
-export async function generateMetadata({
-  params,
-}: {
-  params: { journalist: string };
-}): Promise<Metadata> {
-  const { currentJournalist } = await fetchData(params.journalist);
 
-  if (currentJournalist) {
-    return {
-      title: `${currentJournalist.name} - Artikler og Indsigter | ${theme.site_name}`,
-      description: Array.isArray(currentJournalist.description)
-        ? currentJournalist.description.join(",")
-        : currentJournalist.description,
-      keywords: `Journalist ${currentJournalist.name} - Artikler og Indsigter, ${theme.site_name}`,
-      openGraph: {
-        title: `${currentJournalist.name} | ${theme.site_name}`,
-        description: `${currentJournalist.description},`,
-        url: `${theme.site_name}/journalist/${currentJournalist.slug}`,
-        type: "profile",
-        siteName: `${theme.site_name}`,
-        locale: "da_DK",
-        images: [
-          {
-            url: currentJournalist.image
-              ? urlFor(currentJournalist.image)
-                  .format("webp")
-                  .width(400)
-                  .height(300)
-                  .fit("fill")
-                  .quality(85)
-                  .url()
-              : `${theme.logo_public_url}`,
-            width: 800,
-            height: 600,
-            alt: `Foto af ${currentJournalist.name}`,
-          },
-        ],
-      },
-      twitter: {
-        card: "summary_large_image",
-        site: `${theme.metadata.twitter.site}`,
-        title: `${currentJournalist.name} - Artikler og Indsigter | ${theme.site_name}`,
-        description: `${currentJournalist.description}`,
-        images: currentJournalist.image
-          ? urlFor(currentJournalist.image)
-              .format("webp")
-              .width(400)
-              .height(300)
-              .fit("fill")
-              .quality(85)
-              .url()
-          : `${theme.logo_public_url}`,
-      },
-      robots: "index, follow",
-      publisher: `${theme.site_name}`,
-    };
-  } else {
-    return {
-      title: "Default Title",
-      robots: "noindex, nofollow", // Added robots meta tag
-    };
-  }
+export async function generateMetadata({ params }: { params: { journalist: string } }) {
+  const { currentJournalist } = await fetchData(params.journalist);
+  const metadata: Metadata = await generateJournalistMetadata(currentJournalist);
+  return metadata;
 }
 
 /* -------------------------------------------------------------------------- */

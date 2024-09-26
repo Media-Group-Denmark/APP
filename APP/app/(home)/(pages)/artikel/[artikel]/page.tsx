@@ -51,6 +51,11 @@ export async function generateMetadata({
     return {
       title: mainArticle.title,
       description: mainArticle.teaser,
+      alternates: {
+        canonical: `${theme.site_url}/artikel/${
+          mainArticle.articleSlug
+        }`,
+      },  
       keywords: mainArticle.tag.join(", "),
       openGraph: {
         title: mainArticle.facebookTitle || mainArticle.title,
