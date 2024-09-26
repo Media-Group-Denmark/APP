@@ -2,7 +2,7 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Page } from "@/app/(home)/models/subpage";
+import { SubPage } from '@/app/(home)/(pages)/(information)/models/subpage';
 import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import React from "react";

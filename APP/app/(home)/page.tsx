@@ -10,10 +10,10 @@ import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
 import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
-import { frontpageMeta } from "./meta/frontpageMeta";
+import { defaultMeta } from "./meta/defaultMeta";
 export const revalidate = 600;
 
-export const metadata: Metadata = frontpageMeta;
+export const metadata: Metadata = defaultMeta;
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */

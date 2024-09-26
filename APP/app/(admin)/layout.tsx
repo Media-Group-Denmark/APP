@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
-import "@/app/stylesheets/globals.css";
-import Header from "./components/Header";
 import Link from "next/link";
 import {
   Bell,

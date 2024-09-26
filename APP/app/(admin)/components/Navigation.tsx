@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 
-export default function Navigation({searchParams, pathname}) {
+export default function Navigation({searchParams, pathname} : {searchParams: string, pathname: string}) {
  
 
   const navItems = [

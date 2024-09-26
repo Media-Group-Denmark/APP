@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 
-export const frontpageMeta: Metadata = {
+export const defaultMeta: Metadata = {
   title: theme.metadata.title,
   description: theme.metadata.description,
   keywords: theme.metadata.keywords,

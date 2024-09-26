@@ -7,41 +7,11 @@ import React from 'react'
 import theme from '@/app/lib/theme.json';
 import { Metadata } from 'next';
 import Breadcrumb from '@/app/(home)/components/Navigation/Breadcrumb';
-import { Page } from '@/app/(home)/models/subpage';
-import { findSubPage, getData } from '@/app/api/data/GetData';
-/* -------------------------------------------------------------------------- */
-/*                                  METADATA                                  */
-/* -------------------------------------------------------------------------- */
-export const metadata: Metadata = {
-  title: theme.metadata.title,
-  description: theme.metadata.description,
-  keywords: theme.metadata.keywords,
-  openGraph: {
-    title: theme.metadata.openGraph.title,
-    description: theme.metadata.openGraph.description,
-    url: theme.site_url,
-    type: "website",
-    siteName: theme.site_name,
-    locale: theme.metadata.openGraph.locale,
-    images: [
-      {
-        url: theme.logo_url,
-        width: 800,
-        height: 600,
-        alt: theme.metadata.openGraph.title,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: theme.metadata.twitter.site,
-    title: theme.metadata.twitter.title,
-    description: theme.metadata.twitter.description,
-    images: theme.logo_url,
-  },
-  robots: theme.metadata.robots,
-  publisher: theme.site_name,
-};
+import { SubPage } from '@/app/(home)/(pages)/(information)/models/subpage';
+import { getSubPage } from '../api/getSubPage';
+import { defaultMeta } from '@/app/(home)/meta/defaultMeta';
+
+export const metadata: Metadata = defaultMeta;
 
 /* -------------------------------------------------------------------------- */
 /*                                   CONTENT                                  */
@@ -52,7 +22,7 @@ export default async function page({
   params: { undersider: string; };
 }) {
 
-  const { subPage: page } = await getData(params.undersider) as { subPage: Page[] };
+  const page: SubPage  = await getSubPage(params.undersider);
 
   /* -------------------------------------------------------------------------- */
   /*                           ARTICLE IMAGE COMPONENT                          */
