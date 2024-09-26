@@ -2,7 +2,7 @@ import { singleArticle } from "@/app/(home)/(pages)/artikel/models/singleArticle
 import { client } from "@/app/lib/sanityclient";
 
 export async function getMiddlewareData(slug: string | undefined) {
-    const query = `*[_type == "article" && (newSlug.current == "${slug}" || 
+    const query = `*[_type == "article" && (slug.current == "${slug}" || newSlug.current == "${slug}" || 
         "${slug}" in oldSlugs)][0] {
       _id,
       republishArticle,
@@ -12,7 +12,7 @@ export async function getMiddlewareData(slug: string | undefined) {
     }`;
   
     try {
-      const data = await client.fetch<singleArticle[]>(query);
+      const data = await client.fetch<singleArticle>(query);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);
