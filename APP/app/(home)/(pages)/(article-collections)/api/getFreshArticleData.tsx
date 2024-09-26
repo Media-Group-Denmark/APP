@@ -21,7 +21,7 @@ export async function getFreshArticleData(
       filters += ` && journalist->slug.current == "${journalistDefined}"`;
     }
   
-    const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...100] {
+    const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
       _id,
       publishedAt,
       _type,

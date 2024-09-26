@@ -7,7 +7,7 @@ import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
-import { getAllTagsData } from "@/app/api/data/GetData";
+import { getAllTagsData } from "./api/getAllTagsData";
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
