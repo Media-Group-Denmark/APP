@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
                           ('0' + today.getDate()).slice(-2) + '/' +
                           today.getFullYear().toString().slice(-2);
 
-   
+    // Erstat manuelt / med %2F for at undgå dobbeltkodning
     const encodedDate = formattedDate.replace(/\//g, '%2F');
 
     if (url.searchParams.has('d')) {
@@ -24,11 +24,13 @@ export async function middleware(req: NextRequest) {
     const data = await getMiddlewareData(slug) as singleArticle[];
 
     if (data) {
-        // Redirect til den nye slug med dato som søgeparameter
+        // Redirect til den nye slug med korrekt encoded dato
         const redirectUrl = new URL(`${theme.site_url}/artikel/${data.newSlug}`, req.url);
         redirectUrl.searchParams.set('d', `${encodedDate}`);
         return NextResponse.redirect(redirectUrl, 301);
     } 
+
+    // Redirect uden dobbelkodning
     const redirectUrl = new URL(`${theme.site_url}${fullPath}`, req.url);
     redirectUrl.searchParams.set('d', `${encodedDate}`);  
     return NextResponse.redirect(redirectUrl, 301);
