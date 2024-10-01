@@ -49,7 +49,13 @@ const ArticleHero: React.FC<{
               }`}
             >
               <Image
-                src={urlFor(post.image).url()}
+                src={urlFor(post.image)
+                  .format("webp")
+                  .width(600)
+                  .height(400)
+                  .fit("fill")
+                  .quality(85)
+                  .url()}
                 alt={post.title}
                 layout="responsive"
                 width={600}

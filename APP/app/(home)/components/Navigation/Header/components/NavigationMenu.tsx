@@ -16,6 +16,7 @@ import DarkModeToggle from "./DarkModeToggle/DarkModeToggle";
 import SearchButton from "./SearchBar";
 import { getNavItems } from "../api/getNavItems";
 import { usePathname, useSearchParams } from "next/navigation";
+import MailChimpForm from "../../Footer/components/MailChimpForm";
 
 export default function NewNav() {
   const [navData, setNavData] = useState<any>(null);
@@ -23,6 +24,12 @@ export default function NewNav() {
   const [stickyNav, setStickyNav] = useState(false);
  
   const pathname = usePathname();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsOpen(false); // Close the menu when a link is clicked
+  };
 
 
   function toggle() {
@@ -65,9 +72,9 @@ export default function NewNav() {
 
   
   return (
-    <header className={`flex items-center justify-center gap-4 border-b bg-second_color_light dark:bg-second_color_dark px-4 md:px-6`}>
-      <nav className={`${stickyNav ? "fixed top-0" : "flex"} h-16 content-center bg-second_color_light dark:bg-second_color_dark w-screen items-center justify-center`} >
-       <ul className={`hidden w-[1000px] bg-second_color_light dark:bg-second_color_dark m-auto  flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 px-2 lg:pl-4 `}>
+    <header className={`${stickyNav ? "fixed top-0" : "flex"} flex  items-center justify-center gap-4 border-b bg-second_color_light dark:bg-second_color_dark px-4 md:px-6`}>
+      <nav className={` h-16 content-center bg-second_color_light dark:bg-second_color_dark w-screen items-center justify-center`} >
+       <ul className={` md:w-[1000px] bg-second_color_light dark:bg-second_color_dark m-auto  flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 px-2 lg:pl-4 `}>
           <li className="flex-shrink-0">
             {
               navData ? (
@@ -87,7 +94,7 @@ export default function NewNav() {
             <li>
               <Link
                 href="/"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-muted-foreground transition-colors hover:text-foreground hidden md:inline-block"
               >
                 Forside
               </Link>
@@ -99,7 +106,7 @@ export default function NewNav() {
                 <Link
                   key={link._key}
                   href={`/kategori/${link.slug}`}
-                  className={`transition-colors hover:text-foreground ${
+                  className={`transition-colors hover:text-foreground hidden md:inline-block ${
                     pathname === `/kategori/${link.slug}`
                       ? "text-foreground"
                       : "text-muted-foreground"
@@ -110,16 +117,23 @@ export default function NewNav() {
               </li>
             );
           })}
-          <DarkModeToggle onClick={toggle} />
-          <SearchButton />
+          <span className="hidden md:grid grid-cols-2 items-center ml-auto ">
+            <DarkModeToggle onClick={toggle} />
+            <SearchButton />
+          </span>
        </ul>
       </nav>
-      <Sheet>
+
+      {/*   Phone Nav */}
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <span className="grid md:hidden"><DarkModeToggle onClick={toggle} /></span>
         <SheetTrigger asChild>
           <Button
             variant="outline"
             size="icon"
             className="shrink-0 md:hidden ml-auto"
+            data-state={isOpen ? "open" : "closed"} // Set data-state based on isOpen state
+          onClick={() => setIsOpen(!isOpen)}
           >
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
@@ -139,13 +153,15 @@ export default function NewNav() {
                             ? "text-foreground"
                             : "text-muted-foreground"
                         }`}
+                        onClick={handleLinkClick}
                       >
-                        {link.name}
+                        {link.name} 
                       </Link>
                     );
                   }
                 )
               : null}
+              <MailChimpForm />
           </nav>
         </SheetContent>
       </Sheet>
