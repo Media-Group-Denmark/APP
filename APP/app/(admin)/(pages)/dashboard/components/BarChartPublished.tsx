@@ -9,13 +9,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/app/(admin)/components/ui/card"
+} from "@/app/(admin)/components/shadcn/ui/card"
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/app/(admin)/components/ui/chart";
+} from "@/app/(admin)/components/shadcn/ui/chart";
 import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
 
 export const description = "An interactive bar chart"
