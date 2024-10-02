@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
+} from "../../components/shadcn/ui/card";
 import {
   Table,
   TableBody,
@@ -16,14 +16,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
+} from "../../components/shadcn/ui/table";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "../../components/ui/tabs";
-import { Badge } from "../../components/ui/badge";
+} from "../../components/shadcn/ui/tabs";
+import { Badge } from "../../components/shadcn/ui/badge";
 import React from "react";
 import Link from "next/link";
 import theme from "@/app/lib/theme.json";

@@ -5,8 +5,8 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
-} from "@/app/(admin)/components/ui/sheet";
-import { Button } from "@/app/(admin)/components/ui/button";
+} from "@/app/(admin)/components/shadcn/ui/sheet";
+import { Button } from "@/app/(admin)/components/shadcn/ui/button";
 import { Menu, Package2 } from "lucide-react";
 import { ArticleLink } from "../../../utils/ArticleLink";
 import { urlFor } from "@/app/lib/sanityclient";
