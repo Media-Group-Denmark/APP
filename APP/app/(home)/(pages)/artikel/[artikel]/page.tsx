@@ -209,7 +209,7 @@ export default async function artikel({
                       <span className="text-xs lg:text-sm">
                         Artiklens Tags:{" "}
                       </span>
-                      {mainArticle.tag.map((tag, index) => (
+                      {mainArticle.tag?.map((tag, index) => (
                         <React.Fragment key={index}>
                           {index > 0 ? " " : ""}{" "}
                           <ArticleLink

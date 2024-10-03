@@ -161,8 +161,8 @@ export default function NewNav() {
                   }
                 )
               : null}
-              <MailChimpForm />
           </nav>
+              <aside className="mt-auto grid place-content-center h-full"><MailChimpForm /></aside>
         </SheetContent>
       </Sheet>
     </header>
