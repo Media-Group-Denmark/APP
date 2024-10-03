@@ -74,5 +74,6 @@
     "loadingscreen",
     "APP/postcss.config.js",
     "APP/tailwind.config.ts"
-  ]
+  ],
+  "explorerExclude.backup": {}
 }

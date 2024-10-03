@@ -13,7 +13,7 @@ export async function generateArticleMetadata(currentArticle: singleArticle) {
             currentArticle.articleSlug
           }`,
         },  
-        keywords: currentArticle.tag.join(", "),
+        keywords: currentArticle.tag?.join(", "),
         openGraph: {
           title: currentArticle.facebookTitle || currentArticle.title,
           description: currentArticle.facebookDescription || currentArticle.teaser,
