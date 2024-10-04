@@ -2,11 +2,11 @@
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
 import { urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 
 
 const TrendingArticlesListAltOmKendte: React.FC<{
-  data: Article[];
+  data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
   journalist?: string | undefined;

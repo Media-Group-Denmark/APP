@@ -1,11 +1,11 @@
-import { Article } from "../../../models/article";
+import { ArticleModel } from "../../../models/article";
 import React from "react";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
 const FindArticle: React.FC<{
-  data: Article[];
+  data: ArticleModel[];
   startIndex: number;
   endIndex: number;
 }> = ({ data, startIndex, endIndex }) => {
