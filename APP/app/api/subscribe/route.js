@@ -2,7 +2,6 @@ import mailchimp from "@mailchimp/mailchimp_marketing";
 
 const apiKey = String(process.env.MAILCHIMP_API || process.env.NEXT_PUBLIC_MAILCHIMP_API);
 const audienceId = String(process.env.MAILCHIMP_AUDIENCE || process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE); 
-console.log(apiKey, audienceId, 'demKeys');
 
 mailchimp.setConfig({
     apiKey: apiKey,
