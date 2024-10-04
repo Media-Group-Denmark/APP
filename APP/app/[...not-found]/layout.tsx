@@ -5,7 +5,7 @@ import { Inter, Mulish } from "next/font/google";
 import "@/app/(home)/stylesheets/globals.css";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
 import MailChimpPopUp from "../(home)/components/MailChimp/MailChimpPopUp";
 import Header from "../(home)/components/Navigation/Header/Header";

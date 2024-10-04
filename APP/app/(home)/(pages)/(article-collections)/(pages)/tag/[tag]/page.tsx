@@ -8,7 +8,7 @@ import ArticleHero from "@/app/(home)/(pages)/(article-collections)/components/A
 import SubArticlesGrid from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getTagData } from "../api/getTagData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";

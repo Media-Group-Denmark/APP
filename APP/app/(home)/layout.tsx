@@ -13,7 +13,7 @@ import GoogleAnalyticsScripts from "./components/AdScripts/GoogleAnalyticsScript
 import SubArticlesListSmall from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 

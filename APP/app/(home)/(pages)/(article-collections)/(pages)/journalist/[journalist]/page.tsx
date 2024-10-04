@@ -9,7 +9,7 @@ import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
 import theme from "@/app/lib/theme.json";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getJournalistData } from "../api/getJournalistData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";

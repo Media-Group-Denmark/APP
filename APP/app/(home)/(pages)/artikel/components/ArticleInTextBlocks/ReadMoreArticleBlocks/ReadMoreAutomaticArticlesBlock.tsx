@@ -1,5 +1,5 @@
 import { urlFor } from '@/app/lib/sanityclient';
-import { getFreshArticleData } from '@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData';
+import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
 import React from 'react';
 import ReadMoreAutomaticViews from './ReadMoreAutomaticViews';

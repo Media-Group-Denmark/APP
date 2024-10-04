@@ -1,5 +1,5 @@
 import { client } from "@/app/lib/sanityclient";
-import { ArticleModel } from "../models/article";
+import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
 
 const today = new Date().toISOString();
 export async function getFreshArticleData(

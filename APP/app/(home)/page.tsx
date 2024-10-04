@@ -9,7 +9,7 @@ import TopNewsSlider from "./(pages)/(article-collections)/components/ArticleDis
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { defaultMeta } from "./meta/defaultMeta";
 export const revalidate = 600;
 

@@ -10,7 +10,7 @@ import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/com
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesListAltOmKendte from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
 import SubArticlesListWide from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getCategoryData } from "../api/getCategoryData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { generateCategoryMetadata } from "../meta/generateCategoryMetadata";
