@@ -2,7 +2,7 @@ import React from "react";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import Image from "next/image";
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { ArticleLink } from "../../utils/ArticleLink";
 
 async function getData() {
@@ -33,7 +33,7 @@ async function getData() {
 }
 
 export default async function SubArticlesListSmallOrderRelease() {
-  const data: Article[] = await getData();
+  const data: ArticleModel[] = await getData();
   return (
     <section className="mx-auto max-w-7xl px-6 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-8 mt-6 pb-1 rounded-xl">
       <div className="mx-auto max-w-2xl lg:max-w-4xl">

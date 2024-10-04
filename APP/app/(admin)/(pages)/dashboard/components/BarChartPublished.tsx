@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/app/(admin)/components/shadcn/ui/chart";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 
 export const description = "An interactive bar chart"
 
@@ -31,7 +31,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function BarChartPublished( data: Article[] ) {
+export function BarChartPublished( data: ArticleModel[] ) {
   const [activeChart, setActiveChart] =
     React.useState<keyof typeof chartConfig>("amount")
 

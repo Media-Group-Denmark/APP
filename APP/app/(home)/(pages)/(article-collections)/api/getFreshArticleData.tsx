@@ -1,5 +1,5 @@
 import { client } from "@/app/lib/sanityclient";
-import { Article } from "../models/article";
+import { ArticleModel } from "../models/article";
 
 const today = new Date().toISOString();
 export async function getFreshArticleData(
@@ -44,7 +44,7 @@ export async function getFreshArticleData(
     }`;
   
     try {
-      const data = await client.fetch<Article[]>(query);
+      const data = await client.fetch<ArticleModel[]>(query);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);

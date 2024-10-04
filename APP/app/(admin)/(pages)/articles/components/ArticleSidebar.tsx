@@ -9,7 +9,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-  } from "../../../components/shadcn/ui/card";
+  } from "@/app/(admin)/components/shadcn/ui/card";
   import {
     Table,
     TableBody,
@@ -17,25 +17,32 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-  } from "../../../components/shadcn/ui/table";
+  } from "@/app/(admin)/components/shadcn/ui/table";
   import {
     Tabs,
     TabsContent,
     TabsList,
     TabsTrigger,
-  } from "../../../components/shadcn/ui/tabs";
-  import { Badge } from "../../../components/shadcn/ui/badge";
+  } from "@/app/(admin)/components/shadcn/ui/tabs";
+  import { Badge } from "@/app/(admin)/components/shadcn/ui/badge";
   import theme from "@/app/lib/theme.json";
-import { Article } from '@/app/(home)/(pages)/(article-collections)/models/article';
+import { ArticleModel } from '@/app/(home)/(pages)/(article-collections)/models/article';
 import { urlFor } from '@/app/lib/sanityclient';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export default function ArticleSidebar({searchParams, pathname, articles} : {searchParams: string, pathname: string, articles: Article[]}) {
- 
+export default function ArticleSidebar({articles} : {articles: ArticleModel[]}) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const article = searchParams.get('article')
 
+  const [articleSearchParam, setArticleSearchParam] = useState<string | null>(null)
 
-  useEffect(() => {
-    const url = `${pathname}?${searchParams}`
-  }, [pathname, searchParams])
+  function changeArticleParam(slug: ArticleModel['articleSlug']) {
+    setArticleSearchParam(slug)
+    console.log(articleSearchParam, 'articleSearchParam', pathname, 'pathname')
+    router.push(pathname + '?' + `article=${slug}` )
+  }
 
   return (
        <section className="flex-1 max-w-[500px]  h-screen overflow-y-scroll">
@@ -55,7 +62,7 @@ export default function ArticleSidebar({searchParams, pathname, articles} : {sea
                     <TableBody >
                       {articles?.length > 0
                         ? articles.map((article) => (
-                            <TableRow className='pointer'>
+                            <TableRow  className='cursor-pointer' onClick={() => changeArticleParam(article.articleSlug)}>
                               <TableCell className="hidden sm:table-cell">
                                 <figure className="relative">
                                   <img

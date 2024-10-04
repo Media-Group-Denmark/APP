@@ -1,7 +1,7 @@
 /* "use client"; */
 import React from "react";
 import { getData } from "@/app/lib/GetData";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleLink } from "../../utils/ArticleLink";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
@@ -9,7 +9,7 @@ import { PortableText } from "next-sanity";
 import { SquareChevronRight } from "lucide-react";
 
 export default async function ArticleInfiniteScroll() {
-  const data: Article[] = await getData();
+  const data: ArticleModel[] = await getData();
   return (
     <section>
       <ul>

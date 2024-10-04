@@ -2,7 +2,7 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import React from "react";
-import { Article } from "../../../models/article";
+import { ArticleModel } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import SubArticlesGrid from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
@@ -21,7 +21,7 @@ export const revalidate = 600;
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
 async function fetchData(slug: string | undefined = undefined) {
-  const data: Article[] = await getFreshArticleData();
+  const data: ArticleModel[] = await getFreshArticleData();
   const currentCategory: Reference = await getCategoryData(slug);
   
   return {

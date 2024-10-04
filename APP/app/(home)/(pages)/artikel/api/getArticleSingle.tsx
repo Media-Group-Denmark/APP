@@ -41,7 +41,7 @@ export async function getArticleSingleData(slug: string | undefined) {
         }`;
   
     try {
-      const data = await client.fetch<singleArticle[]>(query);
+      const data = await client.fetch<singleArticleModel[]>(query);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);

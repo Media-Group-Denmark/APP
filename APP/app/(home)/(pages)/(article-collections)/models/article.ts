@@ -1,4 +1,4 @@
-export interface Article {
+export interface ArticleModel {
      _id: string;
      _createdAt: string;
      publishedAt: string;

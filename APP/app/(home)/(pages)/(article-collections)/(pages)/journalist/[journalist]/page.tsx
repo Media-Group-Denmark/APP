@@ -4,7 +4,7 @@
 import React from "react";
 import Image from "next/image";
 import { urlFor } from "@/app/lib/sanityclient";
-import { Article } from "../../../models/article";
+import { ArticleModel } from "../../../models/article";
 import { PortableText } from "next-sanity";
 import type { Metadata } from "next";
 import SubArticlesListLarge from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListLarge";
@@ -18,7 +18,7 @@ import { generateJournalistMetadata } from "../meta/generateJournalistMetaData";
 export const revalidate = 10000;
 
 async function fetchData(slug: string | undefined = undefined) {
-  const data: Article[] = await getFreshArticleData();
+  const data: ArticleModel[] = await getFreshArticleData();
   const currentJournalist: Reference = await getJournalistData(slug);
   
   return {

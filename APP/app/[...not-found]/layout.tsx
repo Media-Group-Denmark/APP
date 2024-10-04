@@ -6,7 +6,7 @@ import "@/app/(home)/stylesheets/globals.css";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
 import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
-import { Article } from "../(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
 import MailChimpPopUp from "../(home)/components/MailChimp/MailChimpPopUp";
 import Header from "../(home)/components/Navigation/Header/Header";
 import { SubArticlesInfiniteScroll } from "../(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
@@ -26,7 +26,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data: Article[] = await getFreshArticleData();
+  const data: ArticleModel[] = await getFreshArticleData();
   return (
     <html lang={theme.site_language}>
       <link

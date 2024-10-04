@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
-import { Article } from "./(pages)/(article-collections)/models/article";
+import { ArticleModel } from "./(pages)/(article-collections)/models/article";
 import type { Metadata } from "next";
 import SubArticlesGrid from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import ArticleHero from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
@@ -19,7 +19,7 @@ export const metadata: Metadata = defaultMeta;
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function Home() {
-  const data: Article[] = await getFreshArticleData();
+  const data: ArticleModel[] = await getFreshArticleData();
 
   return (
     <section>
