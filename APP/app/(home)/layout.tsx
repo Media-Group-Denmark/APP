@@ -16,6 +16,7 @@ import { ArticleModel } from "./(pages)/(article-collections)/models/article";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+export const revalidate = 600;
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap', });
 const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish', display: 'swap', });
