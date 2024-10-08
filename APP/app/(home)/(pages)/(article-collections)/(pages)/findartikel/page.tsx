@@ -63,7 +63,7 @@ export default async function findArtikel({
         navItemTwo=""
       />
       <SearchBar category={categories} journalist={journalists} tag={tags} />
-      <FindArticle data={filteredItems} startIndex={0} endIndex={100} />
+      <FindArticle data={filteredItems} startIndex={0} endIndex={50} />
     </section>
   );
 }

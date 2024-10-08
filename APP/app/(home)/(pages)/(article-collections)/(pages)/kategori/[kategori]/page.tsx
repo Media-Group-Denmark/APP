@@ -79,7 +79,7 @@ export default async function kategori({
                 dayInterval={14}
                 views={0}
                 startIndex={0}
-                endIndex={100}
+                endIndex={50}
                 data={data}
                 category={params.kategori}
                 articleAmount={5}
@@ -102,7 +102,7 @@ export default async function kategori({
               views={0}
               dayInterval={30}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
               data={data}
               category={params.kategori}
@@ -156,7 +156,7 @@ export default async function kategori({
               data={data}
               category={"spare-hacks"}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
             />
             <aside
@@ -167,7 +167,7 @@ export default async function kategori({
               data={data}
               category={"privatkonomi"}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
             />
           </section>

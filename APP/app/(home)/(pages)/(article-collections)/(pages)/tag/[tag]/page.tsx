@@ -66,7 +66,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               <TrendingArticlesList
                 dayInterval={60}
                 startIndex={0}
-                endIndex={100}
+                endIndex={50}
                 data={data}
                 tag={params.tag}
                 articleAmount={5}
@@ -87,7 +87,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <TrendingArticlesList
               dayInterval={30}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               data={data}
               tag={params.tag}
             />

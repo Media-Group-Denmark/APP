@@ -40,7 +40,7 @@ export default async function Home() {
                 dayInterval={14}
                 views={0}
                 startIndex={0}
-                endIndex={100}
+                endIndex={50}
                 articleAmount={5}
               />
             </aside>
@@ -62,7 +62,7 @@ export default async function Home() {
               dayInterval={14}
               views={0}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={5}
             />
             <aside
@@ -100,7 +100,7 @@ export default async function Home() {
               data={data}
               category={"nyheder"}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
             />
             <aside
@@ -111,7 +111,7 @@ export default async function Home() {
               data={data}
               category={"spare-hacks"}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
             />
             <aside
@@ -122,7 +122,7 @@ export default async function Home() {
               data={data}
               category={"privatkonomi"}
               startIndex={0}
-              endIndex={100}
+              endIndex={50}
               articleAmount={6}
             />
           </section>
