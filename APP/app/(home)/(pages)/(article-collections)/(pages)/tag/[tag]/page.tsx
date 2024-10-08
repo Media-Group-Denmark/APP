@@ -2,13 +2,13 @@
 /*                                   IMPORTS                                  */
 /* -------------------------------------------------------------------------- */
 import React from "react";
-import { Article } from "../../../models/article";
+import { ArticleModel } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import SubArticlesGrid from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
 import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
-import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/api/getFreshArticleData";
+ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getTagData } from "../api/getTagData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
@@ -18,7 +18,7 @@ import { generateTagMetadata } from "../meta/generateTagMetaData";
 export const revalidate = 600;
 
 async function fetchData(slug: string | undefined = undefined) {
-  const data: Article[] = await getFreshArticleData();
+  const data: ArticleModel[] = await getFreshArticleData();
   const currentTag: Reference = await getTagData(slug);
   
   return {

@@ -1,12 +1,12 @@
 import React from "react";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
 import { ArticleLink } from "../../../../../components/utils/ArticleLink";
 
 const SubArticlesListLarge: React.FC<{
-  data: Article[];
+  data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
   journalist?: string | undefined;

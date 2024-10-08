@@ -1,14 +1,14 @@
-import { Article } from "../models/article";
+import { ArticleModel } from "../models/article";
 
 export function filterAndSliceArticles(
-  data: Article[] = [],
+  data: ArticleModel[] = [],
   category?: string,
   tag?: string | string[],
   journalist?: string,
   dayInterval?: number,
   startIndex: number = 0,
   endIndex: number = 10
-): Article[] {
+): ArticleModel[] {
   // Sikr, at data altid er en array
   if (!data || data.length === 0) {
     return [];

@@ -1,5 +1,5 @@
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import {
   Card,
@@ -62,7 +62,7 @@ async function getData() {
 }
 
 export default async function ScheduledPost() {
-  const data: Article[] = await getData();
+  const data: ArticleModel[] = await getData();
 
   return (
     <section className="grid place-content-start pt-6">

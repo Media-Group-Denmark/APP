@@ -1,5 +1,5 @@
 import { client, urlFor } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
@@ -34,7 +34,7 @@ async function getData() {
 }
 
 async function SidebarSticky() {
-  const data: Article[] = await getData();
+  const data: ArticleModel[] = await getData();
   return (
     <section className="hidden md:grid md:grid-cols-1 px-6 md:px-0 gap-8 h-fit md:sticky top-20 xl:gap-6 mb-10 max-w-[300px]">
       {data.slice(1, 5).map((article) => (

@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next'
 import { client } from '../../lib/sanityclient';
 import theme from '../../lib/theme.json';
-import { Article } from '../(pages)/(article-collections)/models/article';
+import { ArticleModel } from '../(pages)/(article-collections)/models/article';
 
-export async function getArticleData(): Promise<Article[]> {
+export async function getArticleData(): Promise<ArticleModel[]> {
   const query = `
               *[
                 _type == "article" 
@@ -30,7 +30,7 @@ export async function getArticleData(): Promise<Article[]> {
  
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
-    const articleData: Article[] = await getArticleData();
+    const articleData: ArticleModel[] = await getArticleData();
 
     
     const articles = articleData.map((article) => {

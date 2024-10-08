@@ -1,4 +1,4 @@
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { client } from "@/app/lib/sanityclient";
 const today = new Date().toISOString();
 
@@ -26,7 +26,7 @@ export async function getChartArticleData() {
     }`;
   
     try {
-      const data = await client.fetch<Article[]>(query);
+      const data = await client.fetch<ArticleModel[]>(query);
       return data;
     } catch (error) {
       console.error("Error fetching data:", error);

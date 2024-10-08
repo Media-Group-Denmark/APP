@@ -1,11 +1,11 @@
 import React from "react";
 import { urlFor, client } from "@/app/lib/sanityclient";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import ReadMoreAutomaticViews from "./ReadMoreAutomaticViews";
 import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
 
 // Funktion til at hente relaterede artikler
-async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
+async function fetchRelatedArticles(articleIds: string[]): Promise<ArticleModel[]> {
   const query = `
     *[_type == "article" && _id in $articleIds] {
       _id,
@@ -20,7 +20,7 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<Article[]> {
     if (!articleIds || articleIds.length === 0) {
       return [];
     }
-    const data = await client.fetch<Article[]>(query, { articleIds });
+    const data = await client.fetch<ArticleModel[]>(query, { articleIds });
     return data;
   } catch (error) {
     console.error("Error fetching related articles:", error);

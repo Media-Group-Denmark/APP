@@ -42,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased max-w-screen max-h-screen overflow-clip`}
+        className={`antialiased overflow-clip`}
       >
         <main className="pt-0 dashboard">
           <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

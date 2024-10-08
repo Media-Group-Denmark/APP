@@ -5,7 +5,7 @@ import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 /* import FindArticle from "./components/FindArticle/FindArticle"; */
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
-import { Article } from "../../models/article";
+import { ArticleModel } from "../../models/article";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import FindArticle from "./components/findArticle";
 import { getFindArticleData } from "./api/getFindArticleData";
@@ -31,7 +31,7 @@ export default async function findArtikel({
     journalists: journalists,
     tags: tags,
   } = (await getFindArticleData()) as {
-    allArticles: Article[];
+    allArticles: ArticleModel[];
     categories: Reference[];
     journalists: Reference[];
     tags: Reference[];

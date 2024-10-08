@@ -1,12 +1,12 @@
 
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
-import { Article } from "@/app/(home)/(pages)/(article-collections)/models/article";
+import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { ArticleLink } from '@/app/(home)/components/utils/ArticleLink';
 
 
 
 const TrendingArticlesList: React.FC<{
-  data: Article[];
+  data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
   journalist?: string | undefined;
