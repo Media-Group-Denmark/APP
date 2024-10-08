@@ -32,6 +32,7 @@ import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 import dynamic from "next/dynamic";
 import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
 import { generateArticleMetadata } from "../meta/generateArticleMetadata";
+import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 
 async function fetchArticleData(slug: string) {
   const articleData: singleArticle = await getArticleSingleData(slug);
@@ -257,6 +258,7 @@ export default async function artikel({
                 </article>
               </div>
             </div>
+            <LoadReadPeak />
             <LoadStrossle />
           </>
         ) : null}
