@@ -52,22 +52,6 @@ export async function generateMetadata({ params }: { params: { artikel: string }
 }
 
 
-const DynamicScriptLoader = dynamic(
-  () =>
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(() => (
-          <LoadShowHeroes />
-        ));
-      }, 2000); // 3-second delay
-    }),
-  {
-    ssr: false, // Ensures it's client-side only
-  }
-);
-
-
-
 const DynamicReadMore = dynamic(
   () =>
     new Promise((resolve) => {
@@ -178,7 +162,9 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-                            <DynamicScriptLoader />
+
+                    <aside>
+                      <LoadShowHeroes />
                       <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                         <Image
                           src={urlFor(mainArticle.image)
@@ -198,6 +184,7 @@ export default async function artikel({
                           Foto: {mainArticle.source}
                         </figcaption>
                       </figure>
+                    </aside>
 
                     <div className="my-2 px-3">
                       <span className="text-xs lg:text-sm">
