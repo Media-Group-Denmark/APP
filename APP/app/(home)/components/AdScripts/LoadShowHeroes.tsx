@@ -45,7 +45,7 @@ export default function LoadShowHeroes() {
 
   return (
     <aside>
-      {videoLoaded === false && <h1>Not fetched</h1>}
+      {videoLoaded === false && <h1 className='opacity-0 h-0'>Not fetched</h1>}
       <div id="viralizeContainer"></div>
       <div
         dangerouslySetInnerHTML={{
