@@ -57,12 +57,12 @@ const DynamicScriptLoader = dynamic(
       setTimeout(() => {
         resolve(() => (
           <>
-        <h1 className=' '>ShowHeroes</h1>
-        <Script
-           src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-           data-wid="auto"
-           type="text/javascript"
-         />
+        <h1 className=' opacity-0 h-0 '>ShowHeroes</h1>
+        <script
+          src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+          data-wid="auto"
+          type="text/javascript"
+        ></script>
         </>
         ));
       }, 3000); // 5 sekunders forsinkelse
