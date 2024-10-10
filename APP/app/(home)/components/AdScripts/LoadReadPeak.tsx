@@ -14,9 +14,9 @@ export default function LoadReadPeak() {
                   if (success && tcData.eventStatus === 'tcloaded') {
                     var tcstring = tcData.tcString;
                     var settings = {
-                      id: 'bf551b421dbbf88f',
-                      width: '500',
-                      height: '435',
+                      id: '558b086e75462fd8',
+                      width: '1300',
+                      height: '490',
                       gdpr_consent: tcstring,
                       cats: [],
                       tags: [],
