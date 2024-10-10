@@ -51,26 +51,30 @@ export async function generateMetadata({ params }: { params: { artikel: string }
   return metadata;
 }
 
+
 const DynamicScriptLoader = dynamic(
   () =>
     new Promise((resolve) => {
       setTimeout(() => {
         resolve(() => (
           <>
-        <h1 className=' opacity-0 h-0 '>ShowHeroes</h1>
-        <script
-          src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-          data-wid="auto"
-          type="text/javascript"
-        ></script>
-        </>
+            <h1 className='opacity-0 h-0'>ShowHeroes</h1>
+            <div id="viralizeContainer"></div>
+            <Script
+              src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+              data-wid="viralizeContainer"
+              type="text/javascript"
+              strategy="afterInteractive"
+            />
+          </>
         ));
-      }, 3000); // 5 sekunders forsinkelse
-    }).then((mod) => mod as React.ComponentType),
+      }, 3000); // 3-second delay
+    }),
   {
-    ssr: false, // Sørger for, at det kun loader på client side
+    ssr: false, // Ensures it's client-side only
   }
 );
+
 
 
 const DynamicReadMore = dynamic(

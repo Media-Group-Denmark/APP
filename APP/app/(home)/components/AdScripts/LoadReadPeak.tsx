@@ -1,33 +1,52 @@
+'use client'
+import { useEffect } from 'react';
 import Script from 'next/script';
-import React from 'react';
 
-export default function LoadReadPeak() {
+const LoadReadPeak = () => {
+  useEffect(() => {
+    const insertReadpeak = (tcData, success) => {
+      if (success && tcData.eventStatus === 'tcloaded') {
+        const tcstring = tcData.tcString;
+        const settings = {
+          id: 'bf551b421dbbf88f',
+          width: '500',
+          height: '435',
+          gdpr_consent: tcstring,
+          cats: [],
+          tags: [],
+          numberOfAds: 3,
+        };
+        const element = document.currentScript || document.querySelectorAll('script')[document.querySelectorAll('script').length - 1];
+        window.__rpplc = window.__rpplc || [];
+        window.__rpplc.push(settings, element);
+
+        if (window.location.href.indexOf('?gdpr_debug') > -1) {
+          console.log('tcString: ' + tcstring);
+          console.log('settings: ' + JSON.stringify(settings));
+        }
+      } else {
+        if (window.location.href.indexOf('?gdpr_debug') > -1) {
+          console.log('No tcString.');
+        }
+      }
+    };
+
+    if (typeof __tcfapi !== 'undefined') {
+      __tcfapi('addEventListener', 2, insertReadpeak);
+    }
+  }, []);
+
   return (
-    <aside>
-      <h1 className='opacity-0'>Readpeak</h1>
-      {/* Load ReadPeak external script asynchronously */}
-      <Script async strategy="afterInteractive" src="https://static.readpeak.com/js/rp-int.js" />
-
-      {/* Inline script to initialize ReadPeak settings */}
+    <>
       <Script
-        id="readpeak-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            let element = document.currentScript || document.querySelectorAll('script')[document.querySelectorAll('script').length-1];
-            window.__rpplc = window.__rpplc || [];
-            window.__rpplc.push({
-              id: '558b086e75462fd8',
-              width: 1300,
-              height: 490,
-              gdpr_consent: '', // Make sure to pass the correct consent string here
-              cats: [],
-              tags: [],
-              numberOfAds: 3,
-            }, element);
-          `,
-        }}
+        async
+        src="https://static.readpeak.com/js/rp-int.js"
+        data-cmp-vendor="290"
+        className="cmplazyload"
       />
-    </aside>
+      <div className="rpWidget"></div>
+    </>
   );
-}
+};
+
+export default LoadReadPeak;
