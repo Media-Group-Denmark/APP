@@ -89,7 +89,6 @@ const DynamicReadMore = dynamic(
   }
 );
 
-
 /* -------------------------------------------------------------------------- */
 /*                                 CONTENT                                    */
 /* -------------------------------------------------------------------------- */
@@ -189,7 +188,28 @@ export default async function artikel({
                       </div>
                     </footer>
 
-                    <LoadShowHeroes mainArticle={mainArticle} />
+                    <aside>
+                      <LoadShowHeroes />
+                      <figure className="relative h-[14em] md:h-[25em] overflow-clip">
+                        <Image
+                          src={urlFor(mainArticle.image)
+                            .format("webp")
+                            .width(700)
+                            .height(400)
+                            .quality(100)
+                            .url()}
+                          alt={`Billede af ${mainArticle.source}`}
+                          className="block w-full  bg-gray-300 rounded-t-lg object-cover"
+                          loading="eager"
+                          layout="fill"
+                          priority={true}
+                          sizes="(max-width: 800px) 100vw, 700px"
+                        />
+                        <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+                          Foto: {mainArticle.source}
+                        </figcaption>
+                      </figure>
+                    </aside>
 
                     <div className="my-2 px-3">
                       <span className="text-xs lg:text-sm">
