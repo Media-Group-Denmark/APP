@@ -33,6 +33,7 @@ import dynamic from "next/dynamic";
 import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreArticlesSkeleton";
 import { generateArticleMetadata } from "../meta/generateArticleMetadata";
 import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
+import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
 
 async function fetchArticleData(slug: string) {
   const articleData: singleArticle = await getArticleSingleData(slug);
@@ -55,13 +56,16 @@ const DynamicScriptLoader = dynamic(
     new Promise((resolve) => {
       setTimeout(() => {
         resolve(() => (
-          <Script
-            src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-            data-wid="auto"
-            type="text/javascript"
-          />
+          <>
+        <h1 className=' '>ShowHeroes</h1>
+        <Script
+           src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
+           data-wid="auto"
+           type="text/javascript"
+         />
+        </>
         ));
-      }, 5000); // 5 sekunders forsinkelse
+      }, 3000); // 5 sekunders forsinkelse
     }).then((mod) => mod as React.ComponentType),
   {
     ssr: false, // Sørger for, at det kun loader på client side
@@ -179,13 +183,7 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-                    <Script
-                      src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-                      data-wid="auto"
-                      type="text/javascript"
-                      strategy="lazyOnload"
-                    />
-                    <DynamicScriptLoader />
+                    <aside><DynamicScriptLoader /></aside>
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
@@ -254,11 +252,13 @@ export default async function artikel({
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                     />
                   </section>
-                  {mainArticle.disclaimer && <Disclaimer />}
+                  <div className="disclaimer">{mainArticle.disclaimer && <Disclaimer />}</div>
                 </article>
               </div>
             </div>
             <LoadReadPeak />
+            <div id='loadScript'>
+            </div>
             <LoadStrossle />
           </>
         ) : null}
