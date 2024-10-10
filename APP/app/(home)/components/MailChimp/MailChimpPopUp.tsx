@@ -115,7 +115,7 @@ export default function MailChimpPopUp() {
                   cy="512"
                   r="512"
                   fill="url(#759c1415-0410-454c-8f7c-9a820de03641)"
-                  fill-opacity="0.7"
+                  fillOpacity="0.7"
                 ></circle>
                 <defs>
                   <radialGradient
@@ -126,11 +126,11 @@ export default function MailChimpPopUp() {
                     gradientUnits="userSpaceOnUse"
                     gradientTransform="translate(512 512) rotate(90) scale(512)"
                   >
-                    <stop stop-color="#00AC82"></stop>
+                    <stop stopColor="#00AC82"></stop>
                     <stop
                       offset="1"
-                      stop-color="#00AC82"
-                      stop-opacity="0"
+                      stopColor="#00AC82"
+                      stopOpacity="0"
                     ></stop>
                   </radialGradient>
                 </defs>

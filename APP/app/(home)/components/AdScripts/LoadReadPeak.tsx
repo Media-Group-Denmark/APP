@@ -4,9 +4,11 @@ import React from 'react';
 export default function LoadReadPeak() {
   return (
     <aside>
+      <h1 className='opacity-0'>Readpeak</h1>
       {/* Load ReadPeak external script asynchronously */}
       <Script async strategy="afterInteractive" src="https://static.readpeak.com/js/rp-int.js" />
 
+      {/* Inline script to initialize ReadPeak settings */}
       <Script
         id="readpeak-init"
         strategy="afterInteractive"
