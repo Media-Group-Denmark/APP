@@ -187,7 +187,7 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-                    <aside><DynamicScriptLoader /></aside>
+                    <aside><LoadShowHeroes /></aside>
                     <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                       <Image
                         src={urlFor(mainArticle.image)
