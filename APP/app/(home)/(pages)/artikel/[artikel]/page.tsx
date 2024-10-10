@@ -57,18 +57,9 @@ const DynamicScriptLoader = dynamic(
     new Promise((resolve) => {
       setTimeout(() => {
         resolve(() => (
-          <>
-            <h1 className='opacity-0 h-0'>ShowHeroes</h1>
-            <div id="viralizeContainer"></div>
-            <Script
-              src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
-              data-wid="viralizeContainer"
-              type="text/javascript"
-              strategy="afterInteractive"
-            />
-          </>
+          <LoadShowHeroes />
         ));
-      }, 3000); // 3-second delay
+      }, 2000); // 3-second delay
     }),
   {
     ssr: false, // Ensures it's client-side only
@@ -187,9 +178,7 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-
-                    <aside>
-                      <LoadShowHeroes />
+                            <DynamicScriptLoader />
                       <figure className="relative h-[14em] md:h-[25em] overflow-clip">
                         <Image
                           src={urlFor(mainArticle.image)
@@ -209,7 +198,6 @@ export default async function artikel({
                           Foto: {mainArticle.source}
                         </figcaption>
                       </figure>
-                    </aside>
 
                     <div className="my-2 px-3">
                       <span className="text-xs lg:text-sm">
