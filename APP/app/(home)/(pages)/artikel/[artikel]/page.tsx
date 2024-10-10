@@ -62,6 +62,7 @@ const DynamicScriptLoader = dynamic(
           src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
           data-wid="auto"
           type="text/javascript"
+          async
         ></script>
         </>
         ));
