@@ -264,8 +264,6 @@ export default async function artikel({
               </div>
             </div>
             <LoadReadPeak />
-            <div id='loadScript'>
-            </div>
             <LoadStrossle />
           </>
         ) : null}
