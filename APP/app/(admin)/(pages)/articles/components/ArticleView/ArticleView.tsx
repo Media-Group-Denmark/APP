@@ -60,7 +60,7 @@ export default function ArticleView({articles} : {articles: ArticleModel[]}) {
                               alt={`Billede af ${article?.source}`}
                             className="block w-full  bg-gray-300 rounded-t-lg object-cover"
                             loading="eager"
-                            layout="fill"
+                            fill
                             priority={true}
                             sizes="(max-width: 800px) 100vw, 700px"
                               

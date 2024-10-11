@@ -51,6 +51,9 @@ export async function generateArticleMetadata(currentArticle: singleArticle) {
             .quality(85)
             .url(),
         },
+        robots: {
+          "max-image-preview": "large",
+        },
       };
     } else {
       return {

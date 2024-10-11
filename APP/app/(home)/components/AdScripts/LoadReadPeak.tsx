@@ -1,33 +1,50 @@
-import Script from 'next/script';
 import React from 'react';
 
 export default function LoadReadPeak() {
   return (
-    <aside>
-      <h1 className='opacity-0'>Readpeak</h1>
-      {/* Load ReadPeak external script asynchronously */}
-      <Script async strategy="afterInteractive" src="https://static.readpeak.com/js/rp-int.js" />
-
-      {/* Inline script to initialize ReadPeak settings */}
-      <Script
-        id="readpeak-init"
-        strategy="afterInteractive"
+    <>
+      <div className="rpWidget"></div>
+      <div
         dangerouslySetInnerHTML={{
           __html: `
-            let element = document.currentScript || document.querySelectorAll('script')[document.querySelectorAll('script').length-1];
-            window.__rpplc = window.__rpplc || [];
-            window.__rpplc.push({
-              id: '558b086e75462fd8',
-              width: 1300,
-              height: 490,
-              gdpr_consent: '', // Make sure to pass the correct consent string here
-              cats: [],
-              tags: [],
-              numberOfAds: 3,
-            }, element);
+            <script async src="https://static.readpeak.com/js/rp-int.js" data-cmp-vendor="290" class="cmplazyload"></script>
+            <script>
+              (function() {
+                var insertReadpeak = function(tcData, success) {
+                  if (success && tcData.eventStatus === 'tcloaded') {
+                    var tcstring = tcData.tcString;
+                    var settings = {
+                      id: '558b086e75462fd8',
+                      width: '1300',
+                      height: '490',
+                      gdpr_consent: tcstring,
+                      cats: [],
+                      tags: [],
+                      numberOfAds: 3,
+                    };
+                    var element = document.currentScript || document.querySelectorAll('script')[document.querySelectorAll('script').length - 1];
+                    window.__rpplc = window.__rpplc || [];
+                    window.__rpplc.push(settings, element);
+
+                    if (window.location.href.indexOf('?gdpr_debug') > -1) {
+                      console.log('tcString: ' + tcstring);
+                      console.log('settings: ' + JSON.stringify(settings));
+                    }
+                  } else {
+                    if (window.location.href.indexOf('?gdpr_debug') > -1) {
+                      console.log('No tcString.');
+                    }
+                  }
+                };
+
+                if (typeof __tcfapi !== 'undefined') {
+                  __tcfapi('addEventListener', 2, insertReadpeak);
+                }
+              })();
+            </script>
           `,
         }}
       />
-    </aside>
+    </>
   );
 }

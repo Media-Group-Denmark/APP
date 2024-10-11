@@ -11,6 +11,7 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "../(referencer)/models/reference";
 import getAboutUsPage from "./api/getAboutUsPage";
 import { aboutUsPageMate } from "./meta/aboutUsPageMeta";
+import '@/app/(home)/(pages)/artikel/stylesheets/articleText.css';
 export const revalidate = 80000;
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */

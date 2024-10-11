@@ -34,13 +34,15 @@ import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMore
 import { generateArticleMetadata } from "../meta/generateArticleMetadata";
 import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
+export const revalidate = 6000;
+
+
 
 async function fetchArticleData(slug: string) {
   const articleData: singleArticle = await getArticleSingleData(slug);
   return articleData;
 }
 
-export const revalidate = 6000;
 
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
@@ -62,7 +64,6 @@ const DynamicScriptLoader = dynamic(
           src="https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y"
           data-wid="auto"
           type="text/javascript"
-          async
         ></script>
         </>
         ));
@@ -95,9 +96,20 @@ export default async function artikel({
   params: { artikel: string };
 }) {
   const mainArticle = await fetchArticleData(params.artikel);
-
+  
   const isClient = typeof window !== "undefined";
-
+  
+  const DynamicReadMore = dynamic(
+    () =>
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(import("../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"));
+        }, 5000); // 3 sekunders forsinkelse
+      }).then((mod) => mod.default),
+    {
+      loading: () => <ReadMoreArticlesSkeleton />,
+    }
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
@@ -184,44 +196,92 @@ export default async function artikel({
                         </div>
                       </div>
                     </footer>
-                    <aside><DynamicScriptLoader /></aside>
-                    <figure className="relative h-[14em] md:h-[25em] overflow-clip">
-                      <Image
-                        src={urlFor(mainArticle.image)
-                          .format("webp")
-                          .width(700)
-                          .height(400)
-                          .quality(100)
-                          .url()}
-                        alt={`Billede af ${mainArticle.source}`}
-                        className="block w-full  bg-gray-300 rounded-t-lg object-cover"
-                        loading="eager"
-                        layout="fill"
-                        priority={true}
-                        sizes="(max-width: 800px) 100vw, 700px"
-                      />
-                      <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-                        Foto: {mainArticle.source}
-                      </figcaption>
-                    </figure>
 
-                    <div className="my-2 px-3">
-                      <span className="text-xs lg:text-sm">
-                        Artiklens Tags:{" "}
-                      </span>
-                      {mainArticle.tag?.map((tag, index) => (
-                        <React.Fragment key={index}>
-                          {index > 0 ? " " : ""}{" "}
-                          <ArticleLink
-                            href={`/tag/${mainArticle.tagSlug[index]}`}
-                          >
-                            <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
-                              {tag}
-                            </button>
-                          </ArticleLink>
-                        </React.Fragment>
-                      ))}
-                    </div>
+                    <aside>
+                      <LoadShowHeroes />
+                   {/*    <figure className="relative h-[10em] md:h-[25em]  aspect-w-16 aspect-h-9 overflow-clip">
+  <picture>
+    <source
+      srcSet={`${urlFor(mainArticle.image).width(800).height(450).format('webp').quality(50).url()} 800w,
+               ${urlFor(mainArticle.image).width(480).height(270).format('webp').quality(50).url()} 480w`}
+      sizes="(max-width: 800px) 100vw, 800px"
+      type="image/webp"
+    />
+    <img
+      src={urlFor(mainArticle.image)
+        .width(800)
+        .height(450)
+        .format("webp")
+        .quality(50)
+        .url()}
+      sizes="(max-width: 800px) 100vw, 800px"
+      width="800"
+      height="450"
+      alt={`Billede af ${mainArticle.source}`}
+      className="w-full h-full rounded-t-lg object-cover"
+      loading="lazy"
+    />
+  </picture>
+  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+    Foto: {mainArticle?.source || 'Shutterstock.com'}
+  </figcaption>
+</figure> */}
+<figure className="relative h-[10em] md:h-[25em] overflow-clip">
+  <picture>
+    <source
+      srcSet={`${urlFor(mainArticle.image)
+        .width(800)
+        .height(450)
+        .format('webp')
+        .quality(50)
+        .url()} 800w,
+        ${urlFor(mainArticle.image)
+        .width(480)
+        .height(270)
+        .format('webp')
+        .quality(50)
+        .url()} 480w`}
+      sizes="(max-width: 800px) 100vw, 800px"
+      type="image/webp"
+    />
+    <source
+      srcSet={`${urlFor(mainArticle.image)
+        .width(800)
+        .height(450)
+        .format('webp')
+        .quality(60)
+        .url()} 800w,
+        ${urlFor(mainArticle.image)
+        .width(480)
+        .height(270)
+        .format('webp')
+        .quality(60)
+        .url()} 480w`}
+      sizes="(max-width: 800px) 100vw, 800px"
+      type="image/jpeg"
+    />
+    <img
+      src={urlFor(mainArticle.image)
+        .width(800)
+        .height(450)
+        .format("webp")
+        .quality(60)
+        .url()}
+      sizes="(max-width: 800px) 100vw, 800px"
+      width="800"
+      height="450"
+      alt={`Billede af ${mainArticle.source}`}
+      className="w-full h-auto rounded-t-lg object-cover"
+    />
+  </picture>
+  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+    Foto: {mainArticle?.source || 'Shutterstock.com'}
+  </figcaption>
+</figure>
+
+
+                    </aside>
+
                     <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
                       {mainArticle.teaser}
                     </h2>
@@ -243,6 +303,23 @@ export default async function artikel({
                       components={components}
                     />
                   </section>
+                  <div className="my-2 px-3 mt-12">
+                      <span className="text-xs lg:text-sm">
+                        Artiklens Tags:{" "}
+                      </span>
+                      {mainArticle.tag?.map((tag, index) => (
+                        <React.Fragment key={index}>
+                          {index > 0 ? " " : ""}{" "}
+                          <ArticleLink
+                            href={`/tag/${mainArticle.tagSlug[index]}`}
+                          >
+                            <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
+                              {tag}
+                            </button>
+                          </ArticleLink>
+                        </React.Fragment>
+                      ))}
+                    </div>
                   <section>
                     <SocialMediaShareButtons
                       views={`${mainArticle.views}`}
@@ -258,8 +335,6 @@ export default async function artikel({
               </div>
             </div>
             <LoadReadPeak />
-            <div id='loadScript'>
-            </div>
             <LoadStrossle />
           </>
         ) : null}
