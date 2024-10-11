@@ -5,6 +5,7 @@ import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTo
 import Image from "next/image";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
+export const revalidate = 600;
 
 const ArticleHero: React.FC<{
   data: ArticleModel[];
