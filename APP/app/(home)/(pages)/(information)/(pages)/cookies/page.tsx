@@ -12,6 +12,7 @@ import { Reference } from "../(referencer)/models/reference";
 import getCookiesPage from "./api/getCookiesPage";
 import { cookiesPageMeta } from "./meta/cookiesPageMeta";
 export const revalidate = 80000;
+import '@/app/(home)/(pages)/artikel/stylesheets/articleText.css';
 
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
