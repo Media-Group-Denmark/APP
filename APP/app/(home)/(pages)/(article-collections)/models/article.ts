@@ -25,4 +25,5 @@ export interface ArticleModel {
      endIndex: number;
      reading: number;
      previewMode: boolean;
+     overview: any[];
 }
