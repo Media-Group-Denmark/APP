@@ -13,9 +13,10 @@ import GoogleAnalyticsScripts from "./components/AdScripts/GoogleAnalyticsScript
 import SubArticlesListSmall from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
- import { getFreshArticleData } from "@/app/api/getFreshArticleData";
+import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+
 export const revalidate = 600;
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap', });
@@ -63,6 +64,7 @@ export default async function RootLayout({
       />
       <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
+      <link rel="alternate" type="application/rss+xml" href={`${theme.feed_url}`} />
       <body className={`${inter.variable} ${mulish.variable}`}>
        
        {/*  <AdBlockDetect /> */}
