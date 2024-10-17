@@ -13,6 +13,7 @@ import { getTagData } from "../api/getTagData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
+import tagSchema from "../meta/tagSchema";
 
 
 export const revalidate = 600;
@@ -40,8 +41,14 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
   const { data } = await fetchData(params.tag);
 
+  const jsonLd = tagSchema({data, params: params.tag})
+
   return (
     <section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {data ? (
         <Breadcrumb
           navItem={"Tags"}
@@ -51,6 +58,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
       ) : null}
 
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
+        
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">

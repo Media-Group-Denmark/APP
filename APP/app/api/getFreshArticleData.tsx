@@ -24,6 +24,7 @@ export async function getFreshArticleData(
     const query = `${filters} | order(coalesce(publishedAt, _createdAt) desc) [0...250] {
       _id,
       publishedAt,
+      _updatedAt,
       _type,
       title,
       teaser,

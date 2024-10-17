@@ -13,6 +13,7 @@ export async function getArticleSingleData(slug: string | undefined) {
     query += ` | order(coalesce(publishedAt, _createdAt) desc)[0] {
           _id,
           _createdAt,
+          _updatedAt,
           publishedAt,
           _type,
           title,

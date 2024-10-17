@@ -11,7 +11,7 @@ export const tagPageMeta: Metadata = {
     openGraph: {
       title: `Alle Tags | ${theme.site_name}`,
       description: `Opdag indhold skræddersyet til dine interesser. Udforsk ${theme.site_name}s tags for ${theme.metadata.keywords}, og meget mere.`,
-      url: `${theme.site_url}/tag`,
+      url: `${theme.site_url}/tags`,
       type: "website",
       siteName: theme.site_name,
       locale: "da_DK",

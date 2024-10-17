@@ -1,6 +1,7 @@
 export interface singleArticle {
     _id: string;
     _createdAt: string;
+    _updatedAt: string;
     publishedAt: string;
     _type: string;
     title: string;
@@ -17,6 +18,7 @@ export interface singleArticle {
     categorySlug: string;
     JournalistName: string;
     JournalistSlug: string;
+    JournalistPhoto: {};
     facebookTitle: string;
     facebookDescription: string;
     facebookImage: {};

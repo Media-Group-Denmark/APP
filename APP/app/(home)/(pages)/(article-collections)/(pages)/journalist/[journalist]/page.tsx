@@ -14,6 +14,7 @@ import { getJournalistData } from "../api/getJournalistData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateJournalistMetadata } from "../meta/generateJournalistMetaData";
+import journalistSchema from "../meta/journalistSchema";
 
 export const revalidate = 10000;
 
@@ -43,8 +44,14 @@ export default async function journalist({
 }) {
   const { data, currentJournalist } = await fetchData(params.journalist);
 
+  const jsonLd = journalistSchema({data, journalist: currentJournalist, params: params.journalist})
+
   return (
     <section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {data ? (
         <Breadcrumb
           navItem={"Journalist"}

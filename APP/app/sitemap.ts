@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${theme.site_url}/tag`,
+      url: `${theme.site_url}/tags`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.5,
@@ -61,6 +61,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${theme.site_url}/sitemaps/sitemap.xml`,
       lastModified: new Date(),
       changeFrequency: "daily",
+      priority: 1,
+    },
+    {
+      url: `${theme.site_url}/sitemaps/sitemap-reference/sitemap.xml`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
       priority: 1,
     },
   ];

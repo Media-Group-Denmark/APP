@@ -34,6 +34,7 @@ import ReadMoreArticlesSkeleton from "../components/ArticleInTextBlocks/ReadMore
 import { generateArticleMetadata } from "../meta/generateArticleMetadata";
 import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
+import articleSchema from "../meta/articleSchema";
 export const revalidate = 6000;
 
 
@@ -62,6 +63,8 @@ export default async function artikel({
   params: { artikel: string };
 }) {
   const mainArticle = await fetchArticleData(params.artikel);
+
+  const jsonLd = articleSchema({ mainArticle, params: params.artikel });
   
   const isClient = typeof window !== "undefined";
   
@@ -76,6 +79,7 @@ export default async function artikel({
       loading: () => <ReadMoreArticlesSkeleton />,
     }
   );
+
 
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
@@ -101,11 +105,12 @@ export default async function artikel({
     },
   };
 
-  {
-    /* <ReadMoreAutomaticArticlesBlock articleTitle={cookies().get('name')} articleCategory={cookies().get('category')} currentArticleId={cookies().get('articleId')} /> */
-  }
   return (
     <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <section className="m-auto">
         {mainArticle ? (
           <>

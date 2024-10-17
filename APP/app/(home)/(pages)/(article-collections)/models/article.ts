@@ -1,6 +1,7 @@
 export interface ArticleModel {
      _id: string;
      _createdAt: string;
+     _updatedAt: string;
      publishedAt: string;
      _type: string;
      title: string;

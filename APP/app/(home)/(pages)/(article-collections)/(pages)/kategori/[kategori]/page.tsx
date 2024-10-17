@@ -15,6 +15,7 @@ import { getCategoryData } from "../api/getCategoryData";
 import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { generateCategoryMetadata } from "../meta/generateCategoryMetadata";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
+import categorySchema from "../meta/categorySchema";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -46,14 +47,19 @@ export default async function kategori({
 }) {
   const { data } = await fetchData(params.kategori);
 
+  const jsonLd = categorySchema({data, params: params.kategori})
+
   return (
     <section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Breadcrumb
         navItem={"Kategorier"}
         link={"/kategorier"}
         navItemTwo={params.kategori}
       />
-
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
