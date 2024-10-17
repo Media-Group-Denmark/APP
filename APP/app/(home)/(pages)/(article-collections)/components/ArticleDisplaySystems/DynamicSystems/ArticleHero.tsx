@@ -58,7 +58,6 @@ const ArticleHero: React.FC<{
                   .quality(85)
                   .url()}
                 alt={post.title}
-                layout="responsive"
                 width={600}
                 height={400} // Justér højden for at bevare aspect ratio
                 sizes="(max-width: 768px) 600px, 900px"
