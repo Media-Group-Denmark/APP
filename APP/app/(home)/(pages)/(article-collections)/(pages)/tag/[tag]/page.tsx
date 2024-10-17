@@ -46,6 +46,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
   return (
     <section>
       <script
+        async
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

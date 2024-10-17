@@ -102,9 +102,8 @@ export default function NewNav() {
           ) : null}
           {navData?.navItems.map((link: { _key: any; name: any; slug: any }) => {
             return (
-              <li>
+              <li key={link._key}>
                 <Link
-                  key={link._key}
                   href={`/kategori/${link.slug}`}
                   className={`transition-colors hover:text-foreground hidden md:inline-block ${
                     pathname === `/kategori/${link.slug}`

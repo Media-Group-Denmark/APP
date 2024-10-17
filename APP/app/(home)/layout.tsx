@@ -67,11 +67,12 @@ export default async function RootLayout({
       <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
       <link rel="alternate" type="application/rss+xml" href={`${theme.feed_url}`} />
+      <body className={`${inter.variable} ${mulish.variable}`}>
       <script
+        async
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <body className={`${inter.variable} ${mulish.variable}`}>
        
        {/*  <AdBlockDetect /> */}
         <MailChimpPopUp />

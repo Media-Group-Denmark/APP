@@ -52,6 +52,7 @@ export default async function kategori({
   return (
     <section>
       <script
+        async
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
