@@ -84,7 +84,7 @@ export default function NewNav() {
                   alt="Logo"
                   width={110}
                   height={62}
-                  className="object-contain"
+                  className="object-contain h-auto w-auto"
                 />
               </ArticleLink>
               ) : null
