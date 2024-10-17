@@ -5,6 +5,7 @@ export async function getAllTagsData() {
     const query = `*[_type == "tag"] {
         _id,
         name,
+        _updatedAt,
         "slug": slug.current,
       }`;
     try {

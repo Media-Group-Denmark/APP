@@ -5,6 +5,7 @@ export async function getAllJournalistsData() {
     const query = `*[_type == "journalist"] {
         _id,
         name,
+        _updatedAt,
         "slug": slug.current
       }`;
     try {

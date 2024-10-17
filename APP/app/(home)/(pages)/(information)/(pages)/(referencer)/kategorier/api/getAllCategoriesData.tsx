@@ -5,6 +5,7 @@ export async function getAllCategoriesData() {
     const query = `*[_type == "category"] {
         _id,
         name,
+        _updatedAt,
         "slug": slug.current,
       }`;
     try {
