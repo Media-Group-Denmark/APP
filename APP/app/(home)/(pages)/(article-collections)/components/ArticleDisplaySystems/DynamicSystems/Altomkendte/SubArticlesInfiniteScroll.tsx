@@ -135,7 +135,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                   </header>
                   <aside
                     className={
-                      isMainArticle ? "desktop hidden md:block" : "hidden"
+                      isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
                     data-ad-unit-id={
                       isMainArticle ? "/49662453/PengehjoernetDK/Square_1" : ""

@@ -11,16 +11,19 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<ArticleModel[
       _id,
       publishedAt,
       _type,
+      "image": metaImage.asset,
       title,
       views,
       "articleSlug": slug.current,
-    }[0]
+    }
   `;
   try {
+    console.log("Fetching related articles:", articleIds);
     if (!articleIds || articleIds.length === 0) {
       return [];
     }
     const data = await client.fetch<ArticleModel[]>(query, { articleIds });
+    console.log("Related articles fetched:", data);
     return data;
   } catch (error) {
     console.error("Error fetching related articles:", error);
@@ -45,6 +48,8 @@ export default async function ReadMoreArticlesBlock({
 
     if (articleIds.length > 0) {
       relatedArticles = await fetchRelatedArticles(articleIds);
+    } else {
+      console.log("No related articles  found for main article:", mainArticle);
     }
   }
 
@@ -53,25 +58,25 @@ export default async function ReadMoreArticlesBlock({
   return (
     <section className="my-2 sm:my-6">
     <ul className="list-disc list-inside grid gap-2 !mx-0">
-      {relatedArticles.map((post) => (
+      {relatedArticles?.map((post) => (
         <li className='elementList' key={post._id}>
           <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
-            <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
-              <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
-                <img
-                  width={200}
-                  height={100}
-                  src={urlFor(post.image)
-                    .format("webp")
-                    .width(200)
-                    .height(100)
-                    .fit("fill")
-                    .quality(85)
-                    .url()}
-                  alt={post.title}
-                  className="block rounded-2xl inset-0 bg-gray-300 max-h-44 h-[100px] sm:h-24 rounded-t-lg w-[85px] lg:w-44 object-cover"
-                />
-              </figure>
+          <article className='bg-second_color_light dark:bg-second_color_dark relative isolate flex sm:flex-row sm:gap-8 drop-shadow-lg rounded-xl'>
+                <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:shrink-0 h-[100px] sm:h-24 w-[85px] sm:w-24 ">
+                  <img
+                    width={300}
+                    height={200}
+                    src={urlFor(post.image)
+                      .format("webp")
+                      .width(300)
+                      .height(200)
+                      .fit("fill")
+                      .quality(85)
+                      .url()}
+                    alt={post.title}
+                    className="block rounded-2xl inset-0 bg-gray-300 max-h-44 h-[100px] sm:h-24 rounded-t-lg w-[85px] lg:w-44 object-cover"
+                  />
+                </figure>
 
               <div className='p-2 sm:mt-2'>
                 <aside className="flex h-[1em] items-center gap-x-4">
