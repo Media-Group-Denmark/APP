@@ -7,7 +7,6 @@ import Script from "next/script";
 import theme from "@/app/lib/theme.json";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
-import MailChimpPopUp from "../(home)/components/MailChimp/MailChimpPopUp";
 import Header from "../(home)/components/Navigation/Header/Header";
 import { SubArticlesInfiniteScroll } from "../(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesList from "../(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
@@ -39,7 +38,6 @@ export default async function RootLayout({
       <body className={`${inter.variable} ${mulish.variable}`}>
        
        {/*  <AdBlockDetect /> */}
-        <MailChimpPopUp />
         <Header />
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 

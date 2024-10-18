@@ -8,7 +8,6 @@ import Footer from "./components/Navigation/Footer/Footer";
 import Script from "next/script";
 import theme from "@/app/lib/theme.json";
 import LoadAds from "./components/AdScripts/LoadAds";
-import MailChimpPopUp from "./components/MailChimp/MailChimpPopUp";
 import GoogleAnalyticsScripts from "./components/AdScripts/GoogleAnalyticsScripts";
 import SubArticlesListSmall from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
 import TrendingArticlesList from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
@@ -17,6 +16,7 @@ import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import { defaultSchema } from "./meta/defaultSchema";
+import NewsletterPopup from "./components/MailChimp/NewsletterPopUp";
 
 export const revalidate = 600;
 
@@ -75,7 +75,7 @@ export default async function RootLayout({
       />
        
        {/*  <AdBlockDetect /> */}
-        <MailChimpPopUp />
+        <NewsletterPopup />
         <Header />
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 
