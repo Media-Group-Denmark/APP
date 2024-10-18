@@ -5,8 +5,21 @@ import { useEffect } from 'react'
 
 export default function Navigation({searchParams, pathname} : {searchParams: string, pathname: string}) {
  
+  interface navItem {
+    id: number;
+    name: string;
+    link: string;
+    dropDown: boolean;
+    dropDownItems?: Array<
+      {
+        id: number;
+        name: string;
+        link: string;
+      }
+    >
+  }
 
-  const navItems = [
+  const navItems: navItem[] = [
      /* {
           id: 1,
           name: 'Dashboard',
@@ -67,7 +80,7 @@ export default function Navigation({searchParams, pathname} : {searchParams: str
                     <span className='ml-auto'>{'>'}</span>
                     <div>
                       {
-                        item.dropDownItems.map(dropDownItem => (
+                        item.dropDownItems?.map(dropDownItem => (
                           <Link
                             key={dropDownItem.id}
                             href={dropDownItem.link}

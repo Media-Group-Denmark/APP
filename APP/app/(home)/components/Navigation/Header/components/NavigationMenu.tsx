@@ -18,7 +18,7 @@ import { getNavItems } from "../api/getNavItems";
 import { usePathname, useSearchParams } from "next/navigation";
 import MailChimpForm from "../../Footer/components/MailChimpForm";
 
-export default function NewNav() {
+export default function NavigationMenu() {
   const [navData, setNavData] = useState<any>(null);
   const [logo, setLogo] = useState("");
   const [stickyNav, setStickyNav] = useState(false);
@@ -84,7 +84,7 @@ export default function NewNav() {
                   alt="Logo"
                   width={110}
                   height={62}
-                  className="object-contain h-auto w-auto"
+                  className="object-contain w-[80px] h-auto sm:w-[90px] sm:h-[62px] md:w-[120px] md:h-auto"
                 />
               </ArticleLink>
               ) : null

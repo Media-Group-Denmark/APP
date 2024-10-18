@@ -82,6 +82,7 @@ export default async function RootLayout({
 
 
         <DynamicArticles data={data} />
+
         
         </main>
         <GoogleAnalyticsScripts />
