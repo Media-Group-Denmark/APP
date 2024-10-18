@@ -34,12 +34,10 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
 
   return (
     <section className="mx-auto rounded-xl  md:max-w-7xl px-3 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-2 md:mt-6 pb-1">
-      <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-        <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-          Alle Nyheder
-        </span>
-      </h1>
 
+      <h3 className="font-bold text-xl">
+            <span className="mr-2 animate-pulse">🔴</span>Seneste nyheder
+          </h3>
       <div className="mx-auto py-4 grid gap-4">
         {slicedData.map((post: Article, index: number) => {
           // Bestem om det er den første artikel i en sektion
@@ -79,7 +77,7 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
                       loading="lazy"
                       className={`block rounded-2xl inset-0 bg-gray-300 ${
                         isMainArticle
-                          ? "max-h-64 w-[30em] rounded-t-2xl rounded-b-lg"
+                          ? "max-h-64 w-[36em] rounded-t-2xl rounded-b-lg"
                           : "max-h-44 w-32 lg:w-64"
                       } object-cover`}
                     />

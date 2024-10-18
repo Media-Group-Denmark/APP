@@ -14,6 +14,9 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
 import tagSchema from "../meta/tagSchema";
+import ArticleHeroTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
+import TrendingArticlesListTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+import SubArticlesGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
 
 
 export const revalidate = 600;
@@ -64,7 +67,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
             <div className=" lg:w-[700px]">
-              <ArticleHero
+              <ArticleHeroTwo
                 data={data}
                 tag={params.tag}
                 startIndex={0}
@@ -72,7 +75,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesList
+              <TrendingArticlesListTwo
                 dayInterval={60}
                 startIndex={0}
                 endIndex={50}
@@ -93,7 +96,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
           {/* Phone */}
           <section className="inline-block md:hidden">
-            <TrendingArticlesList
+            <TrendingArticlesListTwo
               dayInterval={30}
               startIndex={0}
               endIndex={50}
@@ -104,27 +107,27 @@ export default async function tag({ params }: { params: { tag: string } }) {
               className="mobile md:hidden"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_2`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               tag={"nyheder"}
               startIndex={1}
               endIndex={3}
             />
             <div className="mt-6 block">
-              <ArticleHero data={data} startIndex={3} endIndex={4} />
+              <ArticleHeroTwo data={data} startIndex={3} endIndex={4} />
             </div>
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               tag={params.tag}
               startIndex={4}
               endIndex={6}
             />
             <div className="mt-4 block">
-              <ArticleHero
+              <ArticleHeroTwo
                 data={data}
                 tag={params.tag}
                 startIndex={6}
@@ -135,7 +138,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               tag={"nyheder"}
               startIndex={0}

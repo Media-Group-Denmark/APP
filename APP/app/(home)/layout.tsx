@@ -19,6 +19,9 @@ import { defaultSchema } from "./meta/defaultSchema";
 import NewsletterPopup from "./components/MailChimp/NewsletterPopUp";
 import TrendingArticlesListTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
 import { SubArticlesInfiniteScrollTwo } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesInfiniteScrollTwo";
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
 
 export const revalidate = 600;
 
@@ -60,7 +63,7 @@ export default async function RootLayout({
   const data: ArticleModel[] = await getFreshArticleData();
   const jsonLd = defaultSchema;
   return (
-    <html lang={theme.site_language}>
+    <html lang={theme.site_language} className={GeistSans.className}>
       <link
         rel="preload"
         href="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
@@ -69,7 +72,7 @@ export default async function RootLayout({
       <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
       <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
       <link rel="alternate" type="application/rss+xml" href={`${theme.feed_url}`} />
-      <body className={`${inter.variable} ${mulish.variable}`}>
+      <body className={`${inter.variable} ${mulish.variable} ${GeistSans.variable} ${GeistMono.variable}`}>
       <script
         async
         type="application/ld+json"
