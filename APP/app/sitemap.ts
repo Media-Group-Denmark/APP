@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import theme from "@/app/lib/theme.json";
+export const revalidate = 600;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

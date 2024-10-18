@@ -4,6 +4,7 @@ import { getAllJournalistsData } from '@/app/(home)/(pages)/(information)/(pages
 import { getAllCategoriesData } from '@/app/(home)/(pages)/(information)/(pages)/(referencer)/kategorier/api/getAllCategoriesData';
 import { getAllTagsData } from '@/app/(home)/(pages)/(information)/(pages)/(referencer)/tags/api/getAllTagsData';
 import { Reference } from '../../(pages)/(information)/(pages)/(referencer)/models/reference';
+export const revalidate = 600;
 
 
  

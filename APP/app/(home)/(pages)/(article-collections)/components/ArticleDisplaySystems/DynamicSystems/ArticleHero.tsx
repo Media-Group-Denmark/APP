@@ -52,16 +52,15 @@ const ArticleHero: React.FC<{
               <Image
                 src={urlFor(post.image)
                   .format("webp")
-                  .width(600)
+                  .width(800)
                   .height(400)
                   .fit("fill")
                   .quality(85)
                   .url()}
                 alt={post.title}
-                width={600}
+                width={800}
                 height={400} // Justér højden for at bevare aspect ratio
                 sizes="(max-width: 768px) 600px, 900px"
-                quality={`(max-width: 768px) 50, 85`}
                 priority={true} // Tilføj dette for billeder i det indledende viewport
               />
             </ArticleLink>

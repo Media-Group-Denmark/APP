@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { client } from '../../lib/sanityclient';
 import theme from '../../lib/theme.json';
 import { ArticleModel } from '../(pages)/(article-collections)/models/article';
+export const revalidate = 600;
 
 export async function getArticleData(): Promise<ArticleModel[]> {
   const query = `
