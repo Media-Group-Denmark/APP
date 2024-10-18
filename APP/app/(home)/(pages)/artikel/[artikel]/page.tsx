@@ -73,13 +73,13 @@ export default async function artikel({
       new Promise((resolve) => {
         setTimeout(() => {
           resolve(import("../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"));
-        }, 5000); // 3 sekunders forsinkelse
+        }, 1000); // 3 sekunders forsinkelse
       }).then((mod) => mod.default),
     {
       loading: () => <ReadMoreArticlesSkeleton />,
     }
   );
-
+ 
 
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
@@ -171,33 +171,6 @@ export default async function artikel({
 
                     <aside>
                       <LoadShowHeroes />
-                   {/*    <figure className="relative h-[10em] md:h-[25em]  aspect-w-16 aspect-h-9 overflow-clip">
-  <picture>
-    <source
-      srcSet={`${urlFor(mainArticle.image).width(800).height(450).format('webp').quality(50).url()} 800w,
-               ${urlFor(mainArticle.image).width(480).height(270).format('webp').quality(50).url()} 480w`}
-      sizes="(max-width: 800px) 100vw, 800px"
-      type="image/webp"
-    />
-    <img
-      src={urlFor(mainArticle.image)
-        .width(800)
-        .height(450)
-        .format("webp")
-        .quality(50)
-        .url()}
-      sizes="(max-width: 800px) 100vw, 800px"
-      width="800"
-      height="450"
-      alt={`Billede af ${mainArticle.source}`}
-      className="w-full h-full rounded-t-lg object-cover"
-      loading="lazy"
-    />
-  </picture>
-  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-    Foto: {mainArticle?.source || 'Shutterstock.com'}
-  </figcaption>
-</figure> */}
 <figure className="relative h-[10em] md:h-[25em] overflow-clip">
   <picture>
     <source
