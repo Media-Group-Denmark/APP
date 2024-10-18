@@ -9,8 +9,8 @@ export default function journalistSchema({ data, journalist, params }: { data: A
     const articles = data.map((article, index: number) => {
         return {
                 "@type": "ListItem",
-                "url": `${theme.site_url}/${article.articleSlug}`,
-                "name": article.title,
+                "url": `${theme.site_url}/${article?.articleSlug}`,
+                "name": article?.title,
                 "position": index + 1
                 }
     })
@@ -20,11 +20,11 @@ export default function journalistSchema({ data, journalist, params }: { data: A
     '@type': 'CollectionPage',
     url: `${theme.site_url}/journalist/${params}`,
     "mainEntityOfPage": `${theme.site_url}/journalist/${params}`,
-    name: journalist.name,
+    name: journalist?.name,
     "author": {
       "@type": "Person",
       "jobTitle": "Journalist",
-      "description": <PortableText value={journalist.description} />,
+      "description": <PortableText value={journalist?.description} />,
       "email": theme.site_email,
       "sameAs": null
     },

@@ -7,8 +7,8 @@ export default function tagSchema({ data, params }: { data: ArticleModel[], para
     const articles = data.map((article, index: number) => {
         return {
                 "@type": "ListItem",
-                "url": `${theme.site_url}/${article.articleSlug}`,
-                "name": article.title,
+                "url": `${theme.site_url}/${article?.articleSlug}`,
+                "name": article?.title,
                 "position": index + 1
                 }
     })

@@ -8,16 +8,16 @@ export default function articleSchema({ mainArticle, params }: { mainArticle: si
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'NewsArticle',
-    headline: mainArticle.title,
-    description: mainArticle.teaser,
+    headline: mainArticle?.title,
+    description: mainArticle?.teaser,
     image: [
       {
         "@context": "http://schema.org",
         "@type": "ImageObject",
-        "thumbnail": urlFor(mainArticle.image),
+        "thumbnail": urlFor(mainArticle?.image),
         "caption": mainArticle?.source || 'Shutterstock.com',
         "author": "RAI",
-        "url": urlFor(mainArticle.image)
+        "url": urlFor(mainArticle?.image)
       },
     ],
     "mainEntityOfPage": `${theme.site_url}/artikel/${params}`,
@@ -26,13 +26,13 @@ export default function articleSchema({ mainArticle, params }: { mainArticle: si
     "author": [
       {
         "@type": "Person",
-        "url": `${theme.site_url}/journalist/${mainArticle.JournalistSlug}`,
-        "image": urlFor(mainArticle.JournalistPhoto),
-        "name": mainArticle.JournalistName
+        "url": `${theme.site_url}/journalist/${mainArticle?.JournalistSlug}`,
+        "image": urlFor(mainArticle?.JournalistPhoto),
+        "name": mainArticle?.JournalistName
       }
     ],
-    "datePublished": mainArticle.publishedAt,
-    "dateModified": mainArticle._updatedAt,
+    "datePublished": mainArticle?.publishedAt,
+    "dateModified": mainArticle?._updatedAt,
     "publisher": {
       "@type": "NewsMediaOrganization",
       "name": theme.site_name,
