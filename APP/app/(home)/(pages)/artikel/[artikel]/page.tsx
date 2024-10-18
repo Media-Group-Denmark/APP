@@ -73,7 +73,7 @@ export default async function artikel({
       new Promise((resolve) => {
         setTimeout(() => {
           resolve(import("../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"));
-        }, 1000); // 3 sekunders forsinkelse
+        }, 1000); 
       }).then((mod) => mod.default),
     {
       loading: () => <ReadMoreArticlesSkeleton />,
