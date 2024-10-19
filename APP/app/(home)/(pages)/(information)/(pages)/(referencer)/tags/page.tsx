@@ -6,7 +6,7 @@ import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(reference
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { getAllTagsData } from "./api/getAllTagsData";
 import { tagPageMeta } from "./meta/tagPageMeta";
 export const revalidate = 80000;
@@ -22,7 +22,7 @@ export default async function tag() {
   return (
     <section className="bg-main_color_light dark:bg-main_color_dark py-24 pt-0">
       <>
-        <Breadcrumb navItem={"Tags"} link="" navItemTwo="" />
+        <CustomBreadcrumb navItem={"Tags"} link="" navItemTwo="" />
       </>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold leading-8 ">

@@ -6,7 +6,7 @@ import { PortableText } from 'next-sanity';
 import React from 'react'
 import theme from '@/app/lib/theme.json';
 import { Metadata } from 'next';
-import Breadcrumb from '@/app/(home)/components/Navigation/Breadcrumb';
+import CustomBreadcrumb from '@/app/(home)/components/Navigation/CustomBreadcrumb';
 import { SubPage } from '@/app/(home)/(pages)/(information)/models/subpage';
 import { getSubPage } from '../api/getSubPage';
 import { defaultMeta } from '@/app/(home)/meta/defaultMeta';
@@ -146,7 +146,7 @@ export default async function page({
       {
         data && (
           <>
-          <Breadcrumb navItem={page.title} link="" navItemTwo=''/>
+          <CustomBreadcrumb navItem={page.title} link="" navItemTwo=''/>
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={page.overview} components={components} />

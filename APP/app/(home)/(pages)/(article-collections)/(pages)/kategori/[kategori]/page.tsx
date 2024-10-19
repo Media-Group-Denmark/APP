@@ -12,10 +12,15 @@ import TrendingArticlesListAltOmKendte from "@/app/(home)/(pages)/(article-colle
 import SubArticlesListWide from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListWide";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getCategoryData } from "../api/getCategoryData";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { generateCategoryMetadata } from "../meta/generateCategoryMetadata";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import categorySchema from "../meta/categorySchema";
+import ArticleHeroTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
+import TrendingArticlesListTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+import TopNewsSliderTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TopNewsSliderTwo";
+import SubArticlesSixGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
+import SubArticlesGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -56,33 +61,33 @@ export default async function kategori({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Breadcrumb
+      {/* <CustomBreadcrumb
         navItem={"Kategorier"}
         link={"/kategorier"}
         navItemTwo={params.kategori}
-      />
+      /> */}
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-        <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
+        <div className="containerr md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
-          <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-            <div className=" lg:w-[700px]">
-              <ArticleHero
+          <section className="grid relative lg:grid-cols-[1fr_1fr] px-4 mt-4 md:mt-0 mb-4 gap-3 max-w-[1000px]">
+            <div className=" lg:w-[600px]">
+              <ArticleHeroTwo
                 data={data}
                 category={params.kategori}
                 startIndex={0}
                 endIndex={1}
               />
-              <aside className="hidden lg:inline-block">
+              {/* <aside className="hidden lg:inline-block">
                 <SubArticlesListWide
                   data={data}
                   category={params.kategori}
                   startIndex={1}
                   endIndex={3}
                 />
-              </aside>
+              </aside> */}
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesListAltOmKendte
+              <TrendingArticlesListTwo
                 dayInterval={14}
                 views={0}
                 startIndex={0}
@@ -93,7 +98,8 @@ export default async function kategori({
               />
             </aside>
           </section>
-
+          
+          <aside className="hidden gap-4 md:block"><TopNewsSliderTwo data={data} dayInterval={2} startIndex={1} endIndex={12} /></aside>
           <aside
             className="mobile md:hidden"
             data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_1`}
@@ -105,7 +111,7 @@ export default async function kategori({
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
-            <TrendingArticlesListAltOmKendte
+            <TrendingArticlesListTwo
               views={0}
               dayInterval={30}
               startIndex={0}
@@ -118,7 +124,7 @@ export default async function kategori({
               className="mobile md:hidden"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_2`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               startIndex={1}
@@ -131,14 +137,14 @@ export default async function kategori({
               className="mobile md:hidden"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               startIndex={4}
               endIndex={6}
             />
             <div className="mt-4 block">
-              <ArticleHero
+              <ArticleHeroTwo
                 data={data}
                 category={params.kategori}
                 startIndex={6}
@@ -149,7 +155,7 @@ export default async function kategori({
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               startIndex={3}
@@ -159,9 +165,9 @@ export default async function kategori({
               className="desktop hidden md:block"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
-              category={"spare-hacks"}
+              category={theme.categoryOne}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -170,9 +176,9 @@ export default async function kategori({
               className="desktop hidden md:block"
               data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
-              category={"privatkonomi"}
+              category={theme.categoryTwo}
               startIndex={0}
               endIndex={50}
               articleAmount={6}

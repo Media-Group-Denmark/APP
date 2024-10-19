@@ -11,7 +11,7 @@ import SubArticlesListLarge from "@/app/(home)/(pages)/(article-collections)/com
 import theme from "@/app/lib/theme.json";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getJournalistData } from "../api/getJournalistData";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateJournalistMetadata } from "../meta/generateJournalistMetaData";
 import journalistSchema from "../meta/journalistSchema";
@@ -53,13 +53,6 @@ export default async function journalist({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {data ? (
-        <Breadcrumb
-          navItem={"Journalist"}
-          link={"/journalister"}
-          navItemTwo={params.journalist}
-        />
-      ) : null}
 
       <section className=" grid mx-auto mt-4 ">
         <div className="containerr px-6 py-10 pt-0 max-w-[1000px] bg-second_color_light dark:bg-second_color_dark pb-12 rounded-2xl">
@@ -107,7 +100,7 @@ export default async function journalist({
           ></aside>
           <aside
             className="hidden md:grid"
-            data-ad-unit-id="/49662453/PengehjoernetDK/Leaderboard_2"
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
           ></aside>
           <SubArticlesListLarge
             data={data}

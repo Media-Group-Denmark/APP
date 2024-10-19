@@ -6,7 +6,7 @@ import React from "react";
 import Image from "next/image";
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { getAllJournalistsData } from "./api/getAllJournalistsData";
@@ -20,7 +20,7 @@ export default async function journalister() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
-      <Breadcrumb navItem={"Journalister"} link="" navItemTwo="" />
+      <CustomBreadcrumb navItem={"Journalister"} link="" navItemTwo="" />
 
       <div className="text-center pb-12">
         <h2 className="text-base font-bold text-accent_color_light dark:text-accent_color_dark">

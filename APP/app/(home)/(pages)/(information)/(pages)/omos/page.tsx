@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import React from "react";
 import theme from "@/app/lib/theme.json";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { Reference } from "../(referencer)/models/reference";
 import getAboutUsPage from "./api/getAboutUsPage";
 import { aboutUsPageMate } from "./meta/aboutUsPageMeta";
@@ -147,7 +147,7 @@ export default async function omos() {
     <section>
       {data ? (
         <>
-          <Breadcrumb navItem={"Om Os"} link="" navItemTwo="" />
+          <CustomBreadcrumb navItem={"Om Os"} link="" navItemTwo="" />
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />

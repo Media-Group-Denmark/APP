@@ -100,7 +100,7 @@ export default async function Home() {
             ></aside>
             <SubArticlesGridTwo
               data={data}
-              category={"nyheder"}
+              category={theme.categoryOne}
               startIndex={4}
               endIndex={6}
               articleAmount={2}
@@ -114,7 +114,7 @@ export default async function Home() {
           <section className="md:inline-block hidden">
             <SubArticlesGridTwo
               data={data}
-              category={"nyheder"}
+              category={theme.categoryOne}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -125,7 +125,7 @@ export default async function Home() {
             ></aside>
             <SubArticlesGridTwo
               data={data}
-              category={"spare-hacks"}
+              category={theme.categoryTwo}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -136,7 +136,7 @@ export default async function Home() {
             ></aside>
             <SubArticlesGridTwo
               data={data}
-              category={"privatkonomi"}
+              category={theme.categoryThree}
               startIndex={0}
               endIndex={50}
               articleAmount={6}

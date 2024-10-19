@@ -45,21 +45,21 @@ const TopNewsSliderTwo: React.FC<{
         ifDefinedJournalist &&
         ifDefinedDayInterval &&
         ifDefinedTag
-      );
+      ); /* bg-[#bce9a7]  bg-[#c9f1b6]*/
     })
     .slice(startIndex, endIndex);
   return (
-    <section className="max-w-[1000px] mx-auto pt-4 pb-1 px-6 bg-indigo-100 rounded-lg">
+    <section className="max-w-[1000px] mx-auto pt-4 pb-1 px-6 rounded-lg">
       <p className="font-bold">
             <span className="mr-2 animate-pulse">🔴</span>Seneste nyheder
           </p>
       <nav className="sliderNav">
         <ul
           style={{ gridTemplateColumns: "repeat(12, auto)" }}
-          className="grid grid-cols-[12] overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
+          className="flex overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
         >
           {slicedData.map((post: Article) => (
-            <li className="min-w-[240px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
+            <li className="min-w-[270px]  min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <Image
                 src={urlFor(post.image)
                   .format("webp")
@@ -69,27 +69,29 @@ const TopNewsSliderTwo: React.FC<{
                   .quality(85)
                   .url()}
                 alt={post.title}
-                className="rounded-t-2xl rounded-b-lg mb-2"
+                className="rounded-t-2xl shadow-lg "
                 width={800}
                 height={400} // Justér højden for at bevare aspect ratio
                 sizes="(max-width: 768px) 600px, 900px"
                 priority={true} // Tilføj dette for billeder i det indledende viewport
               />
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
-              <ArticleLink
-                href={`/artikel/${
-                  post.republishArticle && post.newSlug
-                    ? post.newSlug
-                    : post.articleSlug
-                }`}
-              >
-                <time dateTime={post.publishedAt} className=" text-xs">
-                  {timeSinceText({ date: post.publishedAt })}
-                </time>
-                <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light overflow-hidden line-clamp-3">
-                  {post.title}
-                </h2>
-              </ArticleLink>
+              <aside className='bg-second_color_light dark:bg-second_color_dark shadow-lg  block p-2 h-[110px] rounded-b-lg'>
+                <ArticleLink
+                  href={`/artikel/${
+                    post.republishArticle && post.newSlug
+                      ? post.newSlug
+                      : post.articleSlug
+                  }`}
+                >
+                  <time dateTime={post.publishedAt} className=" text-xs">
+                    {timeSinceText({ date: post.publishedAt })}
+                  </time>
+                  <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light overflow-hidden line-clamp-3">
+                    {post.title}
+                  </h2>
+                </ArticleLink>
+              </aside>
             </li>
           ))}
         </ul>

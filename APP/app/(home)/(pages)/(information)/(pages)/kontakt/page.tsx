@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import React from "react";
 import theme from "@/app/lib/theme.json";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import getContactPage from "./api/getContactPage";
 import { Reference } from "../(referencer)/models/reference";
 import { contactUsPageMeta } from "./meta/contactUsPageMeta";
@@ -143,7 +143,7 @@ export default async function ContactUs() {
     <section>
       {data ? (
         <>
-          <Breadcrumb navItem={"Kontakt Os"} link="" navItemTwo="" />
+          <CustomBreadcrumb navItem={"Kontakt Os"} link="" navItemTwo="" />
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />

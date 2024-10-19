@@ -4,6 +4,7 @@ import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
+import theme from "@/app/lib/theme.json";
 
 export const SubArticlesInfiniteScroll: React.FC<{
   data: ArticleModel[];
@@ -138,14 +139,14 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
                     data-ad-unit-id={
-                      isMainArticle ? "/49662453/PengehjoernetDK/Square_1" : ""
+                      isMainArticle ? `/${theme.site_ad_id}/${theme.site_ad_name}/Square_1` : ""
                     }
                   ></aside>
                   <aside
                     className={isMainArticle ? "mobile md:hidden" : "hidden"}
                     data-ad-unit-id={
                       isMainArticle
-                        ? "/49662453/PengehjoernetDK/Mobile_Square_3"
+                        ? `/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_3`
                         : ""
                     }
                   ></aside>

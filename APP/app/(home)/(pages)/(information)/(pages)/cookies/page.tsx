@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import React from "react";
 import theme from "@/app/lib/theme.json";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { Reference } from "../(referencer)/models/reference";
 import getCookiesPage from "./api/getCookiesPage";
 import { cookiesPageMeta } from "./meta/cookiesPageMeta";
@@ -144,7 +144,7 @@ export default async function cookies() {
     <>
       {data ? (
         <>
-          <Breadcrumb navItem={"Cookies"} link="" navItemTwo="" />
+          <CustomBreadcrumb navItem={"Cookies"} link="" navItemTwo="" />
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />

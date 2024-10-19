@@ -26,8 +26,14 @@ body {
   overflow-x: clip;
   @apply bg-main_color_light dark:bg-main_color_dark;
 }
+
 main {
-  padding-top: 60px;
+  padding-top: 10px;
+}
+@media (min-width: 800px) {
+  main {
+    padding-top: 40px;
+  }
 }
 address {
   font-style: normal;
@@ -107,11 +113,6 @@ border-radius: 10px;
 /* Styler håndtaget ved hover */
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-accent_color_dark dark:bg-accent_color_light;
-}
-
-/* ------------------------------ TIMEINDICATOR ----------------------------- */
-.sliderNav .timeSpan {
-  @apply text-accent_color_light dark:text-accent_color_dark;
 }
 
 /* ----------------------------------- ADS ---------------------------------- */

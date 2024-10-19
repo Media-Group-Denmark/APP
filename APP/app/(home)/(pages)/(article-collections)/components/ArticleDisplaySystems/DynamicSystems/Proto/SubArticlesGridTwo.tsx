@@ -36,7 +36,7 @@ const SubArticlesSixGridTwo: React.FC<{
     articleAmount
   );
   return (
-    <section className="pb-12">
+    <section className="md:pb-12">
       <ArticleLink href={`${theme.site_url}/kategori/${category}`}>
         <h1 className="mb-4 text-xl">
         <span className="animate-pulse">🟣</span>
@@ -83,7 +83,7 @@ const SubArticlesSixGridTwo: React.FC<{
                   />
                 </ArticleLink>
               </figure>
-              <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mb-4">
+              <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] md:h-[120px] lg:h-[150px] mb-4">
                 <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                   <ArticleLink href={`/kategori/${post.categorySlug}`}>
                   <p className="relative text-xs w-fit rounded-full py-1 my-1 font-medium text-gray-600">

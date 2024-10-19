@@ -1,44 +1,49 @@
 {
-    "site_name": "Pengehjørnet",
-    "site_url": "https://pengehjoernet.dk",
+    "site_name": "test",
+    "site_url": "https://test.dk",
     "site_email": "kontakt@pengehjoernet.dk",
     "site_language": "da",
-    "site_ad_name": "PengehjoernetDK",
-    "logo_url": "/img/pengehjoernet.webp",
-    "feed_url": "https://pengehjoernet.dk/feed.xml",
-    "logo_public_url": "https://pengehjoernet.dk/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2Fikbzpczn%2Fproduction%2Fc0c95b2cd5fc03cd89bfd7a48e9821b5c90c795e-473x124.webp&w=128&q=75",
+    "site_ad_name": "testDK",
+    "site_ad_id": "49662453",
+    "logo_url": "/img/logo.webp",
+    "feed_url": "https://test.dk/feed.xml",
+    "logo_public_url": "https://cdn.sanity.io/images/j0gg1m7i/production/c49714232bd209bdd5a02a41edf55f3c0ff74b61-816x158.png",
     "addressLocality": "Vejle, Denmark",
     "addressCountry": "DK",
     "postalCode": "7100",
     "streetAddress": "Horsensvej 72",
+    "categoryOne": "indland",
+    "categoryTwo": "udland",
+    "categoryThree": "teknologi",
+    "categoryFour": "politik",
     "metadata": {
-        "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-        "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
+        "title": "test | Din guide til økonomi, aktier, investering og skat",
+        "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
         "keywords": "økonomi, aktier, investering, skat, unge, aktiemarked, kryptovaluta, sparetips",
         "openGraph": {
-            "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-            "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
+            "title": "test | Din guide til økonomi, aktier, investering og skat",
+            "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
             "locale": "da_DK",
             "images": [
                 {
                     "width": 800,
                     "height": 600,
-                    "alt": "Pengehjørnet - Din guide til økonomi, aktier, investering og skat"
+                    "alt": "test - Din guide til økonomi, aktier, investering og skat"
                 }
             ]
         },
         "twitter": {
             "card": "summary_large_image",
-            "site": "@Pengehjørnet",
-            "title": "Pengehjørnet | Din guide til økonomi, aktier, investering og skat",
-            "description": "Pengehjørnet er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark."
+            "site": "@test",
+            "title": "test | Din guide til økonomi, aktier, investering og skat",
+            "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark."
         },
         "robots": "index, follow",
-        "publisher": "Pengehjørnet"
+        "publisher": "test"
     },
     "subPage": {
         "referenceJournalist": {
-            "keywords": "journalister, økonomieksperter, Pengehjørnet team, finansielle analytikere"
+            "keywords": "journalister, økonomieksperter, test team, finansielle analytikere"
         }
     }
 }

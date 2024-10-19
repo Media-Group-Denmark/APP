@@ -47,7 +47,7 @@ const TopNewsSlider: React.FC<{
     })
     .slice(startIndex, endIndex);
   return (
-    <section className="max-w-[1000px] mx-auto pt-6 md:pt-4 px-6">
+    <section className="max-w-[1000px] mx-auto pt-6 md:pt-4 md:px-6">
       <figure className="flex gap-[12px]">
         <h1 className="text-md">Seneste Nyt</h1>
         <ChevronRight className="font-black my-auto" size={22} />

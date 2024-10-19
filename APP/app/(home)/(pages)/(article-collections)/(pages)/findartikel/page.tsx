@@ -4,7 +4,7 @@
 import { client } from "@/app/lib/sanityclient";
 import { SearchBar } from "./components/SearchBar/SearchBar";
 /* import FindArticle from "./components/FindArticle/FindArticle"; */
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { ArticleModel } from "../../models/article";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import FindArticle from "./components/findArticle";
@@ -57,7 +57,7 @@ export default async function findArtikel({
 
   return (
     <section className="pb-12 lg:w-[980px] m-auto">
-      <Breadcrumb
+      <CustomBreadcrumb
         navItem={"Arkivet"}
         link="/findartikel"
         navItemTwo=""

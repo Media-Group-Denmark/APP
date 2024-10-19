@@ -10,13 +10,14 @@ import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/com
 import theme from "@/app/lib/theme.json";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getTagData } from "../api/getTagData";
-import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
+import CustomBreadcrumb from "@/app/(home)/components/Navigation/CustomBreadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
 import tagSchema from "../meta/tagSchema";
 import ArticleHeroTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
 import TrendingArticlesListTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
 import SubArticlesGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
+import TopNewsSliderTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TopNewsSliderTwo";
 
 
 export const revalidate = 600;
@@ -53,20 +54,13 @@ export default async function tag({ params }: { params: { tag: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {data ? (
-        <Breadcrumb
-          navItem={"Tags"}
-          link={"/tag"}
-          navItemTwo={params.tag}
-        />
-      ) : null}
 
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
-          <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-            <div className=" lg:w-[700px]">
+          <section className="grid relative lg:grid-cols-[1fr_1fr] px-4 mt-4 md:mt-0 mb-4 gap-3 max-w-[1000px]">
+            <div className=" lg:w-[600px]">
               <ArticleHeroTwo
                 data={data}
                 tag={params.tag}
@@ -85,6 +79,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </aside>
           </section>
+          <aside className="hidden gap-4 md:block"><TopNewsSliderTwo data={data} dayInterval={2} startIndex={1} endIndex={12} /></aside>
           <aside
             className="mobile md:hidden"
             data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_1`}
@@ -140,7 +135,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
           <section className="md:inline-block hidden">
             <SubArticlesGridTwo
               data={data}
-              tag={"nyheder"}
+              tag={theme.categoryOne}
               startIndex={0}
               endIndex={6}
             />

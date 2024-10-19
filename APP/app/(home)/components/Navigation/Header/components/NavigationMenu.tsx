@@ -57,7 +57,7 @@ export default function NavigationMenu() {
     const handleScroll = () => {
       // Kontroller skærmbredden for at bestemme, hvilket scroll-trigger-niveau der skal bruges
       const isDesktop = window.innerWidth > 800;
-      const scrollTriggerHeight = isDesktop ? 260 : 0;
+      const scrollTriggerHeight = isDesktop ? 0 : 0;
 
       // Opdaterer sticky-nav-tilstanden baseret på scroll-positionen
       setStickyNav(window.scrollY > scrollTriggerHeight);
@@ -84,7 +84,7 @@ export default function NavigationMenu() {
                   alt="Logo"
                   width={110}
                   height={62}
-                  className="object-contain w-[80px] h-auto sm:w-[90px] sm:h-[62px] md:w-[120px] md:h-auto"
+                  className="object-contain w-[140px] h-auto sm:w-[90px] sm:h-[62px] md:w-[120px] md:h-auto"
                 />
               </ArticleLink>
               ) : null
@@ -116,9 +116,9 @@ export default function NavigationMenu() {
               </li>
             );
           })}
-          <span className="hidden md:grid grid-cols-2 items-center ml-auto ">
-            <DarkModeToggle onClick={toggle} />
-            <SearchButton />
+          <span className="items-center ml-auto ">
+            <span className="hidden md:grid"><DarkModeToggle onClick={toggle} /></span>
+            {/* <SearchButton /> */}
           </span>
        </ul>
       </nav>

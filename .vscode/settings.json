@@ -53,7 +53,7 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     "APP/.eslintrc.json": true,
-    "APP/.gitignore": true,
+    "APP/.gitignore": false,
     "APP/next-env.d.ts": true,
     "APP/package-lock.json": true,
     "APP/tsconfig.json": true,
