@@ -1,12 +1,12 @@
 {
-    "site_name": "test",
-    "site_url": "https://test.dk",
-    "site_email": "kontakt@pengehjoernet.dk",
+    "site_name": "dagsavisen",
+    "site_url": "https://dagsavisen.dk",
+    "site_email": "kontakt@dagsavisen.dk",
     "site_language": "da",
-    "site_ad_name": "testDK",
-    "site_ad_id": "49662453",
+    "site_ad_name": "DagsavisenDK",
+    "site_ad_id": "1234567",
     "logo_url": "/img/logo.webp",
-    "feed_url": "https://test.dk/feed.xml",
+    "feed_url": "https://dagsavisen.dk/feed.xml",
     "logo_public_url": "https://cdn.sanity.io/images/j0gg1m7i/production/c49714232bd209bdd5a02a41edf55f3c0ff74b61-816x158.png",
     "addressLocality": "Vejle, Denmark",
     "addressCountry": "DK",
@@ -17,33 +17,33 @@
     "categoryThree": "teknologi",
     "categoryFour": "politik",
     "metadata": {
-        "title": "test | Din guide til økonomi, aktier, investering og skat",
-        "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
+        "title": "dagsavisen | Din guide til økonomi, aktier, investering og skat",
+        "description": "dagsavisen er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
         "keywords": "økonomi, aktier, investering, skat, unge, aktiemarked, kryptovaluta, sparetips",
         "openGraph": {
-            "title": "test | Din guide til økonomi, aktier, investering og skat",
-            "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
+            "title": "dagsavisen | Din guide til økonomi, aktier, investering og skat",
+            "description": "dagsavisen er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark.",
             "locale": "da_DK",
             "images": [
                 {
                     "width": 800,
                     "height": 600,
-                    "alt": "test - Din guide til økonomi, aktier, investering og skat"
+                    "alt": "dagsavisen - Din guide til økonomi, aktier, investering og skat"
                 }
             ]
         },
         "twitter": {
             "card": "summary_large_image",
-            "site": "@test",
-            "title": "test | Din guide til økonomi, aktier, investering og skat",
-            "description": "test er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark."
+            "site": "@dagsavisen",
+            "title": "dagsavisen | Din guide til økonomi, aktier, investering og skat",
+            "description": "dagsavisen er din portal til de seneste nyheder inden for økonomi, aktier, investering, skat og meget mere, målrettet unge i Danmark."
         },
         "robots": "index, follow",
-        "publisher": "test"
+        "publisher": "dagsavisen"
     },
     "subPage": {
         "referenceJournalist": {
-            "keywords": "journalister, økonomieksperter, test team, finansielle analytikere"
+            "keywords": "journalister, økonomieksperter, dagsavisen team, finansielle analytikere"
         }
     }
 }
