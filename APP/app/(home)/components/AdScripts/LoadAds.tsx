@@ -10,7 +10,6 @@ export default function LoadAds() {
     const scriptUrls = [
       "https://securepubads.g.doubleclick.net/tag/js/gpt.js",
       "https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js",
-      "/lib/relevant.js",
     ];
 
     const loadScript = (src: string) => {

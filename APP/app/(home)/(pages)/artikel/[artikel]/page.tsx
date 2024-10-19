@@ -170,7 +170,7 @@ export default async function artikel({
                     </footer>
 
                     <aside>
-                      <LoadShowHeroes />
+                     {/*  <LoadShowHeroes /> */}
 <figure className="relative h-[10em] md:h-[25em] overflow-clip">
   <picture>
     <source
@@ -279,8 +279,8 @@ export default async function artikel({
                 </article>
               </div>
             </div>
-            <LoadReadPeak />
-            <LoadStrossle />
+            {/* <LoadReadPeak />
+            <LoadStrossle /> */}
           </>
         ) : null}
       </section>
