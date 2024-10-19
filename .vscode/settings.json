@@ -58,8 +58,7 @@
     "APP/package-lock.json": true,
     "APP/tsconfig.json": true,
     "loadingscreen": true,
-    "APP/postcss.config.js": true,
-    "APP/tailwind.config.ts": true
+    "APP/postcss.config.js": true
   },
   "hide-files.files": [
     "APP/.eslintrc.json",
@@ -68,8 +67,7 @@
     "APP/package-lock.json",
     "APP/tsconfig.json",
     "loadingscreen",
-    "APP/postcss.config.js",
-    "APP/tailwind.config.ts"
+    "APP/postcss.config.js"
   ],
   "explorerExclude.backup": {}
 }
