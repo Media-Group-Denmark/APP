@@ -85,6 +85,7 @@ export default async function Home() {
             <SubArticlesGrid
               data={data}
               category={"nyheder"}
+              name="Nyheder"
               startIndex={4}
               endIndex={6}
               articleAmount={2}
@@ -99,6 +100,7 @@ export default async function Home() {
             <SubArticlesGrid
               data={data}
               category={"nyheder"}
+              name="Nyheder"
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -110,6 +112,7 @@ export default async function Home() {
             <SubArticlesGrid
               data={data}
               category={"spare-hacks"}
+              name="Spare-Hacks"
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -121,6 +124,7 @@ export default async function Home() {
             <SubArticlesGrid
               data={data}
               category={"privatkonomi"}
+              name="Privatøkonomi"
               startIndex={0}
               endIndex={50}
               articleAmount={6}

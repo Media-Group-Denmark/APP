@@ -46,7 +46,7 @@ export default function NewsletterPopup() {
       setIsSubmitted(true)
       setTimeout(() => {
         setIsOpen(false);
-      }, 1500);
+      }, 2500);
     } else {
       setIsSubmitted(false)
     }
@@ -59,7 +59,7 @@ export default function NewsletterPopup() {
     <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
       <div className="bg-second_color_light dark:bg-second_color_dark rounded-lg shadow-xl w-full max-w-md p-6 relative animate-in fade-in duration-300">
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={() => {setIsOpen(false), subUser()}}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
         >
           <X className="h-6 w-6" />

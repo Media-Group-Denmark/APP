@@ -40,9 +40,12 @@ export async function generateMetadata({ params }: { params: { tag: string } }) 
 export default async function tag({ params }: { params: { tag: string } }) {
 
   const { data } = await fetchData(params.tag);
+  const { currentTag } = await fetchData(params.tag);
 
   const jsonLd = tagSchema({data, params: params.tag})
 
+
+  console.log(data[0].tagSlug)
   return (
     <section>
       <script
@@ -53,8 +56,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
       {data ? (
         <Breadcrumb
           navItem={"Tags"}
-          link={"/tag"}
-          navItemTwo={params.tag}
+          link={"/tags"}
+          navItemTwo={currentTag.name}
         />
       ) : null}
 
@@ -107,6 +110,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <SubArticlesGrid
               data={data}
               tag={"nyheder"}
+              name="Nyheder"
               startIndex={1}
               endIndex={3}
             />
@@ -120,6 +124,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             <SubArticlesGrid
               data={data}
               tag={params.tag}
+              name={currentTag.name}
               startIndex={4}
               endIndex={6}
             />
@@ -137,7 +142,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
           <section className="md:inline-block hidden">
             <SubArticlesGrid
               data={data}
-              tag={"nyheder"}
+              tag={params.tag}
+              name={currentTag.name}
               startIndex={0}
               endIndex={6}
             />

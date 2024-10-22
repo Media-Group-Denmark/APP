@@ -9,6 +9,7 @@ import { ArticleLink } from "../../../../../components/utils/ArticleLink";
 const SubArticlesSixGrid: React.FC<{
   data: ArticleModel[];
   category?: string | undefined;
+  name?: string;
   tag?: string | string[];
   journalist?: string | undefined;
   dayInterval?: number | undefined;
@@ -18,6 +19,7 @@ const SubArticlesSixGrid: React.FC<{
 }> = async ({
   data,
   category,
+  name,
   tag,
   journalist,
   dayInterval,
@@ -35,18 +37,15 @@ const SubArticlesSixGrid: React.FC<{
     endIndex,
     articleAmount
   );
+
   return (
     <section className="pb-12">
-      <ArticleLink href={`${theme.site_url}/kategori/${category}`}>
+      <ArticleLink href={`${theme.site_url}/${`hej`}/${category}`}>
         <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
           <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-            {category
-              ? category
-              : tag
-              ? tag
-              : journalist
-              ? journalist
-              : "Alle Nyheder"}
+            {name
+            ? name
+            : "Alle Nyheder"}
           </span>
         </h1>
       </ArticleLink>

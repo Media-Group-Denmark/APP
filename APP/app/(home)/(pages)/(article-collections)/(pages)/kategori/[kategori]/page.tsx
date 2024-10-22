@@ -46,8 +46,10 @@ export default async function kategori({
   params: { kategori: string };
 }) {
   const { data } = await fetchData(params.kategori);
+  const { currentCategory } = await fetchData(params.kategori);
 
   const jsonLd = categorySchema({data, params: params.kategori})
+
 
   return (
     <section>
@@ -59,7 +61,7 @@ export default async function kategori({
       <Breadcrumb
         navItem={"Kategorier"}
         link={"/kategorier"}
-        navItemTwo={params.kategori}
+        navItemTwo={currentCategory.name}
       />
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
@@ -76,6 +78,7 @@ export default async function kategori({
                 <SubArticlesListWide
                   data={data}
                   category={params.kategori}
+                  name={currentCategory.name}
                   startIndex={1}
                   endIndex={3}
                 />
@@ -121,6 +124,7 @@ export default async function kategori({
             <SubArticlesGrid
               data={data}
               category={params.kategori}
+              name={currentCategory.name}
               startIndex={1}
               endIndex={3}
             />
@@ -134,6 +138,7 @@ export default async function kategori({
             <SubArticlesGrid
               data={data}
               category={params.kategori}
+              name={currentCategory.name}
               startIndex={4}
               endIndex={6}
             />
@@ -152,6 +157,7 @@ export default async function kategori({
             <SubArticlesGrid
               data={data}
               category={params.kategori}
+              name={currentCategory.name}
               startIndex={3}
               endIndex={9}
             />
@@ -162,6 +168,7 @@ export default async function kategori({
             <SubArticlesGrid
               data={data}
               category={"spare-hacks"}
+              name={"Spare Hacks"}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
@@ -173,6 +180,7 @@ export default async function kategori({
             <SubArticlesGrid
               data={data}
               category={"privatkonomi"}
+              name={"Privatøkonomi"}
               startIndex={0}
               endIndex={50}
               articleAmount={6}

@@ -8,6 +8,7 @@ import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 const SubArticlesListWide: React.FC<{
   data: ArticleModel[];
   category?: string | undefined;
+  name?: string;
   tag?: string | string[];
   journalist?: string | undefined;
   dayInterval?: number | undefined;
@@ -16,6 +17,7 @@ const SubArticlesListWide: React.FC<{
 }> = async ({
   data,
   category,
+  name,
   tag,
   journalist,
   dayInterval,
@@ -36,12 +38,8 @@ const SubArticlesListWide: React.FC<{
     <section>
       <h1 className="lineHeader text-center text-[0.95rem] font-bold mb-4">
         <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-          {category
-            ? category
-            : tag
-            ? tag
-            : journalist
-            ? journalist
+        {name
+            ? name
             : "Alle Nyheder"}
         </span>
       </h1>

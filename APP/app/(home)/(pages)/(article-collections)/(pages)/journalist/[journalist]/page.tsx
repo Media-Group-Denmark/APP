@@ -57,14 +57,14 @@ export default async function journalist({
         <Breadcrumb
           navItem={"Journalist"}
           link={"/journalister"}
-          navItemTwo={params.journalist}
+          navItemTwo={currentJournalist.name}
         />
       ) : null}
 
       <section className=" grid mx-auto mt-4 ">
         <div className="containerr px-6 py-10 pt-0 max-w-[1000px] bg-second_color_light dark:bg-second_color_dark pb-12 rounded-2xl">
           {data ? (
-            <address className="grid md:grid-cols-2 gap-4 md:gap-0 max-w-[1000px] m-auto p-6 pb-0  rounded-lg">
+            <address className="grid shadow-xl gap-4 md:gap-0 max-w-[1000px] m-auto p-6  rounded-lg">
               <div className="w-full  grid sm:grid-cols-[auto_1fr] sm:place-content-center">
                 <figure>
                   <Image
@@ -95,7 +95,7 @@ export default async function journalist({
                 </header>
               </div>
 
-              <h3 className="my-auto">
+              <h3 className="my-auto mt-6">
                 <PortableText value={currentJournalist.description} />
               </h3>
             </address>
