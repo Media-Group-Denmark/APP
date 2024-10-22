@@ -1,12 +1,13 @@
 import { client } from "@/app/lib/sanityclient";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
+export const revalidate = 600;
 
-const today = new Date().toISOString();
 export async function getFreshArticleData(
-    categoryDefined: string | undefined = undefined,
-    tagDefined: string | undefined = undefined,
-    journalistDefined: string | undefined = undefined
-  ) {
+  categoryDefined: string | undefined = undefined,
+  tagDefined: string | undefined = undefined,
+  journalistDefined: string | undefined = undefined
+) {
+    const today = new Date().toISOString();
     let filters = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false]`;
   
     if (categoryDefined) {
