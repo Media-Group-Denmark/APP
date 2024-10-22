@@ -5,10 +5,9 @@ import { ArticleModel } from '../(pages)/(article-collections)/models/article';
 export const revalidate = 600;
 
 export async function getArticleData(): Promise<ArticleModel[]> {
+  const today = new Date().toISOString();
   const query = `
-              *[
-                _type == "article" 
-              ] 
+              *[_type == "article" && publishedAt <= "${today}" && previewMode == false]
               | order(coalesce(publishedAt, _createdAt) desc) {
                 _id,
                 title,
