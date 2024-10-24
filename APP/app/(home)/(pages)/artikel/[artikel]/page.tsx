@@ -280,7 +280,6 @@ export default async function artikel({
               </div>
             </div>
             <LoadReadPeak />
-            <h1>Read to Stross</h1>
             <LoadStrossle />
           </>
         ) : null}
