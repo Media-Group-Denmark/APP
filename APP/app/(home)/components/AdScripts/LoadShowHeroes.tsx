@@ -18,24 +18,19 @@ export default function LoadShowHeroes() {
     script.src = 'https://content.viralize.tv/display/?zid=AAFp6TIrtjcx6N9Y';
     script.setAttribute('data-wid', 'viralizeContainer');
 
-    const showHeroesElement = document.getElementById('viralizeContainer');
-    console.log('showHeroesElement', showHeroesElement?.offsetHeight);
-
     // Append the script to the aside element
     if (asideRef.current) {
       asideRef.current.appendChild(script);
-      console.log('Script appended to aside element');
-      console.log('showHeroesElement2', showHeroesElement?.offsetHeight);
     }
 
     // Clean up script when component unmounts
     return () => {
       if (script.parentNode) {
         script.parentNode.removeChild(script);
-        console.log('Script REMOVED to aside element');
       }
     };
   }, []);
+
   return (
     <aside ref={asideRef}>
       <div id="viralizeContainer"></div>

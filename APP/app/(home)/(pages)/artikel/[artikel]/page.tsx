@@ -169,9 +169,9 @@ export default async function artikel({
                       </div>
                     </footer>
 
-                    <aside>
+                    <aside className="relative min-h-[10em] md:min-h-[25em]">
                       <LoadShowHeroes />
-<figure className="relative h-[10em] md:h-[25em] overflow-clip">
+<figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
   <picture>
     <source
       srcSet={`${urlFor(mainArticle.image)
