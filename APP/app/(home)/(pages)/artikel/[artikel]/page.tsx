@@ -234,12 +234,12 @@ export default async function artikel({
 
                   <aside
                     className="mobile md:hidden"
-                    data-ad-unit-id={`/49662453/${theme.site_ad_name}/mobile_square_article_1`}
+                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/mobile_square_article_1`}
                   ></aside>
 
                   <aside
                     className="desktop hidden md:grid"
-                    data-ad-unit-id={`/49662453/${theme.site_ad_name}/square_article_1`}
+                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/square_article_1`}
                   ></aside>
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
@@ -280,6 +280,7 @@ export default async function artikel({
               </div>
             </div>
             <LoadReadPeak />
+            <h1>Read to Stross</h1>
             <LoadStrossle />
           </>
         ) : null}

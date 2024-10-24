@@ -35,7 +35,6 @@ const SubArticlesSixGrid: React.FC<{
     dayInterval,
     startIndex,
     endIndex,
-    articleAmount
   );
 
   return (

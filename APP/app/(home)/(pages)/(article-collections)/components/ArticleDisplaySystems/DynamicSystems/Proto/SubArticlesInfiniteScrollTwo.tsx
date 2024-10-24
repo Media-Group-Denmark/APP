@@ -137,14 +137,14 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
                       isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
                     data-ad-unit-id={
-                      isMainArticle ? "/49662453/PengehjoernetDK/Square_1" : ""
+                      isMainArticle ? "/${theme.site_ad_id}/PengehjoernetDK/Square_1" : ""
                     }
                   ></aside>
                   <aside
                     className={isMainArticle ? "mobile md:hidden" : "hidden"}
                     data-ad-unit-id={
                       isMainArticle
-                        ? "/49662453/PengehjoernetDK/Mobile_Square_3"
+                        ? "/${theme.site_ad_id}/PengehjoernetDK/Mobile_Square_3"
                         : ""
                     }
                   ></aside>

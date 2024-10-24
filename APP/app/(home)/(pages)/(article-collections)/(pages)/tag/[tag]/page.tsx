@@ -87,11 +87,11 @@ export default async function tag({ params }: { params: { tag: string } }) {
           </section>
           <aside
             className="mobile md:hidden"
-            data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_1`}
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
           ></aside>
           <aside
             className="desktop hidden md:block"
-            data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_2`}
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
           ></aside>
 
           {/* Phone */}
@@ -105,7 +105,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             />
             <aside
               className="mobile md:hidden"
-              data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_2`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_2`}
             ></aside>
             <SubArticlesGrid
               data={data}
@@ -119,7 +119,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             </div>
             <aside
               className="mobile md:hidden"
-              data-ad-unit-id={`/49662453/${theme.site_ad_name}/Mobile_Square_3`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_3`}
             ></aside>
             <SubArticlesGrid
               data={data}
@@ -149,7 +149,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
             />
             <aside
               className="desktop hidden md:block"
-              data-ad-unit-id={`/49662453/${theme.site_ad_name}/Leaderboard_3`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_3`}
             ></aside>
           </section>
         </div>

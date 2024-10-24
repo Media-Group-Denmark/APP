@@ -46,7 +46,7 @@ export default function NewsletterPopup() {
       setIsSubmitted(true)
       setTimeout(() => {
         setIsOpen(false);
-      }, 30000);
+      }, 5000);
     } else {
       setIsSubmitted(false)
     }

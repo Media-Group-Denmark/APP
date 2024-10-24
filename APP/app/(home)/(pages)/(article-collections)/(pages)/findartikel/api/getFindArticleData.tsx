@@ -1,4 +1,5 @@
 import { client } from "@/app/lib/sanityclient";
+const revalidate = 600;
 
 const today = new Date().toISOString();
 
