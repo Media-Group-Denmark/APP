@@ -20,19 +20,19 @@ export default function Navigation({searchParams, pathname} : {searchParams: str
   }
 
   const navItems: navItem[] = [
-     /* {
+     {
           id: 1,
           name: 'Dashboard',
           link: '/dashboard',
           dropDown: false,
-     }, */
-     {
+     },
+     /* {
           id: 1,
           name: 'Artikler',
-          /* icon: <House className="h-4 w-4" />, */
+          icon: <House className="h-4 w-4" />,
           link: '/articles',
           dropDown: false,
-      },
+      }, */
       {
            id: 2,
            name: 'Referencer',
@@ -70,7 +70,7 @@ export default function Navigation({searchParams, pathname} : {searchParams: str
               <aside className='grid grid-cols-2 '>
                 <button
                     key={item.id}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${pathname === item.link ? 'bg-muted' : null }`}
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${pathname === item.link ? 'bg-red-200' : null }`}
                   >
                     <span>
                       {/* {item.icon} */}

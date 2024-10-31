@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import theme from "@/app/lib/theme.json";
+import { Inter, Mulish } from "next/font/google";
 import Link from "next/link";
 import '@/app/(home)/stylesheets/globals.css';
 import {
@@ -28,6 +29,9 @@ import Profile from "./components/Profile/Profile";
 export const description =
   "A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.";
 
+  const inter = Inter({ subsets: ["latin"], variable: '--font-inter', display: 'swap', });
+const mulish = Mulish({ subsets: ["latin"], weight: ["600", "700", "900"], variable: '--font-mulish', display: 'swap', });
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -42,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased overflow-clip`}
+        className={`antialiased overflow-clip ${inter.variable} ${mulish.variable}`}
       >
         <main className="pt-0 dashboard">
           <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">

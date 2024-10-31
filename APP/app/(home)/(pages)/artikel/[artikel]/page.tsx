@@ -106,7 +106,7 @@ export default async function artikel({
   };
 
   return (
-    <section className="bg-[#fff] dark:bg-main_color_dark border-y-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-b-2 border-gray-100 md:pt-4 ">
       <script
         async
         type="application/ld+json"
@@ -184,7 +184,7 @@ export default async function artikel({
         .width(480)
         .height(270)
         .format('webp')
-        .quality(50)
+        .quality(90)
         .url()} 480w`}
       sizes="(max-width: 800px) 100vw, 800px"
       type="image/webp"
@@ -200,7 +200,7 @@ export default async function artikel({
         .width(480)
         .height(270)
         .format('webp')
-        .quality(60)
+        .quality(90)
         .url()} 480w`}
       sizes="(max-width: 800px) 100vw, 800px"
       type="image/jpeg"
@@ -210,7 +210,7 @@ export default async function artikel({
         .width(800)
         .height(450)
         .format("webp")
-        .quality(60)
+        .quality(90)
         .url()}
       sizes="(max-width: 800px) 100vw, 800px"
       width="800"
