@@ -9,7 +9,7 @@ import { ArticleModel } from "../../models/article";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import FindArticle from "./components/findArticle";
 import { getFindArticleData } from "./api/getFindArticleData";
-import ArticleHeroTest from "../../components/ArticleBlocks/block";
+import ArticleHeroTest from "../../components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 
 export const revalidate = 6000;
 

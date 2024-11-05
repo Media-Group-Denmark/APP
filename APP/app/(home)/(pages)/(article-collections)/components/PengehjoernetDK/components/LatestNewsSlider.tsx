@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 
-const TopNewsSlider: React.FC<{
+const LatestNewsSlider: React.FC<{
   data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
@@ -82,4 +82,4 @@ const TopNewsSlider: React.FC<{
   );
 };
 
-export default TopNewsSlider;
+export default LatestNewsSlider;

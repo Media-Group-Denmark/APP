@@ -9,7 +9,7 @@ import theme from "@/app/lib/theme.json";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
 import Header from "../(home)/components/Navigation/Header/Header";
 import { SubArticlesInfiniteScroll } from "../(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
-import TrendingArticlesList from "../(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
+import TrendingArticlesList from "../(home)/(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList";
 import GoogleAnalyticsScripts from "../(home)/components/AdScripts/GoogleAnalyticsScripts";
 import Footer from "../(home)/components/Navigation/Footer/Footer";
 import LoadAds from "../(home)/components/AdScripts/LoadAds";

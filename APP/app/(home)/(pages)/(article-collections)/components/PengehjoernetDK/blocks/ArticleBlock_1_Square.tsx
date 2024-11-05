@@ -1,5 +1,6 @@
-{/* 
-  <ArticleHeroTest
+{
+  /* 
+  <ArticleBlock_1_Square
   data={data} // get the data from page
   category={"nyheder"} // filter articles by category with a category-slug
   tag={"nyheder"} // filter articles by tag with a tag-slug
@@ -21,13 +22,14 @@
     },
   }}
   nameTag={{ name: "Nyheder", tag: true }}
-  header={{ visible: true, time: true, address: false, category: true }}
-  footer={{ visible: false, time: false, address: false, category: false }}
+  header={{ visible: true, time: true, journalist: false, category: true }}
+  footer={{ visible: false, time: false, journalist: false, category: false }}
   fontStyles="text-md md:text-lg leading-5 md:leading-6 font-bold"
   gridSystem="md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 "
   contentHeight="min-h-[140px]"
 />; 
-*/}
+*/
+}
 
 import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
@@ -38,7 +40,7 @@ import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collection
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 export const revalidate = 600;
 
-const ArticleHeroTest: React.FC<{
+const ArticleBlock_1_Square: React.FC<{
   data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
@@ -48,14 +50,14 @@ const ArticleHeroTest: React.FC<{
   endIndex: number;
   fontStyles?: string | undefined;
   mediaSize?: {
-    Figure: {
-      figureDesktopHeight: string;
-      figureMobileHeight: string;
+    Figure?: {
+      figureDesktopHeight?: string | undefined;
+      figureMobileHeight?: string | undefined;
     };
-    Image: {
-      imgWidth: number;
-      imgHeight: number;
-      quality: number;
+    Image?: {
+      imgWidth?: number;
+      imgHeight?: number;
+      quality?: number;
       lazyLoading?: boolean;
       responsive: string;
     };
@@ -66,7 +68,7 @@ const ArticleHeroTest: React.FC<{
     | {
         visible?: boolean;
         time?: boolean;
-        address?: boolean;
+        journalist?: boolean;
         category?: boolean;
       }
     | undefined;
@@ -74,7 +76,7 @@ const ArticleHeroTest: React.FC<{
     | {
         visible?: boolean;
         time?: boolean;
-        address?: boolean;
+        journalist?: boolean;
         category?: boolean;
       }
     | undefined;
@@ -123,16 +125,16 @@ const ArticleHeroTest: React.FC<{
         {slicedData.slice(0, articleAmount || 1).map((post: Article) => (
           <div
             className="shadow-md hover:shadow-lg transition-shadow rounded-lg group "
-            style={{ maxWidth: `${mediaSize?.Image.imgWidth || 800}px` }}
+            style={{ maxWidth: `${mediaSize?.Image.imgWidth || 400}px` }}
             key={post._id}
           >
             <figure
               className={`block rounded-t-lg overflow-clip 
               ${
-                mediaSize ? mediaSize.Figure.figureDesktopHeight : "md:h-[10em]"
+                mediaSize?.Figure.figureDesktopHeight || "md:h-[10em]"
               } 
               ${
-                mediaSize ? mediaSize.Figure.figureMobileHeight : "md:h-[8em]"
+                mediaSize?.Figure.figureMobileHeight || "md:h-[8em]"
               }`}
             >
               <ArticleLink
@@ -147,14 +149,14 @@ const ArticleHeroTest: React.FC<{
                   className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"
                   src={urlFor(post.image)
                     .format("webp")
-                    .width(mediaSize?.Image.imgWidth || 800)
-                    .height(mediaSize?.Image.imgHeight || 400)
+                    .width(mediaSize?.Image.imgWidth || 400)
+                    .height(mediaSize?.Image.imgHeight || 300)
                     .fit("fill")
                     .quality(mediaSize?.Image.quality || 85)
                     .url()}
                   alt={post.title}
-                  width={mediaSize?.Image.imgWidth || 800}
-                  height={mediaSize?.Image.imgHeight || 400}
+                  width={mediaSize?.Image.imgWidth || 400}
+                  height={mediaSize?.Image.imgHeight || 300}
                   sizes={mediaSize?.Image.responsive}
                   {...(mediaSize?.Image.lazyLoading === false
                     ? { priority: true }
@@ -166,7 +168,7 @@ const ArticleHeroTest: React.FC<{
             <div className="px-4 pb-4">
               <header
                 className={`grid grid-rows-[auto_1fr_auto] ${
-                  contentHeight ? contentHeight : "min-h-[480px]"
+                  contentHeight ? contentHeight : "min-h-[140px]"
                 }`}
               >
                 {header && header.visible && (
@@ -178,10 +180,14 @@ const ArticleHeroTest: React.FC<{
                         </p>
                       </ArticleLink>
                     )}
-                    {header && header.address && (
+                    {header && header.journalist && (
                       <address>
                         <ArticleLink
-                          className="text-sm py-2 text-fade_color_light dark:text-fade_color_dark"
+                          className={`${
+                            articleAmount && articleAmount >= 2
+                              ? "text-sm"
+                              : "text-md"
+                          } py-2 text-fade_color_light dark:text-fade_color_dark`}
                           rel="author"
                           href={`/journalist/${post.JournalistSlug}`}
                         >
@@ -191,7 +197,11 @@ const ArticleHeroTest: React.FC<{
                     )}
                     {header && header.time && (
                       <time
-                        className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"
+                        className={`${
+                          articleAmount && articleAmount >= 2
+                            ? "text-xs"
+                            : "text-md"
+                        } rounded-lg sm:my-auto my-1 sm:ml-auto hidden md:inline-block`}
                         dateTime={post.publishedAt}
                       >
                         {timeSinceText({ date: post.publishedAt })}
@@ -220,10 +230,14 @@ const ArticleHeroTest: React.FC<{
 
               {footer && footer.visible && (
                 <footer className="flex gap-2 mt-2">
-                  {footer && footer.address && (
+                  {footer && footer.journalist && (
                     <address>
                       <ArticleLink
-                        className="text-sm py-2 text-fade_color_light dark:text-fade_color_dark"
+                        className={`${
+                          articleAmount && articleAmount >= 2
+                            ? "text-xs"
+                            : "text-md"
+                        } py-2 text-fade_color_light dark:text-fade_color_dark`}
                         rel="author"
                         href={`/journalist/${post.JournalistSlug}`}
                       >
@@ -233,7 +247,11 @@ const ArticleHeroTest: React.FC<{
                   )}
                   {footer && footer.time && (
                     <time
-                      className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"
+                      className={`rounded-lg sm:my-auto my-1 sm:ml-auto ${
+                        articleAmount && articleAmount >= 2
+                          ? "text-xs"
+                          : "text-md"
+                      } hidden md:inline-block`}
                       dateTime={post.publishedAt}
                     >
                       {timeSinceText({ date: post.publishedAt })}
@@ -256,4 +274,4 @@ const ArticleHeroTest: React.FC<{
   );
 };
 
-export default ArticleHeroTest;
+export default ArticleBlock_1_Square;

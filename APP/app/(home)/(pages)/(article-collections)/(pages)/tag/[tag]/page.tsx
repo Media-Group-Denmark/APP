@@ -6,7 +6,7 @@ import { ArticleModel } from "../../../models/article";
 import { Metadata } from "next";
 import ArticleHero from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import SubArticlesGrid from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
-import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
+import TrendingArticlesList from "@/app/(home)/(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList";
 import theme from "@/app/lib/theme.json";
  import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { getTagData } from "../api/getTagData";

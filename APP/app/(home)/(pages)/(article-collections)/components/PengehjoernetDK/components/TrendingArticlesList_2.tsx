@@ -5,7 +5,7 @@ import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 
 
-const TrendingArticlesListAltOmKendte: React.FC<{
+const TrendingArticlesList_2: React.FC<{
   data: ArticleModel[];
   category?: string | undefined;
   tag?: string | string[];
@@ -135,4 +135,4 @@ const TrendingArticlesListAltOmKendte: React.FC<{
   );
 };
 
-export default TrendingArticlesListAltOmKendte;
+export default TrendingArticlesList_2;

@@ -10,7 +10,7 @@ import theme from "@/app/lib/theme.json";
 import LoadAds from "./components/AdScripts/LoadAds";
 import GoogleAnalyticsScripts from "./components/AdScripts/GoogleAnalyticsScripts";
 import SubArticlesListSmall from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesListSmall";
-import TrendingArticlesList from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/TrendingArticlesList";
+import TrendingArticlesList from "./(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList";
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
 import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import dynamic from "next/dynamic";
