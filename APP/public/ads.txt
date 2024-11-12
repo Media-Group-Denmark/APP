@@ -589,3 +589,4 @@ yieldlab.net, 6374282, RESELLER
 yoc.com, 5903, RESELLER
 zeta.com, 891, RESELLER
 omnicommediagroup.com, S009, RESELLER
+google.com, pub-6284205926312405, DIRECT, f08c47fec0942fa0
