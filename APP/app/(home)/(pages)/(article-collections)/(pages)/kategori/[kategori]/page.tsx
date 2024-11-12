@@ -157,7 +157,7 @@ export default async function kategori({
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               name={currentCategory.name}
@@ -168,7 +168,7 @@ export default async function kategori({
               className="desktop hidden md:block"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               name={currentCategory.name}
