@@ -51,14 +51,14 @@ const SubArticlesSixGridTwo: React.FC<{
           </span>
         </h1>
       </ArticleLink>
-      <article className="grid overflow-y-clip grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+      <article className="grid overflow-y-clip grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
         {slicedData
           .map((post: Article) => (
             <div
               key={post._id}
               className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
             >
-              <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300  rounded-t-2xl rounded-b-lg  overflow-clip">
+              <figure className="block w-full h-[7em] md:h-[14em] bg-gray-300  rounded-t-2xl rounded-b-lg  overflow-clip">
                 <ArticleLink
                   aria-label="Læs mere om artiklen"
                   href={`/artikel/${
@@ -68,12 +68,12 @@ const SubArticlesSixGridTwo: React.FC<{
                   }`}
                 >
                   <img
-                    width={400}
-                    height={300}
+                    width={800}
+                    height={600}
                     src={urlFor(post.image)
                       .format("webp")
-                      .width(400)
-                      .height(300)
+                      .width(800)
+                      .height(600)
                       .fit("fill")
                       .quality(85)
                       .url()}

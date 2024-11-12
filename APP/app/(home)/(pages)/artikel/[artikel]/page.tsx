@@ -170,7 +170,7 @@ export default async function artikel({
                     </footer>
 
                     <aside className="relative min-h-[10em] md:min-h-[25em]">
-                      <LoadShowHeroes />
+                     {/*  <LoadShowHeroes /> */}
 <figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
   <picture>
     <source
@@ -220,7 +220,7 @@ export default async function artikel({
     />
   </picture>
   <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-    Foto: {mainArticle?.source || 'Shutterstock.com'}
+   {mainArticle?.source || 'Shutterstock.com'}
   </figcaption>
 </figure>
 
@@ -279,8 +279,8 @@ export default async function artikel({
                 </article>
               </div>
             </div>
-            <LoadReadPeak />
-            <LoadStrossle />
+            {/* <LoadReadPeak />
+            <LoadStrossle /> */}
           </>
         ) : null}
       </section>

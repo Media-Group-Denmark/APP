@@ -116,7 +116,7 @@ export default function NavigationMenu() {
               </li>
             );
           })}
-          <span className="hidden md:grid grid-cols-2 items-center ml-auto ">
+          <span className="hidden grid-cols-2 items-center ml-auto ">
             <DarkModeToggle onClick={toggle} />
             <SearchButton />
           </span>
@@ -161,7 +161,7 @@ export default function NavigationMenu() {
                 )
               : null}
           </nav>
-              <aside className="mt-auto grid place-content-center h-full"><MailChimpForm /></aside>
+              {/* <aside className="mt-auto grid place-content-center h-full"><MailChimpForm /></aside> */}
         </SheetContent>
       </Sheet>
     </header>

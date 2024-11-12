@@ -15,6 +15,7 @@ import LatestNewsSlider from "./(pages)/(article-collections)/components/Pengehj
 import ArticleHeroTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
 import TrendingArticlesListTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
 import TopNewsSliderTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TopNewsSliderTwo";
+import SubArticlesGridTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
 export const revalidate = 600;
 
 export const metadata: Metadata = defaultMeta;
@@ -121,22 +122,23 @@ export default async function Home() {
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
-            <TrendingArticlesList_2
+            {/* <TrendingArticlesList_2
               data={data}
               dayInterval={14}
               views={0}
               startIndex={0}
               endIndex={50}
               articleAmount={5}
-            />
+            /> */}
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
-              startIndex={1}
-              endIndex={3}
+              category={theme.categoryOne}
+              startIndex={0}
+              endIndex={50}
               articleAmount={2}
             />
             <div className="mt-6 block">
@@ -146,12 +148,11 @@ export default async function Home() {
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
-              category={"nyheder"}
-              name="Nyheder"
-              startIndex={4}
-              endIndex={6}
+              category={theme.categoryTwo}
+              startIndex={0}
+              endIndex={50}
               articleAmount={2}
             />
             <div className="mt-4 block">
@@ -161,41 +162,35 @@ export default async function Home() {
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-            <ArticleBlock_1_Square
+          <SubArticlesGridTwo
               data={data}
-              category={"nyheder"}
-              startIndex={0} 
+              category={theme.categoryOne}
+              startIndex={0}
               endIndex={50}
-              articleAmount={6} 
-              nameTag={{ name: "Spare-Hacks", tag: true }}
-              {...articleSixGrid}
-              />
+              articleAmount={6}
+            />
             <aside
               className="desktop hidden md:block"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
             ></aside>
-            <ArticleBlock_1_Square 
+            <SubArticlesGridTwo
               data={data}
-              category={"spare-hacks"}
-              startIndex={0} 
+              category={theme.categoryTwo}
+              startIndex={0}
               endIndex={50}
-              articleAmount={6} 
-              nameTag={{ name: "Spare-Hacks", tag: true }}
-              {...articleSixGrid}
-              />
+              articleAmount={6}
+            />
             <aside
               className="desktop hidden md:block"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
             ></aside>
-            <ArticleBlock_1_Square 
+            <SubArticlesGridTwo
               data={data}
-              category={"privatkonomi"}
-              startIndex={0} 
+              category={theme.categoryThree}
+              startIndex={0}
               endIndex={50}
-              articleAmount={6} 
-              nameTag={{ name: "Privatøkonomi", tag: true }}
-              {...articleSixGrid}
-              />
+              articleAmount={6}
+            />
           </section>
 
         </div>
