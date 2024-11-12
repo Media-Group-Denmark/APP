@@ -12,6 +12,9 @@ import { defaultMeta } from "./meta/defaultMeta";
 import ArticleBlock_1_Square from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 import ArticleBlock_2_Wide from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_2_Wide";
 import LatestNewsSlider from "./(pages)/(article-collections)/components/PengehjoernetDK/components/LatestNewsSlider";
+import ArticleHeroTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
+import TrendingArticlesListTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+import TopNewsSliderTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TopNewsSliderTwo";
 export const revalidate = 600;
 
 export const metadata: Metadata = defaultMeta;
@@ -61,7 +64,7 @@ export default async function Home() {
 
   return (
     <section>
-      <LatestNewsSlider data={data} dayInterval={2} startIndex={0} endIndex={12} />
+      {/* <LatestNewsSlider data={data} dayInterval={2} startIndex={0} endIndex={12} /> */}
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
         <div className="containerr md:px-6 py-10 pt-0 m-auto">
           
@@ -69,38 +72,52 @@ export default async function Home() {
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
             <div className=" lg:w-[700px]">
 
-              <ArticleBlock_1_Square
+              {/* <ArticleBlock_1_Square
                 data={data}
                 startIndex={0} 
                 endIndex={1}
                 articleAmount={1} 
                 {...articleHero}
-                />
+                /> */}
+                <ArticleHeroTwo data={data}
+                startIndex={0} 
+                endIndex={1} />
 
-              <aside className="hidden lg:inline-block">
+              {/* <aside className="hidden lg:inline-block">
                 <ArticleBlock_2_Wide data={data} startIndex={1} endIndex={3} />
-              </aside>
+              </aside> */}
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesList_2
+              {/* <TrendingArticlesList_2
                 data={data}
                 dayInterval={14}
                 views={0}
                 startIndex={0}
                 endIndex={50}
                 articleAmount={5}
-              />
+              /> */}
+              <TrendingArticlesListTwo data={data}
+                dayInterval={14}
+                views={0}
+                startIndex={0}
+                endIndex={50}
+                articleAmount={5} />
             </aside>
           </section>
 
           <aside
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
           ></aside>
           <aside
             className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_2`}
           ></aside>
+
+
+          <TopNewsSliderTwo data={data} dayInterval={14}
+                startIndex={0}
+                endIndex={12} />
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
@@ -114,7 +131,7 @@ export default async function Home() {
             />
             <aside
               className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_2`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
             ></aside>
             <SubArticlesGrid
               data={data}
@@ -127,7 +144,7 @@ export default async function Home() {
             </div>
             <aside
               className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_3`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
             ></aside>
             <SubArticlesGrid
               data={data}
@@ -155,7 +172,7 @@ export default async function Home() {
               />
             <aside
               className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_3`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
             ></aside>
             <ArticleBlock_1_Square 
               data={data}
@@ -168,7 +185,7 @@ export default async function Home() {
               />
             <aside
               className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_3`}
+              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
             ></aside>
             <ArticleBlock_1_Square 
               data={data}

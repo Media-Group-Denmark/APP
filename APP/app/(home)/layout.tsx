@@ -64,8 +64,8 @@ export default async function RootLayout({
         href="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
         as="script"
       />
-      <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
-      <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" />
+      {/* <link rel="dns-prefetch" href="//adx.adform.net" crossOrigin="" />
+      <link rel="dns-prefetch" href="//ads.pubmatic.com" crossOrigin="" /> */}
       <link rel="alternate" type="application/rss+xml" href={`${theme.feed_url}`} />
       <body className={`${inter.variable} ${mulish.variable}`}>
       <script
@@ -75,20 +75,20 @@ export default async function RootLayout({
       />
        
        {/*  <AdBlockDetect /> */}
-        <NewsletterPopup />
+        {/* <NewsletterPopup /> */}
         <Header />
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 
 
 
-        <DynamicArticles data={data} />
+        {/* <DynamicArticles data={data} /> */}
 
         
         </main>
         <GoogleAnalyticsScripts />
         <Footer />
 
-        <Script
+        {/* <Script
         id="clarity-script"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
@@ -100,7 +100,7 @@ export default async function RootLayout({
             })(window, document, "clarity", "script", "n4my1o7l85");
           `,
         }}
-      />
+      /> */}
       <LoadAds />
 
       

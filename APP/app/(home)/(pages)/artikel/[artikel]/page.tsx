@@ -234,7 +234,7 @@ export default async function artikel({
 
                   <aside
                     className="mobile md:hidden"
-                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/mobile_square_article_1`}
+                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_article_1`}
                   ></aside>
 
                   <aside

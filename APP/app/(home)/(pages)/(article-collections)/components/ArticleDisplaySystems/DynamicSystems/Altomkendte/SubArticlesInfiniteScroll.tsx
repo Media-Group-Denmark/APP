@@ -145,7 +145,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                     className={isMainArticle ? "mobile md:hidden" : "hidden"}
                     data-ad-unit-id={
                       isMainArticle
-                        ? "/${theme.site_ad_id}/PengehjoernetDK/Mobile_Square_3"
+                        ? "/${theme.site_ad_id}/PengehjoernetDK/Box_Mobile_3"
                         : ""
                     }
                   ></aside>

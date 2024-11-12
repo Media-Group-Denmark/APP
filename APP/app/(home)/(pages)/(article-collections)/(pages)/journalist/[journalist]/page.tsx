@@ -103,11 +103,11 @@ export default async function journalist({
 
           <aside
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
           ></aside>
           <aside
             className="hidden md:grid"
-            data-ad-unit-id="/${theme.site_ad_id}/PengehjoernetDK/Leaderboard_2"
+            data-ad-unit-id="/${theme.site_ad_id}/PengehjoernetDK/Board_2"
           ></aside>
           <SubArticlesListLarge
             data={data}

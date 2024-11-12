@@ -49,7 +49,7 @@ const TopNewsSliderTwo: React.FC<{
     })
     .slice(startIndex, endIndex);
   return (
-    <section className="max-w-[1000px] mx-auto pt-4 pb-1 px-6 bg-indigo-100 rounded-lg">
+    <section className="max-w-[1000px] mx-auto pt-4 pb-1 px-6 bg-lime-400 rounded-lg">
       <p className="font-bold">
             <span className="mr-2 animate-pulse">🔴</span>Seneste nyheder
           </p>
