@@ -20,7 +20,7 @@ export default async function journalister() {
 
   return (
     <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 pt-0 py-12">
-      <Breadcrumb navItem={"Journalister"} link="" navItemTwo="" />
+      {/* <Breadcrumb navItem={"Journalister"} link="" navItemTwo="" /> */}
 
       <div className="text-center pb-12">
         <h2 className="text-base font-bold text-accent_color_light dark:text-accent_color_dark">

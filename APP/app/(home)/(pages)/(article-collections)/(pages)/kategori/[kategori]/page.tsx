@@ -16,6 +16,9 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { generateCategoryMetadata } from "../meta/generateCategoryMetadata";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import categorySchema from "../meta/categorySchema";
+import ArticleHeroTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
+import TrendingArticlesListTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+import SubArticlesGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
 
 export const revalidate = 600;
 /* -------------------------------------------------------------------------- */
@@ -58,23 +61,23 @@ export default async function kategori({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Breadcrumb
+      {/* <Breadcrumb
         navItem={"Kategorier"}
         link={"/kategorier"}
         navItemTwo={currentCategory.name}
-      />
+      /> */}
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
             <div className=" lg:w-[700px]">
-              <ArticleHero
+              <ArticleHeroTwo
                 data={data}
                 category={params.kategori}
                 startIndex={0}
                 endIndex={1}
               />
-              <aside className="hidden lg:inline-block">
+              {/* <aside className="hidden lg:inline-block">
                 <SubArticlesListWide
                   data={data}
                   category={params.kategori}
@@ -82,10 +85,10 @@ export default async function kategori({
                   startIndex={1}
                   endIndex={3}
                 />
-              </aside>
+              </aside> */}
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesListAltOmKendte
+              <TrendingArticlesListTwo
                 dayInterval={14}
                 views={0}
                 startIndex={0}
@@ -108,7 +111,7 @@ export default async function kategori({
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
-            <TrendingArticlesListAltOmKendte
+            <TrendingArticlesListTwo
               views={0}
               dayInterval={30}
               startIndex={0}
@@ -121,35 +124,35 @@ export default async function kategori({
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
             ></aside>
-            <SubArticlesGrid
+            {/* <SubArticlesGrid
               data={data}
               category={params.kategori}
               name={currentCategory.name}
               startIndex={1}
               endIndex={3}
-            />
+            /> */}
             <div className="mt-6 block">
-              <ArticleHero data={data} startIndex={3} endIndex={4} />
+              <ArticleHeroTwo data={data} startIndex={1} endIndex={2} />
             </div>
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               category={params.kategori}
               name={currentCategory.name}
               startIndex={4}
-              endIndex={6}
+              endIndex={20}
             />
-            <div className="mt-4 block">
+            {/* <div className="mt-4 block">
               <ArticleHero
                 data={data}
                 category={params.kategori}
                 startIndex={6}
                 endIndex={7}
               />
-            </div>
+            </div> */}
           </section>
 
           {/* Desktop */}
@@ -167,23 +170,11 @@ export default async function kategori({
             ></aside>
             <SubArticlesGrid
               data={data}
-              category={"spare-hacks"}
-              name={"Spare Hacks"}
-              startIndex={0}
+              category={params.kategori}
+              name={currentCategory.name}
+              startIndex={9}
               endIndex={50}
-              articleAmount={6}
-            />
-            <aside
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></aside>
-            <SubArticlesGrid
-              data={data}
-              category={"privatkonomi"}
-              name={"Privatøkonomi"}
-              startIndex={0}
-              endIndex={50}
-              articleAmount={6}
+              articleAmount={20}
             />
           </section>
         </div>

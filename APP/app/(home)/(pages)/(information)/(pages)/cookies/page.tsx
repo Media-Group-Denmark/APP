@@ -144,7 +144,7 @@ export default async function cookies() {
     <>
       {data ? (
         <>
-          <Breadcrumb navItem={"Cookies"} link="" navItemTwo="" />
+          {/* <Breadcrumb navItem={"Cookies"} link="" navItemTwo="" /> */}
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />

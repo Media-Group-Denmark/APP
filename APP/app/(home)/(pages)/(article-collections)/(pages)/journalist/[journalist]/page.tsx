@@ -53,13 +53,13 @@ export default async function journalist({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {data ? (
+      {/* {data ? (
         <Breadcrumb
           navItem={"Journalist"}
           link={"/journalister"}
           navItemTwo={currentJournalist.name}
         />
-      ) : null}
+      ) : null} */}
 
       <section className=" grid mx-auto mt-4 ">
         <div className="containerr px-6 py-10 pt-0 max-w-[1000px] bg-second_color_light dark:bg-second_color_dark pb-12 rounded-2xl">

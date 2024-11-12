@@ -146,7 +146,7 @@ export default async function page({
       {
         data && (
           <>
-          <Breadcrumb navItem={page.title} link="" navItemTwo=''/>
+          {/* <Breadcrumb navItem={page.title} link="" navItemTwo=''/> */}
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={page.overview} components={components} />

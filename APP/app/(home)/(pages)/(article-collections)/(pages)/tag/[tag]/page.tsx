@@ -14,6 +14,9 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
 import tagSchema from "../meta/tagSchema";
+import ArticleHeroTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/ArticleHeroTwo";
+import TrendingArticlesListTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+import SubArticlesGridTwo from "../../../components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesGridTwo";
 
 
 export const revalidate = 600;
@@ -53,13 +56,13 @@ export default async function tag({ params }: { params: { tag: string } }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {data ? (
+     {/*  {data ? (
         <Breadcrumb
           navItem={"Tags"}
           link={"/tags"}
           navItemTwo={currentTag.name}
         />
-      ) : null}
+      ) : null} */}
 
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
         
@@ -67,7 +70,7 @@ export default async function tag({ params }: { params: { tag: string } }) {
           {/* Both */}
           <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
             <div className=" lg:w-[700px]">
-              <ArticleHero
+              <ArticleHeroTwo
                 data={data}
                 tag={params.tag}
                 startIndex={0}
@@ -75,13 +78,13 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </div>
             <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesList
-                dayInterval={60}
+              <TrendingArticlesListTwo
+                dayInterval={14}
                 startIndex={0}
                 endIndex={50}
+                views={0}
                 data={data}
                 tag={params.tag}
-                articleAmount={5}
               />
             </aside>
           </section>
@@ -96,56 +99,60 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
           {/* Phone */}
           <section className="inline-block md:hidden">
-            <TrendingArticlesList
+            <TrendingArticlesListTwo
               dayInterval={30}
               startIndex={0}
               endIndex={50}
               data={data}
+              views={0}
               tag={params.tag}
+              articleAmount={5}
             />
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
             ></aside>
-            <SubArticlesGrid
+            {/* <SubArticlesGridTwo
               data={data}
               tag={"nyheder"}
               name="Nyheder"
               startIndex={1}
               endIndex={3}
-            />
+            /> */}
             <div className="mt-6 block">
-              <ArticleHero data={data} startIndex={3} endIndex={4} />
+              <ArticleHeroTwo data={data} tag={params.tag}
+                startIndex={1}
+                endIndex={2} />
             </div>
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
             ></aside>
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               tag={params.tag}
               name={currentTag.name}
               startIndex={4}
-              endIndex={6}
+              endIndex={20}
             />
-            <div className="mt-4 block">
-              <ArticleHero
+            {/* <div className="mt-4 block">
+              <ArticleHeroTwo
                 data={data}
                 tag={params.tag}
                 startIndex={6}
                 endIndex={7}
               />
-            </div>
+            </div> */}
           </section>
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-            <SubArticlesGrid
+            <SubArticlesGridTwo
               data={data}
               tag={params.tag}
               name={currentTag.name}
               startIndex={0}
-              endIndex={6}
+              endIndex={16}
             />
             <aside
               className="desktop hidden md:block"

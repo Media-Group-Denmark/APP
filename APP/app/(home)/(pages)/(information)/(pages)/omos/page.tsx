@@ -147,7 +147,7 @@ export default async function omos() {
     <section>
       {data ? (
         <>
-          <Breadcrumb navItem={"Om Os"} link="" navItemTwo="" />
+          {/* <Breadcrumb navItem={"Om Os"} link="" navItemTwo="" /> */}
           <div className="max-w-[1000px] m-auto px-8 mb-8">
             <div className="articleText text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
               <PortableText value={data[0].overview} components={components} />

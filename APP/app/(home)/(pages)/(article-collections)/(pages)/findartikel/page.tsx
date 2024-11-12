@@ -58,11 +58,11 @@ export default async function findArtikel({
 
   return (
     <section className="pb-12 lg:w-[980px] m-auto">
-      <Breadcrumb
+      {/* <Breadcrumb
         navItem={"Arkivet"}
         link="/findartikel"
         navItemTwo=""
-      />
+      /> */}
       <SearchBar category={categories} journalist={journalists} tag={tags} />
       {/* <FindArticle data={filteredItems} startIndex={0} endIndex={50} /> */}
       <ArticleHeroTest 
