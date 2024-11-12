@@ -16,6 +16,7 @@ import { getFreshArticleData } from "@/app/(home)/(pages)/(article-collections)/
 import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import TrendingArticlesListAltOmKendte from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/TrendingArticlesListAltOmKendte";
+import LoadAds from "./components/AdScripts/LoadAds";
 
 const inter = Merriweather({
   subsets: ['latin'],
@@ -75,12 +76,14 @@ export default async function RootLayout({
           {children} 
 
 
-        <DynamicArticles data={data} />
+        {/* <DynamicArticles data={data} /> */}
         
         </main>
         <GoogleAnalyticsScripts />
         <Footer />
 
+
+        <LoadAds />
 
       
       </body>
