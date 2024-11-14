@@ -102,7 +102,7 @@ export default async function Home() {
                 views={0}
                 startIndex={0}
                 endIndex={50}
-                articleAmount={5} />
+                articleAmount={7} />
             </aside>
           </section>
 
@@ -117,8 +117,9 @@ export default async function Home() {
 
 
           <TopNewsSliderTwo data={data} dayInterval={14}
-                startIndex={0}
+                startIndex={1}
                 endIndex={12} />
+                
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
@@ -130,57 +131,57 @@ export default async function Home() {
               endIndex={50}
               articleAmount={5}
             /> */}
-            <div
+            {/* <div
             className="mobile md:hidden"
             id="div-Box_Mobile_2"
-          ></div>
-            <SubArticlesGridTwo
+          ></div> */}
+            {/* <SubArticlesGridTwo
               data={data}
               category={theme.categoryOne}
               startIndex={0}
               endIndex={50}
               articleAmount={2}
-            />
-            <div className="mt-6 block">
+            /> */}
+           {/*  <div className="mt-6 block">
               <ArticleHero data={data} startIndex={3} endIndex={4} />
-            </div>
-            <div
+            </div> */}
+            {/* <div
             className="mobile md:hidden"
             id="div-Box_Mobile_3"
-          ></div>
-            <SubArticlesGridTwo
+          ></div> */}
+            {/* <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
               startIndex={0}
               endIndex={50}
               articleAmount={2}
-            />
-            <div className="mt-4 block">
+            /> */}
+           {/*  <div className="mt-4 block">
               <ArticleHero data={data} startIndex={6} endIndex={7} />
-            </div>
+            </div> */}
           </section>
 
           {/* Desktop */}
           <section className="md:inline-block hidden">
-          <SubArticlesGridTwo
+          {/* <SubArticlesGridTwo
               data={data}
               category={theme.categoryOne}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
-            />
-          <div
+            /> */}
+         {/*  <div
             className="desktop hidden md:block"
             id="div-Board_3"
-          ></div>
-            <SubArticlesGridTwo
+          ></div> */}
+            {/* <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
               startIndex={0}
               endIndex={50}
               articleAmount={6}
-            />
-             <div
+            /> */}
+            {/*  <div
             className="desktop hidden md:block"
             id="div-Board_3"
           ></div>
@@ -190,7 +191,7 @@ export default async function Home() {
               startIndex={0}
               endIndex={50}
               articleAmount={6}
-            />
+            /> */}
           </section>
 
         </div>

@@ -5,12 +5,12 @@
 
 .font-inter {
   @apply font-sans;
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-geist-sans), sans-serif;
 }
 
 .font-mulish {
   @apply font-sans;
-  font-family: var(--font-mulish), sans-serif;
+  font-family: var(--font-geist-sans);
 }
 
 html {
@@ -111,14 +111,14 @@ border-radius: 10px;
 
 /* ------------------------------ TIMEINDICATOR ----------------------------- */
 .sliderNav .timeSpan {
-  @apply text-accent_color_light dark:text-accent_color_dark;
+  @apply text-gray-500 dark:text-gray-200;
 }
 
 /* ----------------------------------- ADS ---------------------------------- */
 
 .desktop
 {
-  background: #fbf8f8 !important;
+  /* background: #fbf8f8 !important; */
     min-height: 250px !important;
     display: grid !important;
     place-content: center !important;
@@ -149,7 +149,7 @@ border-radius: 10px;
 
   .mobile {
    /*  margin-left: -1.5rem !important; */
-   background: #f5f5f5 !important;
+   /* background: #f5f5f5 !important; */
    min-height: 340px !important;
    align-items: center;
    display: grid !important;

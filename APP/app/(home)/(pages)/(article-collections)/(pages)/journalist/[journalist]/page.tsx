@@ -101,14 +101,14 @@ export default async function journalist({
             </address>
           ) : null}
 
-          <aside
+        <div
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
-          ></aside>
-          <aside
-            className="hidden md:grid"
-            data-ad-unit-id="/${theme.site_ad_id}/PengehjoernetDK/Board_2"
-          ></aside>
+            id="div-Box_Mobile_1"
+          ></div>
+         <div
+            className="desktop hidden md:block"
+            id="div-Board_2"
+          ></div>
           <SubArticlesListLarge
             data={data}
             journalist={params.journalist}

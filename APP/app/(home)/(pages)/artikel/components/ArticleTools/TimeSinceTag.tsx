@@ -1,12 +1,12 @@
 import { Clock, PencilLine } from "lucide-react";
-
+import { CiClock1 } from "react-icons/ci";
 interface TimeSinceProps {
   date: string; 
 }
 
 export const timeSinceText = ({ date }: TimeSinceProps): JSX.Element => {
   const pencil = <PencilLine className="my-auto text-fade_color_light dark:text-fade_color_dark"  size={18} />;
-  const clock = <Clock className="my-auto text-fade_color_light dark:text-fade_color_dark"  size={14} />;
+  const clock = <CiClock1 className="my-auto text-fade_color_light dark:text-fade_color_dark"  size={14}/>
 
   const now = new Date();
   const createdAt = new Date(date);

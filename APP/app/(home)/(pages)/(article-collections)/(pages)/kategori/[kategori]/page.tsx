@@ -100,14 +100,14 @@ export default async function kategori({
             </aside>
           </section>
 
-          <aside
+          <div
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
-          ></aside>
-          <aside
+            id="div-Box_Mobile_1"
+          ></div>
+          <div
             className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_2`}
-          ></aside>
+            id="div-Board_2"
+          ></div>
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
@@ -120,10 +120,10 @@ export default async function kategori({
               data={data}
               category={params.kategori}
             />
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
-            ></aside>
+            <div
+            className="mobile md:hidden"
+            id="div-Box_Mobile_2"
+          ></div>
             {/* <SubArticlesGrid
               data={data}
               category={params.kategori}
@@ -134,10 +134,10 @@ export default async function kategori({
             <div className="mt-6 block">
               <ArticleHeroTwo data={data} startIndex={1} endIndex={2} />
             </div>
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
-            ></aside>
+            <div
+            className="mobile md:hidden"
+            id="div-Box_Mobile_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={params.kategori}
@@ -164,10 +164,10 @@ export default async function kategori({
               startIndex={3}
               endIndex={9}
             />
-            <aside
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></aside>
+            <div
+            className="desktop hidden md:block"
+            id="div-Board_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={params.kategori}

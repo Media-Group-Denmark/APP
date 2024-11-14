@@ -15,7 +15,7 @@ const config: Config = {
   			text_main_color_light: '#f8fafc',
   			text_second_color_light: '#e2e8f0',
   			fade_color_light: '#09060a',
-  			accent_color_light: '#007F6C',
+  			accent_color_light: '#84b370',
   			accent_color_gradient_light: '#007F6C, #00C090',
   			main_color_dark: '#10172b',
   			second_color_dark: '#20293c',

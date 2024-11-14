@@ -38,7 +38,7 @@ const ArticleHeroTwo: React.FC<{
       {slicedData.map((post: Article) => (
         <article
           key={post._id}
-          className="col-span-2 mb-4 bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
+          className="col-span-2 mb-4 bg-second_color_light shadow-md dark:bg-second_color_dark rounded-lg relative"
         >
           <figure className="block w-full max-h-[12em] md:max-h-none md:h-[20em] rounded-t-2xl rounded-b-lg overflow-clip">
             <ArticleLink
@@ -67,10 +67,10 @@ const ArticleHeroTwo: React.FC<{
             </ArticleLink>
           </figure>
 
-          <div className="pb-4">
+          <div className="py-4 px-4">
             <header className="grid grid-rows-[auto_1fr_auto] md:min-h-[140px]">
               <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                <p className="relative text-xs w-fit rounded-full py-1 my-1 font-medium text-gray-600">
+                <p className="relative text-xs w-fit rounded-full py-1 my-1 font-bold uppercase text-gray-600">
                   <span className="animate-pulse">🟢</span> {post.category}
                 </p>
                 

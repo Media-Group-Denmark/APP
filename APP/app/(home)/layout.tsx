@@ -17,6 +17,11 @@ import dynamic from "next/dynamic";
 import { SubArticlesInfiniteScroll } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
 import { defaultSchema } from "./meta/defaultSchema";
 import NewsletterPopup from "./components/MailChimp/NewsletterPopUp";
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import { SubArticlesInfiniteScrollTwo } from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/SubArticlesInfiniteScrollTwo";
+import TrendingArticlesListTwo from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Proto/TrendingArticlesListTwo";
+
 
 export const revalidate = 600;
 
@@ -35,18 +40,19 @@ const mulish = Mulish({
 const InfiniteScroll = ({ data }: { data: ArticleModel[] }) => {
   return (
     <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl bg-second_color_light dark:bg-second_color_dark">
-      <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={30} />
+      <SubArticlesInfiniteScrollTwo data={data} startIndex={7} endIndex={30} />
       <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
         <aside
           className="desktop hidden md:block"
           data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Square_2`}
         ></aside>
-        <TrendingArticlesList
+        <TrendingArticlesListTwo
           data={data}
           dayInterval={14}
           startIndex={0}
+          views={0}
           endIndex={30}
-          articleAmount={6}
+          articleAmount={15}
         />
       </div>
     </section>
@@ -89,7 +95,7 @@ export default async function RootLayout({
         type="application/rss+xml"
         href={`${theme.feed_url}`}
       />
-      <body className={`${inter.variable} ${mulish.variable}`}>
+      <body className={`${inter.variable} ${mulish.variable} ${GeistSans.variable}`}>
         <script
           async
           type="application/ld+json"
@@ -102,7 +108,7 @@ export default async function RootLayout({
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children}
 
-          {/* <DynamicArticles data={data} /> */}
+          <DynamicArticles data={data} />
         </main>
         <GoogleAnalyticsScripts />
         <Footer />

@@ -128,9 +128,9 @@ export default async function artikel({
                       <ArticleLink
                         href={`/kategori/${mainArticle.categorySlug}`}
                       >
-                        <button className="text-accent_color_light dark:text-accent_color_dark font-bold uppercase text-md lg:text-xl rounded-lg">
-                          {mainArticle.category}
-                        </button>
+                        <button className="relative uppercase text-xl w-fit rounded-full py-1 my-1 font-bold text-gray-600">
+                  <span className="animate-pulse">🟢</span> {mainArticle.category}
+                </button>
                       </ArticleLink>
                     </div>
                     <header>
@@ -140,12 +140,12 @@ export default async function artikel({
                     </header>
                     <footer className="py-1 lg:py-4">
                       <div className="items-center p-2 mt-1 md:mt-2 border-t-2 border-gray-200">
-                        <time
+                        {/* <time
                           dateTime={mainArticle.publishedAt}
                           className=" hidden md:block text-xs"
                         >
                           {timeSinceText({ date: mainArticle.publishedAt })}
-                        </time>
+                        </time> */}
 
                         <div className="flex gap-x-2 lg:mt-2 align-middle">
                           <ArticleLink
@@ -153,7 +153,7 @@ export default async function artikel({
                             href={`/journalist/${mainArticle.JournalistSlug}`}
                           >
                             <p className="text-fade_color_light  dark:text-fade_color_dark font-semibold text-xs lg:text-md">
-                              Skrevet af:{" "}
+                              Journalist:{" "}
                               <b className="text-text_second_color_dark dark:text-text_second_color_dark text-xs lg:text-md">
                                 {mainArticle.JournalistName}
                               </b>
@@ -232,15 +232,15 @@ export default async function artikel({
                     </h2>
                   </section>
 
-                  <aside
-                    className="mobile md:hidden"
-                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_article_1`}
-                  ></aside>
 
-                  <aside
-                    className="desktop hidden md:grid"
-                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/square_article_1`}
-                  ></aside>
+          <div
+            className="mobile block md:hidden"
+            id="div-Box_Mobile_Article_1"
+          ></div>
+          <div
+            className="desktop hidden md:block"
+            id="div-Box_Article_1"
+          ></div>
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                     <PortableText
@@ -265,7 +265,7 @@ export default async function artikel({
                         </React.Fragment>
                       ))}
                     </div>
-                  <section>
+                  {/* <section>
                     <SocialMediaShareButtons
                       views={`${mainArticle.views}`}
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
@@ -274,7 +274,7 @@ export default async function artikel({
                       views={`${mainArticle.views}`}
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                     />
-                  </section>
+                  </section> */}
                   <div className="disclaimer">{mainArticle.disclaimer && <Disclaimer />}</div>
                 </article>
               </div>

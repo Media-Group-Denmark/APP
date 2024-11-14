@@ -35,9 +35,7 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
   return (
     <section className="mx-auto rounded-xl  md:max-w-7xl px-3 lg:px-8 bg-second_color_light dark:bg-second_color_dark pt-2 md:mt-6 pb-1">
 
-      <h3 className="font-bold text-xl">
-            <span className="mr-2 animate-pulse">🔴</span>Seneste nyheder
-          </h3>
+      
       <div className="mx-auto py-4 grid gap-4">
         {slicedData.map((post: Article, index: number) => {
           // Bestem om det er den første artikel i en sektion
@@ -88,16 +86,16 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
                     <ArticleLink
                       href={`/kategori/${post.categorySlug}`}
                     >
-                      <p className="relative text-xs w-fit rounded-full py-1 my-1 font-medium text-gray-600">
-                  <span className="animate-pulse">🟢</span> {post.category}
+                      <p className="relative text-md uppercase w-fit rounded-full py-1 my-1 font-bold text-gray-600">
+                  <span className="animate-pulse">⚫</span> {post.category}
                 </p>
                     </ArticleLink>
-                    <time
+                 {/*    <time
                       dateTime={post.publishedAt}
                       className="text-gray-500 hidden md:inline-block"
                     >
                       {timeSinceText({ date: post.publishedAt })}
-                    </time>
+                    </time> */}
                   </aside>
                   <header
                     className={`group max-w-xl ${
@@ -132,22 +130,22 @@ export const SubArticlesInfiniteScrollTwo: React.FC<{
                       {post.teaser}
                     </h2>
                   </header>
-                  <aside
+                  <div
                     className={
                       isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
-                    data-ad-unit-id={
-                      isMainArticle ? "/${theme.site_ad_id}/PengehjoernetDK/Square_1" : ""
+                    id={
+                      isMainArticle ? "div-Box_1" : ""
                     }
-                  ></aside>
-                  <aside
+                  ></div>
+                  <div
                     className={isMainArticle ? "mobile md:hidden" : "hidden"}
-                    data-ad-unit-id={
+                    id={
                       isMainArticle
-                        ? "/${theme.site_ad_id}/PengehjoernetDK/Box_Mobile_3"
+                        ? "div-Box_Mobile_3"
                         : ""
                     }
-                  ></aside>
+                  ></div>
                 </div>
               </article>
             </>

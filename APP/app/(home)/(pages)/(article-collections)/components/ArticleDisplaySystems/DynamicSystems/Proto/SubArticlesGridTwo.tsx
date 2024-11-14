@@ -38,9 +38,9 @@ const SubArticlesSixGridTwo: React.FC<{
   return (
     <section className="pb-12">
       <ArticleLink href={`${theme.site_url}/kategori/${category}`}>
-        <h1 className="mb-4 text-xl">
+        <h1 className="mb-4 text-2xl">
         <span className="animate-pulse">🟣</span>
-          <span className="capitalize">
+          <span className="uppercase">
             {category
               ? category
               : tag
@@ -51,12 +51,12 @@ const SubArticlesSixGridTwo: React.FC<{
           </span>
         </h1>
       </ArticleLink>
-      <article className="grid overflow-y-clip grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative">
+      <article className="grid overflow-y-clip grid-cols-2 lg:grid-cols-2 gap-4 md:gap-8 mt-4 lg:mt-0 relative ">
         {slicedData
           .map((post: Article) => (
             <div
               key={post._id}
-              className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative"
+              className="bg-second_color_light dark:bg-second_color_dark rounded-lg relative shadow-md pb-4"
             >
               <figure className="block w-full h-[7em] md:h-[14em] bg-gray-300  rounded-t-2xl rounded-b-lg  overflow-clip">
                 <ArticleLink
@@ -83,10 +83,10 @@ const SubArticlesSixGridTwo: React.FC<{
                   />
                 </ArticleLink>
               </figure>
-              <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mb-4">
+              <div className="grid  p-4 grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mb-4">
                 <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                   <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                  <p className="relative text-xs w-fit rounded-full py-1 my-1 font-medium text-gray-600">
+                  <p className="relative text-xs w-fit rounded-full py-1 uppercase my-1 font-bold text-gray-600">
                   <span className="animate-pulse">🟣</span> {post.category}
                   </p>
                   </ArticleLink>
@@ -105,7 +105,7 @@ const SubArticlesSixGridTwo: React.FC<{
                         : post.articleSlug
                     }`}
                   >
-                    <h1 className="text-sm md:text-lg font-semibold py-0 rounded-lg max-w-full overflow-hidden line-clamp-3">
+                    <h1 className="text-sm md:text-[1.4em] md:leading-8 font-semibold py-0 rounded-lg max-w-full overflow-hidden line-clamp-3">
                     {post.title}
                     </h1>
                   </ArticleLink>

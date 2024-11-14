@@ -88,14 +88,14 @@ export default async function tag({ params }: { params: { tag: string } }) {
               />
             </aside>
           </section>
-          <aside
+          <div
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
-          ></aside>
-          <aside
+            id="div-Box_Mobile_1"
+          ></div>
+          <div
             className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_2`}
-          ></aside>
+            id="div-Board_2"
+          ></div>
 
           {/* Phone */}
           <section className="inline-block md:hidden">
@@ -108,10 +108,10 @@ export default async function tag({ params }: { params: { tag: string } }) {
               tag={params.tag}
               articleAmount={5}
             />
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
-            ></aside>
+            <div
+            className="mobile md:hidden"
+            id="div-Box_Mobile_2"
+          ></div>
             {/* <SubArticlesGridTwo
               data={data}
               tag={"nyheder"}
@@ -124,10 +124,10 @@ export default async function tag({ params }: { params: { tag: string } }) {
                 startIndex={1}
                 endIndex={2} />
             </div>
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
-            ></aside>
+            <div
+            className="mobile md:hidden"
+            id="div-Box_Mobile_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               tag={params.tag}
@@ -154,10 +154,10 @@ export default async function tag({ params }: { params: { tag: string } }) {
               startIndex={0}
               endIndex={16}
             />
-            <aside
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></aside>
+            <div
+            className="desktop hidden md:block"
+            id="div-Board_3"
+          ></div>
           </section>
         </div>
       </section>

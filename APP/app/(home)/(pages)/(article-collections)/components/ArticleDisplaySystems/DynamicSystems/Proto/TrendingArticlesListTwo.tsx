@@ -22,13 +22,13 @@ const TrendingArticlesListTwo: React.FC<{
   return (
     <section
       id="trending"
-      className=" md:px-2 md:min-w-[380px] md:max-h-[500px] xl:w-full md:overflow-y-scroll  rounded-2xl h-fit grid place-content-start"
+      className=" md:px-2 md:min-w-[380px] md:max-h-[540px] xl:w-full md:overflow-y-scroll shadow-sm  rounded-2xl h-fit grid place-content-start"
     >
       <div>
         {/*  Header Start */}
-        <h1 className="pb-4">
+        <h1 className="pb-4 uppercase md:text-lg">
           <span>
-            <span className="mr-2 animate-pulse">🔴</span>Mest populære
+            <span className="mr-2 animate-pulse text-sm ">🔴</span>Populære
           </span>
         </h1>
         {/*  Header End */}

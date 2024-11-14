@@ -29,6 +29,7 @@ const nextConfig = {
         experimental: {
           taint: true,
         },
+        transpilePackages: ["geist"],
 };
 
 export default nextConfig;

@@ -117,15 +117,15 @@ export default function NavigationMenu() {
             );
           })}
           <span className="hidden grid-cols-2 items-center ml-auto ">
-            <DarkModeToggle onClick={toggle} />
-            <SearchButton />
+            {/* <DarkModeToggle onClick={toggle} />
+            <SearchButton /> */}
           </span>
        </ul>
       </nav>
 
       {/*   Phone Nav */}
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <span className="grid md:hidden"><DarkModeToggle onClick={toggle} /></span>
+        {/* <span className="grid md:hidden"><DarkModeToggle onClick={toggle} /></span> */}
         <SheetTrigger asChild>
           <Button
             variant="outline"

@@ -49,9 +49,9 @@ const TopNewsSliderTwo: React.FC<{
     })
     .slice(startIndex, endIndex);
   return (
-    <section className="max-w-[1000px] mx-auto pt-4 pb-1 rounded-lg">
-      <p className="font-bold">
-            <span className="mr-2 animate-pulse">🔴</span>Seneste nyheder
+    <section className="max-w-[1000px] mx-auto pt-4 pb-1  bg-[#85b376] rounded-lg px-4 mb-4">
+      <p className="font-extrabold text-2xl uppercase text-white">
+            <span className="mr-2 text-sm animate-pulse">🔴</span>Seneste
           </p>
       <nav className="sliderNav">
         <ul
@@ -59,7 +59,7 @@ const TopNewsSliderTwo: React.FC<{
           className="flex overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
         >
           {slicedData.map((post: Article) => (
-            <li className="min-w-[270px]  min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
+            <li className="min-w-[270px]  min-h-[110px] relative my-4 pt-4 pr-4 shadow-md">
               <Image
                 src={urlFor(post.image)
                   .format("webp")
@@ -75,7 +75,7 @@ const TopNewsSliderTwo: React.FC<{
                 sizes="(max-width: 768px) 600px, 900px"
                 priority={true} // Tilføj dette for billeder i det indledende viewport
               />
-              <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
+              
               <aside className='bg-second_color_light dark:bg-second_color_dark shadow-lg  block p-2 h-[110px] rounded-b-lg'>
                 <ArticleLink
                   href={`/artikel/${
