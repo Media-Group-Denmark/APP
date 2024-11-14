@@ -6,7 +6,7 @@ export default function Header() {
     <header className=" duration-500 h-fit md:h-[300px] shadow fixed md:relative z-40 w-screen ">
       <div
         className="desktop !mb-0 hidden md:grid place-content-center h-0 md:h-[260px] overflow-clip bg-second_color_light dark:bg-second_color_dark -z-10 sticky top-0 "
-        data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_1`}
+        id="div-Board_1"
       ></div>
       <NewNav />
     </header>
