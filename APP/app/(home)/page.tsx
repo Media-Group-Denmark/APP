@@ -106,14 +106,14 @@ export default async function Home() {
             </aside>
           </section>
 
-          <aside
+          <div
             className="mobile md:hidden"
             data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
-          ></aside>
-          <aside
+          ></div>
+          <div
             className="desktop hidden md:block"
             data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_2`}
-          ></aside>
+          ></div>
 
 
           <TopNewsSliderTwo data={data} dayInterval={14}
@@ -130,10 +130,10 @@ export default async function Home() {
               endIndex={50}
               articleAmount={5}
             /> */}
-            <aside
+            <div
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
-            ></aside>
+            ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryOne}
@@ -144,10 +144,10 @@ export default async function Home() {
             <div className="mt-6 block">
               <ArticleHero data={data} startIndex={3} endIndex={4} />
             </div>
-            <aside
+            <div
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
-            ></aside>
+            ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
@@ -169,10 +169,10 @@ export default async function Home() {
               endIndex={50}
               articleAmount={6}
             />
-            <aside
+            <div
               className="desktop hidden md:block"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></aside>
+            ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
@@ -180,10 +180,10 @@ export default async function Home() {
               endIndex={50}
               articleAmount={6}
             />
-            <aside
+            <div
               className="desktop hidden md:block"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></aside>
+            ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryThree}
