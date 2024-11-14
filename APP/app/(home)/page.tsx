@@ -108,11 +108,11 @@ export default async function Home() {
 
           <div
             className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_1`}
+            id="div-Box_Mobile_1"
           ></div>
           <div
             className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_2`}
+            id="div-Board_2"
           ></div>
 
 
@@ -131,9 +131,9 @@ export default async function Home() {
               articleAmount={5}
             /> */}
             <div
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_2`}
-            ></div>
+            className="mobile md:hidden"
+            id="div-Box_Mobile_2"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryOne}
@@ -145,9 +145,9 @@ export default async function Home() {
               <ArticleHero data={data} startIndex={3} endIndex={4} />
             </div>
             <div
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Box_Mobile_3`}
-            ></div>
+            className="mobile md:hidden"
+            id="div-Box_Mobile_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
@@ -169,10 +169,10 @@ export default async function Home() {
               endIndex={50}
               articleAmount={6}
             />
-            <div
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></div>
+          <div
+            className="desktop hidden md:block"
+            id="div-Board_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryTwo}
@@ -180,10 +180,10 @@ export default async function Home() {
               endIndex={50}
               articleAmount={6}
             />
-            <div
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Board_3`}
-            ></div>
+             <div
+            className="desktop hidden md:block"
+            id="div-Board_3"
+          ></div>
             <SubArticlesGridTwo
               data={data}
               category={theme.categoryThree}
