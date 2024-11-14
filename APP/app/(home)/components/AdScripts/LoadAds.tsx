@@ -8,7 +8,7 @@ export default function LoadAds() {
   useEffect(() => {
     const scriptUrls = [
       "https://securepubads.g.doubleclick.net/tag/js/gpt.js",
-      /* "https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js", */
+      "/lib/prebid8.46.0-1.js",
       "/lib/ad-script.min.js",
     ];
 
