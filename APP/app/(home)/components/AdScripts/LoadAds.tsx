@@ -16,6 +16,10 @@ export default function LoadAds() {
 
     const loadScript = (src: string) => {
       return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[data-cmp-src="${src}"]`)) {
+          console.log(`Script already loaded: ${src}`);
+          return resolve(null);
+        }
         const script = document.createElement('script')
         script.async = true
         if (src === 'https://macro.adnami.io/macro/hosts/adsm.macro.pengehjoernet.dk.js') {
@@ -36,11 +40,7 @@ export default function LoadAds() {
     .then(() => {
       return Promise.all(
         scriptUrls
-        .filter(
-          (url) =>
-            url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js' &&
-            url !== 'https://macro.adnami.io/macro/hosts/adsm.macro.pengehjoernet.dk.js'
-        )
+        .filter((url) => url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')
         .map((url) => loadScript(url))
       )
     })
