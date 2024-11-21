@@ -36,7 +36,11 @@ export default function LoadAds() {
     .then(() => {
       return Promise.all(
         scriptUrls
-        .filter((url) => url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js')
+        .filter(
+          (url) =>
+            url !== 'https://mgdk-cdn.relevant-digital.com/static/tags/66bdb1b086834271b536bf67.js' &&
+            url !== 'https://macro.adnami.io/macro/hosts/adsm.macro.pengehjoernet.dk.js'
+        )
         .map((url) => loadScript(url))
       )
     })
