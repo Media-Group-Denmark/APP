@@ -73,7 +73,19 @@ export default async function RootLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-       
+      <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            OneSignalDeferred.push(async function(OneSignal) {
+              await OneSignal.init({
+                appId: "9cd9e31c-a92c-4185-bfac-9f3cdf1f7492",
+              });
+            });
+          `,
+        }}
+        />
        {/*  <AdBlockDetect /> */}
         <NewsletterPopup />
         <Header />
