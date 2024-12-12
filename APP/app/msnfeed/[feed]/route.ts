@@ -1,7 +1,7 @@
 import RSS from 'rss';
-import theme from '../lib/theme.json';
-import { urlFor } from '../lib/sanityclient';
-import { getMSNFeedData } from '../api/getMSNFeedData';
+import theme from '../../lib/theme.json';
+import { urlFor } from '../../lib/sanityclient';
+import { getMSNFeedData } from '../../api/getMSNFeedData';
 
 function getDanishPubDate() {
   const date = new Date();
@@ -18,11 +18,20 @@ function escapeXML(str: string) {
             .replace(/'/g, '&apos;');
 }
 
-export async function GET() {
+/* export async function generateMetadata({
+  params,
+}: {
+  params: { artikel: string };
+}) { */
+
+
+export async function GET(
+    request: Request,
+    { params }: { params: { feed: string } }
+  ) {
   const pubDate = getDanishPubDate();
   
-  const allData = await getMSNFeedData();
-  console.log(allData)
+  const allData = await getMSNFeedData(params.feed);
 
   //General
   const feed = new RSS({
@@ -52,7 +61,7 @@ export async function GET() {
       const title = escapeXML(article.title);
       const source = article.source || 'Shutterstock.com';
 
-      console.log(feedItem)
+      //console.log(feedItem)
 
       return {
         'media:content': [

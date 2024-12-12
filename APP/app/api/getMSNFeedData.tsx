@@ -2,8 +2,9 @@ import { client } from "@/app/lib/sanityclient";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
 
 const today = new Date().toISOString();
-export async function getMSNFeedData() {
-  const query = `*[_type == "msnScrollFeed"] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
+export async function getMSNFeedData(feed: string | undefined) {
+  //console.log(feed)
+  const query = `*[_type == "msnScrollFeed" && slug.current == "${feed}"] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
       _id,
       _createdAt,
       _updatedAt,
