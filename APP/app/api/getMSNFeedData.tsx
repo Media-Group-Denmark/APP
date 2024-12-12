@@ -1,5 +1,5 @@
 import { client } from "@/app/lib/sanityclient";
-import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
+import { MSNFeedModel } from "../(home)/models/msnFeedModel";
 
 const today = new Date().toISOString();
 export async function getMSNFeedData(feed: string | undefined) {
@@ -18,7 +18,7 @@ export async function getMSNFeedData(feed: string | undefined) {
     }`;
 
   try {
-    const data = await client.fetch<ArticleModel[]>(query);
+    const data = await client.fetch<MSNFeedModel[]>(query);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);
