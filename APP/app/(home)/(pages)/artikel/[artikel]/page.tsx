@@ -35,20 +35,22 @@ import { generateArticleMetadata } from "../meta/generateArticleMetadata";
 import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
 import articleSchema from "../meta/articleSchema";
+import CustomCodeTextBlock from "../components/ArticleInTextBlocks/CustomCodeTextBlock";
 export const revalidate = 6000;
-
-
 
 async function fetchArticleData(slug: string) {
   const articleData: singleArticle = await getArticleSingleData(slug);
   return articleData;
 }
 
-
 /* -------------------------------------------------------------------------- */
 /*                                  METADATA                                  */
 /* -------------------------------------------------------------------------- */
-export async function generateMetadata({ params }: { params: { artikel: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { artikel: string };
+}) {
   const article = await fetchArticleData(params.artikel);
   const metadata: Metadata = await generateArticleMetadata(article);
   return metadata;
@@ -65,21 +67,24 @@ export default async function artikel({
   const mainArticle = await fetchArticleData(params.artikel);
 
   const jsonLd = articleSchema({ mainArticle, params: params.artikel });
-  
+
   const isClient = typeof window !== "undefined";
-  
+
   const DynamicReadMore = dynamic(
     () =>
       new Promise((resolve) => {
         setTimeout(() => {
-          resolve(import("../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"));
-        }, 1000); 
+          resolve(
+            import(
+              "../components/ArticleInTextBlocks/ReadMoreArticleBlocks/ReadMoreAutomaticArticlesBlock"
+            )
+          );
+        }, 1000);
       }).then((mod) => mod.default),
     {
       loading: () => <ReadMoreArticlesSkeleton />,
     }
   );
- 
 
   /* -------------------------------------------------------------------------- */
   /*                             LOAD COMPONENTS                                */
@@ -92,6 +97,7 @@ export default async function artikel({
       faceBook: FacebookTextBlock,
       instagram: InstagramTextBlock,
       iFrame: IframeTextBlock,
+      customCode: CustomCodeTextBlock,
       readMore: (props: any) => (
         <ReadMoreArticlesBlock mainArticle={mainArticle} />
       ),
@@ -171,60 +177,58 @@ export default async function artikel({
 
                     <aside className="relative min-h-[10em] md:min-h-[25em]">
                       <LoadShowHeroes />
-<figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
-  <picture>
-    <source
-      srcSet={`${urlFor(mainArticle.image)
-        .width(800)
-        .height(450)
-        .format('webp')
-        .quality(50)
-        .url()} 800w,
+                      <figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
+                        <picture>
+                          <source
+                            srcSet={`${urlFor(mainArticle.image)
+                              .width(800)
+                              .height(450)
+                              .format("webp")
+                              .quality(50)
+                              .url()} 800w,
         ${urlFor(mainArticle.image)
-        .width(480)
-        .height(270)
-        .format('webp')
-        .quality(90)
-        .url()} 480w`}
-      sizes="(max-width: 800px) 100vw, 800px"
-      type="image/webp"
-    />
-    <source
-      srcSet={`${urlFor(mainArticle.image)
-        .width(800)
-        .height(450)
-        .format('webp')
-        .quality(60)
-        .url()} 800w,
+          .width(480)
+          .height(270)
+          .format("webp")
+          .quality(90)
+          .url()} 480w`}
+                            sizes="(max-width: 800px) 100vw, 800px"
+                            type="image/webp"
+                          />
+                          <source
+                            srcSet={`${urlFor(mainArticle.image)
+                              .width(800)
+                              .height(450)
+                              .format("webp")
+                              .quality(60)
+                              .url()} 800w,
         ${urlFor(mainArticle.image)
-        .width(480)
-        .height(270)
-        .format('webp')
-        .quality(90)
-        .url()} 480w`}
-      sizes="(max-width: 800px) 100vw, 800px"
-      type="image/jpeg"
-    />
-    <img
-      src={urlFor(mainArticle.image)
-        .width(800)
-        .height(450)
-        .format("webp")
-        .quality(90)
-        .url()}
-      sizes="(max-width: 800px) 100vw, 800px"
-      width="800"
-      height="450"
-      alt={`Billede af ${mainArticle.source}`}
-      className="w-full h-auto rounded-t-lg object-cover"
-    />
-  </picture>
-  <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
-    Foto: {mainArticle?.source || 'Shutterstock.com'}
-  </figcaption>
-</figure>
-
-
+          .width(480)
+          .height(270)
+          .format("webp")
+          .quality(90)
+          .url()} 480w`}
+                            sizes="(max-width: 800px) 100vw, 800px"
+                            type="image/jpeg"
+                          />
+                          <img
+                            src={urlFor(mainArticle.image)
+                              .width(800)
+                              .height(450)
+                              .format("webp")
+                              .quality(90)
+                              .url()}
+                            sizes="(max-width: 800px) 100vw, 800px"
+                            width="800"
+                            height="450"
+                            alt={`Billede af ${mainArticle.source}`}
+                            className="w-full h-auto rounded-t-lg object-cover"
+                          />
+                        </picture>
+                        <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
+                          Foto: {mainArticle?.source || "Shutterstock.com"}
+                        </figcaption>
+                      </figure>
                     </aside>
 
                     <h2 className="text-md lg:text-2xl font-semibold my-2 mb-4 lg:my-4 px-3">
@@ -249,22 +253,20 @@ export default async function artikel({
                     />
                   </section>
                   <div className="my-2 px-3 mt-12">
-                      <span className="text-xs lg:text-sm">
-                        Artiklens Tags:{" "}
-                      </span>
-                      {mainArticle.tag?.map((tag, index) => (
-                        <React.Fragment key={index}>
-                          {index > 0 ? " " : ""}{" "}
-                          <ArticleLink
-                            href={`/tag/${mainArticle.tagSlug[index]}`}
-                          >
-                            <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
-                              {tag}
-                            </button>
-                          </ArticleLink>
-                        </React.Fragment>
-                      ))}
-                    </div>
+                    <span className="text-xs lg:text-sm">Artiklens Tags: </span>
+                    {mainArticle.tag?.map((tag, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 ? " " : ""}{" "}
+                        <ArticleLink
+                          href={`/tag/${mainArticle.tagSlug[index]}`}
+                        >
+                          <button className="text-xs lg:text-sm text-fade_color_light dark:text-fade_color_dark relative rounded-full bg-gray-100 px-3 py-1.5 font-medium hover:bg-gray-100">
+                            {tag}
+                          </button>
+                        </ArticleLink>
+                      </React.Fragment>
+                    ))}
+                  </div>
                   <section>
                     <SocialMediaShareButtons
                       views={`${mainArticle.views}`}
@@ -275,7 +277,9 @@ export default async function artikel({
                       articleUrl={`${theme.site_url}/artikel/${mainArticle.articleSlug}`}
                     />
                   </section>
-                  <div className="disclaimer">{mainArticle.disclaimer && <Disclaimer />}</div>
+                  <div className="disclaimer">
+                    {mainArticle.disclaimer && <Disclaimer />}
+                  </div>
                 </article>
               </div>
             </div>
