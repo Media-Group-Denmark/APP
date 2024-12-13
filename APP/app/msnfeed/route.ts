@@ -36,7 +36,7 @@ export async function GET() {
     feed_url: `${theme.site_url}/msnfeed`,
     site_url: `${theme.site_url}/msnfeed`,
     description: allData[0].description,
-    lastBuildDate: allData[0]._createdAt,
+    /* lastBuildDate: allData[0]._createdAt, */
     /* image_url: theme.logo_public_url, */
     custom_namespaces: {
       atom: 'http://www.w3.org/2005/Atom',
