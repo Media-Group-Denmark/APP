@@ -18,26 +18,19 @@ function escapeXML(str: string) {
             .replace(/'/g, '&apos;');
 }
 
-/* export async function generateMetadata({
-  params,
-}: {
-  params: { artikel: string };
-}) { */
-
 
 export async function GET() {
   const pubDate = getDanishPubDate();
   
   const allData = await getMSNFeedData();
-
+  
   //General
   const feed = new RSS({
     title: `Galleri Feed ${theme.site_name}`,
     feed_url: `${theme.site_url}/msnfeed`,
     site_url: `${theme.site_url}/msnfeed`,
-    description: allData[0].description,
-    /* lastBuildDate: allData[0]._createdAt, */
-    /* image_url: theme.logo_public_url, */
+    description: escapeXML(allData[0].description) || '',
+    lastBuildDate: allData[0]._createdAt,
     custom_namespaces: {
       atom: 'http://www.w3.org/2005/Atom',
       media: 'http://search.yahoo.com/mrss/',
@@ -54,11 +47,9 @@ export async function GET() {
       const imageUrl = urlFor(article.image).url();
       const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
       const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
-      const desc = article.msnDescription || '';
-      const title = escapeXML(article.title);
+      const desc = escapeXML(article.msnDescription) || '';
+      const title = escapeXML(article.title) || '';
       const source = article.source || 'Shutterstock.com';
-
-      //console.log(feedItem)
 
       return {
         'media:content': [
@@ -72,8 +63,8 @@ export async function GET() {
           },
           { 'media:title': title },
           { 'media:credit': escapeXML(source) },
-          { 'media:text': desc },
-          { 'media:description': desc }
+          { 'media:text': escapeXML(desc) },
+          { 'media:description': escapeXML(desc) }
         ]
       };
     });
