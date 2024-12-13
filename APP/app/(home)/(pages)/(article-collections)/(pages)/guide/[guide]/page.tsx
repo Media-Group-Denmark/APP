@@ -13,8 +13,6 @@ import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 export default async function guide({ params }: { params: { guide: string } }) {
   const guideData = await getGuideData(params.guide);
 
-  console.log(guideData[0].articles);
-
   return (
     <section>
       {guideData.map((guide) => (
