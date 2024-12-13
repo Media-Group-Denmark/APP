@@ -45,7 +45,6 @@ export default async function tag({ params }: { params: { tag: string } }) {
   const jsonLd = tagSchema({data, params: params.tag})
 
 
-  console.log(data[0].tagSlug)
   return (
     <section>
       <script

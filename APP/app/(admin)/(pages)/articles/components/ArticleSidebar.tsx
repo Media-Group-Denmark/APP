@@ -40,7 +40,6 @@ export default function ArticleSidebar({articles} : {articles: ArticleModel[]}) 
 
   function changeArticleParam(slug: ArticleModel['articleSlug']) {
     setArticleSearchParam(slug)
-    console.log(articleSearchParam, 'articleSearchParam', pathname, 'pathname')
     router.push(pathname + '?' + `article=${slug}` )
   }
 

@@ -18,12 +18,12 @@ async function fetchRelatedArticles(articleIds: string[]): Promise<ArticleModel[
     }
   `;
   try {
-    console.log("Fetching related articles:", articleIds);
+    
     if (!articleIds || articleIds.length === 0) {
       return [];
     }
     const data = await client.fetch<ArticleModel[]>(query, { articleIds });
-    console.log("Related articles fetched:", data);
+    
     return data;
   } catch (error) {
     console.error("Error fetching related articles:", error);

@@ -30,7 +30,6 @@ export default function ArticleView({articles} : {articles: ArticleModel[]}) {
   const searchParams = useSearchParams();
   const articleSlug = searchParams.get('article');
 
-  console.log(articleSlug, 'article Paraaaaam')
 
   return (
     <section className='overflow-y-scroll h-screen'>
@@ -44,7 +43,6 @@ export default function ArticleView({articles} : {articles: ArticleModel[]}) {
       articles?.map((article) => ( 
         articleSlug === article.articleSlug && (
           <>
-          { console.log(article, 'article') }
             <aside >
         <Label htmlFor="email">Title</Label>
         <Input type="email" id="email" placeholder="Email" value={article?.title} /> 

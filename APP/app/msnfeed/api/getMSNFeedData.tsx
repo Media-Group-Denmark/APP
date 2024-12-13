@@ -19,7 +19,6 @@ export async function getMSNFeedData() {
     
     try {
       const data = await client.fetch<MSNFeedModel[]>(query);
-      console.log(data)
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);

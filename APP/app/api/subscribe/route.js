@@ -11,7 +11,6 @@ mailchimp.setConfig({
 
 export async function POST(request) {
   const { email } = await request.json();
-  console.log(email, 'mail registered')
   try {
     await mailchimp.lists.addListMember(audienceId, {
       email_address: email,

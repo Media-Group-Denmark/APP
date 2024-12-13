@@ -9,7 +9,6 @@ export default function MailChimpForm() {
   const handleSubscribe = async (e) => {
     e.preventDefault(); 
 
-    console.log(email, 'email sendt')
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',

@@ -21,7 +21,6 @@ export async function middleware(req: NextRequest) {
 
   if (data?.newSlug && data.newSlug !== slug) {
     // Redirect to the new slug
-    console.log("Red needed");
     const redirectUrl = new URL(
       `${theme.site_url}/artikel/${data.newSlug}`,
       req.url

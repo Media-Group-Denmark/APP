@@ -151,7 +151,6 @@ export async function GET() {
     const xml = feed.xml({ indent: true });
     const xmlSize = new Blob([xml]).size;
 
-    console.log(`RSS feed size: ${xmlSize} bytes`);
 
     return new Response(xml, {
         headers: {
