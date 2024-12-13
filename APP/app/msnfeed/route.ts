@@ -1,7 +1,7 @@
 import RSS from 'rss';
 import theme from '../lib/theme.json';
 import { urlFor } from '../lib/sanityclient';
-import { getMSNFeedData } from '../api/getMSNFeedData';
+import { getMSNFeedData } from './api/getMSNFeedData';
 
 function getDanishPubDate() {
   const date = new Date();

@@ -1,5 +1,5 @@
 import { client } from "@/app/lib/sanityclient";
-import { MSNFeedModel } from "../(home)/models/MSNFeedModel";
+import { MSNFeedModel } from "../models/MSNFeedModel";
 
 const today = new Date().toISOString();
 export async function getMSNFeedData() {
