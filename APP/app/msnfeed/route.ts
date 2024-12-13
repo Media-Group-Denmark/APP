@@ -29,7 +29,7 @@ export async function GET() {
     title: `Galleri Feed ${theme.site_name}`,
     feed_url: `${theme.site_url}/msnfeed`,
     site_url: `${theme.site_url}/msnfeed`,
-    description: escapeXML(allData[0].description) || '',
+    description: 'Galleri feed med slideshows',
     lastBuildDate: allData[0]._createdAt,
     custom_namespaces: {
       atom: 'http://www.w3.org/2005/Atom',
@@ -39,6 +39,7 @@ export async function GET() {
       dcterms: 'http://purl.org/dc/terms/'
     }
   });
+  //console.log(feed)
 
 //item
   allData.forEach((feedItem: any) => {
@@ -72,7 +73,7 @@ export async function GET() {
     // Opretter et item for hvert feedItem med alle dets media:content
     feed.item({
       title: escapeXML(feedItem.title),
-      description: '<![CDATA[]]>', 
+      description: escapeXML(allData[0].description) || '', 
       url: `${theme.site_url}/guide/${feedItem.feedSlug}`,
       guid: feedItem._id,
       date: feedItem.publishedAt || feedItem._updatedAt,
