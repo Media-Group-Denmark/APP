@@ -153,3 +153,4 @@ export default async function guide({ params }: { params: { guide: string } }) {
     </section>
   );
 }
+export const runtime = "edge";
