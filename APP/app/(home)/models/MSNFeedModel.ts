@@ -9,6 +9,7 @@ export interface MSNFeedModel {
     feedSlug: string | '';
     image: {};
     source: string;
+    JournalistName: string;
     category: string | '';
     previewMode: boolean;
 }
