@@ -150,7 +150,7 @@ export default async function Home() {
               startIndex={0} 
               endIndex={50}
               articleAmount={6} 
-              nameTag={{ name: "Spare-Hacks", tag: true }}
+              nameTag={{ name: "Nyheder", tag: true }}
               {...articleSixGrid}
               />
             <aside

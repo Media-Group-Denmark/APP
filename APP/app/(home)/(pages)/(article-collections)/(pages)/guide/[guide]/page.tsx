@@ -10,6 +10,7 @@ import "@/app/(home)/(pages)/artikel/stylesheets/articleText.css";
 import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 import LoadStrossle from "@/app/(home)/components/AdScripts/LoadStrossle";
 import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
+import PageViewTracker from "@/app/(home)/(pages)/artikel/components/ArticleTools/PageViewTracker";
 
 export default async function guide({ params }: { params: { guide: string } }) {
   const guideData = await getGuideData(params.guide);
@@ -203,6 +204,7 @@ export default async function guide({ params }: { params: { guide: string } }) {
                     theme.site_ad_name
                   }/square_article_${index === 3 ? 3 : index + 2}`}
                 ></aside>
+              {article && <PageViewTracker articleId={article._id} />}
               </section>
           ))}
             </article>
