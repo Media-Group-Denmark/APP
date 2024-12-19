@@ -6,7 +6,7 @@ const today = new Date().toISOString();
 export async function getFindArticleData(slug: string | undefined) {
     const query = `
     {
-      "articles": *[_type == "article" && publishedAt <= "${today}" && 
+      "articles": *[_type in ["article", "msnScrollFeed"] && publishedAt <= "${today}" && 
       previewMode == false ] | order(coalesce(publishedAt, _createdAt) desc) [0...150] {
         _id,
         publishedAt,
@@ -28,7 +28,7 @@ export async function getFindArticleData(slug: string | undefined) {
         previewMode,
         reading,
       },
-       "allArticles": *[_type == "article" && publishedAt <= "${today}" && 
+       "allArticles": *[_type in ["article", "msnScrollFeed"] && publishedAt <= "${today}" && 
       previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) {
         _id,
         publishedAt,

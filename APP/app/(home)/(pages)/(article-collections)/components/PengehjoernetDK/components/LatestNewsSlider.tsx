@@ -61,7 +61,7 @@ const LatestNewsSlider: React.FC<{
             <li className="min-w-[240px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
               <ArticleLink
-                href={`/artikel/${
+                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                   post.republishArticle && post.newSlug
                     ? post.newSlug
                     : post.articleSlug

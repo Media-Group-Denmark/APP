@@ -41,7 +41,11 @@ const TrendingArticlesList_2: React.FC<{
                   <figure className="hidden md:block w-full h-[5em] md:h-[7em] rounded-t-xl bg-gray-300 overflow-clip">
                     <ArticleLink
                       aria-label="Læs mere om artiklen"
-                      href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}
+                      href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
+                        post.republishArticle && post.newSlug
+                          ? post.newSlug
+                          : post.articleSlug
+                      }`}
                     >
                       <img
                       width={400}

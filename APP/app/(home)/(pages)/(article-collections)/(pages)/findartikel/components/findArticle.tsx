@@ -19,7 +19,7 @@ const FindArticle: React.FC<{
           <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
             <ArticleLink
               aria-label="Læs mere om artiklen"
-              href={`/artikel/${article.articleSlug}`}
+              href={article._type === 'msnScrollFeed' ? `/guide/${article.articleSlug}` : `/artikel/${article.articleSlug}`}
             >
               <img
                 width={400}
