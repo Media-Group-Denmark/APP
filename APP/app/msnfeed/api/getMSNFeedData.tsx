@@ -1,7 +1,6 @@
 import { client } from "@/app/lib/sanityclient";
 import { MSNFeedModel } from "../models/MSNFeedModel";
 
-const today = new Date().toISOString();
 export async function getMSNFeedData() {
   const query = `*[_type == "msnScrollFeed"] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
     _id,
@@ -11,14 +10,30 @@ export async function getMSNFeedData() {
     _type,
     title,
     description,
-    category,
+    "image": metaImage.asset,
+    "source": metaImage.asset->description,
+    "category": category->name,
+    "categorySlug": category->slug.current,
     "feedSlug": slug.current,
     "JournalistName": journalist->name,
-    articles[]-> { title, "image": metaImage.asset, "imageTags": metaImage.asset->{url, extension, size, metadata {dimensions}}, "source": coalesce(metaImage.asset->description, 'Shutterstock.com'), msnFeedDescription, msnDescription, previewMode }
-    }`;
-    
-    try {
-      const data = await client.fetch<MSNFeedModel[]>(query);
+    articles[] {
+      title,
+      description,
+      "source": coalesce(metaImage.asset->description, 'Shutterstock.com'),
+      subImage {
+        asset->{
+          url,
+          extension,
+          size,
+          metadata {dimensions}
+        }
+      },
+      imageSrc
+    }
+  }`;
+
+  try {
+    const data = await client.fetch<MSNFeedModel[]>(query);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);

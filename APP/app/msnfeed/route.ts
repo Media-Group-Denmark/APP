@@ -1,6 +1,7 @@
+// rssGenerator.js
+
 import RSS from 'rss';
 import theme from '../lib/theme.json';
-import { urlFor } from '../lib/sanityclient';
 import { getMSNFeedData } from './api/getMSNFeedData';
 
 function getDanishPubDate() {
@@ -18,19 +19,18 @@ function escapeXML(str: string) {
             .replace(/'/g, '&apos;');
 }
 
-
 export async function GET() {
   const pubDate = getDanishPubDate();
   
   const allData = await getMSNFeedData();
   
-  //General
+  // General
   const feed = new RSS({
     title: `Galleri Feed ${theme.site_name}`,
     feed_url: `${theme.site_url}/msnfeed`,
-    site_url: `${theme.site_url}/msnfeed`,
+    site_url: `${theme.site_url}`,
     description: 'Galleri feed med slideshows',
-    /* lastBuildDate: allData[0]._createdAt, */
+    lastBuildDate: allData[0]._createdAt,
     custom_namespaces: {
       atom: 'http://www.w3.org/2005/Atom',
       media: 'http://search.yahoo.com/mrss/',
@@ -39,16 +39,15 @@ export async function GET() {
       dcterms: 'http://purl.org/dc/terms/'
     }
   });
-  //console.log(feed)
 
-//item
+  // Item
   allData.forEach((feedItem: any) => {
     // Opretter <media:content>-elementer for hver artikel
-      const mediaContents = (feedItem.articles || []).map((article: any) => {
-      const imageUrl = urlFor(article.image).url();
-      const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
-      const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
-      const desc = escapeXML(article.msnDescription) || '';
+    const mediaContents = (feedItem.articles || []).map((article: any) => {
+      const imageUrl = article.subImage ? article.subImage.asset.url : article.imageSrc;
+      const imageSize = article.subImage ? article.subImage.asset.size.toString() : '0';
+      const imageExtension = article.subImage ? article.subImage.asset.extension : 'jpeg';
+      const desc = escapeXML(article.description) || '';
       const title = escapeXML(article.title) || '';
       const source = article.source || 'Shutterstock.com';
 
@@ -73,7 +72,7 @@ export async function GET() {
     // Opretter et item for hvert feedItem med alle dets media:content
     feed.item({
       title: escapeXML(feedItem.title),
-      description: escapeXML(allData[0].description) || '', 
+      description: escapeXML(feedItem.description) || '', 
       url: `${theme.site_url}/guide/${feedItem.feedSlug}`,
       guid: feedItem._id,
       date: feedItem.publishedAt || feedItem._updatedAt,

@@ -5,6 +5,12 @@ export interface GuideModel {
     _type: string;
     title: string;
     teaser: string;
+    metaImage: {
+        asset: {
+            _ref: string;
+            _type: string;
+        };
+    },
     description: string;
     feedSlug: string | '';
     image: {
@@ -27,8 +33,8 @@ export interface GuideModel {
     articles: Array<{
         title: string;
         source: string;
-        msnDescription: string;
-        image: {
+        description: string;
+        subImage: {
             asset: {
                 _ref: string;
                 _type: string;

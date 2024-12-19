@@ -53,7 +53,11 @@ const TrendingArticlesListTwo: React.FC<{
                     <div key={post._id} className="flex items-center">
                      
                       <figure className="block max-w-20 mr-6 rounded-xl overflow-clip">
-                        <ArticleLink href={`/artikel/${post.republishArticle && post.newSlug ? post.newSlug : post.articleSlug}`}>
+                        <ArticleLink href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
+                    post.republishArticle && post.newSlug
+                      ? post.newSlug
+                      : post.articleSlug
+                  }`}>
                           <img
                           width={300}
                           height={300}

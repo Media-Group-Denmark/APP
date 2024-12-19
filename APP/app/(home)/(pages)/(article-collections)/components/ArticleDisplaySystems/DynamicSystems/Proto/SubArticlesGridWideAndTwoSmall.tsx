@@ -63,7 +63,7 @@ const SubArticlesGridWideAndTwoSmall: React.FC<{
                   <figure className="block w-full h-[7em] md:h-[20em] bg-gray-300  rounded-t-2xl rounded-b-lg  overflow-clip">
                     <ArticleLink
                       aria-label="Læs mere om artiklen"
-                      href={`/artikel/${
+                      href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                         post.republishArticle && post.newSlug
                           ? post.newSlug
                           : post.articleSlug

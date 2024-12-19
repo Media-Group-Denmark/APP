@@ -139,7 +139,7 @@ const ArticleBlock_1_Square: React.FC<{
             >
               <ArticleLink
                 aria-label="Læs mere om artiklen"
-                href={`/artikel/${
+                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                   post.republishArticle && post.newSlug
                     ? post.newSlug
                     : post.articleSlug

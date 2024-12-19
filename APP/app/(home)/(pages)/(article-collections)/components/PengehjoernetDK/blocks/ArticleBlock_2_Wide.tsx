@@ -96,7 +96,7 @@ const ArticleBlock_2_Wide: React.FC<{
               <figure className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-44 lg:shrink-0">
                 <ArticleLink
                   aria-label="Læs mere om artiklen"
-                  href={`/artikel/${
+                  href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                     post.republishArticle && post.newSlug
                       ? post.newSlug
                       : post.articleSlug

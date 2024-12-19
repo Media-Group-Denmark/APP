@@ -43,7 +43,7 @@ const ArticleHeroTwo: React.FC<{
           <figure className="block w-full max-h-[12em] md:max-h-none md:h-[20em] rounded-t-2xl rounded-b-lg overflow-clip">
             <ArticleLink
               aria-label="Læs mere om artiklen"
-              href={`/artikel/${
+              href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                 post.republishArticle && post.newSlug
                   ? post.newSlug
                   : post.articleSlug

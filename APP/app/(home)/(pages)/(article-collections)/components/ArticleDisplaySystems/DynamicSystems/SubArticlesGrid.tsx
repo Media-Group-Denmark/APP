@@ -39,7 +39,7 @@ const SubArticlesSixGrid: React.FC<{
 
   return (
     <section className="pb-12">
-      <ArticleLink href={`${theme.site_url}/${`hej`}/${category}`}>
+      <ArticleLink href={`${theme.site_url}/${category}`}>
         <h1 className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
           <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
             {name
@@ -58,7 +58,7 @@ const SubArticlesSixGrid: React.FC<{
               <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                 <ArticleLink
                   aria-label="Læs mere om artiklen"
-                  href={`/artikel/${
+                  href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
                     post.republishArticle && post.newSlug
                       ? post.newSlug
                       : post.articleSlug

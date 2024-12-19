@@ -8,7 +8,7 @@ export async function getFreshArticleData(
   journalistDefined: string | undefined = undefined
 ) {
     const today = new Date().toISOString();
-    let filters = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false]`;
+    let filters = `*[_type in ["article", "msnScrollFeed"]   && publishedAt <= "${today}" && previewMode == false]`;
   
     if (categoryDefined) {
       filters += ` && category->slug.current == "${categoryDefined}"`;
