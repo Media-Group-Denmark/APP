@@ -1,10 +1,10 @@
 import { client } from "@/app/lib/sanityclient";
 import { ArticleModel } from "../(home)/(pages)/(article-collections)/models/article";
-
+export const revalidate = 600;
 const today = new Date().toISOString();
 export async function getRssFeedData() {
     
-    const query = `*[_type == "article" && publishedAt <= "${today}" && previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
+    const query = `*[_type in ["article", "msnScrollFeed"] && publishedAt <= "${today}" && previewMode == false] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
       _id,
       _createdAt,
       _updatedAt,
@@ -12,6 +12,7 @@ export async function getRssFeedData() {
       _type,
       title,
       teaser,
+      description,
       republishArticle,
       "articleSlug": slug.current,
       "newSlug": newSlug.current,

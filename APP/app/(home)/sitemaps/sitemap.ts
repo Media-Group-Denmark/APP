@@ -7,9 +7,10 @@ export const revalidate = 600;
 export async function getArticleData(): Promise<ArticleModel[]> {
   const today = new Date().toISOString();
   const query = `
-              *[_type == "article" && publishedAt <= "${today}" && previewMode == false]
+              *[_type in ["article", "msnScrollFeed"] && publishedAt <= "${today}" && previewMode == false]
               | order(coalesce(publishedAt, _createdAt) desc) {
                 _id,
+                _type,
                 title,
                 _createdAt,
                 _updatedAt,
@@ -39,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         slug = article.newSlug;
       }
       return {
-        url: `${theme.site_url}/artikel/${slug}`,
+        url: article._type === 'msnScrollFeed' ? `${theme.site_url}/guide/${article.articleSlug}` : `${theme.site_url}/artikel/${article.articleSlug}`,
         lastModified: new Date(article._updatedAt),
         priority: 1,
       }

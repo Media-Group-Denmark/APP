@@ -5,6 +5,7 @@ import { PortableText } from "next-sanity";
 import { toHTML } from '@portabletext/to-html';
 import { getRssFeedData } from '../api/getRssFeedData';
 import { singleArticle } from '../(home)/(pages)/artikel/models/singleArticle';
+export const revalidate = 600;
 
 const portableTextToHtml = (portableText) => {
     const serializers = {
@@ -86,26 +87,29 @@ export async function GET() {
     const allData: singleArticle[] = await getRssFeedData();
     console.log(allData);
     allData.forEach((article) => {
-        const filteredOverview = article.overview.filter(block => 
-            block._type !== 'readMoreAutomatic' &&
-            block._type !== 'readMore' &&
-            block._type !== 'imageWithMetadata' &&
-            block._type !== 'youTube' &&
-            block._type !== 'tikTok' &&
-            block._type !== 'faceBook' &&
-            block._type !== 'instagram'
-        );
+        let filteredOverview;
+        if(article.overview) {
+            filteredOverview = article.overview.filter(block => 
+                block._type !== 'readMoreAutomatic' &&
+                block._type !== 'readMore' &&
+                block._type !== 'imageWithMetadata' &&
+                block._type !== 'youTube' &&
+                block._type !== 'tikTok' &&
+                block._type !== 'faceBook' &&
+                block._type !== 'instagram'
+            );
+        }
     
         const imageUrl = urlFor(article.image).url();
         const imageSize = article.imageTags.size ? article.imageTags.size.toString() : '0';
         const imageExtension = article.imageTags.extension ? article.imageTags.extension : 'jpeg';
-        const articleDescription = portableTextToHtml(filteredOverview);
+        const articleDescription = portableTextToHtml(filteredOverview) || article.description;
         const articleCategory = article.category ? article.category : 'Ukategoriseret';
     
         feed.item({
             title: escapeXML(article.title),
             description: articleDescription,
-            url: `${theme.site_url}/artikel/${article.articleSlug}`,
+            url: article._type === 'msnScrollFeed' ? `${theme.site_url}/guide/${article.articleSlug}` : `${theme.site_url}/artikel/${article.articleSlug}`,
             guid: article._id,
             categories: [articleCategory],
             author: escapeXML(article.JournalistName),

@@ -31,6 +31,7 @@ export async function getGuideData(feed: string | undefined) {
     articles[] {
       title,
       description,
+      _key,
       subImage {
         asset->{
           url,
@@ -49,7 +50,7 @@ export async function getGuideData(feed: string | undefined) {
 
   try {
     const data = await client.fetch<GuideModel[]>(query, { feed });
-    console.log("Fetched Data:", data);
+    //console.log("Fetched Data:", data);
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);

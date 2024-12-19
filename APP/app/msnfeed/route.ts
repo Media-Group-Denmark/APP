@@ -3,6 +3,7 @@
 import RSS from 'rss';
 import theme from '../lib/theme.json';
 import { getMSNFeedData } from './api/getMSNFeedData';
+export const revalidate = 600;
 
 function getDanishPubDate() {
   const date = new Date();

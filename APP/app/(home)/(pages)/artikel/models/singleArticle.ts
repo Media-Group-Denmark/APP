@@ -11,7 +11,17 @@ export interface singleArticle {
     oldSlugs: string[];
     republishArticle: boolean;
     image: {};
-    source: string;
+    imageTags: {
+        extension: string;
+        size: string;
+        metadata: {
+            dimensions: {
+                height: string;
+                width: string;
+            }
+        };
+    },
+    source: string; 
     tag: string[];
     tagSlug: string[];
     category: string | '';
@@ -23,6 +33,7 @@ export interface singleArticle {
     facebookDescription: string;
     facebookImage: {};
     overview: [];
+    description: string;
     views: number | 0;
     disclaimer: boolean;
     dayInterval: number;

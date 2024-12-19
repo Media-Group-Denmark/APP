@@ -1,5 +1,6 @@
 import { client } from "@/app/lib/sanityclient";
 import { MSNFeedModel } from "../models/MSNFeedModel";
+export const revalidate = 600;
 
 export async function getMSNFeedData() {
   const query = `*[_type == "msnScrollFeed"] | order(coalesce(publishedAt, _createdAt) desc) [0...50] {
@@ -19,6 +20,7 @@ export async function getMSNFeedData() {
     articles[] {
       title,
       description,
+      _key,
       "source": coalesce(metaImage.asset->description, 'Shutterstock.com'),
       subImage {
         asset->{

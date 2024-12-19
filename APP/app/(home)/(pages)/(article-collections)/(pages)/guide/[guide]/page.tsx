@@ -108,6 +108,10 @@ export default async function guide({ params }: { params: { guide: string } }) {
                                   </figcaption>
                                 </figure>
                               </aside>
+                                
+                                <aside className="articleText leading-8 px-3 my-2 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
+                                <p>{guide.description}</p>
+                </aside>
                               <aside
                   className="mobile md:hidden mt-4"
                   data-ad-unit-id={`/${theme.site_ad_id}/${
@@ -120,9 +124,9 @@ export default async function guide({ params }: { params: { guide: string } }) {
                     theme.site_ad_name
                   }/square_article_1`}
                 ></aside>
-                              <article className="w-full rounded-lg mb-12">
+                              <article key={guide._id} className="w-full rounded-lg mb-12">
           {guide.articles.map((article, index) => (
-            <section>
+            <section key={article._key}>
               <meta name="article:section" content={guide.category} />
                 <header>
                   <h2 className="text-xl lg:text-4xl font-extrabold my-1 lg:my-2">
@@ -200,8 +204,6 @@ export default async function guide({ params }: { params: { guide: string } }) {
                   }/square_article_${index === 3 ? 3 : index + 2}`}
                 ></aside>
               </section>
-
-              
           ))}
             </article>
           <SocialMediaShareButtons

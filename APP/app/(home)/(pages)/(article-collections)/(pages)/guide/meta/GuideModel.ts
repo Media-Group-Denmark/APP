@@ -34,6 +34,7 @@ export interface GuideModel {
         title: string;
         source: string;
         description: string;
+        _key: string;
         subImage: {
             asset: {
                 _ref: string;
