@@ -204,18 +204,18 @@ export default async function guide({ params }: { params: { guide: string } }) {
                     theme.site_ad_name
                   }/square_article_${index === 3 ? 3 : index + 2}`}
                 ></aside>
-              {article && <PageViewTracker articleId={article._id} />}
               </section>
           ))}
+          {guide && <PageViewTracker articleId={guide._id} />}
             </article>
           <SocialMediaShareButtons
             views={Math.floor(Math.random() * 100 + 10).toString()}
             articleUrl={`${theme.site_url}/guide/${guide.feedSlug}`}
-          />
+            />
           <MobileSocialMediaShareButtons
             views={Math.floor(Math.random() * 100 + 10).toString()}
             articleUrl={`${theme.site_url}/guide/${guide.feedSlug}`}
-          />
+            />
         </div>
       ))}
       <LoadReadPeak />
