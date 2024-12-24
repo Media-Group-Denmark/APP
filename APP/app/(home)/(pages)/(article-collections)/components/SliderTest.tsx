@@ -7,6 +7,7 @@ import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { timeSinceText } from "../../artikel/components/ArticleTools/TimeSinceTag";
 import { urlFor } from "@/app/lib/sanityclient";
 import { filterAndSliceArticles } from "./FilterArticles";
+import Image from "next/image";
 
 export function EmblaCarousel({
   data,
@@ -18,7 +19,9 @@ export function EmblaCarousel({
   tag,
   journalist,
   dayInterval,
-  EmblaCarousel
+  EmblaCarousel,
+  fontStyles,
+  mediaSize
 }: {
   data: ArticleModel[];
   startIndex: number;
@@ -29,7 +32,21 @@ export function EmblaCarousel({
   tag?: string,
   journalist?: string,
   dayInterval?: number,
-  EmblaCarousel?: string
+  EmblaCarousel?: string,
+  fontStyles: string,
+  mediaSize?: {
+      Figure?: {
+        figureDesktopHeight?: string | undefined;
+        figureMobileHeight?: string | undefined;
+      };
+      Image?: {
+        imgWidth?: number;
+        imgHeight?: number;
+        quality?: number;
+        lazyLoading?: boolean;
+        responsive: string;
+      };
+    };
 }) {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
   const slicedData = filterAndSliceArticles(
@@ -41,7 +58,7 @@ export function EmblaCarousel({
     startIndex,
     endIndex
   );
-  console.log(EmblaCarousel, 'asdfasdfsda')
+
   return (
     <section>
       {nameTag?.tag && (
@@ -59,35 +76,42 @@ export function EmblaCarousel({
                 key={post._id}
                 className={`embla__slide ${EmblaCarousel} shadow-sm bg-second_color_light dark:bg-second_color_dark mr-4 rounded-lg relative`}
               >
-                <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
-                  <ArticleLink
-                    aria-label="Læs mere om artiklen"
-                    href={
-                      post._type === "msnScrollFeed"
-                        ? `/guide/${post.articleSlug}`
-                        : `/artikel/${
-                            post.republishArticle && post.newSlug
-                              ? post.newSlug
-                              : post.articleSlug
-                          }`
-                    }
-                  >
-                    <img
-                      width={400}
-                      height={300}
-                      src={urlFor(post.image)
-                        .format("webp")
-                        .width(400)
-                        .height(300)
-                        .fit("fill")
-                        .quality(85)
-                        .url()}
-                      loading="lazy"
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </ArticleLink>
-                </figure>
+                <figure
+                              className={`block rounded-t-lg overflow-clip 
+                              ${
+                                mediaSize?.Figure.figureDesktopHeight || "md:h-[10em]"
+                              } 
+                              ${
+                                mediaSize?.Figure.figureMobileHeight || "md:h-[8em]"
+                              }`}
+                            >
+                              <ArticleLink
+                                aria-label="Læs mere om artiklen"
+                                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
+                                  post.republishArticle && post.newSlug
+                                    ? post.newSlug
+                                    : post.articleSlug
+                                }`}
+                              >
+                                <Image
+                                  className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"
+                                  src={urlFor(post.image)
+                                    .format("webp")
+                                    .width(mediaSize?.Image.imgWidth || 400)
+                                    .height(mediaSize?.Image.imgHeight || 300)
+                                    .fit("fill")
+                                    .quality(mediaSize?.Image.quality || 85)
+                                    .url()}
+                                  alt={post.title}
+                                  width={mediaSize?.Image.imgWidth || 400}
+                                  height={mediaSize?.Image.imgHeight || 300}
+                                  sizes={mediaSize?.Image.responsive}
+                                  {...(mediaSize?.Image.lazyLoading === false
+                                    ? { priority: true }
+                                    : { loading: "lazy" })}
+                                />
+                              </ArticleLink>
+                            </figure>
                 <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
                   <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                     <ArticleLink href={`/kategori/${post.categorySlug}`}>
@@ -110,9 +134,14 @@ export function EmblaCarousel({
                           : post.articleSlug
                       }`}
                     >
-                      <h1 className="text-sm md:text-lg font-bold py-0 rounded-lg">
+                      <h1 className={
+                      fontStyles
+                        ? fontStyles
+                        : "text-md md:text-lg leading-4 md:leading-6 font-bold"
+                    }>
                         {post.title}
                       </h1>
+                      
                     </ArticleLink>
                   </header>
                 </div>
