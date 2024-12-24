@@ -58,7 +58,7 @@ const LatestNewsSlider: React.FC<{
           className="grid grid-cols-[12] overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
         >
           {slicedData.map((post: Article) => (
-            <li className="min-w-[240px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
+            <li className="min-w-[310px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
               <ArticleLink
                 href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
@@ -70,7 +70,7 @@ const LatestNewsSlider: React.FC<{
                 <time dateTime={post.publishedAt} className=" text-xs ">
                   {timeSinceText({ date: post.publishedAt })}
                 </time>
-                <h2 className="text-[0.9rem] mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
+                <h2 className="text-[0.85rem] md:text-[0.9rem] line-clamp-3 overflow-hidden text-ellipsis mt-2 font-semibold text-text_main_color_dark dark:text-text_main_color_light">
                   {post.title}
                 </h2>
               </ArticleLink>

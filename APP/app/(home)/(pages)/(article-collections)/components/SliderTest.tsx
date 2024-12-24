@@ -18,6 +18,7 @@ export function EmblaCarousel({
   tag,
   journalist,
   dayInterval,
+  EmblaCarousel
 }: {
   data: ArticleModel[];
   startIndex: number;
@@ -27,7 +28,8 @@ export function EmblaCarousel({
   category?: string;
   tag?: string,
   journalist?: string,
-  dayInterval?: number
+  dayInterval?: number,
+  EmblaCarousel?: string
 }) {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
   const slicedData = filterAndSliceArticles(
@@ -39,6 +41,7 @@ export function EmblaCarousel({
     startIndex,
     endIndex
   );
+  console.log(EmblaCarousel, 'asdfasdfsda')
   return (
     <section>
       {nameTag?.tag && (
@@ -54,7 +57,7 @@ export function EmblaCarousel({
             .map((post, index) => (
               <article
                 key={post._id}
-                className="embla__slide shadow-sm bg-second_color_light dark:bg-second_color_dark mr-4 rounded-lg relative"
+                className={`embla__slide ${EmblaCarousel} shadow-sm bg-second_color_light dark:bg-second_color_dark mr-4 rounded-lg relative`}
               >
                 <figure className="block w-full h-[7em] md:h-[10em] bg-gray-300 rounded-t-lg overflow-clip">
                   <ArticleLink
@@ -88,9 +91,9 @@ export function EmblaCarousel({
                 <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
                   <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                     <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                      <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
-                        {post.category}
-                      </p>
+                    <p className="relative text-sm w-fit rounded-full py-1 my-1 font-medium text-accent_color_light dark:text-accent_color_dark hover:text-black dark:hover:text-gray-300">
+                          {post.category}
+                        </p>
                     </ArticleLink>
                     <time
                       className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"

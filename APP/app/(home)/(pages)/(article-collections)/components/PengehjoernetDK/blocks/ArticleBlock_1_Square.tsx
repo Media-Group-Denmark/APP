@@ -175,7 +175,10 @@ const ArticleBlock_1_Square: React.FC<{
                   <aside className="flex gap-2">
                     {header && header.category && (
                       <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                        <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
+                        {/* <p className="relative text-sm w-fit rounded-full bg-gray-50 px-3 py-1 my-1 font-medium text-gray-600 hover:bg-gray-100">
+                          {post.category}
+                        </p> */}
+                        <p className="relative text-sm w-fit rounded-full py-1 my-1 font-medium text-accent_color_light dark:text-accent_color_dark hover:text-black dark:hover:text-gray-300">
                           {post.category}
                         </p>
                       </ArticleLink>

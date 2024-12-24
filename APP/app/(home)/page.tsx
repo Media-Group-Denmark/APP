@@ -3,11 +3,9 @@
 /* -------------------------------------------------------------------------- */
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
 import type { Metadata } from "next";
-import SubArticlesGrid from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/SubArticlesGrid";
-import ArticleHero from "./(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/ArticleHero";
 import theme from "@/app/lib/theme.json";
 import TrendingArticlesList_2 from "./(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList_2";
- import { getFreshArticleData } from "@/app/api/getFreshArticleData";
+import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { defaultMeta } from "./meta/defaultMeta";
 import ArticleBlock_1_Square from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 import ArticleBlock_2_Wide from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_2_Wide";
@@ -37,9 +35,10 @@ export default async function Home() {
         responsive: '(max-width: 768px) 600px, 900px',
       },
     },
+    EmblaCarousel: 'flex-[0_0_100%]',
     header: { visible: true, category: true },
-    footer: { visible: true, journalist: true, time: true },
-    fontStyles: 'text-2xl md:text-[2.3em] md:leading-10 font-extrabold rounded-lg',
+    footer: { visible: false, journalist: false, time: false },
+    fontStyles: 'text-xl md:text-[2.3em] md:leading-10 font-extrabold rounded-lg line-clamp-3 overflow-hidden text-ellipsis',
     contentHeight: 'min-h-[120px] md:min-h-[170px]',
   };
 
@@ -65,48 +64,19 @@ export default async function Home() {
       <LatestNewsSlider data={data} dayInterval={2} startIndex={0} endIndex={12} />
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
         <div className="containerr md:px-6 py-10 pt-0 m-auto">
-          
-          {/* Both */}
-          <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-            <div className=" lg:w-[700px]">
-
-              <ArticleBlock_1_Square
-                data={data}
-                startIndex={0} 
-                endIndex={1}
-                articleAmount={1} 
-                {...articleHero}
-                />
-
-              <aside className="hidden lg:inline-block">
-                <ArticleBlock_2_Wide data={data} startIndex={1} endIndex={3} />
-              </aside>
-            </div>
-            <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesList_2
-                data={data}
-                dayInterval={14}
-                views={0}
-                startIndex={0}
-                endIndex={50}
-                articleAmount={5}
-              />
-            </aside>
-          </section>
-
-
-          <aside
+          {/* Phone */}
+          <section className="grid gap-4 md:hidden">
+          <EmblaCarousel 
+            data={data} 
+            startIndex={0}
+            endIndex={30}
+            articleAmount={15} 
+            {...articleHero}
+            /> 
+            <aside
             className="mobile md:hidden"
             data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
           ></aside>
-          <aside
-            className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
-          ></aside>
-          
-
-          {/* Phone */}
-          <section className="grid gap-4 md:hidden">
           <EmblaCarousel 
             data={data} 
             startIndex={0}
@@ -165,8 +135,42 @@ export default async function Home() {
               <ArticleHero data={data} startIndex={6} endIndex={7} />
             </div> */}
           </section>
+
+
+
           {/* Desktop */}
           <section className="md:inline-block hidden">
+          <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
+            <div className=" lg:w-[700px]">
+
+              <ArticleBlock_1_Square
+                data={data}
+                startIndex={0} 
+                endIndex={1}
+                articleAmount={1} 
+                {...articleHero}
+                />
+
+              <aside className="hidden lg:inline-block">
+                <ArticleBlock_2_Wide data={data} startIndex={1} endIndex={3} />
+              </aside>
+            </div>
+            <aside className="hidden w-[280px] lg:inline-block">
+              <TrendingArticlesList_2
+                data={data}
+                dayInterval={14}
+                views={0}
+                startIndex={0}
+                endIndex={50}
+                articleAmount={5}
+              />
+            </aside>
+          </div>
+          <aside
+            className="desktop hidden md:block"
+            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
+          ></aside>
+
             <ArticleBlock_1_Square
               data={data}
               category={"nyheder"}
