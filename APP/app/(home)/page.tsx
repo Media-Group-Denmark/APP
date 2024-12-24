@@ -12,6 +12,7 @@ import { defaultMeta } from "./meta/defaultMeta";
 import ArticleBlock_1_Square from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 import ArticleBlock_2_Wide from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_2_Wide";
 import LatestNewsSlider from "./(pages)/(article-collections)/components/PengehjoernetDK/components/LatestNewsSlider";
+import { EmblaCarousel } from "./(pages)/(article-collections)/components/SliderTest";
 export const revalidate = 600;
 
 export const metadata: Metadata = defaultMeta;
@@ -38,8 +39,8 @@ export default async function Home() {
     },
     header: { visible: true, category: true },
     footer: { visible: true, journalist: true, time: true },
-    fontStyles: 'text-2xl md:text-[2.3em] leading-10 font-extrabold rounded-lg',
-    contentHeight: 'min-h-[170px]',
+    fontStyles: 'text-2xl md:text-[2.3em] md:leading-10 font-extrabold rounded-lg',
+    contentHeight: 'min-h-[120px] md:min-h-[170px]',
   };
 
   const articleSixGrid = {
@@ -93,6 +94,7 @@ export default async function Home() {
             </aside>
           </section>
 
+
           <aside
             className="mobile md:hidden"
             data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
@@ -101,9 +103,17 @@ export default async function Home() {
             className="desktop hidden md:block"
             data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
           ></aside>
+          
 
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
+          <EmblaCarousel 
+            data={data} 
+            startIndex={0}
+            nameTag={{ name: "Nyheder", tag: true }}
+            category={"nyheder"}
+            endIndex={30}
+            articleAmount={15} /> 
             <TrendingArticlesList_2
               data={data}
               dayInterval={14}
@@ -116,7 +126,14 @@ export default async function Home() {
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_2`}
             ></aside>
-            <SubArticlesGrid
+            <EmblaCarousel 
+            data={data} 
+            startIndex={0}
+            nameTag={{ name: "Nyheder", tag: true }}
+            category={"nyheder"}
+            endIndex={30}
+            articleAmount={15} /> 
+            {/* <SubArticlesGrid
               data={data}
               startIndex={1}
               endIndex={3}
@@ -124,24 +141,30 @@ export default async function Home() {
             />
             <div className="mt-6 block">
               <ArticleHero data={data} startIndex={3} endIndex={4} />
-            </div>
+            </div> */}
             <aside
               className="mobile md:hidden"
               data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_3`}
             ></aside>
-            <SubArticlesGrid
+           {/*  <SubArticlesGrid
               data={data}
               category={"nyheder"}
               name="Nyheder"
               startIndex={4}
               endIndex={6}
               articleAmount={2}
-            />
-            <div className="mt-4 block">
+            /> */}
+            <EmblaCarousel 
+            data={data} 
+            startIndex={0}
+            nameTag={{ name: "Nyheder", tag: true }}
+            category={"nyheder"}
+            endIndex={30}
+            articleAmount={15} /> 
+            {/* <div className="mt-4 block">
               <ArticleHero data={data} startIndex={6} endIndex={7} />
-            </div>
+            </div> */}
           </section>
-
           {/* Desktop */}
           <section className="md:inline-block hidden">
             <ArticleBlock_1_Square

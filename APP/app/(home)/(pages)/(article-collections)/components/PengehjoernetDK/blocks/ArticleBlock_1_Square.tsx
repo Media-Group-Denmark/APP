@@ -220,7 +220,7 @@ const ArticleBlock_1_Square: React.FC<{
                     className={
                       fontStyles
                         ? fontStyles
-                        : "text-md md:text-lg leading-5 md:leading-6 font-bold"
+                        : "text-md md:text-lg leading-4 md:leading-6 font-bold"
                     }
                   >
                     {post.title}

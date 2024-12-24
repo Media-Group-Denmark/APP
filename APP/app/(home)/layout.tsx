@@ -92,7 +92,7 @@ export default async function RootLayout({
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children} 
 
-
+        
         <DynamicArticles data={data} />
 
         
