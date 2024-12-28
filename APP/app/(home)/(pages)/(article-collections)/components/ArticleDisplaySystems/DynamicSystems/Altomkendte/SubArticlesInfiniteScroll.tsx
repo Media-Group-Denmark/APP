@@ -41,7 +41,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
         </span>
       </h1>
 
-      <div className="mx-auto py-4 grid gap-4">
+      <div className="mx-auto md:py-4 grid gap-4">
         {slicedData.map((post: Article, index: number) => {
           // Bestem om det er den første artikel i en sektion
           const isMainArticle = index % 4 === 0;
@@ -49,7 +49,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
             <>
               <article
                 key={post._id}
-                className={` grid gap-4 md:gap-8 mb-10 border-b-slate-100 dark:border-b-slate-600 border-b-[1px] pb-2 ${
+                className={` grid place-content-start gap-4 md:gap-8 md:mb-10 border-b-slate-100 dark:border-b-slate-600 border-b-[1px] pb-2 ${
                   isMainArticle ? "grid-cols-[auto]" : "grid-cols-[auto_auto]"
                 }`}
               >
@@ -60,11 +60,15 @@ export const SubArticlesInfiniteScroll: React.FC<{
                 >
                   <ArticleLink
                     aria-label="Læs mere om artiklen"
-                    href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
-                      post.republishArticle && post.newSlug
-                        ? post.newSlug
-                        : post.articleSlug
-                    }`}
+                    href={
+                      post._type === "msnScrollFeed"
+                        ? `/guide/${post.articleSlug}`
+                        : `/artikel/${
+                            post.republishArticle && post.newSlug
+                              ? post.newSlug
+                              : post.articleSlug
+                          }`
+                    }
                   >
                     <img
                       width={400}
@@ -80,8 +84,8 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       loading="lazy"
                       className={`block rounded-2xl inset-0 bg-gray-300 ${
                         isMainArticle
-                          ? "max-h-64 w-[30em]"
-                          : "max-h-44 w-32 lg:w-64"
+                          ? "max-h-48 md:max-h-64 w-[30em]"
+                          : "max-h-32 md:max-h-44 w-32 lg:w-64"
                       } object-cover`}
                     />
                   </ArticleLink>
@@ -103,7 +107,9 @@ export const SubArticlesInfiniteScroll: React.FC<{
                   </aside>
                   <header
                     className={`group max-w-xl ${
-                      isMainArticle ? "h-[12em]" : "h-[7em] lg:h-[12em]"
+                      isMainArticle
+                        ? "min-h-[6em] md:min-h-[12em]"
+                        : "min-h-[5em] lg:min-h-[12em]"
                     } overflow-clip`}
                   >
                     <h1
@@ -129,7 +135,7 @@ export const SubArticlesInfiniteScroll: React.FC<{
                         isMainArticle
                           ? "text-sm md:text-md"
                           : "text-xs md:text-sm"
-                      } leading-6 text-text_second_color_dark dark:text-text_second_color_light`}
+                      } leading-6 text-text_second_color_dark dark:text-text_second_color_light hidden md:block`}
                     >
                       {post.teaser}
                     </h2>
@@ -139,7 +145,9 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
                     data-ad-unit-id={
-                      isMainArticle ? `/${theme.site_ad_id}/PengehjoernetDK/Square_1` : ""
+                      isMainArticle
+                        ? `/${theme.site_ad_id}/PengehjoernetDK/Square_1`
+                        : ""
                     }
                   ></aside>
                   <aside
