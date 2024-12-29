@@ -36,6 +36,7 @@ import LoadReadPeak from "@/app/(home)/components/AdScripts/LoadReadPeak";
 import LoadShowHeroes from "@/app/(home)/components/AdScripts/LoadShowHeroes";
 import articleSchema from "../meta/articleSchema";
 import CustomCodeTextBlock from "../components/ArticleInTextBlocks/CustomCodeTextBlock";
+import AdContainer from "@/app/(home)/components/AdContainer/AdContainer";
 export const revalidate = 6000;
 
 async function fetchArticleData(slug: string) {
@@ -112,7 +113,7 @@ export default async function artikel({
   };
 
   return (
-    <section className="bg-[#fff] dark:bg-main_color_dark border-b-2 border-gray-100 md:pt-4 ">
+    <section className="bg-[#fff] dark:bg-main_color_dark border-b-2 border-gray-100 pt-4 ">
       <script
         async
         type="application/ld+json"
@@ -236,15 +237,9 @@ export default async function artikel({
                     </h2>
                   </section>
 
-                  <aside
-                    className="mobile md:hidden"
-                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/mobile_square_article_1`}
-                  ></aside>
+                  <AdContainer mobile={true} name={"mobile_square_article_1"} />
 
-                  <aside
-                    className="desktop hidden md:grid"
-                    data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/square_article_1`}
-                  ></aside>
+                  <AdContainer desktop={true} name={'square_article_1'} />
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                     <PortableText
