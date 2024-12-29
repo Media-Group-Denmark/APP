@@ -3,7 +3,6 @@
 /* -------------------------------------------------------------------------- */
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
 import type { Metadata } from "next";
-import theme from "@/app/lib/theme.json";
 import TrendingArticlesList_2 from "./(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList_2";
 import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { defaultMeta } from "./meta/defaultMeta";
@@ -41,7 +40,7 @@ export default async function Home() {
     footer: { visible: false, journalist: false, time: false },
     fontStyles:
       "text-xl md:text-[2.3em] md:leading-10 font-extrabold rounded-lg line-clamp-3 overflow-hidden text-ellipsis",
-    contentHeight: "min-h-[120px] md:min-h-[170px]",
+    contentHeight: "md:min-h-[180px]",
   };
 
   const articleSixGrid = {
@@ -63,6 +62,7 @@ export default async function Home() {
 
   return (
     <section>
+      <AdContainer desktop={true} name={"Leaderboard_2"} />
       <LatestNewsSlider
         data={data}
         dayInterval={2}
@@ -71,7 +71,6 @@ export default async function Home() {
       />
       <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
         <div className="containerr md:px-6 py-10 pt-0 m-auto">
-          
           {/* Phone */}
           <section className="grid gap-4 md:hidden">
             <EmblaCarousel
@@ -104,7 +103,7 @@ export default async function Home() {
             <EmblaCarousel
               data={data}
               startIndex={0}
-              nameTag={{ name: "Spare-Hacks", tag: true }}
+              nameTag={{ name: "Spare-hacks", tag: true }}
               category={"spare-hacks"}
               endIndex={30}
               articleAmount={15}
@@ -116,21 +115,14 @@ export default async function Home() {
           <section className="md:inline-block hidden">
             <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
-                <ArticleBlock_1_Square
+                <EmblaCarousel
                   data={data}
                   startIndex={0}
-                  endIndex={1}
-                  articleAmount={1}
+                  endIndex={30}
+                  articleAmount={15}
                   {...articleHero}
+                  EmblaCarousel={"flex-[0_0_100%]"}
                 />
-
-                <aside className="hidden lg:inline-block">
-                  <ArticleBlock_2_Wide
-                    data={data}
-                    startIndex={1}
-                    endIndex={3}
-                  />
-                </aside>
               </div>
               <aside className="hidden w-[280px] lg:inline-block">
                 <TrendingArticlesList_2
@@ -154,13 +146,13 @@ export default async function Home() {
               {...articleSixGrid}
             />
             <AdContainer desktop={true} name={"Leaderboard_3"} />
-            <ArticleBlock_1_Square
+            <EmblaCarousel
               data={data}
-              category={"spare-hacks"}
               startIndex={0}
-              endIndex={50}
-              articleAmount={6}
-              nameTag={{ name: "Spare-Hacks", tag: true }}
+              nameTag={{ name: "Spare-hacks", tag: true }}
+              category={"spare-hacks"}
+              endIndex={30}
+              articleAmount={15}
               {...articleSixGrid}
             />
             <AdContainer desktop={true} name={"Leaderboard_3"} />
@@ -174,7 +166,6 @@ export default async function Home() {
               {...articleSixGrid}
             />
           </section>
-          
         </div>
       </section>
     </section>

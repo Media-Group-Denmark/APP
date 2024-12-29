@@ -8,6 +8,7 @@ import { timeSinceText } from "../../artikel/components/ArticleTools/TimeSinceTa
 import { urlFor } from "@/app/lib/sanityclient";
 import { filterAndSliceArticles } from "./FilterArticles";
 import Image from "next/image";
+import NameTag from "@/app/(home)/components/NameTag/NameTag";
 
 export function EmblaCarousel({
   data,
@@ -21,7 +22,8 @@ export function EmblaCarousel({
   dayInterval,
   EmblaCarousel,
   fontStyles,
-  mediaSize
+  mediaSize,
+  contentHeight,
 }: {
   data: ArticleModel[];
   startIndex: number;
@@ -29,24 +31,25 @@ export function EmblaCarousel({
   articleAmount: number;
   nameTag?: { name: string; tag: boolean };
   category?: string;
-  tag?: string,
-  journalist?: string,
-  dayInterval?: number,
-  EmblaCarousel?: string,
-  fontStyles: string,
+  tag?: string;
+  journalist?: string;
+  dayInterval?: number;
+  EmblaCarousel?: string;
+  fontStyles: string;
   mediaSize?: {
-      Figure?: {
-        figureDesktopHeight?: string | undefined;
-        figureMobileHeight?: string | undefined;
-      };
-      Image?: {
-        imgWidth?: number;
-        imgHeight?: number;
-        quality?: number;
-        lazyLoading?: boolean;
-        responsive: string;
-      };
+    Figure?: {
+      figureDesktopHeight?: string | undefined;
+      figureMobileHeight?: string | undefined;
     };
+    Image?: {
+      imgWidth?: number;
+      imgHeight?: number;
+      quality?: number;
+      lazyLoading?: boolean;
+      responsive: string;
+    };
+  };
+  contentHeight?: string;
 }) {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()]);
   const slicedData = filterAndSliceArticles(
@@ -62,11 +65,12 @@ export function EmblaCarousel({
   return (
     <section>
       {nameTag?.tag && (
-        <p className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-          <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-            {nameTag.name ? nameTag.name : "Alle Nyheder"}
-          </span>
-        </p>
+        <NameTag
+          name={nameTag.name}
+          category={category}
+          tag={tag}
+          journalist={journalist}
+        />
       )}
       <div className="embla mt-4 pb-4" ref={emblaRef}>
         <div className="embla__container">
@@ -77,47 +81,53 @@ export function EmblaCarousel({
                 className={`embla__slide ${EmblaCarousel} shadow-sm bg-second_color_light dark:bg-second_color_dark mr-4 rounded-lg relative`}
               >
                 <figure
-                              className={`block rounded-t-lg overflow-clip 
+                  className={`block rounded-t-lg overflow-clip 
                               ${
-                                mediaSize?.Figure.figureDesktopHeight || "md:h-[10em]"
+                                mediaSize?.Figure.figureDesktopHeight ||
+                                "md:h-[10em]"
                               } 
                               ${
-                                mediaSize?.Figure.figureMobileHeight || "md:h-[8em]"
+                                mediaSize?.Figure.figureMobileHeight ||
+                                "md:h-[8em]"
                               }`}
-                            >
-                              <ArticleLink
-                                aria-label="Læs mere om artiklen"
-                                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
-                                  post.republishArticle && post.newSlug
-                                    ? post.newSlug
-                                    : post.articleSlug
-                                }`}
-                              >
-                                <Image
-                                  className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"
-                                  src={urlFor(post.image)
-                                    .format("webp")
-                                    .width(mediaSize?.Image.imgWidth || 400)
-                                    .height(mediaSize?.Image.imgHeight || 300)
-                                    .fit("fill")
-                                    .quality(mediaSize?.Image.quality || 85)
-                                    .url()}
-                                  alt={post.title}
-                                  width={mediaSize?.Image.imgWidth || 400}
-                                  height={mediaSize?.Image.imgHeight || 300}
-                                  sizes={mediaSize?.Image.responsive}
-                                  {...(mediaSize?.Image.lazyLoading === false
-                                    ? { priority: true }
-                                    : { loading: "lazy" })}
-                                />
-                              </ArticleLink>
-                            </figure>
-                <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] h-[120px] lg:h-[150px] mx-2 md:mx-4 mb-4">
+                >
+                  <ArticleLink
+                    aria-label="Læs mere om artiklen"
+                    href={
+                      post._type === "msnScrollFeed"
+                        ? `/guide/${post.articleSlug}`
+                        : `/artikel/${
+                            post.republishArticle && post.newSlug
+                              ? post.newSlug
+                              : post.articleSlug
+                          }`
+                    }
+                  >
+                    <Image
+                      className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"
+                      src={urlFor(post.image)
+                        .format("webp")
+                        .width(mediaSize?.Image.imgWidth || 400)
+                        .height(mediaSize?.Image.imgHeight || 300)
+                        .fit("fill")
+                        .quality(mediaSize?.Image.quality || 85)
+                        .url()}
+                      alt={post.title}
+                      width={mediaSize?.Image.imgWidth || 400}
+                      height={mediaSize?.Image.imgHeight || 300}
+                      sizes={mediaSize?.Image.responsive}
+                      {...(mediaSize?.Image.lazyLoading === false
+                        ? { priority: true }
+                        : { loading: "lazy" })}
+                    />
+                  </ArticleLink>
+                </figure>
+                <div className="grid grid-rows-[auto_1fr] md:grid-rows-[auto_1fr_auto] mx-2 md:mx-4 mb-4">
                   <aside className="sm:grid sm:grid-cols-2 align-middle mt-2 h-fit md:my-2">
                     <ArticleLink href={`/kategori/${post.categorySlug}`}>
-                    <p className="relative text-sm w-fit rounded-full py-1 my-1 font-medium text-accent_color_light dark:text-accent_color_dark hover:text-black dark:hover:text-gray-300">
-                          {post.category}
-                        </p>
+                      <p className="relative text-sm w-fit rounded-full py-1 my-1 font-medium text-accent_color_light dark:text-accent_color_dark hover:text-black dark:hover:text-gray-300">
+                        {post.category}
+                      </p>
                     </ArticleLink>
                     <time
                       className="rounded-lg sm:my-auto my-1 sm:ml-auto text-xs hidden md:inline-block"
@@ -126,7 +136,7 @@ export function EmblaCarousel({
                       {timeSinceText({ date: post.publishedAt })}
                     </time>
                   </aside>
-                  <header>
+                  <header className={contentHeight ? contentHeight : "pb-4"}>
                     <ArticleLink
                       href={`/artikel/${
                         post.republishArticle && post.newSlug
@@ -134,14 +144,15 @@ export function EmblaCarousel({
                           : post.articleSlug
                       }`}
                     >
-                      <h1 className={
-                      fontStyles
-                        ? fontStyles
-                        : "text-md md:text-lg leading-4 md:leading-6 font-bold"
-                    }>
+                      <h1
+                        className={
+                          fontStyles
+                            ? fontStyles
+                            : "text-md md:text-lg leading-4 md:leading-6 font-bold"
+                        }
+                      >
                         {post.title}
                       </h1>
-                      
                     </ArticleLink>
                   </header>
                 </div>

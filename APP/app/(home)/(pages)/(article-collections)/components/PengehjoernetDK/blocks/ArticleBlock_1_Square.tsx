@@ -38,6 +38,7 @@ import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTo
 import Image from "next/image";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
+import NameTag from "@/app/(home)/components/NameTag/NameTag";
 export const revalidate = 600;
 
 const ArticleBlock_1_Square: React.FC<{
@@ -111,11 +112,12 @@ const ArticleBlock_1_Square: React.FC<{
   return (
     <>
       {nameTag?.tag && (
-        <p className="lineHeader text-center text-[0.95rem] font-bold md:mb-4">
-          <span className="bg-accent-color-gradient text-white px-4 py-1 uppercase">
-            {nameTag.name ? nameTag.name : "Alle Nyheder"}
-          </span>
-        </p>
+        <NameTag
+        name={nameTag.name}
+        category={category}
+        tag={tag}
+        journalist={journalist}
+      />
       )}
       <article
         className={`col-span-2 mb-4 grid place-content-center ${
@@ -130,20 +132,20 @@ const ArticleBlock_1_Square: React.FC<{
           >
             <figure
               className={`block rounded-t-lg overflow-clip 
-              ${
-                mediaSize?.Figure.figureDesktopHeight || "md:h-[10em]"
-              } 
-              ${
-                mediaSize?.Figure.figureMobileHeight || "md:h-[8em]"
-              }`}
+              ${mediaSize?.Figure.figureDesktopHeight || "md:h-[10em]"} 
+              ${mediaSize?.Figure.figureMobileHeight || "md:h-[8em]"}`}
             >
               <ArticleLink
                 aria-label="Læs mere om artiklen"
-                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
-                  post.republishArticle && post.newSlug
-                    ? post.newSlug
-                    : post.articleSlug
-                }`}
+                href={
+                  post._type === "msnScrollFeed"
+                    ? `/guide/${post.articleSlug}`
+                    : `/artikel/${
+                        post.republishArticle && post.newSlug
+                          ? post.newSlug
+                          : post.articleSlug
+                      }`
+                }
               >
                 <Image
                   className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"

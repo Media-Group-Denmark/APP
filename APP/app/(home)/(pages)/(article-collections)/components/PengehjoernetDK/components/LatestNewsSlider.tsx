@@ -2,6 +2,7 @@ import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/
 import { ChevronRight } from "lucide-react";
 import { timeSinceText } from "@/app/(home)/(pages)/artikel/components/ArticleTools/TimeSinceTag";
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
+import NameTag from "@/app/(home)/components/NameTag/NameTag";
 
 const LatestNewsSlider: React.FC<{
   data: ArticleModel[];
@@ -47,25 +48,26 @@ const LatestNewsSlider: React.FC<{
     })
     .slice(startIndex, endIndex);
   return (
-    <section className="max-w-[1000px] mx-auto pt-6 md:pt-4 px-6">
-      <figure className="flex gap-[12px]">
-        <h1 className="text-md">Seneste Nyt</h1>
-        <ChevronRight className="font-black my-auto" size={22} />
-      </figure>
+    <section className="max-w-[1000px] mx-auto pt-2 md:pt-1 px-6">
+      <NameTag name={"Seneste nyt"} />
       <nav className="sliderNav">
         <ul
           style={{ gridTemplateColumns: "repeat(12, auto)" }}
-          className="grid grid-cols-[12] overflow-x-scroll overflow-y-visible mb-6 lg:mb-12 ml-0"
+          className="grid grid-cols-[12] overflow-x-scroll overflow-y-visible mb-6 ml-0"
         >
           {slicedData.map((post: Article) => (
             <li className="min-w-[310px] min-h-[110px] relative border-t-2 border-second_color_dark dark:border-second_color_light my-4 pt-4 pr-4">
               <span className="w-2 h-2 bg-second_color_dark dark:bg-main_color_light absolute rounded-full -top-[5px] left-0"></span>
               <ArticleLink
-                href={ post._type === 'msnScrollFeed' ? `/guide/${post.articleSlug}` : `/artikel/${
-                  post.republishArticle && post.newSlug
-                    ? post.newSlug
-                    : post.articleSlug
-                }`}
+                href={
+                  post._type === "msnScrollFeed"
+                    ? `/guide/${post.articleSlug}`
+                    : `/artikel/${
+                        post.republishArticle && post.newSlug
+                          ? post.newSlug
+                          : post.articleSlug
+                      }`
+                }
               >
                 <time dateTime={post.publishedAt} className=" text-xs ">
                   {timeSinceText({ date: post.publishedAt })}
