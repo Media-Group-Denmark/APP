@@ -7,10 +7,10 @@ import TrendingArticlesList_2 from "./(pages)/(article-collections)/components/P
 import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { defaultMeta } from "./meta/defaultMeta";
 import ArticleBlock_1_Square from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
-import ArticleBlock_2_Wide from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_2_Wide";
 import LatestNewsSlider from "./(pages)/(article-collections)/components/PengehjoernetDK/components/LatestNewsSlider";
 import { EmblaCarousel } from "./(pages)/(article-collections)/components/SliderTest";
 import AdContainer from "./components/AdContainer/AdContainer";
+import { articleHero, articleSixGrid } from "./(pages)/(article-collections)/components/ArticleContainers/ArticleContainers";
 export const revalidate = 600;
 
 export const metadata: Metadata = defaultMeta;
@@ -21,48 +21,9 @@ export const metadata: Metadata = defaultMeta;
 export default async function Home() {
   const data: ArticleModel[] = await getFreshArticleData();
 
-  const articleHero = {
-    mediaSize: {
-      Figure: {
-        figureDesktopHeight: "md:h-[20em]",
-        figureMobileHeight: "h-[12em]",
-      },
-      Image: {
-        imgWidth: 800,
-        imgHeight: 400,
-        quality: 85,
-        lazyLoading: false,
-        responsive: "(max-width: 768px) 600px, 900px",
-      },
-    },
-    EmblaCarousel: "flex-[0_0_90%]",
-    header: { visible: true, category: true },
-    footer: { visible: false, journalist: false, time: false },
-    fontStyles:
-      "text-xl md:text-[2.3em] md:leading-10 font-extrabold rounded-lg line-clamp-3 overflow-hidden text-ellipsis",
-    contentHeight: "md:min-h-[180px]",
-  };
-
-  const articleSixGrid = {
-    mediaSize: {
-      Figure: {
-        figureDesktopHeight: "md:h-[8em]",
-        figureMobileHeight: "h-[8em]",
-      },
-      Image: {
-        lazyLoading: true,
-        responsive: "(max-width: 768px) 600px, 900px",
-      },
-    },
-    EmblaCarousel: "flex-[0_0_300px]",
-    header: { visible: true, time: true, journalist: false, category: true },
-    fontStyles: "text-md md:text-lg leading-5 md:leading-6 font-bold",
-    gridSystem: "md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 ",
-  };
-
   return (
     <section>
-      <AdContainer desktop={true} name={"Leaderboard_2"} />
+      <AdContainer desktop={true} name={"Leaderboard_1"} />
       <LatestNewsSlider
         data={data}
         dayInterval={2}
@@ -112,7 +73,7 @@ export default async function Home() {
           </section>
 
           {/* Desktop */}
-          <section className="md:inline-block hidden">
+          <section className="md:inline-block hidden max-w-[1000px]">
             <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
               <div className=" lg:w-[700px]">
                 <EmblaCarousel

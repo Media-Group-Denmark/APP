@@ -15,6 +15,7 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateJournalistMetadata } from "../meta/generateJournalistMetaData";
 import journalistSchema from "../meta/journalistSchema";
+import AdContainer from "@/app/(home)/components/AdContainer/AdContainer";
 
 export const revalidate = 10000;
 
@@ -53,6 +54,7 @@ export default async function journalist({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <AdContainer desktop={true} name={"Leaderboard_1"} />
       {data ? (
         <Breadcrumb
           navItem={"Journalist"}

@@ -45,7 +45,7 @@ const TrendingArticlesList_2: React.FC<{
         <NameTag name="Topnyheder" />
         {/*  Header End */}
 
-        <ul className="space-y-4">
+        <ul className="space-y-4 md:space-y-2">
           {slicedData
             .map((post: Article, index: number) => (
               <li>
@@ -53,9 +53,9 @@ const TrendingArticlesList_2: React.FC<{
                   <div>
                     <div
                       key={post._id}
-                      className="flex items-center    md:pb-2"
+                      className="flex items-center md:pb-2"
                     >
-                      <figure className="block max-w-20 mr-2 rounded-xl overflow-clip">
+                      <figure className="block max-w-20 md:max-w-16 mr-2 rounded-xl overflow-clip">
                         <ArticleLink
                           href={`/artikel/${
                             post.republishArticle && post.newSlug

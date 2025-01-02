@@ -14,6 +14,11 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
 import tagSchema from "../meta/tagSchema";
+import { EmblaCarousel } from "../../../components/SliderTest";
+import { articleHero, articleSixGrid } from "../../../components/ArticleContainers/ArticleContainers";
+import AdContainer from "@/app/(home)/components/AdContainer/AdContainer";
+import TrendingArticlesList_2 from "../../../components/PengehjoernetDK/components/TrendingArticlesList_2";
+import ArticleBlock_1_Square from "../../../components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 
 
 export const revalidate = 600;
@@ -44,7 +49,8 @@ export default async function tag({ params }: { params: { tag: string } }) {
 
   const jsonLd = tagSchema({data, params: params.tag})
 
-
+ /*  tag={params.tag}
+  name={currentTag.name} */
   return (
     <section>
       <script
@@ -60,96 +66,107 @@ export default async function tag({ params }: { params: { tag: string } }) {
         />
       ) : null}
 
-      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto ">
-        
-        <div className="containerr px-2 md:px-6 py-10 pt-0 m-auto ">
-          {/* Both */}
-          <section className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-            <div className=" lg:w-[700px]">
-              <ArticleHero
-                data={data}
-                tag={params.tag}
-                startIndex={0}
-                endIndex={1}
-              />
-            </div>
-            <aside className="hidden w-[280px] lg:inline-block">
-              <TrendingArticlesList
-                dayInterval={60}
-                startIndex={0}
-                endIndex={50}
-                data={data}
-                tag={params.tag}
-                articleAmount={5}
-              />
-            </aside>
-          </section>
-          <aside
-            className="mobile md:hidden"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_1`}
-          ></aside>
-          <aside
-            className="desktop hidden md:block"
-            data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_2`}
-          ></aside>
+<section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
+        <div className="containerr md:px-6 py-10 pt-0 m-auto">
 
           {/* Phone */}
-          <section className="inline-block md:hidden">
-            <TrendingArticlesList
-              dayInterval={30}
+          <section className="grid gap-4 md:hidden">
+            <EmblaCarousel
+              data={data}
+              startIndex={0}
+              endIndex={30}
+              articleAmount={15}
+              tag={params.tag}
+              {...articleHero}
+            />
+            <AdContainer mobile={true} name={"Mobile_Square_1"} />
+            <TrendingArticlesList_2
+              data={data}
+              dayInterval={14}
+              views={0}
               startIndex={0}
               endIndex={50}
-              data={data}
               tag={params.tag}
+              articleAmount={5}
             />
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_2`}
-            ></aside>
-            <SubArticlesGrid
+            <AdContainer mobile={true} name={"Mobile_Square_2"} />
+            <EmblaCarousel
               data={data}
-              tag={"nyheder"}
-              name="Nyheder"
-              startIndex={1}
-              endIndex={3}
-            />
-            <div className="mt-6 block">
-              <ArticleHero data={data} startIndex={3} endIndex={4} />
-            </div>
-            <aside
-              className="mobile md:hidden"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Mobile_Square_3`}
-            ></aside>
-            <SubArticlesGrid
-              data={data}
+              startIndex={0}
+              nameTag={{ name: currentTag.name, tag: true }}
               tag={params.tag}
-              name={currentTag.name}
-              startIndex={4}
-              endIndex={6}
+              endIndex={30}
+              articleAmount={15}
+              {...articleSixGrid}
             />
-            <div className="mt-4 block">
-              <ArticleHero
-                data={data}
-                tag={params.tag}
-                startIndex={6}
-                endIndex={7}
-              />
-            </div>
+            <AdContainer mobile={true} name={"Mobile_Square_3"} />
+            <EmblaCarousel
+              data={data}
+              startIndex={0}
+              nameTag={{ name: "Nyheder", tag: true }}
+              category={"nyheder"}
+              endIndex={30}
+              articleAmount={15}
+              {...articleSixGrid}
+            />
           </section>
 
           {/* Desktop */}
-          <section className="md:inline-block hidden">
-            <SubArticlesGrid
+          <section className="md:inline-block hidden max-w-[1000px]">
+            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3  max-w-[1000px]">
+              <div className=" lg:w-[700px]">
+                <EmblaCarousel
+                  data={data}
+                  startIndex={0}
+                  endIndex={30}
+                  articleAmount={15}
+                  tag={params.tag}
+                  {...articleHero}
+                  EmblaCarousel={"flex-[0_0_100%]"}
+                />
+              </div>
+              <aside className="hidden w-[280px] lg:inline-block">
+                <TrendingArticlesList
+                  data={data}
+                  dayInterval={14}
+                  views={0}
+                  startIndex={0}
+                  endIndex={50}
+                  tag={params.tag}
+                  articleAmount={5}
+                />
+              </aside>
+            </div>
+            <AdContainer desktop={true} name={"Leaderboard_2"} />
+            <ArticleBlock_1_Square
               data={data}
               tag={params.tag}
-              name={currentTag.name}
               startIndex={0}
-              endIndex={6}
+              endIndex={50}
+              articleAmount={6}
+              nameTag={{ name: currentTag.name, tag: true }}
+              {...articleSixGrid}
             />
-            <aside
-              className="desktop hidden md:block"
-              data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/Leaderboard_3`}
-            ></aside>
+            <AdContainer desktop={true} name={"Leaderboard_3"} />
+            <EmblaCarousel
+              data={data}
+              startIndex={0}
+              nameTag={{ name: "Nyheder", tag: true }}
+              category={"nyheder"}
+              endIndex={30}
+              articleAmount={15}
+              {...articleSixGrid}
+            />
+            <AdContainer desktop={true} name={"Leaderboard_3"} />
+            <ArticleBlock_1_Square
+              data={data}
+              category={"privatkonomi"}
+              startIndex={0}
+              endIndex={50}
+              articleAmount={6}
+              nameTag={{ name: "Privatøkonomi", tag: true }}
+              {...articleSixGrid}
+            />
           </section>
         </div>
       </section>
