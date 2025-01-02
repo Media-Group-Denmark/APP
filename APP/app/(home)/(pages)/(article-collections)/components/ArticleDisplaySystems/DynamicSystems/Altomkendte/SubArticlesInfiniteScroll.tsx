@@ -5,6 +5,7 @@ import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/
 import { ArticleLink } from "@/app/(home)/components/utils/ArticleLink";
 import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collections)/components/FilterArticles";
 import theme from "@/app/lib/theme.json";
+import AdContainer from "@/app/(home)/components/AdContainer/AdContainer";
 
 export const SubArticlesInfiniteScroll: React.FC<{
   data: ArticleModel[];
@@ -140,13 +141,16 @@ export const SubArticlesInfiniteScroll: React.FC<{
                       {post.teaser}
                     </h2>
                   </header>
+                  {/* {
+                    isMainArticle ? <AdContainer desktop={true} name={"Square_3"} /> : <AdContainer desktop={true} name={"Mobile_Square_3"} />
+                  } */}
                   <aside
                     className={
                       isMainArticle ? "desktop hidden md:grid" : "hidden"
                     }
                     data-ad-unit-id={
                       isMainArticle
-                        ? `/${theme.site_ad_id}/PengehjoernetDK/Square_1`
+                        ? `/${theme.site_ad_id}/PengehjoernetDK/Square_3`
                         : ""
                     }
                   ></aside>
