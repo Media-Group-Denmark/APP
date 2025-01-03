@@ -14,7 +14,7 @@ import Breadcrumb from "@/app/(home)/components/Navigation/Breadcrumb";
 import { Reference } from "@/app/(home)/(pages)/(information)/(pages)/(referencer)/models/reference";
 import { generateTagMetadata } from "../meta/generateTagMetaData";
 import tagSchema from "../meta/tagSchema";
-import { EmblaCarousel } from "../../../components/SliderTest";
+import { EmblaCarousel } from "../../../components/EmblaCarousel";
 import {
   articleHero,
   articleSixGrid,

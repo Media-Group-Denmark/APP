@@ -120,7 +120,7 @@ export default async function artikel({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <section className="m-auto">
-      <AdContainer desktop={true} name={'Leaderboard_1'} />
+        <AdContainer desktop={true} name={"Leaderboard_1"} />
         {mainArticle ? (
           <>
             <Script
@@ -180,53 +180,17 @@ export default async function artikel({
                     <aside className="relative min-h-[10em] md:min-h-[25em]">
                       <LoadShowHeroes />
                       <figure className="absolute top-0 left-0 right-0 h-[10em] md:h-[25em] overflow-clip">
-                        <picture>
-                          <source
-                            srcSet={`${urlFor(mainArticle.image)
-                              .width(800)
-                              .height(450)
-                              .format("webp")
-                              .quality(50)
-                              .url()} 800w,
-        ${urlFor(mainArticle.image)
-          .width(480)
-          .height(270)
-          .format("webp")
-          .quality(90)
-          .url()} 480w`}
-                            sizes="(max-width: 800px) 100vw, 800px"
-                            type="image/webp"
-                          />
-                          <source
-                            srcSet={`${urlFor(mainArticle.image)
-                              .width(800)
-                              .height(450)
-                              .format("webp")
-                              .quality(60)
-                              .url()} 800w,
-        ${urlFor(mainArticle.image)
-          .width(480)
-          .height(270)
-          .format("webp")
-          .quality(90)
-          .url()} 480w`}
-                            sizes="(max-width: 800px) 100vw, 800px"
-                            type="image/jpeg"
-                          />
-                          <img
-                            src={urlFor(mainArticle.image)
-                              .width(800)
-                              .height(450)
-                              .format("webp")
-                              .quality(90)
-                              .url()}
-                            sizes="(max-width: 800px) 100vw, 800px"
-                            width="800"
-                            height="450"
-                            alt={`Billede af ${mainArticle.source}`}
-                            className="w-full h-auto rounded-t-lg object-cover"
-                          />
-                        </picture>
+                        <Image
+                          src={urlFor(mainArticle.image)
+                            .format("webp")
+                            .quality(90)
+                            .url()}
+                          alt={`Billede af ${mainArticle.source}`}
+                          width={1000}
+                          height={650}
+                          sizes="(max-width: 1000px) 100vw, 1000px"
+                          className="w-full h-auto rounded-t-lg object-cover"
+                        />
                         <figcaption className="absolute text-xs lg:text-sm bottom-0 right-0 text-gray-300 p-1 bg-gray-400 bg-opacity-50">
                           Foto: {mainArticle?.source || "Shutterstock.com"}
                         </figcaption>
@@ -240,7 +204,7 @@ export default async function artikel({
 
                   <AdContainer mobile={true} name={"mobile_square_article_1"} />
 
-                  <AdContainer desktop={true} name={'square_article_1'} />
+                  <AdContainer desktop={true} name={"square_article_1"} />
 
                   <section className="articleText leading-8 px-3 text-lg prose prose-blue prose-xl dark:prose-invert prose-li:marker:text-primary">
                     <PortableText

@@ -113,11 +113,11 @@ const ArticleBlock_1_Square: React.FC<{
     <>
       {nameTag?.tag && (
         <NameTag
-        name={nameTag.name}
-        category={category}
-        tag={tag}
-        journalist={journalist}
-      />
+          name={nameTag.name}
+          category={category}
+          tag={tag}
+          journalist={journalist}
+        />
       )}
       <article
         className={`col-span-2 mb-4 grid place-content-center ${
@@ -151,16 +151,16 @@ const ArticleBlock_1_Square: React.FC<{
                   className="group-hover:scale-[1.01] transition-transform duration-[15s] ease-linear"
                   src={urlFor(post.image)
                     .format("webp")
-                    .width(mediaSize?.Image.imgWidth || 400)
-                    .height(mediaSize?.Image.imgHeight || 300)
+                    .width(mediaSize?.Image?.imgWidth || 400)
+                    .height(mediaSize?.Image?.imgHeight || 300)
                     .fit("fill")
-                    .quality(mediaSize?.Image.quality || 85)
+                    .quality(mediaSize?.Image?.quality || 85)
                     .url()}
                   alt={post.title}
-                  width={mediaSize?.Image.imgWidth || 400}
-                  height={mediaSize?.Image.imgHeight || 300}
-                  sizes={mediaSize?.Image.responsive}
-                  {...(mediaSize?.Image.lazyLoading === false
+                  width={mediaSize?.Image?.imgWidth || 400}
+                  height={mediaSize?.Image?.imgHeight || 300}
+                  sizes={mediaSize?.Image?.responsive}
+                  {...(mediaSize?.Image?.lazyLoading === false
                     ? { priority: true }
                     : { loading: "lazy" })}
                 />

@@ -3,6 +3,7 @@ import { filterAndSliceArticles } from "@/app/(home)/(pages)/(article-collection
 import { urlFor } from "@/app/lib/sanityclient";
 import { ArticleModel } from "@/app/(home)/(pages)/(article-collections)/models/article";
 import NameTag from "@/app/(home)/components/NameTag/NameTag";
+import Image from "next/image";
 
 const TrendingArticlesList_2: React.FC<{
   data: ArticleModel[];
@@ -51,10 +52,7 @@ const TrendingArticlesList_2: React.FC<{
               <li>
                 <article className="bg-second_color_light dark:bg-second_color_dark rounded-2xl">
                   <div>
-                    <div
-                      key={post._id}
-                      className="flex items-center md:pb-2"
-                    >
+                    <div key={post._id} className="flex items-center md:pb-2">
                       <figure className="block max-w-20 md:max-w-16 mr-2 rounded-xl overflow-clip">
                         <ArticleLink
                           href={`/artikel/${
@@ -63,13 +61,13 @@ const TrendingArticlesList_2: React.FC<{
                               : post.articleSlug
                           }`}
                         >
-                          <img
-                            width={300}
-                            height={300}
+                          <Image
+                            width={70}
+                            height={70}
                             src={urlFor(post.image)
                               .format("webp")
-                              .width(300)
-                              .height(300)
+                              .width(70)
+                              .height(70)
                               .fit("fill")
                               .quality(85)
                               .url()}

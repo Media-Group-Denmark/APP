@@ -69,5 +69,6 @@
     "loadingscreen",
     "APP/postcss.config.js"
   ],
-  "explorerExclude.backup": {}
+  "explorerExclude.backup": {},
+  "editor.formatOnSave": true
 }

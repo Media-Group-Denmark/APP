@@ -67,7 +67,7 @@ export default function NewsletterPopup() {
         </button>
         <h2 className="text-xl font-bold mb-4">Vind bogen <b className="italic">AI Epoken af Anders Bæk!</b> </h2>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-        <img className="mb-2" src="/img/anders.png" />
+        <img className="mb-2" width={400} height={200} alt="Anders Bæk, en af landets førende AI-eksperter og mest benyttede foredragsholdere om kunstig intelligens" src="/img/anders.png" />
         <span className=" text-sm">Anders Bæk, en af landets førende AI-eksperter og mest benyttede foredragsholdere om kunstig intelligens, giver dig i AI Epoken en unik indsigt i, hvordan AI revolutionerer vores verden.</span>
         <br /><br />
 <b>Tilmeld dig vores nyhedsbrev og deltag i lodtrækningen om denne spændende bog!</b><br />

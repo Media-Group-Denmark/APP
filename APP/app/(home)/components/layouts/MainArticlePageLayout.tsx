@@ -2,7 +2,7 @@ import { ArticleModel } from "../../(pages)/(article-collections)/models/article
 import TrendingArticlesList_2 from "../../(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList_2";
 import ArticleBlock_1_Square from "../../(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
 import LatestNewsSlider from "../../(pages)/(article-collections)/components/PengehjoernetDK/components/LatestNewsSlider";
-import { EmblaCarousel } from "../../(pages)/(article-collections)/components/SliderTest";
+import { EmblaCarousel } from "../../(pages)/(article-collections)/components/EmblaCarousel";
 import AdContainer from "../AdContainer/AdContainer";
 import TrendingArticlesList from "../../(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList";
 import Breadcrumb from "../Navigation/Breadcrumb";
@@ -15,7 +15,7 @@ export default async function MainArticlePageLayout({
   category,
   tag,
   nameTag,
-  breadCrumb
+  breadCrumb,
 }: {
   data: ArticleModel[];
   latestNewsTopSlider?: boolean;
@@ -25,7 +25,6 @@ export default async function MainArticlePageLayout({
   nameTag?: { name: string; tag: boolean };
   breadCrumb?: { navItem: string; navItemTwo: string; link: string };
 }) {
-
   const articleHero = {
     mediaSize: {
       Figure: {
@@ -33,11 +32,11 @@ export default async function MainArticlePageLayout({
         figureMobileHeight: "h-[12em]",
       },
       Image: {
-        imgWidth: 800,
+        imgWidth: 700,
         imgHeight: 400,
         quality: 85,
         lazyLoading: false,
-        responsive: "(max-width: 768px) 600px, 900px",
+        responsive: "(max-width: 768px) 100vw, 700px",
       },
     },
     EmblaCarousel: "flex-[0_0_90%]",
@@ -55,8 +54,10 @@ export default async function MainArticlePageLayout({
         figureMobileHeight: "h-[8em]",
       },
       Image: {
+        imgWidth: 350,
+        imgHeight: 250,
         lazyLoading: true,
-        responsive: "(max-width: 768px) 600px, 900px",
+        responsive: "(max-width: 768px) 100vw, 700px",
       },
     },
     EmblaCarousel: "flex-[0_0_300px]",
@@ -96,16 +97,16 @@ export default async function MainArticlePageLayout({
               {...articleHero}
             />
             <AdContainer mobile={true} name={"Mobile_Square_1"} />
-              <TrendingArticlesList_2
-                data={data}
-                dayInterval={14}
-                views={0}
-                startIndex={0}
-                endIndex={50}
-                articleAmount={5}
-                category={category}
-                tag={tag}
-              />
+            <TrendingArticlesList_2
+              data={data}
+              dayInterval={14}
+              views={0}
+              startIndex={0}
+              endIndex={50}
+              articleAmount={5}
+              category={category}
+              tag={tag}
+            />
             <AdContainer mobile={true} name={"Mobile_Square_2"} />
             <EmblaCarousel
               data={data}
@@ -144,29 +145,29 @@ export default async function MainArticlePageLayout({
                 />
               </div>
               <aside className="w-[280px] inline-block">
-              {topNewsOverview === 1 ? (
-              <TrendingArticlesList
-                data={data}
-                dayInterval={14}
-                views={0}
-                startIndex={0}
-                endIndex={50}
-                articleAmount={5}
-                category={category}
-                tag={tag}
-              />
-            ) : topNewsOverview === 2 ? (
-              <TrendingArticlesList_2
-                data={data}
-                dayInterval={14}
-                views={0}
-                startIndex={0}
-                endIndex={50}
-                articleAmount={5}
-                category={category}
-                tag={tag}
-              />
-            ) : null}
+                {topNewsOverview === 1 ? (
+                  <TrendingArticlesList
+                    data={data}
+                    dayInterval={14}
+                    views={0}
+                    startIndex={0}
+                    endIndex={50}
+                    articleAmount={5}
+                    category={category}
+                    tag={tag}
+                  />
+                ) : topNewsOverview === 2 ? (
+                  <TrendingArticlesList_2
+                    data={data}
+                    dayInterval={14}
+                    views={0}
+                    startIndex={0}
+                    endIndex={50}
+                    articleAmount={5}
+                    category={category}
+                    tag={tag}
+                  />
+                ) : null}
               </aside>
             </div>
             <AdContainer desktop={true} name={"Leaderboard_2"} />
