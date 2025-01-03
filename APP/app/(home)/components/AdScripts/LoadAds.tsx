@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 export default function LoadAds() { 
   const pathname = usePathname();
 
-  useEffect(() => {
+  useEffect(() => { 
 
     const scriptUrls = [
       "https://securepubads.g.doubleclick.net/tag/js/gpt.js",

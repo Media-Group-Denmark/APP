@@ -15,7 +15,7 @@ export default function AdContainer({
   return (
     <aside
       className={
-        mobile ? "mobile md:hidden" : desktop ? "desktop hidden md:block" : ""
+        mobile ? "mobile md:hidden" : desktop ? "desktop hidden md:grid" : ""
       }
       data-ad-unit-id={`/${theme.site_ad_id}/${theme.site_ad_name}/${name}`}
     />

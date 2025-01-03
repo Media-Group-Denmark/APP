@@ -3,14 +3,9 @@
 /* -------------------------------------------------------------------------- */
 import { ArticleModel } from "./(pages)/(article-collections)/models/article";
 import type { Metadata } from "next";
-import TrendingArticlesList_2 from "./(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList_2";
 import { getFreshArticleData } from "@/app/api/getFreshArticleData";
 import { defaultMeta } from "./meta/defaultMeta";
-import ArticleBlock_1_Square from "./(pages)/(article-collections)/components/PengehjoernetDK/blocks/ArticleBlock_1_Square";
-import LatestNewsSlider from "./(pages)/(article-collections)/components/PengehjoernetDK/components/LatestNewsSlider";
-import { EmblaCarousel } from "./(pages)/(article-collections)/components/SliderTest";
-import AdContainer from "./components/AdContainer/AdContainer";
-import { articleHero, articleSixGrid } from "./(pages)/(article-collections)/components/ArticleContainers/ArticleContainers";
+import MainArticlePageLayout from "./components/layouts/MainArticlePageLayout";
 export const revalidate = 600;
 
 export const metadata: Metadata = defaultMeta;
@@ -22,113 +17,6 @@ export default async function Home() {
   const data: ArticleModel[] = await getFreshArticleData();
 
   return (
-    <section>
-      <AdContainer desktop={true} name={"Leaderboard_1"} />
-      <LatestNewsSlider
-        data={data}
-        dayInterval={2}
-        startIndex={0}
-        endIndex={12}
-      />
-      <section className=" grid lg:grid-cols-[auto_1fr] mx-auto">
-        <div className="containerr md:px-6 py-10 pt-0 m-auto">
-          {/* Phone */}
-          <section className="grid gap-4 md:hidden">
-            <EmblaCarousel
-              data={data}
-              startIndex={0}
-              endIndex={30}
-              articleAmount={15}
-              {...articleHero}
-            />
-            <AdContainer mobile={true} name={"Mobile_Square_1"} />
-            <TrendingArticlesList_2
-              data={data}
-              dayInterval={14}
-              views={0}
-              startIndex={0}
-              endIndex={50}
-              articleAmount={5}
-            />
-            <AdContainer mobile={true} name={"Mobile_Square_2"} />
-            <EmblaCarousel
-              data={data}
-              startIndex={0}
-              nameTag={{ name: "Nyheder", tag: true }}
-              category={"nyheder"}
-              endIndex={30}
-              articleAmount={15}
-              {...articleSixGrid}
-            />
-            <AdContainer mobile={true} name={"Mobile_Square_3"} />
-            <EmblaCarousel
-              data={data}
-              startIndex={0}
-              nameTag={{ name: "Spare-hacks", tag: true }}
-              category={"spare-hacks"}
-              endIndex={30}
-              articleAmount={15}
-              {...articleSixGrid}
-            />
-          </section>
-
-          {/* Desktop */}
-          <section className="md:inline-block hidden max-w-[1000px]">
-            <div className="grid relative lg:grid-cols-[1fr_1fr] gap-3 max-w-[1000px]">
-              <div className=" lg:w-[700px]">
-                <EmblaCarousel
-                  data={data}
-                  startIndex={0}
-                  endIndex={30}
-                  articleAmount={15}
-                  {...articleHero}
-                  EmblaCarousel={"flex-[0_0_100%]"}
-                />
-              </div>
-              <aside className="hidden w-[280px] lg:inline-block">
-                <TrendingArticlesList_2
-                  data={data}
-                  dayInterval={14}
-                  views={0}
-                  startIndex={0}
-                  endIndex={50}
-                  articleAmount={5}
-                />
-              </aside>
-            </div>
-            <AdContainer desktop={true} name={"Leaderboard_2"} />
-            <ArticleBlock_1_Square
-              data={data}
-              category={"nyheder"}
-              startIndex={0}
-              endIndex={50}
-              articleAmount={6}
-              nameTag={{ name: "Nyheder", tag: true }}
-              {...articleSixGrid}
-            />
-            <AdContainer desktop={true} name={"Leaderboard_3"} />
-            <EmblaCarousel
-              data={data}
-              startIndex={0}
-              nameTag={{ name: "Spare-hacks", tag: true }}
-              category={"spare-hacks"}
-              endIndex={30}
-              articleAmount={15}
-              {...articleSixGrid}
-            />
-            <AdContainer desktop={true} name={"Leaderboard_3"} />
-            <ArticleBlock_1_Square
-              data={data}
-              category={"privatkonomi"}
-              startIndex={0}
-              endIndex={50}
-              articleAmount={6}
-              nameTag={{ name: "Privatøkonomi", tag: true }}
-              {...articleSixGrid}
-            />
-          </section>
-        </div>
-      </section>
-    </section>
+      <MainArticlePageLayout latestNewsTopSlider={true} topNewsOverview={2} data={data} />
   );
 }

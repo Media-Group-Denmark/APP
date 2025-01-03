@@ -120,6 +120,7 @@ export default async function artikel({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <section className="m-auto">
+      <AdContainer desktop={true} name={'Leaderboard_1'} />
         {mainArticle ? (
           <>
             <Script
