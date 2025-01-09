@@ -14,23 +14,37 @@ export const metadata: Metadata = defaultMeta;
 /*                                   CONTENT                                  */
 /* -------------------------------------------------------------------------- */
 export default async function Home() {
-  const res = await fetch(`${site_url}/api/articles`, {
-    next: { revalidate: 600 },
-  });
+  const baseUrl = theme.local_url || theme.site_url; // Dynamisk base-URL
+  const apiUrl = `${baseUrl}/api/articles`; // Samlet URL
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch data: ${res.statusText}`);
+  try {
+    const res = await fetch(apiUrl, {
+      next: { revalidate: 600 }, // Brug caching i Next.js
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.statusText}`);
+    }
+
+    // Parse JSON
+    const data: ArticleModel[] = await res.json();
+
+    // Returnér layout med data
+    return (
+      <MainArticlePageLayout
+        latestNewsTopSlider={true}
+        topNewsOverview={2}
+        data={data}
+      />
+    );
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+
+    return (
+      <div>
+        <h1>Failed to load articles</h1>
+        <p>Please try again later.</p>
+      </div>
+    );
   }
-
-  // Parse JSON
-  const data: ArticleModel[] = await res.json();
-
-  // Returnér layout, nu med data fra route
-  return (
-    <MainArticlePageLayout
-      latestNewsTopSlider={true}
-      topNewsOverview={2}
-      data={data}
-    />
-  );
 }

@@ -3,18 +3,25 @@ import { ArticleLink } from "../../utils/ArticleLink";
 import { FooterItem } from "./models/footer";
 import theme from "../../../../lib/theme.json";
 import MailChimpForm from "./components/MailChimpForm";
-import { getFooterItems } from "./api/getFooterItems";
 export const revalidate = 3600;
 
 async function fetchFooterData(): Promise<FooterItem | undefined> {
-  const res = await fetch(`${site_url}/api/footer`, {
-    next: { revalidate: 3600 },
-  });
+  const baseUrl = theme.local_url || theme.site_url;
+  const apiUrl = `${baseUrl}/api/footer`;
 
-  if (!res.ok) throw new Error("Failed to fetch articles");
+  try {
+    const res = await fetch(apiUrl, {
+      next: { revalidate: 3600 },
+    });
 
-  const data: FooterItem[] = await res.json();
-  return data?.[0];
+    if (!res.ok) throw new Error("Failed to fetch footer data");
+
+    const data: FooterItem[] = await res.json();
+    return data?.[0];
+  } catch (error) {
+    console.error("Error fetching footer data:", error);
+    return undefined;
+  }
 }
 
 export default async function Footer() {

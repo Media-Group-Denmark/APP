@@ -19,12 +19,23 @@ export const revalidate = 600;
 async function fetchCategoryArticles(
   kategori: string
 ): Promise<ArticleModel[]> {
-  const url = `${site_url}/api/articles?categorySlug=${kategori}`;
-  const res = await fetch(url, {
-    next: { revalidate: 600 },
-  });
-  if (!res.ok) throw new Error("Failed to fetch articles");
-  return res.json();
+  const baseUrl = theme.local_url || theme.site_url; // Dynamisk base-URL
+  const apiUrl = `${baseUrl}/api/articles?categorySlug=${kategori}`; // Byg URL med kategoriSlug
+
+  try {
+    const res = await fetch(apiUrl, {
+      next: { revalidate: 600 }, // Caching i Next.js
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch articles for category: ${kategori}`);
+    }
+
+    return await res.json(); // Returnér dataen
+  } catch (error) {
+    console.error("Error fetching category articles:", error);
+    throw error; // Propager fejlen opad
+  }
 }
 
 /* Henter selv kategori-data (her bruger vi bare din eksisterende getCategoryData) */

@@ -17,15 +17,27 @@ import MainArticlePageLayout from "@/app/(home)/components/layouts/MainArticlePa
 export const revalidate = 600;
 
 async function fetchTagArticles(tag: string): Promise<ArticleModel[]> {
-  const url = `${site_url}/api/articles?tagSlug=${tag}`;
-  const res = await fetch(url, {
-    next: { revalidate: 600 },
-  });
-  if (!res.ok) throw new Error("Failed to fetch articles");
-  return res.json();
+  const baseUrl = theme.local_url || theme.site_url; // Dynamisk base-URL
+  const apiUrl = `${baseUrl}/api/articles?tagSlug=${tag}`; // Dynamisk URL med tagSlug
+
+  try {
+    const res = await fetch(apiUrl, {
+      next: { revalidate: 600 }, // Caching i Next.js
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch articles for tag: ${tag}`);
+    }
+
+    return await res.json(); // Returnér dataen
+  } catch (error) {
+    console.error("Error fetching tag articles:", error);
+    throw error; // Propager fejlen opad
+  }
 }
 
 async function fetchTagData(tag: string): Promise<Reference> {
+  // Hvis fetchTagData kun bruger getTagData direkte, behøver du ikke ændre den
   return getTagData(tag);
 }
 

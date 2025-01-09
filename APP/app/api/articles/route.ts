@@ -16,7 +16,6 @@ export async function GET(request: Request) {
       tagDefined,
       journalistDefined
     );
-    console.log(data, "dataa");
     return NextResponse.json(data); // Returnér JSON
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });

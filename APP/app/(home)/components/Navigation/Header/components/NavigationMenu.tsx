@@ -40,18 +40,25 @@ export default function NavigationMenu() {
 
   useEffect(() => {
     async function loadNavigation() {
+      const baseUrl = theme.local_url || theme.site_url; // Brug local_url hvis defineret, ellers site_url
+      const apiUrl = `${baseUrl}/api/navigation`; // Dynamisk URL baseret på miljø
+
       try {
-        const res = await fetch(`${site_url}/api/navigation`, {
-          next: { revalidate: 3600 },
+        const res = await fetch(apiUrl, {
+          next: { revalidate: 3600 }, // Caching i Next.js
         });
+
         if (res.ok) {
           const data = await res.json();
-          setNavData(data);
+          setNavData(data); // Opdater navigationen i state
+        } else {
+          console.error("Failed to fetch navigation:", res.statusText);
         }
       } catch (error) {
         console.error("Failed to fetch navigation:", error);
       }
     }
+
     loadNavigation();
   }, []);
 
