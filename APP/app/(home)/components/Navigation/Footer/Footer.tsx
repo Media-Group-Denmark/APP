@@ -4,10 +4,21 @@ import { FooterItem } from "./models/footer";
 import theme from "../../../../lib/theme.json";
 import MailChimpForm from "./components/MailChimpForm";
 import { getFooterItems } from "./api/getFooterItems";
+export const revalidate = 3600;
+
+async function fetchFooterData(): Promise<FooterItem | undefined> {
+  const res = await fetch(`${site_url}/api/footer`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch articles");
+
+  const data: FooterItem[] = await res.json();
+  return data?.[0];
+}
 
 export default async function Footer() {
-  const data: FooterItem[] | undefined = await getFooterItems();
-  const footer = data ? data[0] : undefined;
+  const footer = await fetchFooterData();
   return (
     <footer
       className="bg-second_color_light dark:bg-second_color_dark relative z-50  shadow"

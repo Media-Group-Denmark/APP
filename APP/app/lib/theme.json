@@ -1,6 +1,7 @@
 {
     "site_name": "Pengehjørnet",
     "site_url": "https://pengehjoernet.dk",
+    "local_url": "http://localhost:3000",
     "site_email": "kontakt@pengehjoernet.dk",
     "site_language": "da",
     "site_ad_name": "PengehjoernetDK",

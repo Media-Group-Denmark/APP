@@ -6,6 +6,8 @@ import { EmblaCarousel } from "../../(pages)/(article-collections)/components/Em
 import AdContainer from "../AdContainer/AdContainer";
 import TrendingArticlesList from "../../(pages)/(article-collections)/components/PengehjoernetDK/components/TrendingArticlesList";
 import Breadcrumb from "../Navigation/Breadcrumb";
+import { SubArticlesInfiniteScroll } from "../../(pages)/(article-collections)/components/ArticleDisplaySystems/DynamicSystems/Altomkendte/SubArticlesInfiniteScroll";
+import dynamic from "next/dynamic";
 export const revalidate = 600;
 
 export default async function MainArticlePageLayout({
@@ -65,6 +67,39 @@ export default async function MainArticlePageLayout({
     fontStyles: "text-md md:text-lg leading-5 md:leading-6 font-bold",
     gridSystem: "md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 ",
   };
+
+  const InfiniteScroll = ({ data }: { data: ArticleModel[] }) => {
+    return (
+      <section className="grid grid-cols-[1fr_auto] md:gap-8 rounded-xl bg-second_color_light dark:bg-second_color_dark">
+        <SubArticlesInfiniteScroll data={data} startIndex={7} endIndex={30} />
+        <div className="!sticky top-20 mt-2 h-[80vh] hidden max-w-[320px] lg:inline-block">
+          <AdContainer desktop={true} name={"Square_1"} />
+          <TrendingArticlesList
+            data={data}
+            dayInterval={14}
+            startIndex={0}
+            endIndex={30}
+            articleAmount={6}
+          />
+        </div>
+      </section>
+    );
+  };
+
+  // Dynamisk komponent
+  const DynamicArticles = dynamic<
+    React.ComponentType<{ data: ArticleModel[] }>
+  >(
+    () => {
+      return new Promise((resolve) => {
+        setTimeout(() => resolve(InfiniteScroll), 2000);
+      });
+    },
+    {
+      loading: () => null,
+    }
+  );
+
   return (
     <section>
       <AdContainer desktop={true} name={"Leaderboard_1"} />
@@ -207,6 +242,7 @@ export default async function MainArticlePageLayout({
           </section>
         </div>
       </section>
+      <DynamicArticles data={data} />
     </section>
   );
 }

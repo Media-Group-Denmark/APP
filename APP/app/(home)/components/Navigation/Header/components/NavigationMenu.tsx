@@ -14,7 +14,6 @@ import Image from "next/image";
 import theme from "@/app/lib/theme.json";
 import DarkModeToggle from "./DarkModeToggle/DarkModeToggle";
 import SearchButton from "./SearchBar";
-import { getNavItems } from "../api/getNavItems";
 import { usePathname, useSearchParams } from "next/navigation";
 import MailChimpForm from "../../Footer/components/MailChimpForm";
 
@@ -41,8 +40,17 @@ export default function NavigationMenu() {
 
   useEffect(() => {
     async function loadNavigation() {
-      const data = await getNavItems();
-      setNavData(data);
+      try {
+        const res = await fetch(`${site_url}/api/navigation`, {
+          next: { revalidate: 3600 },
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setNavData(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch navigation:", error);
+      }
     }
     loadNavigation();
   }, []);
