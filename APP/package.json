@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "merge": "git merge --no-commit --no-ff main",
+    "storage": "du -sh .[!.]* *",
+    "clean": "pm2 stop all && rm -rf .next",
     "publish": "npm i --force && npm run build && pm2 restart all",
     "debug": "node --inspect npx next dev",
     "lint": "next lint"
