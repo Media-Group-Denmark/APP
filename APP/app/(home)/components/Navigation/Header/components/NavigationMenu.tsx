@@ -16,6 +16,7 @@ import DarkModeToggle from "./DarkModeToggle/DarkModeToggle";
 import SearchButton from "./SearchBar";
 import { usePathname, useSearchParams } from "next/navigation";
 import MailChimpForm from "../../Footer/components/MailChimpForm";
+export const revalidate = 60000;
 
 export default function NavigationMenu() {
   const [navData, setNavData] = useState<any>(null);

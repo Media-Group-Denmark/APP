@@ -31,7 +31,6 @@ export async function GET() {
     feed_url: `${theme.site_url}/msnfeed`,
     site_url: `${theme.site_url}`,
     description: "Galleri feed med slideshows",
-    lastBuildDate: lastBuildDate,
     custom_namespaces: {
       atom: "http://www.w3.org/2005/Atom",
       media: "http://search.yahoo.com/mrss/",
