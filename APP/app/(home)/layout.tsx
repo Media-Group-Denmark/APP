@@ -11,6 +11,7 @@ import LoadAds from "./components/AdScripts/LoadAds";
 import GoogleAnalyticsScripts from "./components/AdScripts/GoogleAnalyticsScripts";
 import { defaultSchema } from "./meta/defaultSchema";
 import NewsletterPopup from "./components/MailChimp/NewsletterPopUp";
+import LoadChartbeat from "./components/AdScripts/LoadChartbeat";
 
 export const revalidate = 600;
 
@@ -59,6 +60,7 @@ export default async function RootLayout({
           src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
           defer
         ></script>
+        <LoadChartbeat />
         <script
           dangerouslySetInnerHTML={{
             __html: `
