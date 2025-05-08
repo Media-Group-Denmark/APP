@@ -74,7 +74,7 @@ export default async function RootLayout({
           }}
         />
         {/*  <AdBlockDetect /> */}
-        <NewsletterPopup />
+        {/* <NewsletterPopup /> */}
         <Header />
         <main className="bg-second_color_light dark:bg-main_color_dark">
           {children}
